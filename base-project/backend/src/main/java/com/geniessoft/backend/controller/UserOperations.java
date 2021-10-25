@@ -21,7 +21,7 @@ import java.util.Optional;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/api/userOps")
+@RequestMapping(value = "/api/users")
 @RequiredArgsConstructor
 public class UserOperations {
 
@@ -35,7 +35,7 @@ public class UserOperations {
                 .body("success");
     }
 
-    @PostMapping(value = "/update")
+    @PutMapping
     public ResponseEntity<String> userUpdate(@Valid @RequestBody UserUpdateDto userUpdateDto){
         Response<User> response = userService.updateUser(userUpdateDto);
         return ResponseEntity
@@ -43,7 +43,7 @@ public class UserOperations {
                 .body(response.getMessage());
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping
     public ResponseEntity<String> userDelete(@RequestParam(value = "userId") Long userId){
         Response<User> response = userService.deleteUser(userId);
         return ResponseEntity
@@ -51,7 +51,7 @@ public class UserOperations {
                 .body(response.getMessage());
     }
 
-    @GetMapping("/get")
+    @GetMapping
     public ResponseEntity<?> userGet(@RequestParam(value = "userId") Long userId){
         Response<User> response = userService.findUser(userId);
         if(response.getStatus() != HttpStatus.OK){
@@ -64,15 +64,4 @@ public class UserOperations {
                 .body(response.getOptionalT().get());
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
-    }
 }
