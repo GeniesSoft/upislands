@@ -1,6 +1,5 @@
 package com.geniessoft.backend.dto;
 
-import com.geniessoft.backend.model.TeamMember;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
