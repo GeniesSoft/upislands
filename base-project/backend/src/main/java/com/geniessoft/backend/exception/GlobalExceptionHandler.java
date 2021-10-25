@@ -1,4 +1,4 @@
-package com.geniessoft.backend.utility.globalexception;
+package com.geniessoft.backend.exception;
 
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
