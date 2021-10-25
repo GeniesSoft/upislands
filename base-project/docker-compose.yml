@@ -1,0 +1,47 @@
+version: '3.7'
+
+services:
+
+  # backend
+  app-server:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on: 
+      - db  
+    networks:
+      - backend
+      - frontend
+
+  # frontend
+  app-client:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_API_BASE_URL: http://127.0.0.1:8080/api
+    ports:
+      - "80:80"
+    depends_on:
+      - app-server
+    networks:
+      - frontend  
+
+  # Database Service (PostgreSQL)
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=postgres
+    - POSTGRES_DB=app-db
+    networks:
+      - backend
+
+# Networks
+networks:
+  backend:
+  frontend:    
