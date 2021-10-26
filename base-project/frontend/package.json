@@ -1,6 +1,5 @@
 {
   "name": "frontend",
-  "homepage": "http://geniessoft.github.io/upislands",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -51,7 +50,7 @@
     "react-app-rewired": "^2.1.8"
   },
   "scripts": {
-    "predeploy": "yanr build",
+    "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
     "start": "react-app-rewired start",
     "start:cra": "react-scripts start",
