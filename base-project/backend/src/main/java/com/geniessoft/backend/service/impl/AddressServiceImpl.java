@@ -16,4 +16,9 @@ public class AddressServiceImpl implements AddressService {
     public Address findAddressById(Integer addressId) {
         return addressRepository.findById(addressId).get();
     }
+
+    @Override
+    public Address saveAddress(Address address) {
+        return addressRepository.save(address);
+    }
 }

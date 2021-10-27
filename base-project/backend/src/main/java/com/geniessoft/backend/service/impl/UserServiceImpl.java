@@ -9,11 +9,14 @@ import com.geniessoft.backend.repository.UserRepository;
 import com.geniessoft.backend.service.RoleService;
 import com.geniessoft.backend.service.UserService;
 import com.geniessoft.backend.utility.customvalidator.Response;
+import com.geniessoft.backend.utility.customvalidator.SimpleSourceDestinationMapper;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
@@ -21,109 +24,72 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final ModelMapper modelMapper;
+    private final SimpleSourceDestinationMapper mapper;
     private final RoleService roleService;
     private final UserRepository userRepository;
 
     @Override
-    public Optional<User> saveUser(UserRegisterDto userRegisterDto) {
+    public User saveUser(UserRegisterDto userRegisterDto) {
 
-        User user = modelMapper.map(userRegisterDto,User.class);
+        User user = mapper.userRegDtoToUser(userRegisterDto);
+        checkUserEmail(user.getEmailAddress());
 
-        Optional<User> userTemp =  findFirstByEmailAddressEquals
-                (user.getEmailAddress()).getOptionalT();
+        Role role = roleService.findRoleByName(Roles.ROLE_USER);
+        user.setRole(role);
+        userRepository.save(user);
 
-        if(!userTemp.isEmpty()){
-            if(userTemp.get().isDeleted()){
-                throw new EntityNotFoundException("123");
-            }
-            else {
-                throw new EntityNotFoundException("1234");
-            }
-        }
-        else {
-            Role role = roleService.findRoleByName(Roles.ROLE_USER);
-            user.setRole(role);
-            userRepository.save(user);
-            return userTemp;
-        }
+        return user;
     }
 
     @Override
-    public Response<User> updateUser(UserUpdateDto userUpdateDto) {
+    public User updateUser(UserUpdateDto userUpdateDto) {
 
-        Optional<User> user = findUser(userUpdateDto.getUserId()).getOptionalT();
+        User user = findUser(userUpdateDto.getUserId());
+        if(!user.getEmailAddress().equals(userUpdateDto.getEmailAddress())){
+            checkUserEmail(userUpdateDto.getEmailAddress());
+        }
+        mapper.updateUser(user,userUpdateDto);
+        userRepository.save(user);
 
-        if(user.isEmpty()){
-            return new Response<>(
-                    "User is not found.",
-                    HttpStatus.NOT_FOUND);
-        }
-        else if(user.get().isDeleted()){
-            return new Response<>(
-                    "User is disabled.",
-                    HttpStatus.FORBIDDEN);
-        }
-        else{
-            User userTemp = modelMapper.map(userUpdateDto, User.class);
-            userTemp.setRole(user.get().getRole());
-            userTemp.setPassword(user.get().getPassword());
-            userTemp.setEmailAddress(user.get().getEmailAddress());
-            userRepository.save(userTemp);
-            return new Response<>(
-                    "Update operation is successful",
-                            HttpStatus.OK);
-        }
+        return user;
     }
 
     @Override
-    public Response<User> deleteUser(int userId) {
-        Response<User> response = findUser(userId);
-        if(response.getOptionalT().isEmpty() ||
-                response.getOptionalT().get().isDeleted()){
-            return response;
-        }
-        else {
-            User user = response.getOptionalT().get();
-            user.setDeleted(true);
-            userRepository.save(user);
-            return new Response<>(
-                    "User is deleted",
-                            HttpStatus.OK);
-        }
+    public void deleteUser(int userId) {
+        User user = findUser(userId);
+        user.setDeleted(true);
     }
 
     @Override
-    public Response<User> findUser(int userId) {
+    public User findUser(int userId) {
 
-        Optional<User> user = userRepository.findById(Long.valueOf(userId));
+        Optional<User> user = userRepository.findByUserId(userId);
         return customUserFind(user);
     }
 
     @Override
-    public Response<User> findFirstByEmailAddressEquals(String emailAddress) {
+    public User findFirstByEmailAddressEquals(String emailAddress) {
         Optional<User> user = userRepository.findFirstByEmailAddressEquals(emailAddress);
         return customUserFind(user);
     }
 
-    private Response<User> customUserFind(Optional<User> user){
+    private User customUserFind(Optional<User> user){
         if(user.isEmpty()){
-            return new Response<>(
-                    user,
-                    "User not found.",
-                    HttpStatus.NOT_FOUND);
+            throw new EntityNotFoundException("User not found.");
         }
         else if(user.get().isDeleted()){
-            return new Response<>(
-                    user,
-                    "No further information is to be supplied",
-                    HttpStatus.FORBIDDEN);
+            throw new EntityNotFoundException("No further information is to be supplied");
         }
         else {
-            return new Response<>(
-                    user,
-                    "User is found.",
-                    HttpStatus.OK);
+            return user.get();
+        }
+    }
+
+    @Override
+    public void checkUserEmail(String emailAddress) {
+        Optional<User> user = userRepository.findFirstByEmailAddressEquals(emailAddress);
+        if(!user.isEmpty()){
+            throw new EntityExistsException("This email address is used.");
         }
     }
 }

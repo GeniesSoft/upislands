@@ -1,25 +1,12 @@
 package com.geniessoft.backend.dto;
 
-import com.geniessoft.backend.utility.customvalidator.NotEmptyOrSpaceOrNull;
 import lombok.Data;
 
 import javax.validation.constraints.Positive;
 
 @Data
-public class CompanyRegisterDto {
+public class CompanyRegisterDto extends CompanyBaseDto{
 
-    @NotEmptyOrSpaceOrNull(message = "Company name cannot be empty.")
-    private String companyName;
-
-    @NotEmptyOrSpaceOrNull(message = "Company description cannot be empty.")
-    private String companyDescription;
-
-    @Positive
-    @NotEmptyOrSpaceOrNull(message = "Job owner cannot be empty.")
+    @Positive(message = "You must enter job owner")
     private int userId;
-    private String country;
-    private String state;
-    private String city;
-    private String street;
-    private String no;
 }

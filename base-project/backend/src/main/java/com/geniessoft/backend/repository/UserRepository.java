@@ -13,4 +13,6 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     @Query
     Optional<User> findFirstByEmailAddressEquals(@Param(value = "emailAddress") String emailAddress);
+
+    Optional<User> findByUserId(int userId);
 }

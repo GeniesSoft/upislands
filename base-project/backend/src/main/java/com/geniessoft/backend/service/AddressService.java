@@ -5,4 +5,5 @@ import com.geniessoft.backend.model.Address;
 public interface AddressService {
 
     Address findAddressById(Integer addressId);
+    Address saveAddress(Address address);
 }

@@ -9,9 +9,10 @@ import java.util.Optional;
 
 public interface UserService<T> {
 
-    Optional<User> saveUser(UserRegisterDto user);
-    Response<T> updateUser(UserUpdateDto user);
-    Response<T> deleteUser(int userId);
-    Response<T> findFirstByEmailAddressEquals(String emailAddress);
-    Response<T> findUser(int userId);
+    User saveUser(UserRegisterDto user);
+    User updateUser(UserUpdateDto user);
+    void deleteUser(int userId);
+    User findFirstByEmailAddressEquals(String emailAddress);
+    User findUser(int userId);
+    void checkUserEmail(String emailAddress);
 }
