@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Response<User> deleteUser(long userId) {
+    public Response<User> deleteUser(int userId) {
         Response<User> response = findUser(userId);
         if(response.getOptionalT().isEmpty() ||
                 response.getOptionalT().get().isDeleted()){
@@ -94,9 +94,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Response<User> findUser(long userId) {
+    public Response<User> findUser(int userId) {
 
-        Optional<User> user = userRepository.findById(userId);
+        Optional<User> user = userRepository.findById(Long.valueOf(userId));
         return customUserFind(user);
     }
 

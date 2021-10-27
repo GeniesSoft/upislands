@@ -8,5 +8,5 @@ import javax.validation.constraints.Positive;
 public class UserUpdateDto extends UserDtoBase{
 
     @Positive
-    private long userId;
+    private int userId;
 }
