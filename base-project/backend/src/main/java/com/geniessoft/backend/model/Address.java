@@ -16,10 +16,11 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int addressId;
-    private String country;
-    private String state;
-    private String city;
+    private int streetNumber; //Also known as house/apt no
     private String street;
-    private String no;
-    // USA address !!!!!
+    private String city;
+    private String county;
+    private String state;
+    private String country;
+    private int zip;
 }
