@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,4 +25,6 @@ public class Location {
     @OneToOne
     private Address address;
 
+    @ManyToMany(mappedBy = "locationList")
+    private List<Company> companyList = new ArrayList<>();
 }

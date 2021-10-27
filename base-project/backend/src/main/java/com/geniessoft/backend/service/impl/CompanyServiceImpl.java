@@ -4,10 +4,12 @@ import com.geniessoft.backend.dto.CompanyRegisterDto;
 import com.geniessoft.backend.dto.CompanyUpdateDto;
 import com.geniessoft.backend.model.Address;
 import com.geniessoft.backend.model.Company;
+import com.geniessoft.backend.model.Location;
 import com.geniessoft.backend.model.User;
 import com.geniessoft.backend.repository.CompanyRepository;
 import com.geniessoft.backend.service.AddressService;
 import com.geniessoft.backend.service.CompanyService;
+import com.geniessoft.backend.service.LocationService;
 import com.geniessoft.backend.service.UserService;
 import com.geniessoft.backend.utility.customvalidator.SimpleSourceDestinationMapper;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,6 +30,7 @@ public class CompanyServiceImpl implements CompanyService {
     private final SimpleSourceDestinationMapper mapper;
     private final AddressService addressService;
     private final UserService userService;
+    private final LocationService locationService;
 
     @Override
     public Company findCompanyById(Integer companyId) {
@@ -45,9 +50,20 @@ public class CompanyServiceImpl implements CompanyService {
         User user = userService.findUser(companyRegisterDto.getUserId());
         company.setCompanyAddress(address);
         company.setJobOwner(user);
+        List<Location> locationList = getLocations(companyRegisterDto.getLocationIdList());
+        company.setLocationList(locationList);
         companyRepository.save(company);
 
         return company;
+    }
+
+    private List<Location> getLocations(List<Integer> locationIdList) {
+        List<Location> locationList = new ArrayList<>();
+        for(Integer value : locationIdList){
+            Location location = locationService.findLocationById(value);
+            locationList.add(location);
+        }
+        return locationList;
     }
 
     @Override

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,9 +30,11 @@ public class Company {
     @JoinColumn(name = "job_owner_id")
     private User jobOwner;
 
-    /*@OneToMany(mappedBy = "company", orphanRemoval = true)
-    private List<JetSki> jetSkiList;
-
-    @OneToMany(mappedBy = "company")
-    private List<CompanyLocation> companyLocationList;*/
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "company_locations",
+            joinColumns = { @JoinColumn(name = "company_id") },
+            inverseJoinColumns = { @JoinColumn(name = "location_id") }
+    )
+    private List<Location> locationList = new ArrayList<>();
 }
