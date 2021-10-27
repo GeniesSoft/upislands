@@ -14,6 +14,7 @@ public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int locationId;
+    private String locationName;
     private String description;
 
     @OneToOne
