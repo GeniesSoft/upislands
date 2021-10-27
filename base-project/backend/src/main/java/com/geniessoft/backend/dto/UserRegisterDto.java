@@ -16,5 +16,5 @@ public class UserRegisterDto extends UserDtoBase{
 
     @NotEmptyOrSpaceOrNull(message = "Email address cannot be empty.")
     @Email(message = "It is not convenient email address.")
-    String emailAddress;
+    private String emailAddress;
 }

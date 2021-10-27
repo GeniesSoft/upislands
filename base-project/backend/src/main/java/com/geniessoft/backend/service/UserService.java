@@ -11,7 +11,7 @@ public interface UserService<T> {
 
     Optional<User> saveUser(UserRegisterDto user);
     Response<T> updateUser(UserUpdateDto user);
-    Response<T> deleteUser(long userId);
+    Response<T> deleteUser(int userId);
     Response<T> findFirstByEmailAddressEquals(String emailAddress);
-    Response<T> findUser(long userId);
+    Response<T> findUser(int userId);
 }

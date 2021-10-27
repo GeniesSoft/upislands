@@ -23,7 +23,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/api/users")
 @RequiredArgsConstructor
-public class UserOperations {
+public class UserController {
 
     private final UserService userService;
 
@@ -32,7 +32,7 @@ public class UserOperations {
         Optional<User> response = userService.saveUser(userRegisterDto);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body("success");
+                .body("User registration is successful.");
     }
 
     @PutMapping
@@ -44,7 +44,7 @@ public class UserOperations {
     }
 
     @DeleteMapping
-    public ResponseEntity<String> userDelete(@RequestParam(value = "userId") Long userId){
+    public ResponseEntity<String> userDelete(@RequestParam(value = "userId") Integer userId){
         Response<User> response = userService.deleteUser(userId);
         return ResponseEntity
                 .status(response.getStatus())
@@ -52,7 +52,7 @@ public class UserOperations {
     }
 
     @GetMapping
-    public ResponseEntity<?> userGet(@RequestParam(value = "userId") Long userId){
+    public ResponseEntity<?> userGet(@RequestParam(value = "userId") Integer userId){
         Response<User> response = userService.findUser(userId);
         if(response.getStatus() != HttpStatus.OK){
             return ResponseEntity

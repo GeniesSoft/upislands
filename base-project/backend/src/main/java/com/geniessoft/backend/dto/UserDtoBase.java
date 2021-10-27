@@ -16,17 +16,17 @@ import java.time.LocalDate;
 public abstract class UserDtoBase {
 
     @NotEmptyOrSpaceOrNull(message = "First name cannot be empty.")
-    String firstName;
+    protected String firstName;
 
     @NotEmptyOrSpaceOrNull(message = "Last name cannot be empty.")
-    String lastName;
+    protected String lastName;
 
     @NotEmpty(message = "Phone number cannot be empty.")
     @ContactNumberConstraint
-    String phoneNumber;
+    protected String phoneNumber;
 
     @NotNull(message = "Birth date is mandatory.")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @JsonFormat(pattern = "MM/dd/yyyy") // In USA In general dd-mm-yyyy
-    LocalDate birthDate;
+    protected LocalDate birthDate;
 }
