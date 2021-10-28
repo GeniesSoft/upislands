@@ -5,7 +5,7 @@ import com.geniessoft.backend.dto.CompanyUpdateDto;
 import com.geniessoft.backend.model.Address;
 import com.geniessoft.backend.model.Company;
 import com.geniessoft.backend.service.CompanyService;
-import com.geniessoft.backend.utility.customvalidator.SimpleSourceDestinationMapper;
+import com.geniessoft.backend.utility.customvalidator.CompanyMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ import javax.validation.Valid;
 public class CompanyController {
 
     private final CompanyService companyService;
-    private final SimpleSourceDestinationMapper mapper;
+    private final CompanyMapper mapper;
 
     @GetMapping
     public ResponseEntity<CompanyRegisterDto> getCompany
@@ -44,7 +44,7 @@ public class CompanyController {
         companyService.saveCompany(companyRegisterDto);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body("Registration is successful");
+                .body("Save is successful");
     }
 
     @PutMapping

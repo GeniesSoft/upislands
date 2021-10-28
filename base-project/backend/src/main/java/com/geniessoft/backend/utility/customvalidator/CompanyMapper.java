@@ -9,7 +9,7 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel="spring")
-public interface SimpleSourceDestinationMapper {
+public interface CompanyMapper {
 
     CompanyRegisterDto companyToCompanyDto(Company company, Address address);
 

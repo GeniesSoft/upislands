@@ -8,13 +8,9 @@ import com.geniessoft.backend.model.User;
 import com.geniessoft.backend.repository.UserRepository;
 import com.geniessoft.backend.service.RoleService;
 import com.geniessoft.backend.service.UserService;
-import com.geniessoft.backend.utility.customvalidator.Response;
-import com.geniessoft.backend.utility.customvalidator.SimpleSourceDestinationMapper;
+import com.geniessoft.backend.utility.customvalidator.CompanyMapper;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
@@ -24,7 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final SimpleSourceDestinationMapper mapper;
+    private final CompanyMapper mapper;
     private final RoleService roleService;
     private final UserRepository userRepository;
 

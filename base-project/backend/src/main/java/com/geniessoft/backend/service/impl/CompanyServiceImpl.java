@@ -11,7 +11,7 @@ import com.geniessoft.backend.service.AddressService;
 import com.geniessoft.backend.service.CompanyService;
 import com.geniessoft.backend.service.LocationService;
 import com.geniessoft.backend.service.UserService;
-import com.geniessoft.backend.utility.customvalidator.SimpleSourceDestinationMapper;
+import com.geniessoft.backend.utility.customvalidator.CompanyMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +27,7 @@ import java.util.Optional;
 public class CompanyServiceImpl implements CompanyService {
 
     private final CompanyRepository companyRepository;
-    private final SimpleSourceDestinationMapper mapper;
+    private final CompanyMapper mapper;
     private final AddressService addressService;
     private final UserService userService;
     private final LocationService locationService;

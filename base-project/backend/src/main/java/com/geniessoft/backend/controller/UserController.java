@@ -4,21 +4,14 @@ import com.geniessoft.backend.dto.UserRegisterDto;
 import com.geniessoft.backend.dto.UserUpdateDto;
 import com.geniessoft.backend.model.User;
 import com.geniessoft.backend.service.UserService;
-import com.geniessoft.backend.utility.customvalidator.Response;
-import com.geniessoft.backend.utility.customvalidator.SimpleSourceDestinationMapper;
+import com.geniessoft.backend.utility.customvalidator.CompanyMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.mapstruct.control.MappingControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
 
 
 @Slf4j
@@ -28,7 +21,7 @@ import java.util.Optional;
 public class UserController {
 
     private final UserService userService;
-    private final SimpleSourceDestinationMapper mapper;
+    private final CompanyMapper mapper;
 
     @PostMapping(value = "/register")
     public ResponseEntity<String> userRegister(@Valid @RequestBody UserRegisterDto userRegisterDto){
