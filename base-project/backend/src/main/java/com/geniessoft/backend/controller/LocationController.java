@@ -33,25 +33,25 @@ public class LocationController {
                 .status(HttpStatus.OK)
                 .body("Location is saved.");
     }
-/*
+
     @PutMapping
-    public ResponseEntity<String> updateLocation(@Valid @RequestBody LocationDto locationDto){
-        Response<User> response = locationService.updateLocation(locationDto);
+    public ResponseEntity<String> updateLocation(@Valid @RequestBody LocationUpdateDto locationUpdateDto){
+        locationService.updateLocation(locationUpdateDto);
         return ResponseEntity
-                .status(response.getStatus())
-                .body(response.getMessage());
+                .status(HttpStatus.OK)
+                .body("Location is updated");
     }
 
     @DeleteMapping
     public ResponseEntity<String> deleteLocation(@RequestParam(value = "locationId") Integer locationId){
-        Response<User> response = locationService.deleteLocation(locationId);
+       locationService.deleteLocation(locationId);
         return ResponseEntity
-                .status(response.getStatus())
-                .body(response.getMessage());
+                .status(HttpStatus.OK)
+                .body("Location is deleted");
     }
-*/
+
     @GetMapping
-    public ResponseEntity<LocationGetDto> getLocation(@RequestParam(value = "locationId") Integer locationId){
+    public ResponseEntity<LocationGetDto> getLocationById(@RequestParam(value = "locationId") Integer locationId){
 
         Location location = locationService.findLocationById(locationId);
         Address address = location.getAddress();

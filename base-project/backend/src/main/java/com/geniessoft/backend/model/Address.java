@@ -10,17 +10,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int addressId;
-    private int streetNumber; //Also known as house/apt no
+    private String streetNumber; //Also known as house/apt no
     private String street;
     private String city;
     private String county;
     private String state;
     private String country;
-    private int zip;
+    private String zip;
 }

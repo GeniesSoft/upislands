@@ -12,8 +12,8 @@ public class LocationSaveDto extends LocationBaseDto{
     @NotEmptyOrSpaceOrNull(message = "Location Name cannot be empty.")
     protected String locationName;
 
-    protected int streetNumber; //Also known as house/apt no
-    protected int zip;
+    protected String streetNumber; //Also known as house/apt no
+    protected String zip;
 
     @NotEmptyOrSpaceOrNull(message = "Address cannot be empty.")
     protected String street;

@@ -2,6 +2,7 @@ package com.geniessoft.backend.service.impl;
 
 import com.geniessoft.backend.dto.LocationBaseDto;
 import com.geniessoft.backend.dto.LocationSaveDto;
+import com.geniessoft.backend.dto.LocationUpdateDto;
 import com.geniessoft.backend.model.Address;
 import com.geniessoft.backend.model.Location;
 import com.geniessoft.backend.repository.LocationRepository;
@@ -37,17 +38,20 @@ public class LocationServiceImpl implements LocationService {
 
 
     @Override
-    public Location updateLocation(LocationBaseDto locationDto) {
-        return null;
+    @Transactional(rollbackOn = Exception.class)
+    public Location updateLocation(LocationUpdateDto locationUpdateDto){
+        Location location = findLocationById(locationUpdateDto.getLocationId());
+        //checkLocationName(location.getLocationName());
+        mapper.updateLocation(location, locationUpdateDto);
+        locationRepository.save(location);
+        return location;
     }
 
     @Override
     public void checkLocationName(String locationName) {
         Optional<Location> location = locationRepository.findFirstByLocationNameEquals(locationName.trim());
-        if (location.isEmpty()){
-            return;
-        }
-        else {
+
+        if (location.isPresent()){
             if (location.get().isDeleted()){
                 throw new EntityExistsException("This Location is deleted.");
             }
@@ -58,7 +62,9 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public void deleteLocation(int locationId) {
-
+        Location location = findLocationById(locationId);
+        location.setDeleted(true);
+        locationRepository.save(location);
     }
 
     @Override
