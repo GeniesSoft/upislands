@@ -18,6 +18,7 @@ public class Booking {
     private Date startDate;
     private Date finishDate;
     private double totalPrice;
+    private boolean isActive;
 
     @OneToOne
     @JoinColumn(name = "booking_location_id")

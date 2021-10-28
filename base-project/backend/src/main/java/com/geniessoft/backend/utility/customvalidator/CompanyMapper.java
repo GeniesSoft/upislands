@@ -10,7 +10,7 @@ import org.mapstruct.MappingTarget;
 import java.util.List;
 
 @Mapper(componentModel="spring")
-public interface SimpleSourceDestinationMapper {
+public interface CompanyMapper {
 
     //////////////////////////////--Company--//////////////////////////////////
 

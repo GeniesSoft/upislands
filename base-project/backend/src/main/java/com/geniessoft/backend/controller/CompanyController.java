@@ -8,8 +8,8 @@ import com.geniessoft.backend.model.Address;
 import com.geniessoft.backend.model.Company;
 import com.geniessoft.backend.model.Location;
 import com.geniessoft.backend.service.CompanyService;
+import com.geniessoft.backend.utility.customvalidator.CompanyMapper;
 import com.geniessoft.backend.utility.customvalidator.LocationMapper;
-import com.geniessoft.backend.utility.customvalidator.SimpleSourceDestinationMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 public class CompanyController {
 
     private final CompanyService companyService;
-    private final SimpleSourceDestinationMapper mapper;
+    private final CompanyMapper mapper;
     private final LocationMapper locationMapper;
 
     @GetMapping
