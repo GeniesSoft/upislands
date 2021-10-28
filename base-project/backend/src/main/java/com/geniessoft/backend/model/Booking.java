@@ -18,15 +18,16 @@ public class Booking {
     private Date startDate;
     private Date finishDate;
     private double totalPrice;
+    private int jetSkiCount;
     private boolean active = true;
 
     @OneToOne
     @JoinColumn(name = "booking_location_id")
     private Location bookingLocation;
 
-
-    @ManyToMany(mappedBy = "bookingList")
-    private List<JetSki> jetSkiList;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "booking_company_id")
+    private Company bookingCompany;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

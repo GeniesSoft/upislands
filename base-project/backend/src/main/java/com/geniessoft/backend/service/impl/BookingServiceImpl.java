@@ -1,15 +1,13 @@
 package com.geniessoft.backend.service.impl;
 
 import com.geniessoft.backend.dto.BookingBaseDto;
-import com.geniessoft.backend.model.Booking;
-import com.geniessoft.backend.model.JetSki;
-import com.geniessoft.backend.model.Location;
-import com.geniessoft.backend.model.User;
+import com.geniessoft.backend.model.*;
 import com.geniessoft.backend.repository.BookingRepository;
 import com.geniessoft.backend.service.BookingService;
+import com.geniessoft.backend.service.CompanyService;
 import com.geniessoft.backend.service.LocationService;
 import com.geniessoft.backend.service.UserService;
-import com.geniessoft.backend.utility.customvalidator.BookingMapper;
+import com.geniessoft.backend.utility.mapper.BookingMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +24,7 @@ public class BookingServiceImpl implements BookingService {
    private final BookingMapper mapper;
    private final UserService userService;
    private final LocationService locationService;
+   private final CompanyService companyService;
     //private final JetSkiService jetSkiService;
 
     @Override
@@ -36,25 +35,20 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Booking saveBooking(BookingBaseDto bookingSaveDto) {
-        List<JetSki> jetSkiList = getJetSkies(bookingSaveDto.getJetSkiIdList());
+
         User user = userService.findUser(bookingSaveDto.getUserId());
         Location location = locationService.findLocationById(bookingSaveDto.getLocationId());
         Booking booking = mapper.bookingDtoToBooking(bookingSaveDto);
+        Company company = companyService.findCompanyById(bookingSaveDto.getCompanyId());
         booking.setUser(user);
         booking.setBookingLocation(location);
-        booking.setJetSkiList(jetSkiList);
+        booking.setBookingCompany(company);
+        //jetSkiService.updateCount(bookingSaveDto.getCompanyId(),bookingSaveDto.getJetSkiCount());
         bookingRepository.save(booking);
 
         return booking;
     }
 
-    private List<JetSki> getJetSkies(List<Integer> jetSkiIdList) {
-        List<JetSki> jetSkiList = new ArrayList<>();
-        for (Integer jetSkiId: jetSkiIdList) {
-         //  jetSkiList.add(jetSkiService.findById(jetSkiId));
-        }
-        return jetSkiList;
-    }
 
     @Override
     public Booking updateBooking(BookingBaseDto bookingUpdateDto) {

@@ -19,9 +19,9 @@ public  class BookingBaseDto {
     protected int locationId;
     protected boolean active;
     protected int userId;
+    protected int companyId;
 
-    @LocationListConstraint(message = "You must select at least 1 jet ski")
-    private List<Integer> jetSkiIdList;
+    private int jetSkiCount;
 
 
 }
