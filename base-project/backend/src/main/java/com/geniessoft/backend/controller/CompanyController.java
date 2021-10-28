@@ -38,7 +38,7 @@ public class CompanyController {
                 .body(dto);
     }
 
-    @PostMapping(value = "register")
+    @PostMapping(value = "save")
     public ResponseEntity<String> addCompany
             (@Validated @RequestBody CompanyRegisterDto companyRegisterDto){
         companyService.saveCompany(companyRegisterDto);

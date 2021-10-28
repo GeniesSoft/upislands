@@ -13,9 +13,11 @@ public abstract class CompanyBaseDto {
 
     @NotEmptyOrSpaceOrNull(message = "Company description cannot be empty.")
     protected String companyDescription;
-    protected String country;
-    protected String state;
-    protected String city;
-    protected String street;
-    protected String no;
+    private int streetNumber; //Also known as house/apt no
+    private String street;
+    private String city;
+    private String county;
+    private String state;
+    private String country;
+    private int zip;
 }
