@@ -18,14 +18,12 @@ public class Booking {
     private Date startDate;
     private Date finishDate;
     private double totalPrice;
-    private boolean isActive;
+    private boolean active = true;
 
     @OneToOne
     @JoinColumn(name = "booking_location_id")
     private Location bookingLocation;
 
-    @OneToMany(mappedBy = "booking", orphanRemoval = true)
-    private List<Review> reviewList;
 
     @ManyToMany(mappedBy = "bookingList")
     private List<JetSki> jetSkiList;
