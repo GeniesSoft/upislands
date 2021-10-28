@@ -8,16 +8,18 @@ import com.geniessoft.backend.utility.mapper.CompanyMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-
 
 @Slf4j
 @RestController
 @RequestMapping(value = "/api/users")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     private final UserService userService;
@@ -56,4 +58,14 @@ public class UserController {
                 .body(dto);
     }
 
+    @PostMapping(
+            path = "{userId}/image/upload",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public void uploadUserProfileImage(
+            @PathVariable("userId") int userId,
+            @RequestParam("file") MultipartFile file){
+        userService.uploadUserProfileImage(userId,file);
+    }
 }
