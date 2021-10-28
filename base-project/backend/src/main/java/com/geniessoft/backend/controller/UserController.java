@@ -4,7 +4,7 @@ import com.geniessoft.backend.dto.UserRegisterDto;
 import com.geniessoft.backend.dto.UserUpdateDto;
 import com.geniessoft.backend.model.User;
 import com.geniessoft.backend.service.UserService;
-import com.geniessoft.backend.utility.customvalidator.CompanyMapper;
+import com.geniessoft.backend.utility.mapper.CompanyMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

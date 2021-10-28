@@ -1,4 +1,4 @@
-package com.geniessoft.backend.utility.customvalidator;
+package com.geniessoft.backend.utility.mapper;
 
 import com.geniessoft.backend.dto.LocationGetDto;
 import com.geniessoft.backend.dto.LocationSaveDto;

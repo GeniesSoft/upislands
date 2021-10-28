@@ -8,7 +8,7 @@ import com.geniessoft.backend.model.User;
 import com.geniessoft.backend.repository.UserRepository;
 import com.geniessoft.backend.service.RoleService;
 import com.geniessoft.backend.service.UserService;
-import com.geniessoft.backend.utility.customvalidator.CompanyMapper;
+import com.geniessoft.backend.utility.mapper.CompanyMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
