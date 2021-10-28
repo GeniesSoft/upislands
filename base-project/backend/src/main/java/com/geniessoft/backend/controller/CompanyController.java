@@ -8,8 +8,8 @@ import com.geniessoft.backend.model.Address;
 import com.geniessoft.backend.model.Company;
 import com.geniessoft.backend.model.Location;
 import com.geniessoft.backend.service.CompanyService;
-import com.geniessoft.backend.utility.customvalidator.CompanyMapper;
-import com.geniessoft.backend.utility.customvalidator.LocationMapper;
+import com.geniessoft.backend.utility.mapper.CompanyMapper;
+import com.geniessoft.backend.utility.mapper.LocationMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

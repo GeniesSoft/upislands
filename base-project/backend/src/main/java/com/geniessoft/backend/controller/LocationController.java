@@ -1,13 +1,12 @@
 package com.geniessoft.backend.controller;
 
-import com.geniessoft.backend.dto.LocationBaseDto;
 import com.geniessoft.backend.dto.LocationGetDto;
 import com.geniessoft.backend.dto.LocationSaveDto;
 import com.geniessoft.backend.dto.LocationUpdateDto;
 import com.geniessoft.backend.model.Address;
 import com.geniessoft.backend.model.Location;
 import com.geniessoft.backend.service.LocationService;
-import com.geniessoft.backend.utility.customvalidator.LocationMapper;
+import com.geniessoft.backend.utility.mapper.LocationMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
