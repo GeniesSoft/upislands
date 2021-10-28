@@ -40,4 +40,7 @@ public class User {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private Role role;
+
+    @OneToOne
+    private Content userProfileImage;
 }

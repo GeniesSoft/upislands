@@ -1,6 +1,5 @@
 package com.geniessoft.backend.service.impl;
 
-import com.geniessoft.backend.dto.LocationBaseDto;
 import com.geniessoft.backend.dto.LocationSaveDto;
 import com.geniessoft.backend.dto.LocationUpdateDto;
 import com.geniessoft.backend.model.Address;
@@ -8,7 +7,7 @@ import com.geniessoft.backend.model.Location;
 import com.geniessoft.backend.repository.LocationRepository;
 import com.geniessoft.backend.service.AddressService;
 import com.geniessoft.backend.service.LocationService;
-import com.geniessoft.backend.utility.customvalidator.LocationMapper;
+import com.geniessoft.backend.utility.mapper.LocationMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
