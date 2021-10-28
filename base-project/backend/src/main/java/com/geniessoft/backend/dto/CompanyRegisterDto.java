@@ -1,7 +1,6 @@
 package com.geniessoft.backend.dto;
 
 import com.geniessoft.backend.utility.customvalidator.LocationListConstraint;
-
 import lombok.Getter;
 import lombok.Setter;
 

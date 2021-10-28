@@ -44,8 +44,9 @@ public class CompanyServiceImpl implements CompanyService {
     public Company saveCompany(CompanyRegisterDto companyRegisterDto) {
 
         checkCompanyName(companyRegisterDto.getCompanyName());
-        Company company = mapper.companyDtoToCompany(companyRegisterDto);
-        Address address = mapper.companyDtoToAddress(companyRegisterDto);
+        checkUserHasCompany(companyRegisterDto.getUserId());
+        Company company = mapper.companyRegisterDtoToCompany(companyRegisterDto);
+        Address address = mapper.companyRegisterDtoToAddress(companyRegisterDto);
         addressService.saveAddress(address);
         User user = userService.findUser(companyRegisterDto.getUserId());
         company.setCompanyAddress(address);
@@ -85,6 +86,19 @@ public class CompanyServiceImpl implements CompanyService {
         }
     }
 
+
+    @Override
+    public void checkUserHasCompany(int userId) {
+        Optional<Company> company = companyRepository
+                .findFirstByJobOwnerUserId(userId);
+        if(company.isEmpty()){
+            return;
+        }
+        else {
+            throw new EntityExistsException("This user already has a company.");
+        }
+    }
+
     @Override
     @Transactional(rollbackOn = Exception.class)
     public Company updateCompany(CompanyUpdateDto companyUpdateDto) {
@@ -94,8 +108,9 @@ public class CompanyServiceImpl implements CompanyService {
                 .equals(companyUpdateDto.getCompanyName())){
             checkCompanyName(companyUpdateDto.getCompanyName());
         }
-        mapper.updateCompany(company,companyUpdateDto);
-        mapper.updateAddress(company.getCompanyAddress(),companyUpdateDto);
+        mapper.updateCompany(company, companyUpdateDto);
+        mapper.updateAddress(company.getCompanyAddress(), companyUpdateDto);
+        company.setLocationList(getLocations(companyUpdateDto.getLocationIdList()));
         companyRepository.save(company);
 
         return company;

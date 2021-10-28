@@ -10,7 +10,9 @@ public interface CompanyService {
 
     Company saveCompany(CompanyRegisterDto companyRegisterDto);
 
-    Company updateCompany(CompanyUpdateDto companyUpdateDto);
+    Company updateCompany(CompanyUpdateDto companyUpdateGetDto);
+
+    void checkUserHasCompany(int userId);
 
     void deleteCompany(Integer companyId);
 

@@ -1,8 +1,11 @@
 package com.geniessoft.backend.dto;
 
+import com.geniessoft.backend.utility.customvalidator.LocationListConstraint;
 import com.geniessoft.backend.utility.customvalidator.NotEmptyOrSpaceOrNull;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter

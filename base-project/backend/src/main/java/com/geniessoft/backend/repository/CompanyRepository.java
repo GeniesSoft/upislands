@@ -11,4 +11,5 @@ public interface CompanyRepository extends JpaRepository<Company,Integer> {
 
     Optional<Company> findByCompanyIdAndDeletedIsFalse(Integer companyId);
     Optional<Company> findFirstByCompanyNameEquals(String name);
+    Optional<Company> findFirstByJobOwnerUserId(int userId);
 }
