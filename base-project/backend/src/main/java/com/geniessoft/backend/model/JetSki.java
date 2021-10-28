@@ -25,13 +25,6 @@ public class JetSki {
     @OneToMany(mappedBy = "jetSki", orphanRemoval = true)
     private List<NotAvailableDate> notAvailableDateList;
 
-    @OneToMany(mappedBy = "jetSki", orphanRemoval = true)
-    private List<JetSkiContent> jetSkiContentList;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "jetSkimodel_id")
-    private JetSkiModel jetSkiModel;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
     private Company company;
