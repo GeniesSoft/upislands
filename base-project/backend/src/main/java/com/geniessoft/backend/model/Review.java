@@ -15,16 +15,10 @@ public class Review {
     private int reviewId;
     private String reviewMessage;
     private double rating;
-
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
+    private boolean deleted = false;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id")
     private Booking booking;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "location_id")
-    private Location location;
+
 }
