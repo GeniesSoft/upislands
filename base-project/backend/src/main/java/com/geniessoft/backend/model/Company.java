@@ -27,6 +27,9 @@ public class Company {
     private Address companyAddress;
 
     @OneToOne
+    private JetSkiDetails jetSkiDetails;
+
+    @OneToOne
     @JoinColumn(name = "job_owner_id")
     private User jobOwner;
 
