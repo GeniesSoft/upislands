@@ -4,12 +4,14 @@ import com.geniessoft.backend.dto.UserRegisterDto;
 import com.geniessoft.backend.dto.UserUpdateDto;
 import com.geniessoft.backend.model.User;
 import com.geniessoft.backend.service.UserService;
+import com.geniessoft.backend.utility.customvalidator.ImageConstraint;
 import com.geniessoft.backend.utility.mapper.CompanyMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,13 +22,14 @@ import javax.validation.Valid;
 @RequestMapping(value = "/api/users")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000")
+@Validated
 public class UserController {
 
     private final UserService userService;
     private final CompanyMapper mapper;
 
     @PostMapping(value = "/register")
-    public ResponseEntity<String> userRegister(@Valid @RequestBody UserRegisterDto userRegisterDto){
+    public ResponseEntity<String> registerUser(@Valid @RequestBody UserRegisterDto userRegisterDto){
         userService.saveUser(userRegisterDto);
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -34,7 +37,7 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<String> userUpdate(@Valid @RequestBody UserUpdateDto userUpdateDto){
+    public ResponseEntity<String> updateUser(@Valid @RequestBody UserUpdateDto userUpdateDto){
         userService.updateUser(userUpdateDto);
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -42,7 +45,7 @@ public class UserController {
     }
 
     @DeleteMapping
-    public ResponseEntity<String> userDelete(@RequestParam(value = "userId") Integer userId){
+    public ResponseEntity<String> deleteUser(@RequestParam(value = "userId") Integer userId){
         userService.deleteUser(userId);
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -50,7 +53,7 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<UserUpdateDto> userGet(@RequestParam(value = "userId") Integer userId){
+    public ResponseEntity<UserUpdateDto> getUser(@RequestParam(value = "userId") Integer userId){
         User user = userService.findUser(userId);
         UserUpdateDto dto = mapper.userToUserUpdateDto(user);
         return ResponseEntity
@@ -63,9 +66,12 @@ public class UserController {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public void uploadUserProfileImage(
+    public ResponseEntity<String> uploadUserProfileImage(
             @PathVariable("userId") int userId,
-            @RequestParam("file") MultipartFile file){
+            @RequestParam("file")  @ImageConstraint MultipartFile file){
         userService.uploadUserProfileImage(userId,file);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Image is uploaded.");
     }
 }

@@ -7,9 +7,11 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.IOUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -35,7 +37,6 @@ public class FileStoreService {
 
         try{
             amazonS3.putObject(path,filename,inputStream,metadata);
-            System.out.println("Image is uploaded ....");
         }
         catch (AmazonServiceException exception){
             throw new IllegalStateException("Failed to store file to S3",exception);
@@ -51,5 +52,16 @@ public class FileStoreService {
         catch (AmazonServiceException | IOException e){
             throw new IllegalStateException("Failed to download file to S3",e);
         }
+    }
+
+    public void delete(String path, String filename){
+        amazonS3.deleteObject(path,filename);
+    }
+
+    public Map<String,String> getMetadata(MultipartFile file){
+        Map<String,String> metadata = new HashMap<>();
+        metadata.put("Content-Type", file.getContentType());
+        metadata.put("Content-Length",String.valueOf(file.getSize()));
+        return metadata;
     }
 }

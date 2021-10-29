@@ -27,6 +27,10 @@ public class Company {
     private Address companyAddress;
 
     @OneToOne
+    @JoinColumn(name = "company_profile_image_id")
+    private Content companyProfileImage;
+
+    @OneToOne
     @JoinColumn(name = "job_owner_id")
     private User jobOwner;
 

@@ -11,10 +11,18 @@ import java.util.UUID;
 public interface UserService {
 
     User saveUser(UserRegisterDto user);
+
     User updateUser(UserUpdateDto user);
+
     User findFirstByEmailAddressEquals(String emailAddress);
+
     User findUser(int userId);
+
     void uploadUserProfileImage(int userId, MultipartFile file);
+
     void deleteUser(int userId);
+
     void checkUserEmail(String emailAddress);
+
+    void deleteUserProfileImage(User user);
 }

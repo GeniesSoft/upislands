@@ -27,4 +27,8 @@ public class Location {
 
     @ManyToMany(mappedBy = "locationList")
     private List<Company> companyList = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "location_profile_image_id")
+    private Content locationProfileImage;
 }

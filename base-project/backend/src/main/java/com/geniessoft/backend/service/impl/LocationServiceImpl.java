@@ -3,17 +3,26 @@ package com.geniessoft.backend.service.impl;
 import com.geniessoft.backend.dto.LocationSaveDto;
 import com.geniessoft.backend.dto.LocationUpdateDto;
 import com.geniessoft.backend.model.Address;
+import com.geniessoft.backend.model.Company;
+import com.geniessoft.backend.model.Content;
 import com.geniessoft.backend.model.Location;
 import com.geniessoft.backend.repository.LocationRepository;
 import com.geniessoft.backend.service.AddressService;
+import com.geniessoft.backend.service.ContentService;
+import com.geniessoft.backend.service.LocationContentService;
 import com.geniessoft.backend.service.LocationService;
+import com.geniessoft.backend.utility.bucket.BucketName;
+import com.geniessoft.backend.utility.bucket.FolderNames;
 import com.geniessoft.backend.utility.mapper.LocationMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.io.IOException;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -23,6 +32,9 @@ public class LocationServiceImpl implements LocationService {
     private final LocationRepository locationRepository;
     private final LocationMapper mapper;
     private final AddressService addressService;
+    private final FileStoreService fileStoreService;
+    private final ContentService contentService;
+    private final LocationContentService locationContentService;
 
     @Override
     @Transactional(rollbackOn = Exception.class)
@@ -77,5 +89,66 @@ public class LocationServiceImpl implements LocationService {
                 .findLocationByLocationIdAndDeletedIsFalse(locationId);
         return location.orElseThrow(() -> new EntityNotFoundException("Location is not found."));
 
+    }
+
+    @Override
+    @Transactional(rollbackOn = Exception.class)
+    public void deleteLocationProfileImage(Location location) {
+        Content content = location.getLocationProfileImage();
+        contentService.deleteContent(content.getContentId());
+        fileStoreService.delete(content.getContentPath(),content.getContentName());
+    }
+
+    @Override
+    @Transactional(rollbackOn = Exception.class)
+    public void addLocationProfileImage(int locationId, MultipartFile file) {
+
+        // If there is location profile image then previous image deleted.
+        Location location = findLocationById(locationId);
+        if(location.getLocationProfileImage() != null){
+            deleteLocationProfileImage(location);
+        }
+
+        Map<String,String> metadata = fileStoreService.getMetadata(file);
+        String path = String.format("%s/%s", BucketName.BUCKET_NAME.getBucketName(), FolderNames.location_profile_images);
+        String fileName = String.format("%s-%s", location.getLocationId(), file.getOriginalFilename());
+
+        try {
+
+            Content locationProfileImage = contentService.saveContent(fileName,path,file.getContentType());
+            location.setLocationProfileImage(locationProfileImage);
+            fileStoreService.upload(path,fileName,Optional.of(metadata),file.getInputStream());
+            System.out.println("Location profile image is uploaded");
+        }
+        catch (IOException e){
+            throw new IllegalStateException(e);
+        }
+    }
+
+    @Override
+    @Transactional(rollbackOn = Exception.class)
+    public void addLocationContent(int locationId, MultipartFile file, String content_text) {
+
+        Location location = findLocationById(locationId);
+        Map<String,String> metadata = fileStoreService.getMetadata(file);
+
+        String path = String.format("%s/%s",
+                BucketName.BUCKET_NAME.getBucketName(),
+                FolderNames.location_contents +"/"+ location.getLocationId());
+
+        String fileName = String.format("%s-%s",
+                System.currentTimeMillis(),
+                file.getOriginalFilename());
+
+        try {
+
+            locationContentService.saveLocationContent
+                    (fileName,path,file.getContentType(),content_text,location);
+            fileStoreService.upload(path,fileName,Optional.of(metadata),file.getInputStream());
+            System.out.println("Location content is uploaded");
+        }
+        catch (IOException e){
+            throw new IllegalStateException(e);
+        }
     }
 }
