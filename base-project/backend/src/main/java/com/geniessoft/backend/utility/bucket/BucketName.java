@@ -2,7 +2,7 @@ package com.geniessoft.backend.utility.bucket;
 
 public enum BucketName {
 
-    PROFILE_IMAGE("upisland-bucket");
+    BUCKET_NAME("upisland-bucket");
 
     private final String bucketName;
 
