@@ -16,7 +16,7 @@ public class Review {
     private String reviewMessage;
     private double rating;
     private boolean deleted = false;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "booking_id")
     private Booking booking;
 

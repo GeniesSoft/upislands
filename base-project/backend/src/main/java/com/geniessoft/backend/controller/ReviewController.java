@@ -19,8 +19,8 @@ import javax.validation.Valid;
 @RequestMapping(value = "/api/review")
 @RequiredArgsConstructor
 public class ReviewController {
-    ReviewService reviewService;
-    ReviewMapper reviewMapper;
+    private final ReviewService reviewService;
+    private final ReviewMapper reviewMapper;
 
     @PostMapping(value = "/save")
     public ResponseEntity<String> addReview(@Valid @RequestBody ReviewBaseDto reviewBaseDto){
@@ -30,7 +30,7 @@ public class ReviewController {
                 .body("Review is saved");
     }
 
-    @PostMapping
+    @PutMapping
     public ResponseEntity<String> updateReview(@Valid @RequestBody ReviewUpdateDto reviewUpdateDto){
         reviewService.updateReview(reviewUpdateDto);
         return ResponseEntity

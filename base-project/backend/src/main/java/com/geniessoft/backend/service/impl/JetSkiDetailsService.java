@@ -63,4 +63,9 @@ public class JetSkiDetailsService {
         jetSkiDetailsRepository.delete(jetSkiDetails);
     }
 
+    public double getSessionPrice(Company company){
+        JetSkiDetails jetSkiDetails = findJetSkiDetailsByCompany(company);
+        return jetSkiDetails.getSessionPrice();
+    }
+
 }

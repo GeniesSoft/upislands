@@ -19,7 +19,8 @@ public class Location {
 
     @Column(unique = true)
     private String locationName;
-
+    private String tripTime;
+    private boolean needExperience;
     private String description;
 
     @OneToOne

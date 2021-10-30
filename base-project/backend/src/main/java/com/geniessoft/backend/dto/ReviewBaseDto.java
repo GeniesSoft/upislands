@@ -9,5 +9,4 @@ public class ReviewBaseDto {
     protected String reviewMessage;
     protected double rating;
     protected int bookingId;
-    protected boolean deleted;
 }
