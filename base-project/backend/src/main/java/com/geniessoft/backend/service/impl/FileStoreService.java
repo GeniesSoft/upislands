@@ -2,10 +2,9 @@ package com.geniessoft.backend.service.impl;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.S3ObjectInputStream;
+import com.amazonaws.services.s3.model.*;
 import com.amazonaws.util.IOUtils;
+import com.geniessoft.backend.utility.bucket.BucketName;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,9 +42,9 @@ public class FileStoreService {
         }
     }
 
-    public byte[] download(String path, String key) {
+    public byte[] download(String path, String fileName) {
         try {
-            S3Object object = amazonS3.getObject(path,key);
+            S3Object object = amazonS3.getObject(path,fileName);
             S3ObjectInputStream inputStream = object.getObjectContent();
             return IOUtils.toByteArray(inputStream);
         }
