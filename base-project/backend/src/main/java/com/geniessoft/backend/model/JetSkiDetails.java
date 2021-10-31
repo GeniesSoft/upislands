@@ -41,6 +41,7 @@ public class JetSkiDetails {
         this.totalNumberOfJetSkies = totalNumberOfJetSkies;
         this.sessionPrice = sessionPrice;
         this.company = company;
+        this.scheduleMap = new HashMap<>();
     }
 
 }
