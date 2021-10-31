@@ -1,19 +1,15 @@
 package com.geniessoft.backend.service.impl;
 
 import com.geniessoft.backend.dto.BookingBaseDto;
+import com.geniessoft.backend.dto.BookingUpdateDto;
 import com.geniessoft.backend.model.*;
 import com.geniessoft.backend.repository.BookingRepository;
-import com.geniessoft.backend.service.BookingService;
-import com.geniessoft.backend.service.CompanyService;
-import com.geniessoft.backend.service.LocationService;
-import com.geniessoft.backend.service.UserService;
+import com.geniessoft.backend.service.*;
 import com.geniessoft.backend.utility.mapper.BookingMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,7 +21,7 @@ public class BookingServiceImpl implements BookingService {
    private final UserService userService;
    private final LocationService locationService;
    private final CompanyService companyService;
-    //private final JetSkiService jetSkiService;
+    private final JetSkiDetailsService jetSkiDetailsService;
 
     @Override
     public Booking findBookingById(int bookingId) {
@@ -43,19 +39,20 @@ public class BookingServiceImpl implements BookingService {
         booking.setUser(user);
         booking.setBookingLocation(location);
         booking.setBookingCompany(company);
-        //jetSkiService.updateCount(bookingSaveDto.getCompanyId(),bookingSaveDto.getJetSkiCount());
+        jetSkiDetailsService.updateSchedule(company.getCompanyId(), booking.getDate(),booking.getStartTime() , booking.getEndTime(), booking.getJetSkiCount());
+        double totalPrice = jetSkiDetailsService.getSessionPrice(company);
+        booking.setTotalPrice(totalPrice);
         bookingRepository.save(booking);
-
         return booking;
     }
 
 
     @Override
-    public Booking updateBooking(BookingBaseDto bookingUpdateDto) {
-        deleteBooking(bookingUpdateDto.getUserId());
+    public Booking updateBooking(BookingUpdateDto bookingUpdateDto) {
+        deleteBooking(bookingUpdateDto.getBookingId());
+        BookingBaseDto bookingBaseDto = mapper.bookingUpdateDtoToBookingBaseDto(bookingUpdateDto);
 
-
-        return saveBooking(bookingUpdateDto);
+        return saveBooking(bookingBaseDto);
     }
 
     @Override

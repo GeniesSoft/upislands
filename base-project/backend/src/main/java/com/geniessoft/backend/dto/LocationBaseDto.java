@@ -10,6 +10,8 @@ public abstract class LocationBaseDto {
 
     @NotEmptyOrSpaceOrNull(message = "Description cannot be empty.")
     protected String description;
+    protected String tripTime;
+    protected boolean needExperience;
 
 
 }

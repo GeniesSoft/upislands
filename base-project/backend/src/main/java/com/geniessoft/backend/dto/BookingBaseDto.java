@@ -1,23 +1,24 @@
 package com.geniessoft.backend.dto;
 
 
-import com.geniessoft.backend.utility.customvalidator.LocationListConstraint;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.Positive;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Getter
 @Setter
 public  class BookingBaseDto {
-
-    protected Date startDate;
-    protected Date finishDate;
-    protected double totalPrice;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
+    protected LocalDate date;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+    protected LocalTime startTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+    protected LocalTime endTime;
     protected int locationId;
-    protected boolean active;
+
     protected int userId;
     protected int companyId;
 
