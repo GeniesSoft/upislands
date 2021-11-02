@@ -12,10 +12,11 @@ public class LocalGuide {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int localGuideId;
-    private String name;
+
+    private String localGuideName;
     private boolean available = true;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
     private Company company;
 
