@@ -115,7 +115,7 @@ export default withRouter(function Header({ location }) {
                       <Logo
                           withLink
                           linkTo="/"
-                          src="/images/logo-alt3.png"
+                          src={homeLogo === "white" ? "/images/logo-alt3.png" : "/images/logo-alt2.png"}
                           title="UpIslands"
                       /> :
                       <Logo
