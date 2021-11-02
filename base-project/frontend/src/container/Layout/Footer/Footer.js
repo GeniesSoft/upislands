@@ -10,7 +10,7 @@ const Footer = () => {
         <Logo
           withLink
           linkTo="/"
-          src="/images/logo-alt.svg"
+          src="/images/logo-alt.png"
           title="Upislands"
         />
       }

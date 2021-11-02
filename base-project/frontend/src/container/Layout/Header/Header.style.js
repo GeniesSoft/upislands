@@ -35,7 +35,7 @@ const HeaderWrapper = styled.header`
 
           a {
             img {
-              opacity: 0;
+              opacity: 1;
             }
 
             h3 {
@@ -67,7 +67,7 @@ const HeaderWrapper = styled.header`
 
           a {
             img {
-              opacity: 0;
+              opacity: 1;
             }
 
             h3 {

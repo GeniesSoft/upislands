@@ -25,7 +25,7 @@ export default function ForgetPassWord() {
         <Logo
           withLink
           linkTo="/"
-          src="/images/logo-alt.svg"
+          src="/images/logo-alt.png"
           title="UpIslands"
         />
         <Title>Welcome Back</Title>

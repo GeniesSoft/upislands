@@ -9,12 +9,12 @@ const Logo = ({ className, withLink, linkTo, title, src }) => {
       {withLink ? (
         <NavLink to={linkTo}>
           {src && <img src={src} alt="UpIslands" />}
-          {title && <h3>{title}</h3>}
+          {/*{title && <h3>{title}</h3>}*/}
         </NavLink>
       ) : (
         <Fragment>
           {src && <img src={src} alt="UpIslands" />}
-          {title && <h3>{title}</h3>}
+          {/*{title && <h3>{title}</h3>}*/}
         </Fragment>
       )}
     </LogoArea>
