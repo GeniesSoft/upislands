@@ -1,2 +1,4 @@
-package com.geniessoft.backend.controller;public class LocalGuideController {
+package com.geniessoft.backend.controller;
+
+public class LocalGuideController {
 }

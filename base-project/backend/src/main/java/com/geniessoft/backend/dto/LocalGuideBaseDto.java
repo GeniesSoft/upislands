@@ -1,2 +1,4 @@
-package com.geniessoft.backend.dto;public class LocalGuideBaseDto {
+package com.geniessoft.backend.dto;
+
+public class LocalGuideBaseDto {
 }
