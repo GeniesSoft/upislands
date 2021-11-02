@@ -1,5 +1,6 @@
 package com.geniessoft.backend.controller;
 
+import com.geniessoft.backend.dto.ProfileImageDto;
 import com.geniessoft.backend.dto.UserRegisterDto;
 import com.geniessoft.backend.dto.UserUpdateDto;
 import com.geniessoft.backend.model.User;
@@ -73,5 +74,15 @@ public class UserController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body("Image is uploaded.");
+    }
+
+    @GetMapping(value = "/{userId}/profileImage")
+    public ResponseEntity<ProfileImageDto> getProfileImage(
+            @PathVariable("userId") int userId){
+
+        byte[] image = userService.getUserProfileImage(userId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new ProfileImageDto(image));
     }
 }

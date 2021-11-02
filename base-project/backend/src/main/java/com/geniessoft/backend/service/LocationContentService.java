@@ -6,6 +6,8 @@ import com.geniessoft.backend.model.Location;
 import com.geniessoft.backend.model.LocationContent;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface LocationContentService {
 
@@ -15,4 +17,12 @@ public interface LocationContentService {
             String contentType,
             String contentText,
             Location location);
+
+    LocationContent getLocationContent(int locationId);
+
+    void deleteLocationContent(Integer locationContentId);
+
+    void updateLocationContent(Integer locationContentId, String contentText);
+
+    List<LocationContent> getLocationContentPage(int locationId, int offset, int pageSize);
 }

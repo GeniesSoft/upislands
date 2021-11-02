@@ -23,6 +23,7 @@ public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository reviewRepository;
 
     @Override
+    @Transactional(rollbackOn = Exception.class)
     public Review saveReview(ReviewBaseDto reviewBaseDto) {
         Review review = reviewMapper.reviewDtoToReview(reviewBaseDto);
         Booking booking = bookingService.findBookingById(reviewBaseDto.getBookingId());
@@ -42,6 +43,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    @Transactional(rollbackOn = Exception.class)
     public void deleteReview(int reviewId) {
         Review review = findReviewById(reviewId);
         review.setDeleted(true);

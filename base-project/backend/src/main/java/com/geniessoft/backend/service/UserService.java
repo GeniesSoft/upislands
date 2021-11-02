@@ -25,4 +25,6 @@ public interface UserService {
     void checkUserEmail(String emailAddress);
 
     void deleteUserProfileImage(User user);
+
+    byte[] getUserProfileImage(int userId);
 }

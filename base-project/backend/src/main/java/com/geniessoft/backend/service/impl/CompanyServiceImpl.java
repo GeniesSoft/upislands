@@ -2,6 +2,7 @@ package com.geniessoft.backend.service.impl;
 
 import com.geniessoft.backend.dto.CompanyRegisterDto;
 import com.geniessoft.backend.dto.CompanyUpdateDto;
+import com.geniessoft.backend.dto.ContentDto;
 import com.geniessoft.backend.model.*;
 import com.geniessoft.backend.repository.CompanyRepository;
 import com.geniessoft.backend.service.*;
@@ -17,6 +18,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -155,7 +157,7 @@ public class CompanyServiceImpl implements CompanyService {
         Company company = findCompanyById(companyId);
         Map<String,String> metadata = fileStoreService.getMetadata(file);
 
-        String path = String.format("%s/%s",
+        String path = String.format("/%s/%s",
                 BucketName.BUCKET_NAME.getBucketName(),
                 FolderNames.company_contents +"/"+ company.getCompanyId());
 
@@ -173,5 +175,33 @@ public class CompanyServiceImpl implements CompanyService {
         catch (IOException e){
             throw new IllegalStateException(e);
         }
+    }
+
+    @Override
+    public void deleteCompanyContent(Integer companyContentId) {
+        companyContentService.deleteCompanyContent(companyContentId);
+    }
+
+    @Override
+    public void updateCompanyContent(Integer companyContentId, String contentText) {
+        companyContentService.updateCompanyContent(companyContentId, contentText);
+    }
+
+    @Override
+    public List<ContentDto> getCompanyContents(int companyId, int offset, int pageSize) {
+
+        List<CompanyContent> companyContentList =
+                companyContentService.getCompanyContentPage(companyId,offset,pageSize);
+
+        return contentService.getContents(companyContentList);
+    }
+
+    @Override
+    public byte[] getCompanyProfileImage(int companyId) {
+        Company company = findCompanyById(companyId);
+        return fileStoreService.download(
+                company.getCompanyProfileImage().getContentPath(),
+                company.getCompanyProfileImage().getContentName());
+
     }
 }

@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -30,6 +31,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    @Transactional(rollbackOn = Exception.class)
     public Booking saveBooking(BookingBaseDto bookingSaveDto) {
 
         User user = userService.findUser(bookingSaveDto.getUserId());
@@ -48,6 +50,7 @@ public class BookingServiceImpl implements BookingService {
 
 
     @Override
+    @Transactional(rollbackOn = Exception.class)
     public Booking updateBooking(BookingUpdateDto bookingUpdateDto) {
         deleteBooking(bookingUpdateDto.getBookingId());
         BookingBaseDto bookingBaseDto = mapper.bookingUpdateDtoToBookingBaseDto(bookingUpdateDto);
@@ -56,6 +59,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    @Transactional(rollbackOn = Exception.class)
     public void deleteBooking(int bookingId) {
         Booking booking = findBookingById(bookingId);
         booking.setActive(false);
