@@ -1,11 +1,9 @@
 package com.geniessoft.backend.service.impl;
 
+import com.geniessoft.backend.dto.ContentDto;
 import com.geniessoft.backend.dto.LocationSaveDto;
 import com.geniessoft.backend.dto.LocationUpdateDto;
-import com.geniessoft.backend.model.Address;
-import com.geniessoft.backend.model.Company;
-import com.geniessoft.backend.model.Content;
-import com.geniessoft.backend.model.Location;
+import com.geniessoft.backend.model.*;
 import com.geniessoft.backend.repository.LocationRepository;
 import com.geniessoft.backend.service.AddressService;
 import com.geniessoft.backend.service.ContentService;
@@ -22,8 +20,10 @@ import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -150,5 +150,32 @@ public class LocationServiceImpl implements LocationService {
         catch (IOException e){
             throw new IllegalStateException(e);
         }
+    }
+
+    @Override
+    public void deleteLocationContent(Integer locationContentId) {
+        locationContentService.deleteLocationContent(locationContentId);
+    }
+
+    @Override
+    public void updateLocationContent(Integer locationContentId, String contentText) {
+        locationContentService.updateLocationContent(locationContentId, contentText);
+    }
+
+    @Override
+    public List<ContentDto> getLocationContents(int locationId, int offset, int pageSize) {
+
+        List<LocationContent> locationContentList =
+                locationContentService.getLocationContentPage(locationId,offset,pageSize);
+
+        return contentService.getContents(locationContentList);
+    }
+
+    @Override
+    public byte[] getLocationProfileImage(int locationId) {
+        Location location = findLocationById(locationId);
+        return fileStoreService.download(
+                location.getLocationProfileImage().getContentPath(),
+                location.getLocationProfileImage().getContentName());
     }
 }

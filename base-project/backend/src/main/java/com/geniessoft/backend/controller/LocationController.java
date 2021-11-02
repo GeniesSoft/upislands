@@ -1,8 +1,6 @@
 package com.geniessoft.backend.controller;
 
-import com.geniessoft.backend.dto.LocationGetDto;
-import com.geniessoft.backend.dto.LocationSaveDto;
-import com.geniessoft.backend.dto.LocationUpdateDto;
+import com.geniessoft.backend.dto.*;
 import com.geniessoft.backend.model.Address;
 import com.geniessoft.backend.model.Location;
 import com.geniessoft.backend.service.LocationService;
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -69,13 +68,13 @@ public class LocationController {
     }
 
     @PostMapping(
-            path = "{locationId}/image/upload",
+            path = "{locationId}/image",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<String> addLocationProfileImage(
             @PathVariable("locationId") int locationId,
-            @RequestParam("file") @ImageConstraint MultipartFile file){
+            @RequestParam("file") @ContentConstraints MultipartFile file){
         locationService.addLocationProfileImage(locationId ,file);
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -83,17 +82,60 @@ public class LocationController {
     }
 
     @PostMapping(
-            path = "{locationId}/content/upload",
+            path = "{locationId}/content",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<String> addCompanyContent(
+    public ResponseEntity<String> addLocationContent(
             @PathVariable("locationId") int locationId,
             @RequestParam("file") @ContentConstraints MultipartFile file,
-            @RequestParam("content_text") String content_text){
+            @RequestParam("contentText") String content_text){
         locationService.addLocationContent(locationId ,file, content_text);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body("Location content is uploaded.");
+    }
+
+    @DeleteMapping(value = "/content")
+    public ResponseEntity<String> deleteLocationContent
+            (@RequestParam(value = "locationContentId") Integer locationContentId){
+        locationService.deleteLocationContent(locationContentId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Location content is successfully deleted.");
+    }
+
+    @PutMapping(value = "/content")
+    public ResponseEntity<String> updateLocationContent
+            (@RequestParam(value = "locationContentId") Integer locationContentId,
+             @RequestParam(value = "contentText") String contentText){
+        locationService.updateLocationContent(locationContentId,contentText);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Location content is successfully updated.");
+    }
+
+    @GetMapping(value = "/contents/{locationId}/{offset}/{pageSize}")
+    public ResponseEntity<List<ContentDto>> getLocationContentList(
+            @PathVariable("locationId") int locationId,
+            @PathVariable("offset") int offset,
+            @PathVariable("pageSize") int pageSize){
+
+        List<ContentDto> contentDtoList = locationService.
+                getLocationContents(locationId, offset, pageSize);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(contentDtoList);
+    }
+
+    @GetMapping(value = "/{locationId}/profileImage")
+    public ResponseEntity<ProfileImageDto> getProfileImage(
+            @PathVariable("locationId") int locationId){
+
+        byte[] image = locationService.getLocationProfileImage(locationId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new ProfileImageDto(image));
     }
 }

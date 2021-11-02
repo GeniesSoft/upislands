@@ -1,9 +1,6 @@
 package com.geniessoft.backend.controller;
 
-import com.geniessoft.backend.dto.CompanyGetDto;
-import com.geniessoft.backend.dto.CompanyRegisterDto;
-import com.geniessoft.backend.dto.CompanyUpdateDto;
-import com.geniessoft.backend.dto.LocationGetDto;
+import com.geniessoft.backend.dto.*;
 import com.geniessoft.backend.model.Address;
 import com.geniessoft.backend.model.Company;
 import com.geniessoft.backend.model.Location;
@@ -85,7 +82,7 @@ public class CompanyController {
     }
 
     @PostMapping(
-            path = "{companyId}/image/upload",
+            path = "{companyId}/profileImage",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -99,7 +96,7 @@ public class CompanyController {
     }
 
     @PostMapping(
-            path = "{companyId}/content/upload",
+            path = "{companyId}/content",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -111,5 +108,48 @@ public class CompanyController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body("Company content is uploaded.");
+    }
+
+    @DeleteMapping(value = "/content")
+    public ResponseEntity<String> deleteCompanyContent
+            (@RequestParam(value = "companyContentId") Integer companyContentId){
+        companyService.deleteCompanyContent(companyContentId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Content is successfully deleted.");
+    }
+
+    @PutMapping(value = "/content")
+    public ResponseEntity<String> updateCompanyContent
+            (@RequestParam(value = "companyContentId") Integer companyContentId,
+             @RequestParam(value = "contentText") String contentText){
+        companyService.updateCompanyContent(companyContentId,contentText);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Company content is successfully updated.");
+    }
+
+    @GetMapping(value = "/contents/{companyId}/{offset}/{pageSize}")
+    public ResponseEntity<List<ContentDto>> getCompanyContentList(
+            @PathVariable("companyId") int companyId,
+            @PathVariable("offset") int offset,
+            @PathVariable("pageSize") int pageSize){
+
+        List<ContentDto> contentDtoList = companyService.
+                getCompanyContents(companyId, offset, pageSize);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(contentDtoList);
+    }
+
+    @GetMapping(value = "/{companyId}/profileImage")
+    public ResponseEntity<ProfileImageDto> getProfileImage(
+            @PathVariable("companyId") int companyId){
+
+        byte[] image = companyService.getCompanyProfileImage(companyId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new ProfileImageDto(image));
     }
 }

@@ -2,10 +2,7 @@ package com.geniessoft.backend.service.impl;
 
 import com.geniessoft.backend.dto.UserRegisterDto;
 import com.geniessoft.backend.dto.UserUpdateDto;
-import com.geniessoft.backend.model.Content;
-import com.geniessoft.backend.model.Role;
-import com.geniessoft.backend.model.Roles;
-import com.geniessoft.backend.model.User;
+import com.geniessoft.backend.model.*;
 import com.geniessoft.backend.repository.UserRepository;
 import com.geniessoft.backend.service.ContentService;
 import com.geniessoft.backend.service.RoleService;
@@ -133,5 +130,13 @@ public class UserServiceImpl implements UserService {
         else {
             return user.get();
         }
+    }
+
+    @Override
+    public byte[] getUserProfileImage(int userId) {
+        User user = findUser(userId);
+        return fileStoreService.download(
+                user.getUserProfileImage().getContentPath(),
+                user.getUserProfileImage().getContentName());
     }
 }

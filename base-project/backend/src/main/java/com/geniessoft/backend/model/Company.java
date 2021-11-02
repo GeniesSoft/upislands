@@ -41,4 +41,6 @@ public class Company {
             inverseJoinColumns = { @JoinColumn(name = "location_id") }
     )
     private List<Location> locationList = new ArrayList<>();
+
+    private boolean guide;
 }
