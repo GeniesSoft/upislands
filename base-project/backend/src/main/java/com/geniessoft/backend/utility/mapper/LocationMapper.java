@@ -8,8 +8,6 @@ import com.geniessoft.backend.model.Location;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
-import java.util.List;
-
 @Mapper(componentModel="spring")
 public interface LocationMapper {
     LocationGetDto locationToLocationGetDto(Location location, Address address);

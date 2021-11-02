@@ -19,6 +19,9 @@ public class Review {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "booking_id")
     private Booking booking;
+    @OneToOne
+    @JoinColumn(name = "review_image_id")
+    private Content reviewContent;
 
 
 }
