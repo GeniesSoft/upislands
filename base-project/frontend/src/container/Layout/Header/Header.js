@@ -89,7 +89,7 @@ export default withRouter(function Header({ location }) {
                   withLink
                   linkTo="/"
                   src="/images/logo-alt.svg"
-                  title="TripFinder."
+                  title="UpIslands"
                 />
               </>
               <NavbarSearch />

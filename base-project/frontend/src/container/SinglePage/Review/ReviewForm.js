@@ -325,7 +325,7 @@ const ReviewForm = () => {
               genuine opinion of this hotel, and that I have no personal or
               business relationship with this establishment, and have not been
               offered any incentive or payment originating from the
-              establishment to write this review. I understand that TripFinder
+              establishment to write this review. I understand that UpIslands
               has a zero-tolerance policy on fake reviews.
             </Checkbox>
           }
