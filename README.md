@@ -1,3 +1,3 @@
 # Upislands Trip Project
 
-[GitHub Pages Link](https://geniessoft.github.io/upislands/)
+[Netlify Link](https://boring-mayer-a0790e.netlify.app/)
