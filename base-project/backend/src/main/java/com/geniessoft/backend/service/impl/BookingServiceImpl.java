@@ -42,7 +42,7 @@ public class BookingServiceImpl implements BookingService {
         booking.setBookingLocation(location);
         booking.setBookingCompany(company);
         jetSkiDetailsService.updateSchedule(company.getCompanyId(), booking.getDate(),booking.getStartTime() , booking.getEndTime(), booking.getJetSkiCount());
-        double totalPrice = jetSkiDetailsService.getSessionPrice(company);
+        double totalPrice = jetSkiDetailsService.getSessionPrice(company.getCompanyId());
         booking.setTotalPrice(totalPrice);
         bookingRepository.save(booking);
         return booking;

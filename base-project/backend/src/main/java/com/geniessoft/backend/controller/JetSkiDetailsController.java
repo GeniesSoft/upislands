@@ -28,39 +28,39 @@ public class JetSkiDetailsController {
     @GetMapping("/{companyId}")
     public JetSkiDetailsGetDto getJetSkiDetails(
             @PathVariable(value = "companyId") Integer companyId) {
-        JetSkiDetails jetSkiDetails = jetSkiDetailsService.findJetSkiDetailsByCompany(
-                companyService.findCompanyById(companyId)
-        );
+        JetSkiDetails jetSkiDetails = jetSkiDetailsService.findJetSkiDetailsByCompanyId(companyId);
         return jetSkiDetailsMapper.jetSkiDetailsToJetSkiDetailsGetDto(jetSkiDetails);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/{companyId}")
-    public String addJetSkiDetails(
+    public String saveJetSkiDetails(
             @PathVariable(value = "companyId") Integer companyId,
             @Valid @RequestBody JetSkiDetailsSaveDto jetSkiDetailsSaveDto) {
-        Company company = companyService.findCompanyById(companyId);
-        JetSkiDetails jetSkiDetails = jetSkiDetailsMapper.jetSkiDetailsSaveDtoToJetSkiDetails(jetSkiDetailsSaveDto);
-        jetSkiDetails.setCompany(company);
-        jetSkiDetailsService.saveJetSkiDetails(jetSkiDetails);
-        return "Jet ski details added";
+        jetSkiDetailsService.saveJetSkiDetails(
+                companyId,
+                jetSkiDetailsMapper.jetSkiDetailsSaveDtoToJetSkiDetails(jetSkiDetailsSaveDto)
+        );
+        return "Jet ski details saved";
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping
+    @PutMapping("/{companyId}")
     public String updateJetSkiDetails(
+            @PathVariable(value = "companyId") Integer companyId,
             @Valid @RequestBody JetSkiDetailsUpdateDto jetSkiDetailsUpdateDto) {
-        jetSkiDetailsService.saveJetSkiDetails(
+        jetSkiDetailsService.updateJetSkiDetails(
+                companyId,
                 jetSkiDetailsMapper.jetSkiDetailsUpdateDtoToJetSkiDetails(jetSkiDetailsUpdateDto)
         );
         return "Jet ski details updated";
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("/{jetSkiDetailsId}")
+    @DeleteMapping("/{companyId}")
     public String deleteJetSkiDetails(
-            @PathVariable(value = "jetSkiDetailsId") Integer jetSkiDetailsId) {
-        jetSkiDetailsService.deleteJetSkiDetails(jetSkiDetailsId);
+            @PathVariable(value = "companyId") Integer companyId) {
+        jetSkiDetailsService.deleteJetSkiDetails(companyId);
         return "Jet ski details deleted";
     }
 

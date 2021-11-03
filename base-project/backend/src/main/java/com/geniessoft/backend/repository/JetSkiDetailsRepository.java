@@ -12,4 +12,8 @@ public interface JetSkiDetailsRepository extends JpaRepository<JetSkiDetails, In
 
     Optional<JetSkiDetails> findByCompany(Company company);
 
+    Optional<JetSkiDetails> findByCompany_CompanyId(Integer companyId);
+
+    void deleteByCompany_CompanyId(Integer companyId);
+
 }

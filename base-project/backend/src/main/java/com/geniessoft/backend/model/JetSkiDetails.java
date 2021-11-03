@@ -44,4 +44,9 @@ public class JetSkiDetails {
         this.scheduleMap = new HashMap<>();
     }
 
+    public void update(JetSkiDetails jetSkiDetails) {
+        totalNumberOfJetSkies = jetSkiDetails.totalNumberOfJetSkies;
+        sessionPrice = jetSkiDetails.sessionPrice;
+    }
+
 }
