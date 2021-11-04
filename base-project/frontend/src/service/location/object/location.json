@@ -1,0 +1,25 @@
+{
+  "create" : {
+    "description" : "",
+    "locationName" : "",
+    "streetNumber" : 0,
+    "street" : "",
+    "city" : "",
+    "county" : "",
+    "state" : "",
+    "country" : "",
+    "zip" : 0
+  },
+  "update" : {
+    "locationId" : 0,
+    "description" : "",
+    "locationName" : "",
+    "streetNumber" : "",
+    "street" : "",
+    "city" : "",
+    "county" : "",
+    "state" : "",
+    "country" : "",
+    "zip" : ""
+  }
+}
