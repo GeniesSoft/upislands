@@ -2,8 +2,7 @@ package com.geniessoft.backend.controller;
 
 import com.geniessoft.backend.dto.ReviewBaseDto;
 import com.geniessoft.backend.dto.ReviewUpdateDto;
-import com.geniessoft.backend.model.Booking;
-import com.geniessoft.backend.model.Review;
+import com.geniessoft.backend.model.*;
 import com.geniessoft.backend.service.ReviewService;
 import com.geniessoft.backend.utility.mapper.ReviewMapper;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -49,10 +50,63 @@ public class ReviewController {
     public ResponseEntity<ReviewBaseDto> getReviewById(@RequestParam(value = "reviewId") Integer reviewId ){
         Review review = reviewService.findReviewById(reviewId);
         Booking booking = review.getBooking();
-        ReviewBaseDto reviewBaseDto = reviewMapper.reviewToReviewBaseDto(review, booking);
+        LocalGuide localGuide = review.getLocalGuide();
+        Location location = review.getLocation();
+        ReviewBaseDto reviewBaseDto = reviewMapper.reviewToReviewBaseDto(review, booking,location,localGuide);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(reviewBaseDto);
 
     }
+
+
+    @GetMapping(value = "/average")
+    public ResponseEntity<String> getLocalGuideReviewAverage(@RequestParam(value= "localGuideId") Integer localGuideId){
+        List<Review> reviews = reviewService.findReviewsByLocalGuideId(localGuideId);
+        double reviewSum = 0;
+        for (Review review: reviews) {
+           reviewSum += review.getLocalGuideRating();
+        }
+        double reviewAverage = reviewSum/reviews.size();
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(reviewAverage + "");
+
+    }
+    @GetMapping(value = "/average")
+    public ResponseEntity<String> getLocationReviewAverage(@RequestParam(value= "locationId") Integer locationId){
+        List<Review> reviews = reviewService.findReviewsByLocalGuideId(locationId);
+        double reviewSum = 0;
+        for (Review review: reviews) {
+            reviewSum += review.getLocationRating();
+        }
+        double reviewAverage = reviewSum/reviews.size();
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(reviewAverage + "");
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ReviewBaseDto>> getReviewsByLocalGuideId(@RequestParam(value= "localGuideId") Integer localGuideId){
+        List<Review> reviews = reviewService.findReviewsByLocalGuideId(localGuideId);
+        return getListResponseEntity(reviews);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ReviewBaseDto>> getReviewsByLocationId(@RequestParam(value= "location") Integer location){
+        List<Review> reviews = reviewService.findReviewsByLocationId(location);
+        return getListResponseEntity(reviews);
+    }
+
+    private ResponseEntity<List<ReviewBaseDto>> getListResponseEntity(List<Review> reviews) {
+        List<ReviewBaseDto> reviewBaseDtoList = new ArrayList<>();
+        for (Review review: reviews) {
+            ReviewBaseDto reviewBaseDto = reviewMapper.reviewToReviewBaseDto(review, review.getBooking(), review.getLocation(), review.getLocalGuide());
+            reviewBaseDtoList.add(reviewBaseDto);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(reviewBaseDtoList);
+    }
+
+
+
 }

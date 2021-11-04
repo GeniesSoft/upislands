@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,6 +20,8 @@ import java.util.Optional;
 public class ReviewServiceImpl implements ReviewService {
 
     private final BookingService bookingService;
+    private final LocationService locationService;
+    private final LocalGuideService localGuideService;
     private final ReviewMapper reviewMapper;
     private final ReviewRepository reviewRepository;
 
@@ -56,6 +59,19 @@ public class ReviewServiceImpl implements ReviewService {
 
         return review.orElseThrow(() -> new EntityNotFoundException("Review is not found."));
     }
+
+    @Override
+    public List<Review> findReviewsByLocalGuideId(int localGuideId) {
+        Optional<List<Review>> reviews = reviewRepository.findReviewsByLocalGuide(localGuideService.findLocalGuideById(localGuideId));
+        return reviews.orElseThrow(() -> new EntityNotFoundException("No local guide review found."));
+    }
+
+    @Override
+    public List<Review> findReviewsByLocationId(int locationId) {
+        Optional<List<Review>> reviews = reviewRepository.findReviewsByLocation(locationService.findLocationById(locationId));
+        return reviews.orElseThrow(() -> new EntityNotFoundException("No location review found."));
+    }
+
 
     @Override
     public void checkIfBookingIsReviewed(Booking booking) {

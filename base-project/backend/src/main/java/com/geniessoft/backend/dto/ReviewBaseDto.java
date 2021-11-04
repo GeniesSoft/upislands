@@ -7,9 +7,10 @@ import lombok.Setter;
 @Setter
 public class ReviewBaseDto {
     protected String reviewMessage;
-    protected double companyRating;
     protected double locationRating;
     protected double localGuideRating;
+    protected int locationId;
+    protected int localGuideId;
     protected int bookingId;
     protected int reviewContentId;
 }
