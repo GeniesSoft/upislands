@@ -5,7 +5,6 @@ import com.geniessoft.backend.model.Address;
 import com.geniessoft.backend.model.Location;
 import com.geniessoft.backend.service.LocationService;
 import com.geniessoft.backend.utility.customvalidator.ContentConstraints;
-import com.geniessoft.backend.utility.customvalidator.ImageConstraint;
 import com.geniessoft.backend.utility.mapper.LocationMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -65,6 +65,29 @@ public class LocationController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(dto);
+    }
+    @GetMapping(value = "/mostBooked")
+    public ResponseEntity<LocationGetDto> getMostBookedLocation(){
+        Location location = locationService.findMostBookedLocation();
+        Address address= location.getAddress();
+        LocationGetDto locationGetDto= mapper.locationToLocationGetDto(location, address);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(locationGetDto);
+    }
+
+    @GetMapping(value = "/bookedLocations")
+    public ResponseEntity<List<LocationGetDto>> getBookedLocationsByOrder(){
+         List<Location> locations = locationService.findBookedLocationsByAscOrder();
+         List<LocationGetDto> locationGetDtoList = new ArrayList<>();
+        for (Location location: locations) {
+            Address address = location.getAddress();
+            LocationGetDto locationGetDto = mapper.locationToLocationGetDto(location, address);
+            locationGetDtoList.add(locationGetDto);
+        }
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(locationGetDtoList);
     }
 
     @PostMapping(

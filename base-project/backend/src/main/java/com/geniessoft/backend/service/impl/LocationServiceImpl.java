@@ -5,10 +5,7 @@ import com.geniessoft.backend.dto.LocationSaveDto;
 import com.geniessoft.backend.dto.LocationUpdateDto;
 import com.geniessoft.backend.model.*;
 import com.geniessoft.backend.repository.LocationRepository;
-import com.geniessoft.backend.service.AddressService;
-import com.geniessoft.backend.service.ContentService;
-import com.geniessoft.backend.service.LocationContentService;
-import com.geniessoft.backend.service.LocationService;
+import com.geniessoft.backend.service.*;
 import com.geniessoft.backend.utility.bucket.BucketName;
 import com.geniessoft.backend.utility.bucket.FolderNames;
 import com.geniessoft.backend.utility.mapper.LocationMapper;
@@ -20,9 +17,7 @@ import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,6 +27,7 @@ public class LocationServiceImpl implements LocationService {
     private final LocationRepository locationRepository;
     private final LocationMapper mapper;
     private final AddressService addressService;
+    private final BookingService bookingService;
     private final FileStoreService fileStoreService;
     private final ContentService contentService;
     private final LocationContentService locationContentService;
@@ -81,6 +77,44 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public Location findLocationByName(String locationName) {
         return null;
+    }
+
+    @Override
+    public Location findMostBookedLocation() {
+        Map<Location,Integer> locationCountMap = makeLocationCountMap();
+        Location mostBookedLocation = Collections.max(locationCountMap.entrySet(), Map.Entry.comparingByValue()).getKey();
+        return mostBookedLocation;
+    }
+
+
+    @Override
+    public List<Location> findBookedLocationsByAscOrder() {
+       Map<Location,Integer> locationCountMap = makeLocationCountMap();
+        locationCountMap = locationCountMap.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        List<Location> locations = new ArrayList<>(locationCountMap.keySet());
+        return locations;
+    }
+
+    private Map<Location,Integer> makeLocationCountMap(){
+        List<Booking> bookings = bookingService.findAllBookingsByLocationOrder();
+        Map<Location,Integer> locationCountMap = new HashMap<>();
+        for (int i = 0;i<bookings.size();i++) {
+
+            Location location = findLocationById(bookings.get(i).getBookingLocation().getLocationId());
+            if (i == 0){
+                locationCountMap.put(location, 1);}
+            if (i !=0){
+                if (location.equals(findLocationById(bookings.get(i-1).getBookingLocation().getLocationId()))){
+                    locationCountMap.merge(location, 1, Integer::sum);
+                }
+                else {
+                    locationCountMap.put(location,1);
+                }
+            }
+        }
+        return locationCountMap;
     }
 
     @Override

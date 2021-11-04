@@ -2,8 +2,11 @@ package com.geniessoft.backend.controller;
 
 import com.geniessoft.backend.dto.LocalGuideBaseDto;
 import com.geniessoft.backend.dto.LocalGuideUpdateDto;
+import com.geniessoft.backend.dto.LocationGetDto;
+import com.geniessoft.backend.model.Address;
 import com.geniessoft.backend.model.Company;
 import com.geniessoft.backend.model.LocalGuide;
+import com.geniessoft.backend.model.Location;
 import com.geniessoft.backend.service.LocalGuideService;
 import com.geniessoft.backend.utility.mapper.LocalGuideMapper;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RequestMapping("/api/local-guide")
@@ -53,6 +58,29 @@ public class LocalGuideController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(localGuideBaseDto);
+    }
+    @GetMapping(value = "/mostBooked")
+    public ResponseEntity<LocalGuideBaseDto> getMostBookedLocation(){
+        LocalGuide localGuide = localGuideService.findMostBookedLocalGuide();
+        Company company= localGuide.getCompany();
+        LocalGuideBaseDto localGuideBaseDto= localGuideMapper.localGuideToLocalGuideDto(localGuide, company);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(localGuideBaseDto);
+    }
+
+    @GetMapping(value = "/bookedGuides")
+    public ResponseEntity<List<LocalGuideBaseDto>> getBookedLocationsByOrder(){
+        List<LocalGuide> localGuides = localGuideService.findLocalGuidesByAscOrder();
+        List<LocalGuideBaseDto> localGuideBaseDtoList = new ArrayList<>();
+        for (LocalGuide localGuide: localGuides) {
+            Company company = localGuide.getCompany();
+            LocalGuideBaseDto localGuideBaseDto = localGuideMapper.localGuideToLocalGuideDto(localGuide,company);
+            localGuideBaseDtoList.add(localGuideBaseDto);
+        }
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(localGuideBaseDtoList);
     }
 
 

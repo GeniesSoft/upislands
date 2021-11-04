@@ -18,6 +18,10 @@ public interface LocationService {
 
     Location findLocationByName(String locationName);
 
+    Location findMostBookedLocation();
+
+    List<Location> findBookedLocationsByAscOrder();
+
     Location findLocationById(int locationId);
 
     List<ContentDto> getLocationContents(int locationId, int offset, int pageSize);

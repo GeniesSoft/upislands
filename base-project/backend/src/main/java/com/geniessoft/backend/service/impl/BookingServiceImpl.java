@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,7 +23,7 @@ public class BookingServiceImpl implements BookingService {
    private final UserService userService;
    private final LocationService locationService;
    private final CompanyService companyService;
-    private final JetSkiDetailsService jetSkiDetailsService;
+   private final JetSkiDetailsService jetSkiDetailsService;
 
     @Override
     public Booking findBookingById(int bookingId) {
@@ -59,12 +60,35 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public List<Booking> findAllBookings() {
+        Optional<List<Booking>> bookings =  bookingRepository.findAllByActiveIsTrue();
+        return bookings.orElseThrow(() -> new EntityNotFoundException("No booking is found."));
+    }
+
+    @Override
+    public List<Booking> findAllBookingsByLocationOrder() {
+        Optional<List<Booking>> bookings =  bookingRepository.findAllByOrderByBookingLocationAsc();
+        return bookings.orElseThrow(() -> new EntityNotFoundException("No booking is found."));
+    }
+
+    @Override
+    public List<Booking> findAllBookingsByLocalGuideOrder() {
+        Optional<List<Booking>> bookings =  bookingRepository.findAllByOrderByLocalGuideAsc();
+        return bookings.orElseThrow(() -> new EntityNotFoundException("No booking is found."));
+    }
+
+    @Override
+    public List<Booking> findAllBookingsByUserOrder() {
+        Optional<List<Booking>> bookings =  bookingRepository.findAllByOrderByUserAsc();
+        return bookings.orElseThrow(() -> new EntityNotFoundException("No booking is found."));
+    }
+
+    @Override
     @Transactional(rollbackOn = Exception.class)
     public void deleteBooking(int bookingId) {
         Booking booking = findBookingById(bookingId);
         booking.setActive(false);
         bookingRepository.save(booking);
-
-
     }
+
 }

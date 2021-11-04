@@ -5,6 +5,7 @@ import com.geniessoft.backend.dto.UserUpdateDto;
 import com.geniessoft.backend.model.User;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -15,6 +16,10 @@ public interface UserService {
     User updateUser(UserUpdateDto user);
 
     User findFirstByEmailAddressEquals(String emailAddress);
+
+    User findMostBookedUser();
+
+    List<User> findBookedUsersByAscOrder();
 
     User findUser(int userId);
 
