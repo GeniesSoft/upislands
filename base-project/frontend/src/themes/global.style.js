@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import { themeGet } from '@styled-system/theme-get';
+import {createGlobalStyle} from 'styled-components';
+import {themeGet} from '@styled-system/theme-get';
 
 const GlobalStyle = createGlobalStyle`
   * {

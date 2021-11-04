@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { themeGet } from '@styled-system/theme-get';
+import {themeGet} from '@styled-system/theme-get';
 
 const PricingWrapper = styled.div`
   max-width: 1140px;

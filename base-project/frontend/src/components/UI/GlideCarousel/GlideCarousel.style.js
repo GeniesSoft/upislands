@@ -54,11 +54,11 @@ const DefaultBtn = styled.button`
 `;
 
 export {
-  GlideSlideWrapper,
-  ButtonControlWrapper,
-  ButtonWrapper,
-  BulletControlWrapper,
-  BulletButton,
-  DefaultBtn,
+    GlideSlideWrapper,
+    ButtonControlWrapper,
+    ButtonWrapper,
+    BulletControlWrapper,
+    BulletButton,
+    DefaultBtn,
 };
 export default GlideWrapper;

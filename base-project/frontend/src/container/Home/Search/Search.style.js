@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { themeGet } from '@styled-system/theme-get';
+import {themeGet} from '@styled-system/theme-get';
 
 const BannerWrapper = styled.div`
   width: 100%;
@@ -75,12 +75,13 @@ const BannerWrapper = styled.div`
 
 export const SearchWrapper = styled.div`
   width: calc(100% - 60px);
-  padding: 28px 30px 30px;
-  border-radius: 6px;
-  background-color: ${themeGet('color.1', '#ffffff')};
-  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.08);
+  padding: 0 20px 20px 20px;
+  border-radius: 20px;
+  // background-color: ${themeGet('color.1', '#ffffff')};
+  background-color: transparent;
+  // box-shadow: 0 1px 20px rgba(0, 0, 0, 0.08);
   position: absolute;
-  bottom: 81px;
+  top: 120px;
   z-index: 1;
 
   @media (min-width: 569px) and (max-width: 991px) {
@@ -107,6 +108,25 @@ export const SearchWrapper = styled.div`
   h2 {
     margin-bottom: 10px;
   }
+  
+  .flexible {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 260px; 
+    width: 100%;
+  }
+  
+  .flexible > .ant-btn {
+    min-width: 200px;
+    color: ${themeGet('color.4', '#ffffff')};
+    background-color: ${themeGet('color.1', '#008489')};
+    z-index: 1;
+    border-radius: 35px;
+    border: 0;
+    font-size: 20px;
+    font-weight: 700;
+  }
 `;
 
 export const FormWrapper = styled.div`
@@ -114,7 +134,8 @@ export const FormWrapper = styled.div`
   align-items: center;
   justify-content: flex-end;
   background-color: ${themeGet('color.2', '#F7F7F7')};
-  border-radius: 3px 0 0 3px;
+  // border-radius: 3px 0 0 3px;
+  border-radius: 30px;
   min-height: 60px;
 
   @media (max-width: 991px) {
@@ -127,11 +148,13 @@ export const FormWrapper = styled.div`
 
   /* submit button style */
   button[type='submit'].ant-btn {
-    min-width: 157px;
-    height: 60px;
+    margin-right: 10px;
+    min-width: 50px;
+    height: 50px;
     color: ${themeGet('color.1', '#ffffff')};
     background-color: ${themeGet('primary.0', '#008489')};
-    border-radius: 0 3px 3px 0;
+    // border-radius: 0 3px 3px 0;
+    border-radius: 25px;
     border: 0;
     box-shadow: none;
     font-size: 15px;
@@ -140,7 +163,9 @@ export const FormWrapper = styled.div`
 
     @media (max-width: 991px) {
       min-width: 100%;
-      border-radius: 0 0 3px 3px;
+      // border-radius: 0 0 3px 3px;
+      border-radius: 25px;
+      margin-right: 0;
     }
 
     @media (max-width: 480px) {

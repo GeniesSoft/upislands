@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react';
+import React, {Fragment} from 'react';
 
 const BlankPage = props => {
-  return <Fragment>{props.children}</Fragment>;
+    return <Fragment>{props.children}</Fragment>;
 };
 
 export default BlankPage;

@@ -29,37 +29,32 @@ public class UserController {
     private final UserService userService;
     private final CompanyMapper mapper;
 
-    @PostMapping(value = "/register")
-    public ResponseEntity<String> registerUser(@Valid @RequestBody UserRegisterDto userRegisterDto){
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping
+    public String registerUser(@Valid @RequestBody UserRegisterDto userRegisterDto){
         userService.saveUser(userRegisterDto);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Registration is successful.");
+        return "User successfully registered";
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = "{id}")
+    public UserUpdateDto getUser(@PathVariable(value = "id") Integer id){
+        User user = userService.findUser(id);
+        return mapper.userToUserUpdateDto(user);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
     @PutMapping
-    public ResponseEntity<String> updateUser(@Valid @RequestBody UserUpdateDto userUpdateDto){
+    public String updateUser(@Valid @RequestBody UserUpdateDto userUpdateDto){
         userService.updateUser(userUpdateDto);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Update operation is successful.");
+        return "User successfully updated";
     }
 
-    @DeleteMapping
-    public ResponseEntity<String> deleteUser(@RequestParam(value = "userId") Integer userId){
-        userService.deleteUser(userId);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Delete operation is successful.");
-    }
-
-    @GetMapping
-    public ResponseEntity<UserUpdateDto> getUser(@RequestParam(value = "userId") Integer userId){
-        User user = userService.findUser(userId);
-        UserUpdateDto dto = mapper.userToUserUpdateDto(user);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(dto);
+    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping(value = "{id}")
+    public String deleteUser(@PathVariable(value = "id") Integer id){
+        userService.deleteUser(id);
+        return "User successfully deleted";
     }
 
     @PostMapping(

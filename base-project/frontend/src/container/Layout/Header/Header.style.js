@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { themeGet } from '@styled-system/theme-get';
+import {themeGet} from '@styled-system/theme-get';
 
 const HeaderWrapper = styled.header`
   width: 100%;
@@ -39,7 +39,7 @@ const HeaderWrapper = styled.header`
             }
 
             h3 {
-              color: ${themeGet('color.1', '#ffffff')};
+              color: ${themeGet('primary.0', '#ffffff')};
             }
           }
         }
@@ -71,7 +71,7 @@ const HeaderWrapper = styled.header`
             }
 
             h3 {
-              color: ${themeGet('color.1', '#ffffff')};
+              color: ${themeGet('primary.0', '#ffffff')};
             }
           }
         }

@@ -1,6 +1,6 @@
 export {
-  default as AgentAccountSettingsPage,
+    default as AgentAccountSettingsPage,
 } from './AccountSettings/AgentAccountSettingsPage';
 export {
-  default as AgentDetailsViewPage,
+    default as AgentDetailsViewPage,
 } from './AccountDetails/AgentDetailsViewPage';

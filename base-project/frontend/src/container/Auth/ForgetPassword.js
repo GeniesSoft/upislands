@@ -1,80 +1,75 @@
 import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { MdEmail } from 'react-icons/md';
-import { Input, Button } from 'antd';
+import {Controller, useForm} from 'react-hook-form';
+import {MdEmail} from 'react-icons/md';
+import {Button, Input} from 'antd';
 import Logo from 'components/UI/Logo/Logo';
 import FormControl from 'components/UI/FormControl/FormControl';
-import Wrapper, {
-  Title,
-  TitleInfo,
-  FormWrapper,
-  BannerWrapper,
-} from './Auth.style';
+import Wrapper, {BannerWrapper, FormWrapper, Title, TitleInfo,} from './Auth.style';
 
 export default function ForgetPassWord() {
-  const { control, errors, handleSubmit } = useForm({
-    mode: 'onChange',
-  });
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+    const {control, errors, handleSubmit} = useForm({
+        mode: 'onChange',
+    });
+    const onSubmit = (data) => {
+        console.log(data);
+    };
 
-  return (
-    <Wrapper>
-      <FormWrapper>
-        <Logo
-          withLink
-          linkTo="/"
-          src="/images/logo-alt.png"
-          title="UpIslands"
-        />
-        <Title>Welcome Back</Title>
-        <TitleInfo>Enter your email to recover your account</TitleInfo>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <FormControl
-            label="Email"
-            htmlFor="email"
-            error={
-              errors.email && (
-                <>
-                  {errors.email?.type === 'required' && (
-                    <span>This field is required!</span>
-                  )}
-                  {errors.email?.type === 'pattern' && (
-                    <span>Please enter a valid email address!</span>
-                  )}
-                </>
-              )
-            }
-          >
-            <Controller
-              as={<Input />}
-              type="email"
-              id="email"
-              name="email"
-              defaultValue=""
-              control={control}
-              rules={{
-                required: true,
-                pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-              }}
-            />
-          </FormControl>
-          <Button
-            className="signin-btn"
-            type="primary"
-            htmlType="submit"
-            size="large"
-            style={{ width: '100%' }}
-          >
-            <MdEmail />
-            Send email
-          </Button>
-        </form>
-      </FormWrapper>
-      <BannerWrapper>
-        <img src="/images/login-page-bg.jpg" alt="Auth page banner" />
-      </BannerWrapper>
-    </Wrapper>
-  );
+    return (
+        <Wrapper>
+            <FormWrapper>
+                <Logo
+                    withLink
+                    linkTo="/"
+                    src="/images/logo-alt.png"
+                    title="UpIslands"
+                />
+                <Title>Welcome Back</Title>
+                <TitleInfo>Enter your email to recover your account</TitleInfo>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <FormControl
+                        label="Email"
+                        htmlFor="email"
+                        error={
+                            errors.email && (
+                                <>
+                                    {errors.email?.type === 'required' && (
+                                        <span>This field is required!</span>
+                                    )}
+                                    {errors.email?.type === 'pattern' && (
+                                        <span>Please enter a valid email address!</span>
+                                    )}
+                                </>
+                            )
+                        }
+                    >
+                        <Controller
+                            as={<Input/>}
+                            type="email"
+                            id="email"
+                            name="email"
+                            defaultValue=""
+                            control={control}
+                            rules={{
+                                required: true,
+                                pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+                            }}
+                        />
+                    </FormControl>
+                    <Button
+                        className="signin-btn"
+                        type="primary"
+                        htmlType="submit"
+                        size="large"
+                        style={{width: '100%'}}
+                    >
+                        <MdEmail/>
+                        Send email
+                    </Button>
+                </form>
+            </FormWrapper>
+            <BannerWrapper>
+                <img src="/images/login-page-bg.jpg" alt="Auth page banner"/>
+            </BannerWrapper>
+        </Wrapper>
+    );
 }
