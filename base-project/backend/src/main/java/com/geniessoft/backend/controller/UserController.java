@@ -28,7 +28,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/users")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
 @Validated
 public class UserController {
 
@@ -44,7 +43,7 @@ public class UserController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "{id}")
+    @GetMapping(value = "/{id}")
     public UserUpdateDto getUser(@PathVariable(value = "id") Integer id){
         User user = userService.findUser(id);
         return mapper.userToUserUpdateDto(user);
@@ -58,7 +57,7 @@ public class UserController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping(value = "{id}")
+    @DeleteMapping(value = "/{id}")
     public String deleteUser(@PathVariable(value = "id") Integer id){
         userService.deleteUser(id);
         return "User successfully deleted";
@@ -87,7 +86,7 @@ public class UserController {
     }
 
     @PostMapping(
-            path = "{userId}/image/upload",
+            path = "/{userId}/image/upload",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )

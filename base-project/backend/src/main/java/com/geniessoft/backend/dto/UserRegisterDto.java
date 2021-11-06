@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 public class UserRegisterDto extends UserDtoBase{
 
     @NotBlank(message = "Password is mandatory")
-    @Size(min = 8, max = 10, message = "Password must be 8-10 characters long.")
+    @Size(min = 8, max = 30, message = "Password must be 8-30 characters long.")
     private String password;
 
     @NotEmptyOrSpaceOrNull(message = "Email address cannot be empty.")

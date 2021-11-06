@@ -27,7 +27,6 @@ import java.util.Map;
 @RequestMapping(value = "/api/locations")
 @RequiredArgsConstructor
 @Validated
-@CrossOrigin(origins = "http://localhost:3000")
 public class LocationController {
 
     private final LocationService locationService;
@@ -100,7 +99,7 @@ public class LocationController {
     }
 
     @PostMapping(
-            path = "{locationId}/image",
+            path = "/{locationId}/image",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -114,7 +113,7 @@ public class LocationController {
     }
 
     @PostMapping(
-            path = "{locationId}/content",
+            path = "/{locationId}/content",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
