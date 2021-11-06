@@ -19,7 +19,7 @@ public interface UserService {
 
     User findMostBookedUser();
 
-    List<User> findBookedUsersByAscOrder();
+    List<User> findBookedUsersByDescOrder();
 
     User findUser(int userId);
 

@@ -1,8 +1,11 @@
 package com.geniessoft.backend.controller;
 
+import com.geniessoft.backend.dto.LocationGetDto;
 import com.geniessoft.backend.dto.ProfileImageDto;
 import com.geniessoft.backend.dto.UserRegisterDto;
 import com.geniessoft.backend.dto.UserUpdateDto;
+import com.geniessoft.backend.model.Address;
+import com.geniessoft.backend.model.Location;
 import com.geniessoft.backend.model.User;
 import com.geniessoft.backend.service.UserService;
 import com.geniessoft.backend.utility.customvalidator.ImageConstraint;
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -60,6 +65,28 @@ public class UserController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(dto);
+    }
+
+    @GetMapping(value = "/mostBooked")
+    public ResponseEntity<UserUpdateDto> getMostBookedUser(){
+        User user = userService.findMostBookedUser();
+        UserUpdateDto userUpdateDto = mapper.userToUserUpdateDto(user);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(userUpdateDto);
+    }
+
+    @GetMapping(value = "/bookedUsers")
+    public ResponseEntity<List<UserUpdateDto>> getBookedUsersByOrder(){
+        List<User> users = userService.findBookedUsersByDescOrder();
+        List<UserUpdateDto> userUpdateDtoList = new ArrayList<>();
+        for (User user: users) {
+            UserUpdateDto userUpdateDto = mapper.userToUserUpdateDto(user);
+            userUpdateDtoList.add(userUpdateDto);
+        }
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(userUpdateDtoList);
     }
 
     @PostMapping(

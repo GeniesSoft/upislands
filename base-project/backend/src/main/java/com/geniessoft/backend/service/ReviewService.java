@@ -13,6 +13,8 @@ public interface ReviewService {
     Review findReviewById(int reviewId);
     List<Review> findReviewsByLocalGuideId(int localGuideId);
     List<Review> findReviewsByLocationId(int locationId);
+    Double findReviewAverageByLocalGuideId(int localGuideId);
+    Double findReviewAverageByLocationId(int locationId);
     void checkIfBookingIsReviewed(Booking booking);
     void deleteReview(int reviewId);
 

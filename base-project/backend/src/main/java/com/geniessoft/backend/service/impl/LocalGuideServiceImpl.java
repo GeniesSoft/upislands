@@ -9,6 +9,7 @@ import com.geniessoft.backend.repository.LocalGuideRepository;
 import com.geniessoft.backend.service.BookingService;
 import com.geniessoft.backend.service.CompanyService;
 import com.geniessoft.backend.service.LocalGuideService;
+import com.geniessoft.backend.service.ReviewService;
 import com.geniessoft.backend.utility.mapper.LocalGuideMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,9 +24,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class LocalGuideServiceImpl implements LocalGuideService {
     private final CompanyService companyService;
+    private final ReviewService reviewService;
+    private final BookingService bookingService;
     private final LocalGuideMapper localGuideMapper;
     private final LocalGuideRepository localGuideRepository;
-    private final BookingService bookingService;
 
     @Override
     public LocalGuide findLocalGuideById(int localGuideId) {
@@ -69,7 +71,7 @@ public class LocalGuideServiceImpl implements LocalGuideService {
     }
 
     @Override
-    public List<LocalGuide> findLocalGuidesByAscOrder() {
+    public List<LocalGuide> findLocalGuidesByBookingDescOrder() {
         Map<LocalGuide,Integer> localGuideCountMap = makeLocalGuideCountMap();
         localGuideCountMap = localGuideCountMap.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue())
@@ -78,6 +80,25 @@ public class LocalGuideServiceImpl implements LocalGuideService {
         return localGuides;
 
     }
+
+    @Override
+    public Map<LocalGuide,Double> findLocalGuidesByRatingDescOrder() {
+        List<LocalGuide> localGuides = findAllLocalGuides();
+        Map<LocalGuide,Double> localGuideAverages = new HashMap<>();
+        for (LocalGuide localGuide: localGuides) {
+            localGuideAverages.put(localGuide,reviewService.findReviewAverageByLocalGuideId(localGuide.getLocalGuideId()));
+        }
+        localGuideAverages = localGuideAverages.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        return localGuideAverages;
+    }
+
+    @Override
+    public List<LocalGuide> findAllLocalGuides() {
+        return localGuideRepository.findAll();
+    }
+
     private Map<LocalGuide,Integer> makeLocalGuideCountMap(){
         List<Booking> bookings = bookingService.findAllBookingsByLocalGuideOrder();
         Map<LocalGuide,Integer> locationCountMap = new HashMap<>();

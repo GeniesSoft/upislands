@@ -2,6 +2,7 @@ package com.geniessoft.backend.controller;
 
 import com.geniessoft.backend.dto.*;
 import com.geniessoft.backend.model.Address;
+import com.geniessoft.backend.model.LocalGuide;
 import com.geniessoft.backend.model.Location;
 import com.geniessoft.backend.service.LocationService;
 import com.geniessoft.backend.utility.customvalidator.ContentConstraints;
@@ -17,7 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -78,7 +81,7 @@ public class LocationController {
 
     @GetMapping(value = "/bookedLocations")
     public ResponseEntity<List<LocationGetDto>> getBookedLocationsByOrder(){
-         List<Location> locations = locationService.findBookedLocationsByAscOrder();
+         List<Location> locations = locationService.findBookedLocationsByBookingDescOrder();
          List<LocationGetDto> locationGetDtoList = new ArrayList<>();
         for (Location location: locations) {
             Address address = location.getAddress();
@@ -88,6 +91,19 @@ public class LocationController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(locationGetDtoList);
+    }
+    @GetMapping(value = "/LocationsAverage")
+    public ResponseEntity<Map<LocationGetDto,Double>> getLocationsByAverageOrder(){
+        Map<Location,Double> locationAverageMap = locationService.findLocationsByRatingDescOrder();
+        Map<LocationGetDto,Double> locationDtoAverageMap = new HashMap<>();
+        for (Map.Entry<Location,Double> entry : locationAverageMap.entrySet() ){
+            Location location = entry.getKey();
+            LocationGetDto  locationGetDto = mapper.locationToLocationGetDto(location, location.getAddress());
+            locationDtoAverageMap.put(locationGetDto,entry.getValue());
+        }
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(locationDtoAverageMap);
     }
 
     @PostMapping(

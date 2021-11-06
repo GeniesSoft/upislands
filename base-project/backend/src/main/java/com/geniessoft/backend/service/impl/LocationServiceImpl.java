@@ -28,6 +28,7 @@ public class LocationServiceImpl implements LocationService {
     private final LocationMapper mapper;
     private final AddressService addressService;
     private final BookingService bookingService;
+    private final ReviewService reviewService;
     private final FileStoreService fileStoreService;
     private final ContentService contentService;
     private final LocationContentService locationContentService;
@@ -88,13 +89,32 @@ public class LocationServiceImpl implements LocationService {
 
 
     @Override
-    public List<Location> findBookedLocationsByAscOrder() {
+    public List<Location> findBookedLocationsByBookingDescOrder() {
        Map<Location,Integer> locationCountMap = makeLocationCountMap();
         locationCountMap = locationCountMap.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
         List<Location> locations = new ArrayList<>(locationCountMap.keySet());
         return locations;
+    }
+
+    @Override
+    public Map<Location,Double> findLocationsByRatingDescOrder() {
+        List<Location> locations = findAllLocations();
+        Map<Location,Double> locationAverageMap = new HashMap<>();
+        for (Location location: locations) {
+            locationAverageMap.put(location, reviewService.findReviewAverageByLocationId(location.getLocationId()));
+        }
+
+        locationAverageMap = locationAverageMap.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        return locationAverageMap;
+    }
+
+    @Override
+    public List<Location> findAllLocations() {
+        return locationRepository.findAll();
     }
 
     private Map<Location,Integer> makeLocationCountMap(){

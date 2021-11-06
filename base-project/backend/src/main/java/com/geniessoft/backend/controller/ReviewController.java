@@ -62,12 +62,7 @@ public class ReviewController {
 
     @GetMapping(value = "/average")
     public ResponseEntity<String> getLocalGuideReviewAverage(@RequestParam(value= "localGuideId") Integer localGuideId){
-        List<Review> reviews = reviewService.findReviewsByLocalGuideId(localGuideId);
-        double reviewSum = 0;
-        for (Review review: reviews) {
-           reviewSum += review.getLocalGuideRating();
-        }
-        double reviewAverage = reviewSum/reviews.size();
+        Double reviewAverage = reviewService.findReviewAverageByLocalGuideId(localGuideId);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(reviewAverage + "");
@@ -75,12 +70,7 @@ public class ReviewController {
     }
     @GetMapping(value = "/average")
     public ResponseEntity<String> getLocationReviewAverage(@RequestParam(value= "locationId") Integer locationId){
-        List<Review> reviews = reviewService.findReviewsByLocalGuideId(locationId);
-        double reviewSum = 0;
-        for (Review review: reviews) {
-            reviewSum += review.getLocationRating();
-        }
-        double reviewAverage = reviewSum/reviews.size();
+        Double reviewAverage = reviewService.findReviewAverageByLocationId(locationId);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(reviewAverage + "");

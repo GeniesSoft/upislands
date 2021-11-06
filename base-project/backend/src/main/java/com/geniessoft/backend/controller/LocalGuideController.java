@@ -2,11 +2,8 @@ package com.geniessoft.backend.controller;
 
 import com.geniessoft.backend.dto.LocalGuideBaseDto;
 import com.geniessoft.backend.dto.LocalGuideUpdateDto;
-import com.geniessoft.backend.dto.LocationGetDto;
-import com.geniessoft.backend.model.Address;
 import com.geniessoft.backend.model.Company;
 import com.geniessoft.backend.model.LocalGuide;
-import com.geniessoft.backend.model.Location;
 import com.geniessoft.backend.service.LocalGuideService;
 import com.geniessoft.backend.utility.mapper.LocalGuideMapper;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RequestMapping("/api/local-guide")
@@ -60,7 +59,7 @@ public class LocalGuideController {
                 .body(localGuideBaseDto);
     }
     @GetMapping(value = "/mostBooked")
-    public ResponseEntity<LocalGuideBaseDto> getMostBookedLocation(){
+    public ResponseEntity<LocalGuideBaseDto> getMostBookedLocalGuide(){
         LocalGuide localGuide = localGuideService.findMostBookedLocalGuide();
         Company company= localGuide.getCompany();
         LocalGuideBaseDto localGuideBaseDto= localGuideMapper.localGuideToLocalGuideDto(localGuide, company);
@@ -70,8 +69,8 @@ public class LocalGuideController {
     }
 
     @GetMapping(value = "/bookedGuides")
-    public ResponseEntity<List<LocalGuideBaseDto>> getBookedLocationsByOrder(){
-        List<LocalGuide> localGuides = localGuideService.findLocalGuidesByAscOrder();
+    public ResponseEntity<List<LocalGuideBaseDto>> getBookedLocalGuideByOrder(){
+        List<LocalGuide> localGuides = localGuideService.findLocalGuidesByBookingDescOrder();
         List<LocalGuideBaseDto> localGuideBaseDtoList = new ArrayList<>();
         for (LocalGuide localGuide: localGuides) {
             Company company = localGuide.getCompany();
@@ -81,6 +80,19 @@ public class LocalGuideController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(localGuideBaseDtoList);
+    }
+    @GetMapping(value = "/GuidesAverage")
+    public ResponseEntity<Map<LocalGuideBaseDto,Double>> getLocalGuidesByAverageOrder(){
+        Map<LocalGuide,Double> localGuideAverageMap = localGuideService.findLocalGuidesByRatingDescOrder();
+        Map<LocalGuideBaseDto,Double> localGuideDtoAverageMap = new HashMap<>();
+       for (Map.Entry<LocalGuide,Double> entry : localGuideAverageMap.entrySet() ){
+           LocalGuide localGuide = entry.getKey();
+           LocalGuideBaseDto localGuideBaseDto = localGuideMapper.localGuideToLocalGuideDto(localGuide, localGuide.getCompany());
+           localGuideDtoAverageMap.put(localGuideBaseDto,entry.getValue());
+       }
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(localGuideDtoAverageMap);
     }
 
 

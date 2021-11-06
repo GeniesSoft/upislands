@@ -8,6 +8,7 @@ import com.geniessoft.backend.model.Location;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 
 public interface LocationService {
@@ -20,7 +21,10 @@ public interface LocationService {
 
     Location findMostBookedLocation();
 
-    List<Location> findBookedLocationsByAscOrder();
+    List<Location> findBookedLocationsByBookingDescOrder();
+
+    Map<Location,Double> findLocationsByRatingDescOrder();
+    List<Location> findAllLocations();
 
     Location findLocationById(int locationId);
 

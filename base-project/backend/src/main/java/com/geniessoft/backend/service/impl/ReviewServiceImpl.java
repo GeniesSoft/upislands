@@ -65,6 +65,28 @@ public class ReviewServiceImpl implements ReviewService {
         Optional<List<Review>> reviews = reviewRepository.findReviewsByLocalGuide(localGuideService.findLocalGuideById(localGuideId));
         return reviews.orElseThrow(() -> new EntityNotFoundException("No local guide review found."));
     }
+    @Override
+    public Double findReviewAverageByLocalGuideId(int localGuideId){
+        List<Review> reviews = findReviewsByLocalGuideId(localGuideId);
+        double reviewSum = 0;
+        for (Review review: reviews) {
+            reviewSum += review.getLocalGuideRating();
+        }
+        double reviewAverage = reviewSum/reviews.size();
+        return reviewAverage;
+    }
+
+    @Override
+    public Double findReviewAverageByLocationId(int locationId) {
+        List<Review> reviews = findReviewsByLocationId(locationId);
+        double reviewSum = 0;
+        for (Review review: reviews) {
+            reviewSum += review.getLocalGuideRating();
+        }
+        double reviewAverage = reviewSum/reviews.size();
+        return reviewAverage;
+
+    }
 
     @Override
     public List<Review> findReviewsByLocationId(int locationId) {
