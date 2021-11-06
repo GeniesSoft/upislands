@@ -1,28 +1,28 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Sticky from 'react-stickynode';
-import { withRouter } from 'react-router-dom';
-import { IoIosClose } from 'react-icons/io';
-import { Button, Drawer } from 'antd';
+import {withRouter} from 'react-router-dom';
+import {IoIosClose} from 'react-icons/io';
+import {Button, Drawer} from 'antd';
 import Logo from 'components/UI/Logo/Logo';
 import Text from 'components/UI/Text/Text';
 import TextLink from 'components/UI/TextLink/TextLink';
 import Navbar from 'components/Navbar/Navbar';
-import { AuthContext } from 'context/AuthProvider';
-import { LayoutContext } from 'context/LayoutProvider';
+import {AuthContext} from 'context/AuthProvider';
+import {LayoutContext} from 'context/LayoutProvider';
 import useWindowSize from 'library/hooks/useWindowSize';
-import { AGENT_PROFILE_PAGE } from 'settings/constant';
+import {AGENT_PROFILE_PAGE} from 'settings/constant';
 import AuthMenu from './AuthMenu';
 import MainMenu from './MainMenu';
 import MobileMenu from './MobileMenu';
 import ProfileMenu from './ProfileMenu';
 import NavbarSearch from './NavbarSearch';
 import HeaderWrapper, {
-  MobileNavbar,
-  CloseDrawer,
-  AvatarWrapper,
-  AvatarImage,
-  AvatarInfo,
-  LogoArea,
+    AvatarImage,
+    AvatarInfo,
+    AvatarWrapper,
+    CloseDrawer,
+    LogoArea,
+    MobileNavbar,
 } from './Header.style';
 
 const avatarImg = `http://s3.amazonaws.com/redqteam.com/isomorphic-reloaded-image/profilepic.png`;
@@ -38,138 +38,137 @@ const avatarImg = `http://s3.amazonaws.com/redqteam.com/isomorphic-reloaded-imag
 //   </svg>
 // );
 
-export default withRouter(function Header({ location }) {
-  const [{ searchVisibility }] = useContext(LayoutContext);
-  const { loggedIn } = useContext(AuthContext);
-  const { width } = useWindowSize();
-  const [state, setState] = useState(false);
+export default withRouter(function Header({location}) {
+    const [{searchVisibility}] = useContext(LayoutContext);
+    const {loggedIn} = useContext(AuthContext);
+    const {width} = useWindowSize();
+    const [state, setState] = useState(false);
 
-  const sidebarHandler = () => {
-    setState(!state);
-  };
+    const sidebarHandler = () => {
+        setState(!state);
+    };
 
-  const headerType = location.pathname === '/' ? 'transparent' : 'default';
+    const headerType = location.pathname === '/' ? 'transparent' : 'default';
 
-  const [homeLogo, setHomeLogo] = useState("white");
+    const [homeLogo, setHomeLogo] = useState("white");
 
-  const handleNavColorChange = () => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setHomeLogo("black");
-      }
-      else {
-        setHomeLogo("white");
-      }
-    }
-    document.addEventListener("scroll", handleScroll);
-    return () => {
-      document.removeEventListener("scroll", handleScroll);
-    }
-  }
-  useEffect( handleNavColorChange, []);
-
-  return (
-    <HeaderWrapper>
-      <Sticky
-        top={headerType === 'transparent' ? -1 : 0}
-        innerZ={10001}
-        activeClass="isHeaderSticky"
-      >
-        {width > 991 ? (
-          <Navbar
-            logo={
-              <>
-                {
-                  headerType === 'transparent' ?
-                      <Logo
-                          withLink
-                          linkTo="/"
-                          src={homeLogo === "white" ? "/images/logo-alt3.png" : "/images/logo-alt2.png"}
-                          title="UpIslands"
-                      /> :
-                      <Logo
-                          withLink
-                          linkTo="/"
-                          src="/images/logo-alt2.png"
-                          title="UpIslands"
-                      />
-                }
-              </>
+    const handleNavColorChange = () => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                setHomeLogo("black");
+            } else {
+                setHomeLogo("white");
             }
-            navMenu={<MainMenu />}
-            authMenu={<AuthMenu />}
-            isLogin={loggedIn}
-            avatar={<Logo src={avatarImg} />}
-            profileMenu={<ProfileMenu avatar={<Logo src={avatarImg} />} />}
-            headerType={headerType}
-            searchComponent={<NavbarSearch />}
-            location={location}
-            searchVisibility={searchVisibility}
-          />
-        ) : (
-          <MobileNavbar className={headerType}>
-            <LogoArea>
-              <>
-                {
-                  headerType === 'transparent' ?
-                      <Logo
-                          withLink
-                          linkTo="/"
-                          src={homeLogo === "white" ? "/images/logo-alt3.png" : "/images/logo-alt2.png"}
-                          title="UpIslands"
-                      /> :
-                      <Logo
-                          withLink
-                          linkTo="/"
-                          src="/images/logo-alt2.png"
-                          title="UpIslands"
-                      />
-                }
-              </>
-              <NavbarSearch />
-            </LogoArea>
-            <Button
-              className={`hamburg-btn ${state ? 'active' : ''}`}
-              onClick={sidebarHandler}
+        }
+        document.addEventListener("scroll", handleScroll);
+        return () => {
+            document.removeEventListener("scroll", handleScroll);
+        }
+    }
+    useEffect(handleNavColorChange, []);
+
+    return (
+        <HeaderWrapper>
+            <Sticky
+                top={headerType === 'transparent' ? -1 : 0}
+                innerZ={10001}
+                activeClass="isHeaderSticky"
             >
-              <span />
-              <span />
-              <span />
-            </Button>
-            <Drawer
-              placement="right"
-              closable={false}
-              onClose={sidebarHandler}
-              width="285px"
-              className="mobile-header"
-              visible={state}
-            >
-              <CloseDrawer>
-                <button onClick={sidebarHandler}>
-                  <IoIosClose />
-                </button>
-              </CloseDrawer>
-              {loggedIn ? (
-                <AvatarWrapper>
-                  <AvatarImage>
-                    <Logo src={avatarImg} />
-                  </AvatarImage>
-                  <AvatarInfo>
-                    <Text as="h3" content="Nova Scotia" />
-                    <TextLink
-                      link={AGENT_PROFILE_PAGE}
-                      content="View Profile"
+                {width > 991 ? (
+                    <Navbar
+                        logo={
+                            <>
+                                {
+                                    headerType === 'transparent' ?
+                                        <Logo
+                                            withLink
+                                            linkTo="/"
+                                            src={homeLogo === "white" ? "/images/nav-logo-2.svg" : "/images/nav-logo.svg"}
+                                            title="UpIslands"
+                                        /> :
+                                        <Logo
+                                            withLink
+                                            linkTo="/"
+                                            src="/images/nav-logo-2.svg"
+                                            title="UpIslands"
+                                        />
+                                }
+                            </>
+                        }
+                        navMenu={<MainMenu/>}
+                        authMenu={<AuthMenu/>}
+                        isLogin={loggedIn}
+                        avatar={<Logo src={avatarImg}/>}
+                        profileMenu={<ProfileMenu avatar={<Logo src={avatarImg}/>}/>}
+                        headerType={headerType}
+                        searchComponent={<NavbarSearch/>}
+                        location={location}
+                        searchVisibility={searchVisibility}
                     />
-                  </AvatarInfo>
-                </AvatarWrapper>
-              ) : (
-                <AuthMenu className="auth-menu" />
-              )}
-              <MobileMenu className="main-menu" />
-            </Drawer>
-          </MobileNavbar>
-        )}
-      </Sticky>
-    </HeaderWrapper>
-  );
+                ) : (
+                    <MobileNavbar className={headerType}>
+                        <LogoArea>
+                            <>
+                                {
+                                    headerType === 'transparent' ?
+                                        <Logo
+                                            withLink
+                                            linkTo="/"
+                                            src={homeLogo === "white" ? "/images/nav-logo-2.svg" : "/images/nav-logo.svg"}
+                                            title="UpIslands"
+                                        /> :
+                                        <Logo
+                                            withLink
+                                            linkTo="/"
+                                            src="/images/nav-logo-2.svg"
+                                            title="UpIslands"
+                                        />
+                                }
+                            </>
+                            <NavbarSearch/>
+                        </LogoArea>
+                        <Button
+                            className={`hamburg-btn ${state ? 'active' : ''}`}
+                            onClick={sidebarHandler}
+                        >
+                            <span/>
+                            <span/>
+                            <span/>
+                        </Button>
+                        <Drawer
+                            placement="right"
+                            closable={false}
+                            onClose={sidebarHandler}
+                            width="285px"
+                            className="mobile-header"
+                            visible={state}
+                        >
+                            <CloseDrawer>
+                                <button onClick={sidebarHandler}>
+                                    <IoIosClose/>
+                                </button>
+                            </CloseDrawer>
+                            {loggedIn ? (
+                                <AvatarWrapper>
+                                    <AvatarImage>
+                                        <Logo src={avatarImg}/>
+                                    </AvatarImage>
+                                    <AvatarInfo>
+                                        <Text as="h3" content="Nova Scotia"/>
+                                        <TextLink
+                                            link={AGENT_PROFILE_PAGE}
+                                            content="View Profile"
+                                        />
+                                    </AvatarInfo>
+                                </AvatarWrapper>
+                            ) : (
+                                <AuthMenu className="auth-menu"/>
+                            )}
+                            <MobileMenu className="main-menu"/>
+                        </Drawer>
+                    </MobileNavbar>
+                )}
+            </Sticky>
+        </HeaderWrapper>
+    );
 });

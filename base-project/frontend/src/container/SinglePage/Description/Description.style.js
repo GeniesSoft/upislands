@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { themeGet } from '@styled-system/theme-get';
+import {themeGet} from '@styled-system/theme-get';
+
 const DescriptionWrapper = styled.div`
   padding: 0 0 29px;
 

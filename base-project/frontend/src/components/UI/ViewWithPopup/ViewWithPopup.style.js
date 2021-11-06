@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, {css} from 'styled-components';
 
 export const Container = styled.div`
   border-radius: ${props => (props.radius ? props.radius : 3)}px;

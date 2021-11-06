@@ -61,11 +61,11 @@ const ReactDateWrapper = ComponentName => styled(ComponentName)`
         .DayPickerNavigation__prev,
         .DayPickerNavigation__next {
           -webkit-transform: ${props =>
-            props['data-rtl'] === 'rtl' ? 'rotate(180deg)' : 'inherit'};
+    props['data-rtl'] === 'rtl' ? 'rotate(180deg)' : 'inherit'};
           -ms-transform: ${props =>
-            props['data-rtl'] === 'rtl' ? 'rotate(180deg)' : 'inherit'};
+    props['data-rtl'] === 'rtl' ? 'rotate(180deg)' : 'inherit'};
           transform: ${props =>
-            props['data-rtl'] === 'rtl' ? 'rotate(180deg)' : 'inherit'};
+    props['data-rtl'] === 'rtl' ? 'rotate(180deg)' : 'inherit'};
         }
       }
     }
@@ -73,11 +73,11 @@ const ReactDateWrapper = ComponentName => styled(ComponentName)`
     .DateRangePickerInput {
       .DateRangePickerInput__arrow {
         -webkit-transform: ${props =>
-          props['data-rtl'] === 'rtl' ? 'rotate(180deg)' : 'inherit'};
+    props['data-rtl'] === 'rtl' ? 'rotate(180deg)' : 'inherit'};
         -ms-transform: ${props =>
-          props['data-rtl'] === 'rtl' ? 'rotate(180deg)' : 'inherit'};
+    props['data-rtl'] === 'rtl' ? 'rotate(180deg)' : 'inherit'};
         transform: ${props =>
-          props['data-rtl'] === 'rtl' ? 'rotate(180deg)' : 'inherit'};
+    props['data-rtl'] === 'rtl' ? 'rotate(180deg)' : 'inherit'};
       }
     }
   }
@@ -85,4 +85,4 @@ const ReactDateWrapper = ComponentName => styled(ComponentName)`
 
 const ReactDatesWrapper = WithDirection(ReactDateWrapper);
 
-export { ReactDatesStyleWrapper, ReactDatesWrapper };
+export {ReactDatesStyleWrapper, ReactDatesWrapper};

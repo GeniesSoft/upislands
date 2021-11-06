@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { themeGet } from '@styled-system/theme-get';
+import {themeGet} from '@styled-system/theme-get';
+
 const ReservationFormWrapper = styled.form`
   padding: 0 30px;
   @media (max-width: 375px) {

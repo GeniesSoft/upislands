@@ -1,5 +1,5 @@
-import styled, { keyframes } from 'styled-components';
-import { themeGet } from '@styled-system/theme-get';
+import styled, {keyframes} from 'styled-components';
+import {themeGet} from '@styled-system/theme-get';
 
 const fadeIn = keyframes`
   0% {

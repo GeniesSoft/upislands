@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { themeGet } from '@styled-system/theme-get';
+import {themeGet} from '@styled-system/theme-get';
 
 const LogoArea = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ const LogoArea = styled.div`
   }
 
   img {
-    width: 150px;
+    width: 40px;
   }
 
   h3 {
@@ -19,7 +19,7 @@ const LogoArea = styled.div`
     text-transform: capitalize;
     font-size: 20px;
     font-weight: 700;
-    margin: 0 0 0 10px;
+    margin: 0 0 0 5px;
   }
 `;
 

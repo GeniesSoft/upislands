@@ -33,41 +33,33 @@ public class LocationController {
     private final LocationService locationService;
     private final LocationMapper mapper;
 
-
-     @PostMapping(value = "/save")
-    public ResponseEntity<String> addLocation(@Valid @RequestBody LocationSaveDto locationDto){
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping
+    public String addLocation(@Valid @RequestBody LocationSaveDto locationDto){
       locationService.saveLocation(locationDto);
-      return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Location is saved.");
+      return "Location successfully saved";
     }
 
-    @PutMapping
-    public ResponseEntity<String> updateLocation(@Valid @RequestBody LocationUpdateDto locationUpdateDto){
-        locationService.updateLocation(locationUpdateDto);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Location is updated");
-    }
-
-    @DeleteMapping
-    public ResponseEntity<String> deleteLocation(@RequestParam(value = "locationId") Integer locationId){
-       locationService.deleteLocation(locationId);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Location is deleted");
-    }
-
-    @GetMapping
-    public ResponseEntity<LocationGetDto> getLocationById(@RequestParam(value = "locationId") Integer locationId){
-
-        Location location = locationService.findLocationById(locationId);
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = "/{id}")
+    public LocationGetDto getLocationById(@PathVariable(value = "id") Integer id){
+        Location location = locationService.findLocationById(id);
         Address address = location.getAddress();
-        LocationGetDto dto = mapper.locationToLocationGetDto(location, address);
+        return mapper.locationToLocationGetDto(location, address);
+    }
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(dto);
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping
+    public String updateLocation(@Valid @RequestBody LocationUpdateDto locationUpdateDto){
+        locationService.updateLocation(locationUpdateDto);
+        return "Location successfully updated";
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping(value = "/{id}")
+    public String deleteLocation(@PathVariable(value = "id") Integer id){
+       locationService.deleteLocation(id);
+        return "Location is deleted";
     }
     @GetMapping(value = "/mostBooked")
     public ResponseEntity<LocationGetDto> getMostBookedLocation(){

@@ -9,16 +9,16 @@ import React from "react";
 
 function App() {
 
-  return (
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <BrowserRouter>
-          <AuthProvider>
-            <Routes />
-          </AuthProvider>
-        </BrowserRouter>
-      </ThemeProvider>
-  );
+    return (
+        <ThemeProvider theme={theme}>
+            <GlobalStyles/>
+            <BrowserRouter>
+                <AuthProvider>
+                    <Routes/>
+                </AuthProvider>
+            </BrowserRouter>
+        </ThemeProvider>
+    );
 
 }
 

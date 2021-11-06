@@ -1,5 +1,6 @@
-import styled, { css, keyframes } from 'styled-components';
-import { themeGet } from '@styled-system/theme-get';
+import styled, {css, keyframes} from 'styled-components';
+import {themeGet} from '@styled-system/theme-get';
+
 const addAnimation = keyframes`
   0% {
     transform: scale(1) rotate(0deg);
