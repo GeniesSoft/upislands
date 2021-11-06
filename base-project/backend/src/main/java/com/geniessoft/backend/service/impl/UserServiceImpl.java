@@ -20,7 +20,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +27,6 @@ public class UserServiceImpl implements UserService {
 
     private final CompanyMapper mapper;
     private final RoleService roleService;
-    private final BookingService bookingService;
     private final UserRepository userRepository;
     private final FileStoreService fileStoreService;
     private final ContentService contentService;
@@ -78,7 +76,7 @@ public class UserServiceImpl implements UserService {
         return customUserFind(user);
     }
 
-    @Override
+    /*@Override
     public User findMostBookedUser() {
         Map<User,Integer> userCountMap = makeUserCountMap();
         User user = Collections.max(userCountMap.entrySet(), Map.Entry.comparingByValue()).getKey();
@@ -86,7 +84,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findBookedUsersByAscOrder() {
+    public List<User> findBookedUsersByDescOrder() {
         Map<User,Integer> userCountMap = makeUserCountMap();
         userCountMap = userCountMap.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue())
@@ -113,7 +111,7 @@ public class UserServiceImpl implements UserService {
             }
         }
         return locationCountMap;
-    }
+    }*/
 
     @Override
     public void checkUserEmail(String emailAddress) {

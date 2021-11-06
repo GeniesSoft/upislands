@@ -1,15 +1,19 @@
 package com.geniessoft.backend.controller;
 
+import com.geniessoft.backend.dto.ProfileImageDto;
 import com.geniessoft.backend.dto.ReviewBaseDto;
 import com.geniessoft.backend.dto.ReviewUpdateDto;
 import com.geniessoft.backend.model.*;
 import com.geniessoft.backend.service.ReviewService;
+import com.geniessoft.backend.utility.customvalidator.ImageConstraint;
 import com.geniessoft.backend.utility.mapper.ReviewMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -60,7 +64,7 @@ public class ReviewController {
     }
 
 
-    @GetMapping(value = "/average")
+    @GetMapping(value = "review/average/localguide")
     public ResponseEntity<String> getLocalGuideReviewAverage(@RequestParam(value= "localGuideId") Integer localGuideId){
         Double reviewAverage = reviewService.findReviewAverageByLocalGuideId(localGuideId);
         return ResponseEntity
@@ -68,7 +72,7 @@ public class ReviewController {
                 .body(reviewAverage + "");
 
     }
-    @GetMapping(value = "/average")
+    @GetMapping(value = "review/average/location")
     public ResponseEntity<String> getLocationReviewAverage(@RequestParam(value= "locationId") Integer locationId){
         Double reviewAverage = reviewService.findReviewAverageByLocationId(locationId);
         return ResponseEntity
@@ -76,13 +80,13 @@ public class ReviewController {
                 .body(reviewAverage + "");
     }
 
-    @GetMapping
+    @GetMapping(value = "review/localguideReviews")
     public ResponseEntity<List<ReviewBaseDto>> getReviewsByLocalGuideId(@RequestParam(value= "localGuideId") Integer localGuideId){
         List<Review> reviews = reviewService.findReviewsByLocalGuideId(localGuideId);
         return getListResponseEntity(reviews);
     }
 
-    @GetMapping
+    @GetMapping(value = "review/locationReviews")
     public ResponseEntity<List<ReviewBaseDto>> getReviewsByLocationId(@RequestParam(value= "location") Integer location){
         List<Review> reviews = reviewService.findReviewsByLocationId(location);
         return getListResponseEntity(reviews);
@@ -97,6 +101,27 @@ public class ReviewController {
         return ResponseEntity.status(HttpStatus.OK).body(reviewBaseDtoList);
     }
 
+    @PostMapping(
+            path = "{reviewId}/content",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<String> addReviewContent(
+            @PathVariable("reviewId") int reviewId,
+            @RequestParam("file") @ImageConstraint MultipartFile file){
+        reviewService.addReviewContent(reviewId ,file);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Review content is uploaded.");
+    }
 
+    /*@GetMapping(value = "/{reviewId}/content")
+    public ResponseEntity<ProfileImageDto> getReviewContent(
+            @PathVariable("reviewId") int reviewId){
 
+        byte[] image = reviewService.getReviewContent(reviewId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new ProfileImageDto(image));
+    }*/
 }

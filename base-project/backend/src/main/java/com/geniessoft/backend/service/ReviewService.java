@@ -4,6 +4,7 @@ import com.geniessoft.backend.dto.ReviewBaseDto;
 import com.geniessoft.backend.dto.ReviewUpdateDto;
 import com.geniessoft.backend.model.Booking;
 import com.geniessoft.backend.model.Review;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -17,5 +18,5 @@ public interface ReviewService {
     Double findReviewAverageByLocationId(int locationId);
     void checkIfBookingIsReviewed(Booking booking);
     void deleteReview(int reviewId);
-
+    void addReviewContent(int reviewId, MultipartFile file);
 }

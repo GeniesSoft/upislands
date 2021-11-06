@@ -19,11 +19,6 @@ public interface LocationService {
 
     Location findLocationByName(String locationName);
 
-    Location findMostBookedLocation();
-
-    List<Location> findBookedLocationsByBookingDescOrder();
-
-    Map<Location,Double> findLocationsByRatingDescOrder();
     List<Location> findAllLocations();
 
     Location findLocationById(int locationId);

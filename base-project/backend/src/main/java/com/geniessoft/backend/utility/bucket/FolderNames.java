@@ -5,5 +5,6 @@ public enum FolderNames {
     company_profile_images,
     location_profile_images,
     company_contents,
-    location_contents
+    location_contents,
+    review_contents
 }

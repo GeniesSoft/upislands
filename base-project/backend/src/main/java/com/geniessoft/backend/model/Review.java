@@ -35,6 +35,4 @@ public class Review {
     @JoinColumn(name = "review_image_id")
     private Content reviewContent;
 
-
-
 }

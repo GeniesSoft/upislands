@@ -10,6 +10,7 @@ import com.geniessoft.backend.utility.bucket.BucketName;
 import com.geniessoft.backend.utility.bucket.FolderNames;
 import com.geniessoft.backend.utility.mapper.CompanyMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,11 +28,11 @@ public class CompanyServiceImpl implements CompanyService {
     private final CompanyRepository companyRepository;
     private final CompanyMapper mapper;
     private final AddressService addressService;
-    private final UserService userService;
-    private final LocationService locationService;
     private final ContentService contentService;
     private final FileStoreService fileStoreService;
     private final CompanyContentService companyContentService;
+    private final UserService userService;
+    private final LocationService locationService;
 
     @Override
     public Company findCompanyById(Integer companyId) {

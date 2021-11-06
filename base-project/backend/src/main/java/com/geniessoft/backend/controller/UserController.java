@@ -7,6 +7,7 @@ import com.geniessoft.backend.dto.UserUpdateDto;
 import com.geniessoft.backend.model.Address;
 import com.geniessoft.backend.model.Location;
 import com.geniessoft.backend.model.User;
+import com.geniessoft.backend.service.AnalysisService;
 import com.geniessoft.backend.service.UserService;
 import com.geniessoft.backend.utility.customvalidator.ImageConstraint;
 import com.geniessoft.backend.utility.mapper.CompanyMapper;
@@ -33,6 +34,7 @@ public class UserController {
 
     private final UserService userService;
     private final CompanyMapper mapper;
+    private final AnalysisService analysisService;
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
@@ -64,7 +66,7 @@ public class UserController {
 
     @GetMapping(value = "/mostBooked")
     public ResponseEntity<UserUpdateDto> getMostBookedUser(){
-        User user = userService.findMostBookedUser();
+        User user = analysisService.findMostBookedUser();
         UserUpdateDto userUpdateDto = mapper.userToUserUpdateDto(user);
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -73,7 +75,7 @@ public class UserController {
 
     @GetMapping(value = "/bookedUsers")
     public ResponseEntity<List<UserUpdateDto>> getBookedUsersByOrder(){
-        List<User> users = userService.findBookedUsersByDescOrder();
+        List<User> users = analysisService.findBookedUsersByDescOrder();
         List<UserUpdateDto> userUpdateDtoList = new ArrayList<>();
         for (User user: users) {
             UserUpdateDto userUpdateDto = mapper.userToUserUpdateDto(user);

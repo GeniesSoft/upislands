@@ -23,8 +23,8 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class LocalGuideServiceImpl implements LocalGuideService {
+
     private final CompanyService companyService;
-    private final ReviewService reviewService;
     private final BookingService bookingService;
     private final LocalGuideMapper localGuideMapper;
     private final LocalGuideRepository localGuideRepository;
@@ -63,14 +63,14 @@ public class LocalGuideServiceImpl implements LocalGuideService {
         return localGuideRepository.save(localGuide);
     }
 
-    @Override
+    /*@Override
     public LocalGuide findMostBookedLocalGuide() {
         Map<LocalGuide,Integer> localGuideCountMap = makeLocalGuideCountMap();
         LocalGuide localGuide = Collections.max(localGuideCountMap.entrySet(), Map.Entry.comparingByValue()).getKey();
         return localGuide;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public List<LocalGuide> findLocalGuidesByBookingDescOrder() {
         Map<LocalGuide,Integer> localGuideCountMap = makeLocalGuideCountMap();
         localGuideCountMap = localGuideCountMap.entrySet().stream()
@@ -79,9 +79,9 @@ public class LocalGuideServiceImpl implements LocalGuideService {
         List<LocalGuide> localGuides = new ArrayList<>(localGuideCountMap.keySet());
         return localGuides;
 
-    }
+    }*/
 
-    @Override
+    /*@Override
     public Map<LocalGuide,Double> findLocalGuidesByRatingDescOrder() {
         List<LocalGuide> localGuides = findAllLocalGuides();
         Map<LocalGuide,Double> localGuideAverages = new HashMap<>();
@@ -92,14 +92,14 @@ public class LocalGuideServiceImpl implements LocalGuideService {
                 .sorted(Map.Entry.comparingByValue())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
         return localGuideAverages;
-    }
+    }*/
 
     @Override
     public List<LocalGuide> findAllLocalGuides() {
         return localGuideRepository.findAll();
     }
 
-    private Map<LocalGuide,Integer> makeLocalGuideCountMap(){
+    /*private Map<LocalGuide,Integer> makeLocalGuideCountMap(){
         List<Booking> bookings = bookingService.findAllBookingsByLocalGuideOrder();
         Map<LocalGuide,Integer> locationCountMap = new HashMap<>();
         for (int i = 0;i<bookings.size();i++) {
@@ -117,5 +117,5 @@ public class LocalGuideServiceImpl implements LocalGuideService {
             }
         }
         return locationCountMap;
-    }
+    }*/
 }

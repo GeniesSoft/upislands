@@ -5,14 +5,19 @@ import com.geniessoft.backend.dto.ReviewUpdateDto;
 import com.geniessoft.backend.model.*;
 import com.geniessoft.backend.repository.ReviewRepository;
 import com.geniessoft.backend.service.*;
+import com.geniessoft.backend.utility.bucket.BucketName;
+import com.geniessoft.backend.utility.bucket.FolderNames;
 import com.geniessoft.backend.utility.mapper.ReviewMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -24,6 +29,8 @@ public class ReviewServiceImpl implements ReviewService {
     private final LocalGuideService localGuideService;
     private final ReviewMapper reviewMapper;
     private final ReviewRepository reviewRepository;
+    private final FileStoreService fileStoreService;
+    private final ContentService contentService;
 
     @Override
     @Transactional(rollbackOn = Exception.class)
@@ -100,6 +107,30 @@ public class ReviewServiceImpl implements ReviewService {
         if (reviewRepository.findReviewByBooking(booking).isPresent()){
             throw new EntityExistsException("This booking is already reviewed");
         }
+    }
 
+    @Override
+    public void addReviewContent(int reviewId, MultipartFile file) {
+
+        // If there is company profile image then previous image deleted.
+        Review review = findReviewById(reviewId);
+        if(review.getReviewContent() != null){
+            throw new EntityExistsException("You cannot update review");
+        }
+
+        Map<String,String> metadata = fileStoreService.getMetadata(file);
+        String path = String.format("%s/%s", BucketName.BUCKET_NAME.getBucketName(), FolderNames.review_contents);
+        String fileName = String.format("%s-%s", review.getReviewId(), file.getOriginalFilename());
+
+        try {
+
+            Content reviewContent = contentService.saveContent(fileName,path,file.getContentType());
+            review.setReviewContent(reviewContent);
+            fileStoreService.upload(path,fileName,Optional.of(metadata),file.getInputStream());
+            System.out.println("Review content is uploaded");
+        }
+        catch (IOException e){
+            throw new IllegalStateException(e);
+        }
     }
 }

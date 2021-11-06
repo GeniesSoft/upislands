@@ -17,9 +17,9 @@ public interface UserService {
 
     User findFirstByEmailAddressEquals(String emailAddress);
 
-    User findMostBookedUser();
+    //User findMostBookedUser();
 
-    List<User> findBookedUsersByDescOrder();
+    //List<User> findBookedUsersByDescOrder();
 
     User findUser(int userId);
 

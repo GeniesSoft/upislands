@@ -2,8 +2,8 @@ package com.geniessoft.backend.controller;
 
 import com.geniessoft.backend.dto.*;
 import com.geniessoft.backend.model.Address;
-import com.geniessoft.backend.model.LocalGuide;
 import com.geniessoft.backend.model.Location;
+import com.geniessoft.backend.service.AnalysisService;
 import com.geniessoft.backend.service.LocationService;
 import com.geniessoft.backend.utility.customvalidator.ContentConstraints;
 import com.geniessoft.backend.utility.mapper.LocationMapper;
@@ -32,6 +32,7 @@ public class LocationController {
 
     private final LocationService locationService;
     private final LocationMapper mapper;
+    private final AnalysisService analysisService;
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
@@ -63,7 +64,7 @@ public class LocationController {
     }
     @GetMapping(value = "/mostBooked")
     public ResponseEntity<LocationGetDto> getMostBookedLocation(){
-        Location location = locationService.findMostBookedLocation();
+        Location location = analysisService.findMostBookedLocation();
         Address address= location.getAddress();
         LocationGetDto locationGetDto= mapper.locationToLocationGetDto(location, address);
         return ResponseEntity
@@ -73,7 +74,7 @@ public class LocationController {
 
     @GetMapping(value = "/bookedLocations")
     public ResponseEntity<List<LocationGetDto>> getBookedLocationsByOrder(){
-         List<Location> locations = locationService.findBookedLocationsByBookingDescOrder();
+         List<Location> locations = analysisService.findBookedLocationsByBookingDescOrder();
          List<LocationGetDto> locationGetDtoList = new ArrayList<>();
         for (Location location: locations) {
             Address address = location.getAddress();
@@ -86,7 +87,7 @@ public class LocationController {
     }
     @GetMapping(value = "/LocationsAverage")
     public ResponseEntity<Map<LocationGetDto,Double>> getLocationsByAverageOrder(){
-        Map<Location,Double> locationAverageMap = locationService.findLocationsByRatingDescOrder();
+        Map<Location,Double> locationAverageMap = analysisService.findLocationsByRatingDescOrder();
         Map<LocationGetDto,Double> locationDtoAverageMap = new HashMap<>();
         for (Map.Entry<Location,Double> entry : locationAverageMap.entrySet() ){
             Location location = entry.getKey();

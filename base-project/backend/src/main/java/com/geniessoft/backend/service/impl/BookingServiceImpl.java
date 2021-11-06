@@ -7,6 +7,7 @@ import com.geniessoft.backend.repository.BookingRepository;
 import com.geniessoft.backend.service.*;
 import com.geniessoft.backend.utility.mapper.BookingMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -18,12 +19,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BookingServiceImpl implements BookingService {
 
-   private final BookingRepository bookingRepository;
-   private final BookingMapper mapper;
-   private final UserService userService;
-   private final LocationService locationService;
-   private final CompanyService companyService;
-   private final JetSkiDetailsService jetSkiDetailsService;
+    private final BookingRepository bookingRepository;
+    private final BookingMapper mapper;
+    private final CompanyService companyService;
+    private final JetSkiDetailsService jetSkiDetailsService;
+    private final UserService userService;
+    private final LocationService locationService;
 
     @Override
     public Booking findBookingById(int bookingId) {
@@ -90,5 +91,4 @@ public class BookingServiceImpl implements BookingService {
         booking.setActive(false);
         bookingRepository.save(booking);
     }
-
 }

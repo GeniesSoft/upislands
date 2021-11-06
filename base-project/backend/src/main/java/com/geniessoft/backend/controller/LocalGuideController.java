@@ -4,6 +4,7 @@ import com.geniessoft.backend.dto.LocalGuideBaseDto;
 import com.geniessoft.backend.dto.LocalGuideUpdateDto;
 import com.geniessoft.backend.model.Company;
 import com.geniessoft.backend.model.LocalGuide;
+import com.geniessoft.backend.service.AnalysisService;
 import com.geniessoft.backend.service.LocalGuideService;
 import com.geniessoft.backend.utility.mapper.LocalGuideMapper;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ public class LocalGuideController {
 
     private final LocalGuideService localGuideService;
     private final LocalGuideMapper localGuideMapper;
+    private final AnalysisService analysisService;
 
     @PutMapping(value = "/save")
     public ResponseEntity<String> addLocalGuide(@Valid @RequestBody LocalGuideBaseDto localGuideBaseDto){
@@ -60,7 +62,7 @@ public class LocalGuideController {
     }
     @GetMapping(value = "/mostBooked")
     public ResponseEntity<LocalGuideBaseDto> getMostBookedLocalGuide(){
-        LocalGuide localGuide = localGuideService.findMostBookedLocalGuide();
+        LocalGuide localGuide = analysisService.findMostBookedLocalGuide();
         Company company= localGuide.getCompany();
         LocalGuideBaseDto localGuideBaseDto= localGuideMapper.localGuideToLocalGuideDto(localGuide, company);
         return ResponseEntity
@@ -70,7 +72,7 @@ public class LocalGuideController {
 
     @GetMapping(value = "/bookedGuides")
     public ResponseEntity<List<LocalGuideBaseDto>> getBookedLocalGuideByOrder(){
-        List<LocalGuide> localGuides = localGuideService.findLocalGuidesByBookingDescOrder();
+        List<LocalGuide> localGuides = analysisService.findLocalGuidesByBookingDescOrder();
         List<LocalGuideBaseDto> localGuideBaseDtoList = new ArrayList<>();
         for (LocalGuide localGuide: localGuides) {
             Company company = localGuide.getCompany();
@@ -83,7 +85,7 @@ public class LocalGuideController {
     }
     @GetMapping(value = "/GuidesAverage")
     public ResponseEntity<Map<LocalGuideBaseDto,Double>> getLocalGuidesByAverageOrder(){
-        Map<LocalGuide,Double> localGuideAverageMap = localGuideService.findLocalGuidesByRatingDescOrder();
+        Map<LocalGuide,Double> localGuideAverageMap = analysisService.findLocalGuidesByRatingDescOrder();
         Map<LocalGuideBaseDto,Double> localGuideDtoAverageMap = new HashMap<>();
        for (Map.Entry<LocalGuide,Double> entry : localGuideAverageMap.entrySet() ){
            LocalGuide localGuide = entry.getKey();
