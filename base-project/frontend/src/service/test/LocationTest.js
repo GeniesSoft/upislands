@@ -5,10 +5,7 @@ import TestConstraints from "./TestConstraints";
 const LocationTest = () => {
 
     const createLocation = () => {
-        LocationApi
-            .create(TestConstraints.locationCreateRequest())
-            .then(response => console.log(response.data))
-            .catch(error => console.log(error));
+        LocationApi.create(TestConstraints.locationCreateRequest());
     }
     const getLocation = () => {
         LocationApi
@@ -17,16 +14,10 @@ const LocationTest = () => {
             .catch(error => console.log(error));
     }
     const updateLocation = () => {
-        LocationApi
-            .update(TestConstraints.locationUpdateRequest())
-            .then(response => console.log(response.data))
-            .catch(error => console.log(error));
+        LocationApi.update(TestConstraints.locationUpdateRequest());
     }
     const deleteLocation = () => {
-        LocationApi
-            .delete(1)
-            .then(response => console.log(response.data))
-            .catch(error => console.log(error));
+        LocationApi.delete(1);
     }
 
     return (

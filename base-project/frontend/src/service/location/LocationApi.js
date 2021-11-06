@@ -9,7 +9,7 @@ class LocationApi extends CrudApi {
 export default new LocationApi(
     axios.create(
         {
-            baseURL: API_BASE_URL,
-            url: "/locations"
+            baseURL: API_BASE_URL + "/locations"
         }
-    ));
+    )
+);

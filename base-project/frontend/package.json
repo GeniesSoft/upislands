@@ -37,6 +37,7 @@
     "react-scroll": "^1.8.1",
     "react-share": "^4.3.1",
     "react-stickynode": "^3.0.4",
+    "react-toastify": "^8.1.0",
     "react-waypoint": "^9.0.3",
     "styled-components": "^5.2.1",
     "styled-system": "^5.1.5",

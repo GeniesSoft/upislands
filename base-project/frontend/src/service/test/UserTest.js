@@ -5,10 +5,7 @@ import TestConstraints from "./TestConstraints";
 const UserTest = () => {
 
     const createUser = () => {
-        UserApi
-            .create(TestConstraints.userCreateRequest())
-            .then(response => console.log(response.data))
-            .catch(error => console.log(error));
+        UserApi.create(TestConstraints.userCreateRequest());
     }
     const getUser = () => {
         UserApi
@@ -17,16 +14,10 @@ const UserTest = () => {
             .catch(error => console.log(error));
     }
     const updateUser = () => {
-        UserApi
-            .update(TestConstraints.userUpdateRequest())
-            .then(response => console.log(response.data))
-            .catch(error => console.log(error));
+        UserApi.update(TestConstraints.userUpdateRequest())
     }
     const deleteUser = () => {
-        UserApi
-            .delete(1)
-            .then(response => console.log(response.data))
-            .catch(error => console.log(error));
+        UserApi.delete(1)
     }
 
     return (

@@ -11,15 +11,15 @@ import TestView from "./service/test/TestView";
 function App() {
 
     return (
-        // <TestView />
-        <ThemeProvider theme={theme}>
-            <GlobalStyles/>
-            <BrowserRouter>
-                <AuthProvider>
-                    <Routes/>
-                </AuthProvider>
-            </BrowserRouter>
-        </ThemeProvider>
+        <TestView />
+        // <ThemeProvider theme={theme}>
+        //     <GlobalStyles/>
+        //     <BrowserRouter>
+        //         <AuthProvider>
+        //             <Routes/>
+        //         </AuthProvider>
+        //     </BrowserRouter>
+        // </ThemeProvider>
     );
 
 }
