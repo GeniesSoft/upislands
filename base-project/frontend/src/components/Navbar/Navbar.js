@@ -29,11 +29,15 @@ const Navbar = ({
                 {logo || searchVisibility ? (
                     <LogoArea>
                         {logo}
-                        {!searchVisibility && location.pathname === '/'
-                            ? null
-                            : searchComponent}
+                        <div className={"nav-search"}>
+                            {!searchVisibility && location.pathname === '/'
+                                ? null
+                                : searchComponent}
+                        </div>
+
                     </LogoArea>
                 ) : null}
+
                 <MenuArea>
                     {navMenu && (
                         <MenuWrapper className="main_menu">{navMenu}</MenuWrapper>

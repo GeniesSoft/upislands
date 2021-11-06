@@ -4,16 +4,21 @@ import footerBg from './footer-bg.svg';
 
 const FooterWrapper = styled.footer`
   width: 100%;
-  background-color: ${themeGet('color.1', '#ffffff')};
-  background-image: url(${(props) => (props.bgSrc ? props.bgSrc : footerBg)});
-  background-repeat: no-repeat;
-  background-position: bottom;
-  background-size: 100%;
-  padding: 47px 0 66px;
+  // background-color: ${themeGet('color.1', '#ffffff')};
+  // background-image: url(${(props) => (props.bgSrc ? props.bgSrc : footerBg)});
+  // background-repeat: no-repeat;
+  // background-position: bottom;
+  // background-size: 100%;
+  background-color: whitesmoke;
+  padding: 4px 0 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  
+  img {
+    width: 160px;
+  }
 
   @media (max-width: 480px) {
     padding: 60px 0 50px;
@@ -21,7 +26,7 @@ const FooterWrapper = styled.footer`
 `;
 
 export const MenuWrapper = styled.div`
-  margin-top: 40px;
+  margin-top: 20px;
   padding-left: 10px;
 
   @media (max-width: 480px) {

@@ -46,6 +46,7 @@ const NavbarWrapper = styled.nav`
       }
     }
   }
+  
 `;
 
 export const Container = styled.div`
@@ -175,7 +176,7 @@ export const MenuWrapper = styled.div`
       font-weight: 400;
       transition: color 0.2s ease-in-out;
       @media (max-width: 1200px) {
-        margin: 0 10px;
+        margin: 0 1px;
       }
       &:first-child {
         margin-left: 0;

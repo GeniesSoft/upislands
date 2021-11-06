@@ -55,11 +55,12 @@ const SearchArea = ({searchTitleStyle, searchDescriptionStyle, history}) => {
                         <Button
                             type="primary"
                             htmlType="submit"
-                            href={"/listing"}
                             shape={"circle"}
                             size={"large"}
                         >
-                            I'm flexible
+                            <div>
+                                I'm flexible
+                            </div>
                         </Button>
                     </div>
                 </SearchWrapper>

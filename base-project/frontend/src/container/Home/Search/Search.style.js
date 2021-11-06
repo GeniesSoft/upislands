@@ -29,6 +29,7 @@ const BannerWrapper = styled.div`
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: 55%;
     }
   }
 
@@ -81,13 +82,13 @@ export const SearchWrapper = styled.div`
   background-color: transparent;
   // box-shadow: 0 1px 20px rgba(0, 0, 0, 0.08);
   position: absolute;
-  top: 120px;
+  top: 8em;
   z-index: 1;
 
-  @media (min-width: 569px) and (max-width: 991px) {
-    width: 414px;
-    left: 30px;
-  }
+  // @media (min-width: 569px) and (max-width: 991px) {
+  //   width: 414px;
+  //   left: 30px;
+  // }
 
   @media (max-width: 480px) {
     width: calc(100% - 30px);
@@ -119,13 +120,24 @@ export const SearchWrapper = styled.div`
   
   .flexible > .ant-btn {
     min-width: 200px;
-    color: ${themeGet('color.4', '#ffffff')};
+    min-height: 60px;
     background-color: ${themeGet('color.1', '#008489')};
     z-index: 1;
     border-radius: 35px;
-    border: 0;
-    font-size: 20px;
+    box-shadow: 0 0 5px #fff;
+    border: 1px;
+    font-size: 25px;
     font-weight: 700;
+  }
+  
+  .flexible > button div {
+    background-image: linear-gradient(45deg, #004f52, #02f1fa);
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
   }
 `;
 
@@ -144,6 +156,11 @@ export const FormWrapper = styled.div`
 
   @media (max-width: 480px) {
     margin-top: 10px;
+  }
+  
+  @media (min-width: 569px) and (max-width: 991px) {
+    margin: 0 auto 0 auto;
+    width: 414px;
   }
 
   /* submit button style */

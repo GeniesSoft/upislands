@@ -1,5 +1,5 @@
 import {Button} from "antd";
-import LocationApi from "../location/api/LocationApi";
+import LocationApi from "../location/LocationApi";
 import TestConstraints from "./TestConstraints";
 
 const LocationTest = () => {

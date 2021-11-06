@@ -11,11 +11,11 @@ const Footer = () => {
                     withLink
                     linkTo="/"
                     src="/images/logo-alt.png"
-                    title="Upislands"
+                    title=""
                 />
             }
             menu={<FooterMenu/>}
-            copyright={`Copyright @ ${new Date().getFullYear()} RedQ, Inc.`}
+            copyright={`Copyright @ ${new Date().getFullYear()} GeniesSoft`}
         />
     );
 };

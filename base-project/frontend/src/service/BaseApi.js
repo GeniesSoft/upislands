@@ -1,7 +1,6 @@
 class BaseApi {
 
-    constructor(basePath, axios) {
-        this.PATH_BASE = basePath;
+    constructor(axios) {
         this.axios = axios;
     }
 

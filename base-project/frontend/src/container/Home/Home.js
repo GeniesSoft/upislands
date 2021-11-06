@@ -4,10 +4,6 @@ import SearchArea from './Search/Search';
 import LocationGrid from './Location/Location';
 import {LayoutContext} from 'context/LayoutProvider';
 import {Waypoint} from 'react-waypoint';
-import {Button} from "antd";
-import UserApi from "../../service/user/api/UserApi";
-import user from "../../service/user/object/user.json"
-import TestView from "../../service/test/TestView";
 
 const Home = () => {
     const [, dispatch] = useContext(LayoutContext);

@@ -1,5 +1,5 @@
-import user from "../user/object/user.json";
-import location from "../location/object/location.json";
+import user from "../user/user.json";
+import location from "../location/location.json";
 
 class TestConstraints {
 

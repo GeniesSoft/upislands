@@ -1,5 +1,5 @@
 import {Button} from "antd";
-import UserApi from "../user/api/UserApi";
+import UserApi from "../user/UserApi";
 import TestConstraints from "./TestConstraints";
 
 const UserTest = () => {
