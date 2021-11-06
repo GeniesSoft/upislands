@@ -19,4 +19,5 @@ public interface ReviewService {
     void checkIfBookingIsReviewed(Booking booking);
     void deleteReview(int reviewId);
     void addReviewContent(int reviewId, MultipartFile file);
+    byte[] getReviewContent(int reviewId);
 }
