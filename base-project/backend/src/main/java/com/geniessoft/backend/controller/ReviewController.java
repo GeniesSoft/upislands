@@ -115,7 +115,7 @@ public class ReviewController {
                 .body("Review content is uploaded.");
     }
 
-    /*@GetMapping(value = "/{reviewId}/content")
+    @GetMapping(value = "/{reviewId}/content")
     public ResponseEntity<ProfileImageDto> getReviewContent(
             @PathVariable("reviewId") int reviewId){
 
@@ -123,5 +123,5 @@ public class ReviewController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(new ProfileImageDto(image));
-    }*/
+    }
 }

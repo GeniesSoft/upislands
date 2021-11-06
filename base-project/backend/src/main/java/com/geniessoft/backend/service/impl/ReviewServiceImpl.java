@@ -133,4 +133,12 @@ public class ReviewServiceImpl implements ReviewService {
             throw new IllegalStateException(e);
         }
     }
+
+    @Override
+    public byte[] getReviewContent(int reviewId) {
+        Review review = findReviewById(reviewId);
+        return fileStoreService.download(
+                review.getReviewContent().getContentPath(),
+                review.getReviewContent().getContentName());
+    }
 }
