@@ -13,4 +13,5 @@ public interface RoleRepository extends JpaRepository<Role,Integer> {
 
     @Query
     Role findFirstByRoleNameEquals(@Param(value = "roleName") Roles roleName);
+    Role findFirstByRoleId(int RoleId);
 }

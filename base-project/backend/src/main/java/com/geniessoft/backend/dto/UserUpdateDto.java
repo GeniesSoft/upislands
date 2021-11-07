@@ -10,4 +10,5 @@ public class UserUpdateDto extends UserDtoBase{
     @Positive
     private int userId;
     private String emailAddress;
+    private int roleId;
 }

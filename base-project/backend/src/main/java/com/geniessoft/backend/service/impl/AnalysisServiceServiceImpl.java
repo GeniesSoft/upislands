@@ -21,6 +21,9 @@ public class AnalysisServiceServiceImpl implements AnalysisService {
     private final ReviewService reviewService;
     private final LocalGuideService localGuideService;
 
+
+    //----------------------User Analysis---------------------------//
+
     @Override
     public User findMostBookedUser() {
         Map<User,Integer> userCountMap = makeUserCountMap();

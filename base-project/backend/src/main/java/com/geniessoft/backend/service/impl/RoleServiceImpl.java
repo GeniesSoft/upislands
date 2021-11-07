@@ -17,4 +17,9 @@ public class RoleServiceImpl implements RoleService {
     public Role findRoleByName(Roles roleName) {
         return roleRepository.findFirstByRoleNameEquals(roleName);
     }
+
+    @Override
+    public Role findRoleById(int roleId) {
+        return roleRepository.findFirstByRoleId(roleId);
+    }
 }
