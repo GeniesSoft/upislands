@@ -30,14 +30,15 @@ import java.util.Map;
 public class LocationController {
 
     private final LocationService locationService;
-    private final LocationMapper mapper;
     private final AnalysisService analysisService;
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
     public String addLocation(@Valid @RequestBody LocationSaveDto locationDto){
-      locationService.saveLocation(locationDto);
-      return "Location successfully saved";
+        locationService.saveLocation(
+                LocationMapper.INSTANCE.locationSaveDtoToLocation(locationDto)
+        );
+        return "Location successfully saved";
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -45,13 +46,15 @@ public class LocationController {
     public LocationGetDto getLocationById(@PathVariable(value = "id") Integer id){
         Location location = locationService.findLocationById(id);
         Address address = location.getAddress();
-        return mapper.locationToLocationGetDto(location, address);
+        return LocationMapper.INSTANCE.locationToLocationGetDto(location, address);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping
     public String updateLocation(@Valid @RequestBody LocationUpdateDto locationUpdateDto){
-        locationService.updateLocation(locationUpdateDto);
+        locationService.updateLocation(
+                LocationMapper.INSTANCE.locationUpdateDtoToLocation(locationUpdateDto)
+        );
         return "Location successfully updated";
     }
 
@@ -65,7 +68,7 @@ public class LocationController {
     public ResponseEntity<LocationGetDto> getMostBookedLocation(){
         Location location = analysisService.findMostBookedLocation();
         Address address= location.getAddress();
-        LocationGetDto locationGetDto= mapper.locationToLocationGetDto(location, address);
+        LocationGetDto locationGetDto= LocationMapper.INSTANCE.locationToLocationGetDto(location, address);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(locationGetDto);
@@ -77,7 +80,7 @@ public class LocationController {
          List<LocationGetDto> locationGetDtoList = new ArrayList<>();
         for (Location location: locations) {
             Address address = location.getAddress();
-            LocationGetDto locationGetDto = mapper.locationToLocationGetDto(location, address);
+            LocationGetDto locationGetDto = LocationMapper.INSTANCE.locationToLocationGetDto(location, address);
             locationGetDtoList.add(locationGetDto);
         }
         return ResponseEntity
@@ -90,7 +93,7 @@ public class LocationController {
         Map<LocationGetDto,Double> locationDtoAverageMap = new HashMap<>();
         for (Map.Entry<Location,Double> entry : locationAverageMap.entrySet() ){
             Location location = entry.getKey();
-            LocationGetDto  locationGetDto = mapper.locationToLocationGetDto(location, location.getAddress());
+            LocationGetDto  locationGetDto = LocationMapper.INSTANCE.locationToLocationGetDto(location, location.getAddress());
             locationDtoAverageMap.put(locationGetDto,entry.getValue());
         }
         return ResponseEntity

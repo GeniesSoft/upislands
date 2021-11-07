@@ -22,9 +22,8 @@ public class Company {
     private String companyDescription;
     private boolean deleted = false;
 
-    @OneToOne
-    @JoinColumn(name = "company_address_id")
-    private Address companyAddress;
+    @Embedded
+    private Address address;
 
     @OneToOne
     @JoinColumn(name = "company_profile_image_id")

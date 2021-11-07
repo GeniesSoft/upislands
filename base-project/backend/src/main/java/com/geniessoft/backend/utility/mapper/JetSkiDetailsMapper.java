@@ -5,9 +5,12 @@ import com.geniessoft.backend.dto.JetSkiDetailsSaveDto;
 import com.geniessoft.backend.dto.JetSkiDetailsUpdateDto;
 import com.geniessoft.backend.model.JetSkiDetails;
 import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel="spring")
+@Mapper
 public interface JetSkiDetailsMapper {
+
+    JetSkiDetailsMapper INSTANCE = Mappers.getMapper(JetSkiDetailsMapper.class);
 
     JetSkiDetailsGetDto jetSkiDetailsToJetSkiDetailsGetDto(JetSkiDetails jetSkiDetails);
 

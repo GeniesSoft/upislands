@@ -8,11 +8,15 @@ import lombok.Setter;
 @Setter
 public abstract class LocationBaseDto {
 
-    @NotEmptyOrSpaceOrNull(message = "Description cannot be empty.")
+    @NotEmptyOrSpaceOrNull(message = "Location Name cannot be empty")
+    protected String locationName;
+
     protected String description;
+
     protected String tripTime;
     protected boolean needExperience;
 
+    protected AddressDto address;
 
 }
 

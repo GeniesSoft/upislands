@@ -23,7 +23,7 @@ public class Location {
     private boolean needExperience;
     private String description;
 
-    @OneToOne
+    @Embedded
     private Address address;
 
     @ManyToMany(mappedBy = "locationList")

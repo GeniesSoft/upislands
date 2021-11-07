@@ -13,9 +13,9 @@ import java.util.Map;
 
 public interface LocationService {
 
-    Location  saveLocation(LocationSaveDto location);
+    Location  saveLocation(Location location);
 
-    Location updateLocation(LocationUpdateDto locationUpdateDto);
+    Location updateLocation(Location location);
 
     Location findLocationByName(String locationName);
 

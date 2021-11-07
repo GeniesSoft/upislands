@@ -1,13 +1,15 @@
 package com.geniessoft.backend.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.Positive;
 
-@Data
-public class UserUpdateDto extends UserDtoBase{
+@Getter
+@Setter
+public class UserUpdateDto extends UserBaseDto {
 
-    @Positive
+    @Positive(message = "User Id must provide")
     private int userId;
-    private String emailAddress;
+
 }

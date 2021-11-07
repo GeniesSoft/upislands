@@ -27,7 +27,6 @@ public class CompanyServiceImpl implements CompanyService {
 
     private final CompanyRepository companyRepository;
     private final CompanyMapper mapper;
-    private final AddressService addressService;
     private final ContentService contentService;
     private final FileStoreService fileStoreService;
     private final CompanyContentService companyContentService;
@@ -48,10 +47,7 @@ public class CompanyServiceImpl implements CompanyService {
         checkCompanyName(companyRegisterDto.getCompanyName());
         checkUserHasCompany(companyRegisterDto.getUserId());
         Company company = mapper.companyRegisterDtoToCompany(companyRegisterDto);
-        Address address = mapper.companyRegisterDtoToAddress(companyRegisterDto);
-        addressService.saveAddress(address);
         User user = userService.findUser(companyRegisterDto.getUserId());
-        company.setCompanyAddress(address);
         company.setJobOwner(user);
         List<Location> locationList = getLocations(companyRegisterDto.getLocationIdList());
         company.setLocationList(locationList);
@@ -80,10 +76,7 @@ public class CompanyServiceImpl implements CompanyService {
     public void checkCompanyName(String name) {
         Optional<Company> company = companyRepository
                 .findFirstByCompanyNameEquals(name.trim());
-        if(company.isEmpty()){
-            return;
-        }
-        else {
+        if (company.isPresent()) {
             throw new EntityExistsException("This company name is used");
         }
     }
@@ -93,10 +86,7 @@ public class CompanyServiceImpl implements CompanyService {
     public void checkUserHasCompany(int userId) {
         Optional<Company> company = companyRepository
                 .findFirstByJobOwnerUserId(userId);
-        if(company.isEmpty()){
-            return;
-        }
-        else {
+        if (company.isPresent()) {
             throw new EntityExistsException("This user already has a company.");
         }
     }
@@ -111,7 +101,7 @@ public class CompanyServiceImpl implements CompanyService {
             checkCompanyName(companyUpdateDto.getCompanyName());
         }
         mapper.updateCompany(company, companyUpdateDto);
-        mapper.updateAddress(company.getCompanyAddress(), companyUpdateDto);
+        mapper.updateAddress(company.getAddress(), companyUpdateDto);
         company.setLocationList(getLocations(companyUpdateDto.getLocationIdList()));
         companyRepository.save(company);
 

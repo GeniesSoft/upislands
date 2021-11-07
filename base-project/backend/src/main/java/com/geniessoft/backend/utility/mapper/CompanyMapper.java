@@ -18,8 +18,6 @@ public interface CompanyMapper {
 
     Company companyRegisterDtoToCompany(CompanyRegisterDto dto);
 
-    Address companyRegisterDtoToAddress(CompanyRegisterDto dto);
-
     CompanyGetDto companyToCompanyGetDto(Company company, Address address, List<LocationGetDto> locationGetDtoList);
 
     void updateAddress(@MappingTarget Address address, CompanyUpdateDto dto);

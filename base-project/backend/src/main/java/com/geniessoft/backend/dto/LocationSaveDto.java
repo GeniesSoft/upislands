@@ -9,17 +9,4 @@ import lombok.Setter;
 @Setter
 public class LocationSaveDto extends LocationBaseDto{
 
-    @NotEmptyOrSpaceOrNull(message = "Location Name cannot be empty.")
-    protected String locationName;
-
-    protected String streetNumber; //Also known as house/apt no
-    protected String zip;
-
-    @NotEmptyOrSpaceOrNull(message = "Address cannot be empty.")
-    protected String street;
-    protected String city;
-    protected String county;
-    protected String state;
-    protected String country;
-
 }

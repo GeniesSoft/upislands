@@ -11,5 +11,5 @@ public class CompanyGetDto extends CompanyBaseDto{
 
     private int companyId;
     private int userId;
-    private List<LocationGetDto> locationGetDtoList;
+    private List<LocationGetDto> locationList;
 }

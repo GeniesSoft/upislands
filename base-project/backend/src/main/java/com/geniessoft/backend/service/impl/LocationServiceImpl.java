@@ -26,8 +26,6 @@ import java.util.stream.Collectors;
 public class LocationServiceImpl implements LocationService {
 
     private final LocationRepository locationRepository;
-    private final LocationMapper mapper;
-    private final AddressService addressService;
     //private final ReviewService reviewService;
     private final FileStoreService fileStoreService;
     private final ContentService contentService;
@@ -35,24 +33,25 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     @Transactional(rollbackOn = Exception.class)
-    public Location saveLocation(LocationSaveDto locationSaveDto) {
-        checkLocationName(locationSaveDto.getLocationName());
-        Location location = mapper.locationSaveDtoToLocation(locationSaveDto);
-        Address address = mapper.locationSaveDtoToAddress(locationSaveDto);
-        addressService.saveAddress(address);
-        location.setAddress(address);
+    public Location saveLocation(Location location) {
+
+        checkLocationName(location.getLocationName());
+
         return locationRepository.save(location);
     }
 
 
     @Override
     @Transactional(rollbackOn = Exception.class)
-    public Location updateLocation(LocationUpdateDto locationUpdateDto){
-        Location location = findLocationById(locationUpdateDto.getLocationId());
-        //checkLocationName(location.getLocationName());
-        mapper.updateLocation(location, locationUpdateDto);
-        locationRepository.save(location);
-        return location;
+    public Location updateLocation(Location location){
+        checkLocationId(location.getLocationId());
+        return locationRepository.save(location);
+    }
+
+    public void checkLocationId(Integer locationId) {
+        Optional<Location> optionalLocation = locationRepository.findById(locationId);
+
+        if (optionalLocation.isEmpty()) throw new EntityNotFoundException("Location not found");
     }
 
     @Override
@@ -60,11 +59,10 @@ public class LocationServiceImpl implements LocationService {
         Optional<Location> location = locationRepository.findFirstByLocationNameEquals(locationName.trim());
 
         if (location.isPresent()){
-            if (location.get().isDeleted()){
-                throw new EntityExistsException("This Location is deleted.");
-            }
+            if (location.get().isDeleted())
+                throw new EntityNotFoundException("This Location is deleted");
             else
-                throw new EntityExistsException("This location already exists.");
+                throw new EntityExistsException("This location already exists");
         }
     }
 

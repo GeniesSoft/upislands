@@ -21,15 +21,13 @@ import javax.validation.Valid;
 public class JetSkiDetailsController {
 
     private final JetSkiDetailsService jetSkiDetailsService;
-    private final CompanyService companyService;
-    private final JetSkiDetailsMapper jetSkiDetailsMapper;
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{companyId}")
     public JetSkiDetailsGetDto getJetSkiDetails(
             @PathVariable(value = "companyId") Integer companyId) {
         JetSkiDetails jetSkiDetails = jetSkiDetailsService.findJetSkiDetailsByCompanyId(companyId);
-        return jetSkiDetailsMapper.jetSkiDetailsToJetSkiDetailsGetDto(jetSkiDetails);
+        return JetSkiDetailsMapper.INSTANCE.jetSkiDetailsToJetSkiDetailsGetDto(jetSkiDetails);
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -39,7 +37,7 @@ public class JetSkiDetailsController {
             @Valid @RequestBody JetSkiDetailsSaveDto jetSkiDetailsSaveDto) {
         jetSkiDetailsService.saveJetSkiDetails(
                 companyId,
-                jetSkiDetailsMapper.jetSkiDetailsSaveDtoToJetSkiDetails(jetSkiDetailsSaveDto)
+                JetSkiDetailsMapper.INSTANCE.jetSkiDetailsSaveDtoToJetSkiDetails(jetSkiDetailsSaveDto)
         );
         return "Jet ski details saved";
     }
@@ -51,7 +49,7 @@ public class JetSkiDetailsController {
             @Valid @RequestBody JetSkiDetailsUpdateDto jetSkiDetailsUpdateDto) {
         jetSkiDetailsService.updateJetSkiDetails(
                 companyId,
-                jetSkiDetailsMapper.jetSkiDetailsUpdateDtoToJetSkiDetails(jetSkiDetailsUpdateDto)
+                JetSkiDetailsMapper.INSTANCE.jetSkiDetailsUpdateDtoToJetSkiDetails(jetSkiDetailsUpdateDto)
         );
         return "Jet ski details updated";
     }

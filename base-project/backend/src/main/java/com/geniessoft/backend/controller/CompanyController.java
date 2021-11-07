@@ -29,7 +29,6 @@ public class CompanyController {
 
     private final CompanyService companyService;
     private final CompanyMapper mapper;
-    private final LocationMapper locationMapper;
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
@@ -45,12 +44,12 @@ public class CompanyController {
             @PathVariable(value = "id") Integer id){
 
         Company company = companyService.findCompanyById(id);
-        Address address = company.getCompanyAddress();
+        Address address = company.getAddress();
         List<Location> locationList = company.getLocationList();
 
         List<LocationGetDto> locationGetDtoList = locationList
                 .stream()
-                .map((location)-> locationMapper
+                .map((location)-> LocationMapper.INSTANCE
                             .locationToLocationGetDto(location, location.getAddress()))
                             .collect(Collectors.toList());
 

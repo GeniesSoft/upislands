@@ -9,7 +9,7 @@ import javax.validation.constraints.Positive;
 @Setter
 public class LocationUpdateDto extends LocationBaseDto {
 
-    @Positive(message = "You must provide Location ID.")
+    @Positive(message = "Location Id must provide")
     private int locationId;
 
 }

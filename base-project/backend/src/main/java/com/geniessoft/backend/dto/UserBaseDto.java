@@ -7,25 +7,30 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Getter
 @Setter
-public abstract class UserDtoBase {
+public abstract class UserBaseDto {
 
-    @NotEmptyOrSpaceOrNull(message = "First name cannot be empty.")
+    @NotEmptyOrSpaceOrNull(message = "First name cannot be empty")
     protected String firstName;
 
-    @NotEmptyOrSpaceOrNull(message = "Last name cannot be empty.")
+    @NotEmptyOrSpaceOrNull(message = "Last name cannot be empty")
     protected String lastName;
 
-    @NotEmpty(message = "Phone number cannot be empty.")
+    @NotEmpty(message = "Phone number cannot be empty")
     @ContactNumberConstraint
     protected String phoneNumber;
 
-    @NotNull(message = "Birth date is mandatory.")
+    @NotEmptyOrSpaceOrNull(message = "Email address cannot be empty")
+    @Email(message = "Invalid email address")
+    private String emailAddress;
+
+    @NotNull(message = "Birth date is mandatory")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @JsonFormat(pattern = "MM/dd/yyyy") // In USA In general dd-mm-yyyy
     protected LocalDate birthDate;
