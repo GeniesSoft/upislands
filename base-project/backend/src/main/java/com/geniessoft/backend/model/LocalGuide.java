@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -14,7 +15,14 @@ public class LocalGuide {
     private int localGuideId;
 
     private String localGuideName;
-    private boolean available = true;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(
+            name="scheduleSession",
+            joinColumns = @JoinColumn(name = "localGuideId")
+    )
+    @Column(name = "is_local_guid_available")
+    private Map<ScheduleSession,Boolean> scheduleMap;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")

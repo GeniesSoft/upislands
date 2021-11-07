@@ -4,6 +4,7 @@ import com.geniessoft.backend.dto.LocalGuideBaseDto;
 import com.geniessoft.backend.dto.LocalGuideUpdateDto;
 import com.geniessoft.backend.model.Booking;
 import com.geniessoft.backend.model.Company;
+import com.geniessoft.backend.model.JetSkiDetails;
 import com.geniessoft.backend.model.LocalGuide;
 import com.geniessoft.backend.repository.LocalGuideRepository;
 import com.geniessoft.backend.service.BookingService;
@@ -11,11 +12,15 @@ import com.geniessoft.backend.service.CompanyService;
 import com.geniessoft.backend.service.LocalGuideService;
 import com.geniessoft.backend.service.ReviewService;
 import com.geniessoft.backend.utility.mapper.LocalGuideMapper;
+import com.geniessoft.backend.utility.schedule.BooleanScheduler;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -23,11 +28,11 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class LocalGuideServiceImpl implements LocalGuideService {
-
     private final CompanyService companyService;
     private final BookingService bookingService;
     private final LocalGuideMapper localGuideMapper;
     private final LocalGuideRepository localGuideRepository;
+    private final BooleanScheduler booleanScheduler;
 
     @Override
     public LocalGuide findLocalGuideById(int localGuideId) {
@@ -61,6 +66,17 @@ public class LocalGuideServiceImpl implements LocalGuideService {
         localGuide.setLocalGuideName(localGuideBaseDto.getLocalGuideName());
 
         return localGuideRepository.save(localGuide);
+    }
+
+    @Transactional
+    public void updateSchedule(Integer localGuideId, LocalDate day, LocalTime startTime, LocalTime endTime, Integer numOfJetSkiesToSchedule) {
+        LocalGuide localGuide = findLocalGuideById(localGuideId);
+
+        booleanScheduler.setScheduleMap(localGuide.getScheduleMap());
+
+        localGuide.setScheduleMap(booleanScheduler.updateSchedule(day, startTime, endTime, true));
+
+        localGuideRepository.save(localGuide);
     }
 
     /*@Override

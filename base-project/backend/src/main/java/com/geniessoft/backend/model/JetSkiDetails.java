@@ -1,11 +1,9 @@
 package com.geniessoft.backend.model;
 
-import com.geniessoft.backend.utility.schedule.Scheduler;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.util.*;
@@ -27,11 +25,11 @@ public class JetSkiDetails {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
-            name="jetSkiSession",
+            name="scheduleSession",
             joinColumns = @JoinColumn(name = "jetSkiDetailsId")
     )
     @Column(name = "num_of_used_jetSkies")
-    private Map<JetSkiSession,Integer> scheduleMap;
+    private Map<ScheduleSession,Integer> scheduleMap;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")

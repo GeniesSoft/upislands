@@ -15,7 +15,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class JetSkiSession {
+public class ScheduleSession {
 
     private LocalDate day;
     private LocalTime startTime;
@@ -24,7 +24,7 @@ public class JetSkiSession {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        JetSkiSession that = (JetSkiSession) o;
+        ScheduleSession that = (ScheduleSession) o;
         return day.equals(that.day) && startTime.equals(that.startTime);
     }
 
