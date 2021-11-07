@@ -1,6 +1,7 @@
-import user from "../user/user.json";
-import location from "../location/location.json";
-import company from "../company/company.json";
+import user from "../data/user.json";
+import location from "../data/location.json";
+import company from "../data/company.json";
+import address from "../data/address.json";
 
 class TestConstraints {
 
@@ -26,32 +27,50 @@ class TestConstraints {
         return userUpdateRequest;
     }
 
+    addressCreate() {
+        let addressCreate = address;
+        addressCreate.city = "testCity";
+        addressCreate.state = "testState";
+        addressCreate.country = "testCountry";
+        addressCreate.county = "testCounty";
+        addressCreate.street = "testStreet";
+        addressCreate.streetNumber = 1;
+        addressCreate.zip = 1;
+        return addressCreate;
+    }
+
+    addressUpdate() {
+        let addressUpdate = address;
+        addressUpdate.city = "updatedTestCity";
+        addressUpdate.state = "updatedTestState";
+        addressUpdate.country = "updatedTestCountry";
+        addressUpdate.county = "updatedTestCounty";
+        addressUpdate.street = "updatedTestStreet";
+        addressUpdate.streetNumber = 2;
+        addressUpdate.zip = 2;
+        return addressUpdate;
+    }
+
     locationCreateRequest() {
         let locationCreateRequest = location.create;
         locationCreateRequest.locationName = "testLocationName";
         locationCreateRequest.description = "testDescription";
-        locationCreateRequest.city = "testCity";
-        locationCreateRequest.state = "testState";
-        locationCreateRequest.country = "testCountry";
-        locationCreateRequest.county = "testCounty";
-        locationCreateRequest.street = "testStreet";
-        locationCreateRequest.streetNumber = 1;
-        locationCreateRequest.zip = 1;
+        locationCreateRequest.tripTime = "testTripTime";
+        locationCreateRequest.needExperience = false;
+        locationCreateRequest.address = this.addressCreate();
+
         return locationCreateRequest;
     }
 
     locationUpdateRequest() {
         let locationUpdateRequest = location.update;
         locationUpdateRequest.locationId = 1;
+        locationUpdateRequest.tripTime = "updatedTestTripTime";
+        locationUpdateRequest.needExperience = false;
         locationUpdateRequest.locationName = "updatedTestLocationName";
         locationUpdateRequest.description = "updatedTestDescription";
-        locationUpdateRequest.city = "updatedTestCity";
-        locationUpdateRequest.state = "updatedTestState";
-        locationUpdateRequest.country = "updatedTestCountry";
-        locationUpdateRequest.county = "updatedTestCounty";
-        locationUpdateRequest.street = "updatedTestStreet";
-        locationUpdateRequest.streetNumber = 2;
-        locationUpdateRequest.zip = 2;
+        locationUpdateRequest.address = this.addressUpdate();
+
         return locationUpdateRequest;
     }
 
@@ -61,13 +80,7 @@ class TestConstraints {
         companyCreateRequest.locationIdList = [1];
         companyCreateRequest.companyName = "testName";
         companyCreateRequest.companyDescription = "testDescription";
-        companyCreateRequest.city = "testCity";
-        companyCreateRequest.state = "testState";
-        companyCreateRequest.country = "testCountry";
-        companyCreateRequest.county = "testCounty";
-        companyCreateRequest.street = "testStreet";
-        companyCreateRequest.streetNumber = 1;
-        companyCreateRequest.zip = 1;
+        companyCreateRequest.address = this.addressCreate()
         return companyCreateRequest;
     }
 
@@ -77,13 +90,7 @@ class TestConstraints {
         companyUpdateRequest.locationIdList = [1];
         companyUpdateRequest.companyName = "updatedTestyName";
         companyUpdateRequest.companyDescription = "updatedTestDescription";
-        companyUpdateRequest.city = "updatedTestCity";
-        companyUpdateRequest.state = "updatedTestState";
-        companyUpdateRequest.country = "updatedTestCountry";
-        companyUpdateRequest.county = "updatedTestCounty";
-        companyUpdateRequest.street = "updatedTestStreet";
-        companyUpdateRequest.streetNumber = 2;
-        companyUpdateRequest.zip = 2;
+        companyUpdateRequest.address = this.addressUpdate();
         return companyUpdateRequest;
     }
 

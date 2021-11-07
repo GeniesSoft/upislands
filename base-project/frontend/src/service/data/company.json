@@ -5,13 +5,7 @@
     "companyName": "",
     "companyDescription": "",
     "guide": false,
-    "streetNumber": 0,
-    "street": "",
-    "city": "",
-    "county": "",
-    "state": "",
-    "country": "",
-    "zip": 0
+    "address": {}
   },
   "update": {
     "companyId": 0,
@@ -19,12 +13,6 @@
     "companyName": "",
     "companyDescription": "",
     "guide": false,
-    "streetNumber": 0,
-    "street": "",
-    "city": "",
-    "county": "",
-    "state": "",
-    "country": "",
-    "zip": 0
+    "address": {}
   }
 }
