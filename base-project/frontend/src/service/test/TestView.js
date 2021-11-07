@@ -1,17 +1,8 @@
 import UserTest from "./UserTest";
 import LocationTest from "./LocationTest";
-import {Button} from "antd";
-import Notify from "../notification/Notify";
+import CompanyTest from "./CompanyTest";
 
 const TestView = () => {
-
-    const handle = () => {
-        Notify.success("Hi");
-        Notify.error("Hi");
-        Notify.info("Hi");
-        Notify.default("Hi");
-        Notify.warning("Hi");
-    }
 
     return (
       <div>
@@ -19,6 +10,8 @@ const TestView = () => {
           <UserTest />
           <hr />
           <LocationTest />
+          <hr />
+          <CompanyTest />
           <hr />
       </div>
     );

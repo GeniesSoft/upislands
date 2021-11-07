@@ -52,7 +52,6 @@ public class UserServiceImpl implements UserService {
             checkUserEmail(userUpdateDto.getEmailAddress());
         }
         mapper.updateUser(user,userUpdateDto);
-        user.setRole(roleService.findRoleById(userUpdateDto.getRoleId()));
         userRepository.save(user);
 
         return user;

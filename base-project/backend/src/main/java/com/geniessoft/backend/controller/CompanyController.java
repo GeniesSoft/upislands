@@ -31,53 +31,50 @@ public class CompanyController {
     private final CompanyMapper mapper;
     private final LocationMapper locationMapper;
 
-    @GetMapping
-    public ResponseEntity<CompanyGetDto> getCompany
-            (@RequestParam(value = "companyId") Integer companyId){
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping
+    public String addCompany(
+            @Validated @RequestBody CompanyRegisterDto companyRegisterDto){
+        companyService.saveCompany(companyRegisterDto);
+        return "Company successfully saved";
+    }
 
-        Company company = companyService.findCompanyById(companyId);
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = "/{id}")
+    public CompanyGetDto getCompany(
+            @PathVariable(value = "id") Integer id){
+
+        Company company = companyService.findCompanyById(id);
         Address address = company.getCompanyAddress();
-
         List<Location> locationList = company.getLocationList();
+
         List<LocationGetDto> locationGetDtoList = locationList
                 .stream()
-                .map((e)-> locationMapper
-                            .locationToLocationGetDto(e,e.getAddress()))
+                .map((location)-> locationMapper
+                            .locationToLocationGetDto(location, location.getAddress()))
                             .collect(Collectors.toList());
 
         CompanyGetDto dto = mapper.companyToCompanyGetDto(company, address, locationGetDtoList);
+
         dto.setUserId(company.getJobOwner().getUserId());
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(dto);
+        return dto;
     }
 
-    @PostMapping(value = "save")
-    public ResponseEntity<String> addCompany
-            (@Validated @RequestBody CompanyRegisterDto companyRegisterDto){
-        companyService.saveCompany(companyRegisterDto);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Company is saved");
-    }
-
+    @ResponseStatus(HttpStatus.OK)
     @PutMapping
-    public ResponseEntity<String> updateCompany
-            (@Valid @RequestBody CompanyUpdateDto companyUpdateGetDto){
+    public String updateCompany(
+            @Valid @RequestBody CompanyUpdateDto companyUpdateGetDto){
         companyService.updateCompany(companyUpdateGetDto);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Company is updated.");
+        return "Company successfully updated";
     }
 
-    @DeleteMapping
-    public ResponseEntity<String> deleteCompany
-            (@RequestParam(value = "companyId") Integer companyId){
-        companyService.deleteCompany(companyId);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Delete operation is successful");
+    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping(value = "/{id}")
+    public String deleteCompany(
+            @PathVariable(value = "id") Integer id){
+        companyService.deleteCompany(id);
+        return "Company successfully deleted";
     }
 
     @PostMapping(

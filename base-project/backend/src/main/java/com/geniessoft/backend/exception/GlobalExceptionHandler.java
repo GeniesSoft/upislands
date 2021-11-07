@@ -1,9 +1,11 @@
 package com.geniessoft.backend.exception;
 
 import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.persistence.EntityExistsException;
@@ -14,30 +16,25 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public ResponseEntity<List<String>> handleValidationException(MethodArgumentNotValidException e) {
+    public List<String> handleValidationException(MethodArgumentNotValidException e) {
 
-        return ResponseEntity.badRequest().body(
-                e.getFieldErrors().stream()
+        return e.getFieldErrors().stream()
                         .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                        .collect(Collectors.toList())
-        );
+                        .collect(Collectors.toList());
     }
 
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(value = EntityNotFoundException.class)
-    public ResponseEntity<List<String>> handleEntityNotFoundException(EntityNotFoundException e) {
-
-        return ResponseEntity.badRequest().body(
-                List.of(e.getMessage())
-        );
+    public String handleEntityNotFoundException(EntityNotFoundException e) {
+        return e.getMessage();
     }
 
+    @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(value = EntityExistsException.class)
-    public ResponseEntity<List<String>> handleEntityExistsException(EntityExistsException e) {
-
-        return ResponseEntity.badRequest().body(
-                List.of(e.getMessage())
-        );
+    public String handleEntityExistsException(EntityExistsException e) {
+        return e.getMessage();
     }
 
 }

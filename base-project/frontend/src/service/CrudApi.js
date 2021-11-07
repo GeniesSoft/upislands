@@ -15,14 +15,7 @@ class CrudApi {
             })
             .catch(error => {
                 Notify.updateProcess(pid, "error", "Create request failed!");
-                switch (error.response.status) {
-                    case 400:
-                        error.response.data.forEach(Notify.error);
-                        break;
-                    default:
-                        Notify.error(error.response);
-                        break;
-                }
+                this.handleError(error);
             })
     }
 
@@ -30,14 +23,7 @@ class CrudApi {
         return this.axios
             .get(`/${id}`)
             .catch(error => {
-                switch (error.response.status) {
-                    case 400:
-                        error.response.data.forEach(Notify.error);
-                        break;
-                    default:
-                        Notify.error(error.response);
-                        break;
-                }
+                this.handleError(error);
             });
     }
 
@@ -50,14 +36,7 @@ class CrudApi {
             })
             .catch(error => {
                 Notify.updateProcess(pid, "error", "Update request failed!");
-                switch (error.response.status) {
-                    case 400:
-                        error.response.data.forEach(Notify.error);
-                        break;
-                    default:
-                        Notify.error(error.response);
-                        break;
-                }
+                this.handleError(error);
             });
     }
 
@@ -70,15 +49,26 @@ class CrudApi {
             })
             .catch(error => {
                 Notify.updateProcess(pid, "error", "Delete request failed!");
-                switch (error.response.status) {
-                    case 400:
-                        error.response.data.forEach(Notify.error);
-                        break;
-                    default:
-                        Notify.error(error.response);
-                        break;
-                }
+                this.handleError(error);
             });
+    }
+
+    handleError(error) {
+        switch (error.response.status) {
+            case 400:
+                console.log(error.response.data);
+                error.response.data.forEach(Notify.error);
+                break;
+            case 404:
+                Notify.error(error.response.data);
+                break;
+            case 409:
+                Notify.error(error.response.data);
+                break;
+            default:
+                Notify.error(error.response);
+                break;
+        }
     }
 
 }

@@ -16,4 +16,5 @@ public class CompanyUpdateDto extends CompanyBaseDto{
 
     @LocationListConstraint(message = "You must add at least one location.")
     private List<Integer> locationIdList;
+
 }
