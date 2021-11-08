@@ -73,8 +73,7 @@ public class LocalGuideServiceImpl implements LocalGuideService {
         LocalGuide localGuide = findLocalGuideById(localGuideId);
 
         booleanScheduler.setScheduleMap(localGuide.getScheduleMap());
-
-        localGuide.setScheduleMap(booleanScheduler.updateSchedule(day, startTime, endTime, true));
+        booleanScheduler.updateSchedule(day, startTime, endTime, true);
 
         localGuideRepository.save(localGuide);
     }

@@ -5,8 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
 
@@ -17,19 +18,6 @@ import java.util.Objects;
 @AllArgsConstructor
 public class ScheduleSession {
 
-    private LocalDate day;
-    private LocalTime startTime;
+    private LocalDateTime startTime;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ScheduleSession that = (ScheduleSession) o;
-        return day.equals(that.day) && startTime.equals(that.startTime);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(day, startTime);
-    }
 }

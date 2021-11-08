@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityExistsException;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,22 +22,20 @@ import java.util.Map;
 public abstract class SchedulerBase<T> implements Scheduler<T> {
 
     protected Integer MIN_SESSION_TIME = 30; // in minutes
-    protected Map<? super ScheduleSession, T> scheduleMap;
+    protected Map<ScheduleSession, T> scheduleMap;
 
     public SchedulerBase(Integer minSessionTime, Map<ScheduleSession, T> scheduleMap) {
         this.MIN_SESSION_TIME = minSessionTime;
         this.scheduleMap = scheduleMap;
     }
 
-    public Map<? super ScheduleSession, T> updateSchedule(LocalDate day, LocalTime startTime, LocalTime endTime, T t) {
+    public void updateSchedule(LocalDate day, LocalTime startTime, LocalTime endTime, T t) {
         List<ScheduleSession> sessionList = splitSessions(day, startTime, endTime);
 
         if (isScheduleUpdatable(sessionList, t))
             setSchedule(sessionList, t);
         else
             throw new EntityExistsException("Selected time interval is not suitable");
-
-        return scheduleMap;
     }
 
     protected List<ScheduleSession> splitSessions(LocalDate day, LocalTime startTime, LocalTime endTime) {
@@ -44,7 +43,9 @@ public abstract class SchedulerBase<T> implements Scheduler<T> {
         List<ScheduleSession> sessionList = new ArrayList<>((int) sessionCount);
 
         for (int i = 0; i < sessionCount; i++)
-            sessionList.add(new ScheduleSession(day, startTime.plusMinutes((long) i * MIN_SESSION_TIME)));
+            sessionList.add(new ScheduleSession(
+                    LocalDateTime.of(day, startTime.plusMinutes((long) i * MIN_SESSION_TIME)))
+            );
 
         return sessionList;
     }
