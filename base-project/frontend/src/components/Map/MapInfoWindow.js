@@ -1,7 +1,7 @@
 import React from 'react';
 import {InfoWindow} from '@react-google-maps/api';
 import Rating from 'components/UI/Rating/Rating';
-import GridCard from '../GridCard/GridCard';
+import GridCardListing from '../GridCardListing/GridCardListing';
 
 const MapInfoWindow = ({data, onCloseClick}) => {
     const position = {lat: data?.lat, lng: data?.lng};
@@ -13,7 +13,7 @@ const MapInfoWindow = ({data, onCloseClick}) => {
             id={data?.id}
             onCloseClick={onCloseClick}
         >
-            <GridCard
+            <GridCardListing
                 className='info_window_card'
                 location={data?.formattedAddress}
                 title={data?.title}
@@ -27,7 +27,7 @@ const MapInfoWindow = ({data, onCloseClick}) => {
                 }
             >
                 <img src={data?.thumbUrl} alt={data?.title}/>
-            </GridCard>
+            </GridCardListing>
         </InfoWindow>
     );
 };

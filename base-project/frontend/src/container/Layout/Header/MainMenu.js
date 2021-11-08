@@ -9,7 +9,7 @@ const MainMenu = ({className}) => {
         <Menu className={className}>
             <Menu.Item key="0">
                 <NavLink exact to={`${HOME_PAGE}`}>
-                    Hotels
+                    Home
                 </NavLink>
             </Menu.Item>
             <Menu.Item key="1">

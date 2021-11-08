@@ -5,6 +5,7 @@ import {Checkbox} from 'antd';
 import CategorySearch from 'components/Search/CategorySearch/CategotySearch';
 import {PostPlaceholder} from 'components/UI/ContentLoader/ContentLoader';
 import SectionGrid from 'components/SectionGrid/SectionGrid';
+import SectionGrid2 from 'components/SectionGrid2/SectionGrid2';
 import ListingMap from './ListingMap';
 import FilterDrawer from 'components/Search/MobileSearchView';
 import useWindowSize from 'library/hooks/useWindowSize';
@@ -17,13 +18,16 @@ export default function Listing({location, history}) {
     const {width} = useWindowSize();
     const [showMap, setShowMap] = useState(false);
     const {data, loading, loadMoreData, total, limit} = useDataApi(url);
-    let columnWidth = [1 / 1, 1 / 2, 1 / 3, 1 / 4, 1 / 5];
+    // let columnWidth = [1 / 1, 1 / 2, 1 / 3, 1 / 4, 1 / 5];
+    let columnWidth = [1 / 1];
     if (location.search) {
         url += location.search;
     }
     if (showMap) {
-        columnWidth = [1 / 1, 1 / 2, 1 / 2, 1 / 2, 1 / 3];
+        // columnWidth = [1 / 1, 1 / 2, 1 / 2, 1 / 2, 1 / 3];
+        columnWidth = [1 / 1];
     }
+
     const handleMapToggle = () => {
         setShowMap((showMap) => !showMap);
     };
@@ -39,31 +43,45 @@ export default function Listing({location, history}) {
                             <FilterDrawer history={history} location={location}/>
                         )
                     }
-                    right={
-                        <ShowMapCheckbox>
-                            <Checkbox defaultChecked={false} onChange={handleMapToggle}>
-                                Show map
-                            </Checkbox>
-                        </ShowMapCheckbox>
-                    }
+                    // right={
+                    //     <ShowMapCheckbox>
+                    //         <Checkbox defaultChecked={true} onChange={handleMapToggle}>
+                    //             Show map
+                    //         </Checkbox>
+                    //     </ShowMapCheckbox>
+                    // }
                 />
             </Sticky>
 
             <Fragment>
-                <PostsWrapper className={width > 767 && showMap ? 'col-12' : 'col-24'}>
-                    <SectionGrid
-                        link={SINGLE_POST_PAGE}
-                        columnWidth={columnWidth}
-                        data={data}
-                        totalItem={total.length}
-                        loading={loading}
-                        limit={limit}
-                        handleLoadMore={loadMoreData}
-                        placeholder={<PostPlaceholder/>}
-                    />
+                <PostsWrapper className={width > 991 ? 'col-12' : 'col-24'}>
+                    {width > 481 ?
+                        <SectionGrid2
+                            link={SINGLE_POST_PAGE}
+                            columnWidth={columnWidth}
+                            data={data}
+                            totalItem={total.length}
+                            loading={loading}
+                            limit={limit}
+                            handleLoadMore={loadMoreData}
+                            placeholder={<PostPlaceholder/>}
+                        />
+                        :
+                        <SectionGrid
+                            link={SINGLE_POST_PAGE}
+                            columnWidth={columnWidth}
+                            data={data}
+                            totalItem={total.length}
+                            loading={loading}
+                            limit={limit}
+                            handleLoadMore={loadMoreData}
+                            placeholder={<PostPlaceholder/>}
+                        />
+                    }
+
                 </PostsWrapper>
 
-                {showMap && <ListingMap/>}
+                {width > 991 && <ListingMap/>}
             </Fragment>
         </ListingWrapper>
     );

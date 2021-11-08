@@ -6,7 +6,6 @@ import Favourite from 'components/UI/Favorite/Favorite';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import GridCardListing from '../GridCardListing/GridCardListing';
-import GridCard from "../GridCard/GridCard";
 
 const responsive = {
     desktop: {
@@ -46,7 +45,7 @@ const PostGrid = ({
                       link,
                   }) => {
     return (
-        <GridCard
+        <GridCardListing
             isCarousel={true}
             favorite={
                 <Favourite
@@ -98,7 +97,7 @@ const PostGrid = ({
                     />
                 ))}
             </Carousel>
-        </GridCard>
+        </GridCardListing>
     );
 };
 
