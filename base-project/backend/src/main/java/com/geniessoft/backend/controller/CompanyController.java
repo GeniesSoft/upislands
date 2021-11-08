@@ -75,19 +75,17 @@ public class CompanyController {
         companyService.deleteCompany(id);
         return "Company successfully deleted";
     }
-
+    @ResponseStatus(HttpStatus.OK)
     @PostMapping(
             path = "{companyId}/profileImage",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<String> addCompanyProfileImage(
+    public String addCompanyProfileImage(
             @PathVariable("companyId") int companyId,
             @RequestParam("file") @ImageConstraint MultipartFile file){
         companyService.addCompanyProfileImage(companyId ,file);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Company profile image is uploaded.");
+        return "Company profile image is uploaded.";
     }
 
     @PostMapping(
@@ -95,37 +93,35 @@ public class CompanyController {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<String> addCompanyContent(
+    @ResponseStatus(HttpStatus.OK)
+    public String addCompanyContent(
             @PathVariable("companyId") int companyId,
             @RequestParam("file") @ContentConstraints MultipartFile file,
             @RequestParam("content_text") String content_text){
         companyService.addCompanyContent(companyId ,file, content_text);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Company content is uploaded.");
+        return "Company content is uploaded.";
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/content")
-    public ResponseEntity<String> deleteCompanyContent
+    public String deleteCompanyContent
             (@RequestParam(value = "companyContentId") Integer companyContentId){
         companyService.deleteCompanyContent(companyContentId);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Content is successfully deleted.");
+        return "Content is successfully deleted.";
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/content")
-    public ResponseEntity<String> updateCompanyContent
+    public String updateCompanyContent
             (@RequestParam(value = "companyContentId") Integer companyContentId,
              @RequestParam(value = "contentText") String contentText){
         companyService.updateCompanyContent(companyContentId,contentText);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Company content is successfully updated.");
+        return "Company content is successfully updated.";
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/contents/{companyId}/{offset}/{pageSize}")
-    public ResponseEntity<List<ContentDto>> getCompanyContentList(
+    public List<ContentDto> getCompanyContentList(
             @PathVariable("companyId") int companyId,
             @PathVariable("offset") int offset,
             @PathVariable("pageSize") int pageSize){
@@ -133,18 +129,15 @@ public class CompanyController {
         List<ContentDto> contentDtoList = companyService.
                 getCompanyContents(companyId, offset, pageSize);
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(contentDtoList);
+        return contentDtoList;
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{companyId}/profileImage")
-    public ResponseEntity<ProfileImageDto> getProfileImage(
+    public ProfileImageDto getProfileImage(
             @PathVariable("companyId") int companyId){
 
         byte[] image = companyService.getCompanyProfileImage(companyId);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(new ProfileImageDto(image));
+        return new ProfileImageDto(image);
     }
 }

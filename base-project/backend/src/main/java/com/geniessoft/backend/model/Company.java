@@ -41,5 +41,4 @@ public class Company {
     )
     private List<Location> locationList = new ArrayList<>();
 
-    private boolean guide;
 }

@@ -64,18 +64,18 @@ public class LocationController {
        locationService.deleteLocation(id);
         return "Location is deleted";
     }
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/mostBooked")
-    public ResponseEntity<LocationGetDto> getMostBookedLocation(){
+    public LocationGetDto getMostBookedLocation(){
         Location location = analysisService.findMostBookedLocation();
         Address address= location.getAddress();
         LocationGetDto locationGetDto= LocationMapper.INSTANCE.locationToLocationGetDto(location, address);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(locationGetDto);
+        return locationGetDto;
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/bookedLocations")
-    public ResponseEntity<List<LocationGetDto>> getBookedLocationsByOrder(){
+    public List<LocationGetDto> getBookedLocationsByOrder(){
          List<Location> locations = analysisService.findBookedLocationsByBookingDescOrder();
          List<LocationGetDto> locationGetDtoList = new ArrayList<>();
         for (Location location: locations) {
@@ -83,93 +83,80 @@ public class LocationController {
             LocationGetDto locationGetDto = LocationMapper.INSTANCE.locationToLocationGetDto(location, address);
             locationGetDtoList.add(locationGetDto);
         }
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(locationGetDtoList);
+        return locationGetDtoList;
     }
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/LocationsAverage")
-    public ResponseEntity<Map<LocationGetDto,Double>> getLocationsByAverageOrder(){
+    public Map<Integer,Double> getLocationsByAverageOrder(){
         Map<Location,Double> locationAverageMap = analysisService.findLocationsByRatingDescOrder();
-        Map<LocationGetDto,Double> locationDtoAverageMap = new HashMap<>();
+        Map<Integer,Double> locationIdAverageMap = new HashMap<>();
         for (Map.Entry<Location,Double> entry : locationAverageMap.entrySet() ){
             Location location = entry.getKey();
-            LocationGetDto  locationGetDto = LocationMapper.INSTANCE.locationToLocationGetDto(location, location.getAddress());
-            locationDtoAverageMap.put(locationGetDto,entry.getValue());
+            locationIdAverageMap.put(location.getLocationId(),entry.getValue());
         }
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(locationDtoAverageMap);
+        return locationIdAverageMap;
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @PostMapping(
             path = "/{locationId}/image",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<String> addLocationProfileImage(
+    public String addLocationProfileImage(
             @PathVariable("locationId") int locationId,
             @RequestParam("file") @ContentConstraints MultipartFile file){
         locationService.addLocationProfileImage(locationId ,file);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Location profile image is uploaded.");
+        return "Location profile image is uploaded.";
     }
-
+    @ResponseStatus(HttpStatus.OK)
     @PostMapping(
             path = "/{locationId}/content",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<String> addLocationContent(
+    public String addLocationContent(
             @PathVariable("locationId") int locationId,
             @RequestParam("file") @ContentConstraints MultipartFile file,
             @RequestParam("contentText") String content_text){
         locationService.addLocationContent(locationId ,file, content_text);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Location content is uploaded.");
+        return "Location content is uploaded.";
     }
-
+    @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/content")
-    public ResponseEntity<String> deleteLocationContent
+    public String deleteLocationContent
             (@RequestParam(value = "locationContentId") Integer locationContentId){
         locationService.deleteLocationContent(locationContentId);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Location content is successfully deleted.");
+        return "Location content is successfully deleted.";
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/content")
-    public ResponseEntity<String> updateLocationContent
+    public String updateLocationContent
             (@RequestParam(value = "locationContentId") Integer locationContentId,
              @RequestParam(value = "contentText") String contentText){
         locationService.updateLocationContent(locationContentId,contentText);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Location content is successfully updated.");
+        return "Location content is successfully updated.";
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/contents/{locationId}/{offset}/{pageSize}")
-    public ResponseEntity<List<ContentDto>> getLocationContentList(
+    public List<ContentDto> getLocationContentList(
             @PathVariable("locationId") int locationId,
             @PathVariable("offset") int offset,
             @PathVariable("pageSize") int pageSize){
-
         List<ContentDto> contentDtoList = locationService.
                 getLocationContents(locationId, offset, pageSize);
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(contentDtoList);
+        return contentDtoList;
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{locationId}/profileImage")
-    public ResponseEntity<ProfileImageDto> getProfileImage(
+    public ProfileImageDto getProfileImage(
             @PathVariable("locationId") int locationId){
 
         byte[] image = locationService.getLocationProfileImage(locationId);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(new ProfileImageDto(image));
+        return new ProfileImageDto(image);
     }
 }

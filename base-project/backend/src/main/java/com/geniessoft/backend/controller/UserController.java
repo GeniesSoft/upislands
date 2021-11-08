@@ -63,49 +63,44 @@ public class UserController {
         return "User successfully deleted";
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/mostBooked")
-    public ResponseEntity<UserUpdateDto> getMostBookedUser(){
+    public UserUpdateDto getMostBookedUser(){
         User user = analysisService.findMostBookedUser();
         UserUpdateDto userUpdateDto = mapper.userToUserUpdateDto(user);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(userUpdateDto);
+        return userUpdateDto;
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/bookedUsers")
-    public ResponseEntity<List<UserUpdateDto>> getBookedUsersByOrder(){
+    public List<UserUpdateDto> getBookedUsersByOrder(){
         List<User> users = analysisService.findBookedUsersByDescOrder();
         List<UserUpdateDto> userUpdateDtoList = new ArrayList<>();
         for (User user: users) {
             UserUpdateDto userUpdateDto = mapper.userToUserUpdateDto(user);
             userUpdateDtoList.add(userUpdateDto);
         }
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(userUpdateDtoList);
+        return userUpdateDtoList;
     }
-
+    @ResponseStatus(HttpStatus.OK)
     @PostMapping(
             path = "/{userId}/image/upload",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<String> uploadUserProfileImage(
+    public String uploadUserProfileImage(
             @PathVariable("userId") int userId,
             @RequestParam("file")  @ImageConstraint MultipartFile file){
         userService.uploadUserProfileImage(userId,file);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Image is uploaded.");
+        return "Image is uploaded.";
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{userId}/profileImage")
-    public ResponseEntity<ProfileImageDto> getProfileImage(
+    public ProfileImageDto getProfileImage(
             @PathVariable("userId") int userId){
 
         byte[] image = userService.getUserProfileImage(userId);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(new ProfileImageDto(image));
+        return new ProfileImageDto(image);
     }
 }

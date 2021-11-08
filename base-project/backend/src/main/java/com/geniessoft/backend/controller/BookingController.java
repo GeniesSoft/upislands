@@ -26,39 +26,36 @@ public class BookingController {
     private final BookingService bookingService;
     private final BookingMapper mapper;
 
-    @PostMapping(value = "/save")
-    public ResponseEntity<String> addBooking(@Valid @RequestBody BookingBaseDto bookingBaseDto){
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping
+    public String addBooking(@Valid @RequestBody BookingBaseDto bookingBaseDto){
         bookingService.saveBooking(bookingBaseDto);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Booking is saved");
+        return "Booking is saved";
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @PutMapping
-    public ResponseEntity<String> updateBooking(@Valid @RequestBody BookingUpdateDto bookingUpdateDto){
+    public String updateBooking(@Valid @RequestBody BookingUpdateDto bookingUpdateDto){
         bookingService.updateBooking(bookingUpdateDto);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Booking is updated");
+        return "Booking is updated";
 
     }
-    @DeleteMapping
-    public ResponseEntity<String> deleteBooking(@RequestParam(value = "bookingId") Integer bookingId){
+
+    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping(value = "/{id}")
+    public String deleteBooking(@PathVariable(value = "id") Integer bookingId){
         bookingService.deleteBooking(bookingId);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Booking is deleted");
+        return "Booking is deleted";
 
     }
-    @GetMapping
-    public ResponseEntity<BookingBaseDto> getBookingById(@RequestParam( value = "bookingId") Integer bookingId){
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = "/{id}")
+    public BookingBaseDto getBookingById(@PathVariable( value = "id") Integer bookingId){
         Booking booking = bookingService.findBookingById(bookingId);
         Location location = booking.getBookingLocation();
         Company company = booking.getBookingCompany();
         User user = booking.getUser();
         BookingBaseDto dto = mapper.bookingToBookingBaseDto(booking, location, company, user);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(dto);
+        return dto;
     }
 }
