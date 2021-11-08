@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface BookingRepository extends JpaRepository<Booking,Integer> {
 
     Optional<Booking> findBookingByBookingIdAndActiveIsTrue(Integer bookingId);
+    Optional<Booking> findBookingByBookingId(Integer bookingId);
 
     Optional<List<Booking>> findAllByActiveIsTrue();
     Optional<List<Booking>> findAllByOrderByBookingLocationAsc();

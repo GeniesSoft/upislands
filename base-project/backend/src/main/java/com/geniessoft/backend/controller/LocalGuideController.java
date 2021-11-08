@@ -27,7 +27,7 @@ public class LocalGuideController {
     private final LocalGuideMapper localGuideMapper;
     private final AnalysisService analysisService;
 
-    @PutMapping(value = "/save")
+    @PostMapping(value = "/save")
     public ResponseEntity<String> addLocalGuide(@Valid @RequestBody LocalGuideBaseDto localGuideBaseDto){
         localGuideService.saveLocalGuide(localGuideBaseDto);
         return ResponseEntity
@@ -35,7 +35,7 @@ public class LocalGuideController {
                 .body("Local guide is saved.");
     }
 
-    @PostMapping
+    @PutMapping
     public ResponseEntity<String> updateLocalGuide(@Valid @RequestBody LocalGuideUpdateDto localGuideUpdateDto){
         localGuideService.updateLocalGuide(localGuideUpdateDto);
         return ResponseEntity

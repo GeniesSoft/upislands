@@ -63,7 +63,7 @@ public class JetSkiDetailsServiceImpl implements com.geniessoft.backend.service.
         integerScheduler.setTotalAvailable(jetSkiDetails.getTotalNumberOfJetSkies());
 
         jetSkiDetails.setScheduleMap(integerScheduler.updateSchedule(day, startTime, endTime, numOfJetSkiesToSchedule));
-        saveJetSkiDetails(companyId, jetSkiDetails);
+        updateJetSkiDetails(companyId, jetSkiDetails);
     }
 
     @Override

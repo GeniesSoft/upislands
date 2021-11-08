@@ -29,7 +29,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class LocalGuideServiceImpl implements LocalGuideService {
     private final CompanyService companyService;
-    private final BookingService bookingService;
     private final LocalGuideMapper localGuideMapper;
     private final LocalGuideRepository localGuideRepository;
     private final BooleanScheduler booleanScheduler;
@@ -69,7 +68,8 @@ public class LocalGuideServiceImpl implements LocalGuideService {
     }
 
     @Transactional
-    public void updateSchedule(Integer localGuideId, LocalDate day, LocalTime startTime, LocalTime endTime, Integer numOfJetSkiesToSchedule) {
+    @Override
+    public void updateSchedule(Integer localGuideId, LocalDate day, LocalTime startTime, LocalTime endTime) {
         LocalGuide localGuide = findLocalGuideById(localGuideId);
 
         booleanScheduler.setScheduleMap(localGuide.getScheduleMap());

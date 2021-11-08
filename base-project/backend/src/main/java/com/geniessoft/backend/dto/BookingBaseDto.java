@@ -18,11 +18,11 @@ public  class BookingBaseDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     protected LocalTime endTime;
     protected int locationId;
-
+    protected int localGuideId;
     protected int userId;
     protected int companyId;
 
-    private int jetSkiCount;
+    protected int jetSkiCount;
 
 
 }
