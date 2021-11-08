@@ -21,14 +21,14 @@ import java.util.Map;
 public abstract class SchedulerBase<T> implements Scheduler<T> {
 
     protected Integer MIN_SESSION_TIME = 30; // in minutes
-    protected Map<ScheduleSession, T> scheduleMap;
+    protected Map<? super ScheduleSession, T> scheduleMap;
 
     public SchedulerBase(Integer minSessionTime, Map<ScheduleSession, T> scheduleMap) {
         this.MIN_SESSION_TIME = minSessionTime;
         this.scheduleMap = scheduleMap;
     }
 
-    public Map<ScheduleSession, T> updateSchedule(LocalDate day, LocalTime startTime, LocalTime endTime, T t) {
+    public Map<? super ScheduleSession, T> updateSchedule(LocalDate day, LocalTime startTime, LocalTime endTime, T t) {
         List<ScheduleSession> sessionList = splitSessions(day, startTime, endTime);
 
         if (isScheduleUpdatable(sessionList, t))

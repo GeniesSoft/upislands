@@ -18,11 +18,11 @@ public class LocalGuide {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
-            name="scheduleSession",
+            name="localGuideSession",
             joinColumns = @JoinColumn(name = "localGuideId")
     )
     @Column(name = "is_local_guide_available")
-    private Map<ScheduleSession,Boolean> scheduleMap;
+    private Map<LocalGuideSession,Boolean> scheduleMap;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
