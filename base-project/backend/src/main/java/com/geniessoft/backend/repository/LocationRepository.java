@@ -14,6 +14,7 @@ public interface LocationRepository extends JpaRepository<Location,Integer> {
     Optional<Location> findLocationByLocationIdAndDeletedIsFalse(Integer locationId);
     Optional<Location> findFirstByLocationNameEquals(String name);
 
-    @Override
-    List<Location> findAll();
+    List<Location> findLocationsByDeletedIsFalse();
+
+    List<Location> findLocationsByAddress_StateAndDeletedIsFalse(String State);
 }

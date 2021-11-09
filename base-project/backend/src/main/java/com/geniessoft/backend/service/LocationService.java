@@ -23,6 +23,8 @@ public interface LocationService {
 
     Location findLocationById(int locationId);
 
+    List<Location> findAllLocationsInAState(String state);
+
     List<ContentDto> getLocationContents(int locationId, int offset, int pageSize);
 
     void checkLocationName(String locationName);

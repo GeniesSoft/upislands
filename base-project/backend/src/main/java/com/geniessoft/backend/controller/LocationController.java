@@ -96,6 +96,16 @@ public class LocationController {
         }
         return locationIdAverageMap;
     }
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = "/state-locations")
+    public List<LocationGetDto> getLocationsByState(@Valid @RequestParam(value = "state") String state){
+        List<Location> locations =  locationService.findAllLocationsInAState(state);
+        List<LocationGetDto> locationGetDtoList = new ArrayList<>();
+        for (Location location: locations) {
+            locationGetDtoList.add(LocationMapper.INSTANCE.locationToLocationGetDto(location, location.getAddress()));
+        }
+        return locationGetDtoList;
+    }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(

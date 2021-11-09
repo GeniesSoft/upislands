@@ -112,7 +112,7 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public List<Location> findAllLocations() {
-        return locationRepository.findAll();
+        return locationRepository.findLocationsByDeletedIsFalse();
     }
 
     /*private Map<Location,Integer> makeLocationCountMap(){
@@ -140,6 +140,19 @@ public class LocationServiceImpl implements LocationService {
         Optional<Location> location = locationRepository
                 .findLocationByLocationIdAndDeletedIsFalse(locationId);
         return location.orElseThrow(() -> new EntityNotFoundException("Location is not found."));
+
+    }
+
+    @Override
+    public List<Location> findAllLocationsInAState(String state) {
+        List<Location> locations = findAllLocations();
+        List<Location> stateLocations = new ArrayList<>();
+        for ( Location location: locations) {
+            if (location.getAddress().getState().equals(state)) {
+                stateLocations.add(location);
+            }
+        }
+        return stateLocations;
 
     }
 
