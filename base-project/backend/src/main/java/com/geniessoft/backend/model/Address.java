@@ -10,6 +10,8 @@ import javax.persistence.*;
 @Setter
 public class Address {
 
+    private String latitude;
+    private String longitude;
     private String streetNumber; //Also known as house/apt no
     private String street;
     private String city;

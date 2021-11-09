@@ -11,12 +11,14 @@ import lombok.Setter;
 @Setter
 public class AddressDto {
 
-    private int streetNumber;
+    private String latitude;
+    private String longitude;
+    private String streetNumber;
     private String street;
     private String city;
     private String county;
     private String state;
     private String country;
-    private int zip;
+    private String zip;
 
 }
