@@ -21,7 +21,8 @@ public class LocalGuide {
             name="localGuideSession",
             joinColumns = @JoinColumn(name = "localGuideId")
     )
-    private Map<ScheduleSession, Boolean> scheduleMap;
+    @Column(name = "is_available")
+    private Map<LocalGuideSession, Boolean> scheduleMap;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")

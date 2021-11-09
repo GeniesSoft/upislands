@@ -29,7 +29,7 @@ public class JetSkiDetails {
             joinColumns = @JoinColumn(name = "jetSkiDetailsId")
     )
     @Column(name = "num_of_used_jetSkies")
-    private Map<ScheduleSession, Integer> scheduleMap;
+    private Map<JetSkiSession, Integer> scheduleMap;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")

@@ -3,7 +3,7 @@ package com.geniessoft.backend.service.impl;
 import com.geniessoft.backend.model.JetSkiDetails;
 import com.geniessoft.backend.repository.CompanyRepository;
 import com.geniessoft.backend.repository.JetSkiDetailsRepository;
-import com.geniessoft.backend.utility.schedule.IntegerScheduler;
+import com.geniessoft.backend.utility.schedule.JetSkiScheduler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +18,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class JetSkiDetailsServiceImpl implements com.geniessoft.backend.service.JetSkiDetailsService {
 
-    private final IntegerScheduler integerScheduler;
     private final JetSkiDetailsRepository jetSkiDetailsRepository;
     private final CompanyRepository companyRepository;
+    private final JetSkiScheduler jetSkiScheduler;
 
     @Override
     public JetSkiDetails findJetSkiDetailsByCompanyId(Integer companyId) {
@@ -59,10 +59,9 @@ public class JetSkiDetailsServiceImpl implements com.geniessoft.backend.service.
     public void updateSchedule(Integer companyId, LocalDate day, LocalTime startTime, LocalTime endTime, Integer numOfJetSkiesToSchedule) {
         JetSkiDetails jetSkiDetails = findJetSkiDetailsByCompanyId(companyId);
 
-        integerScheduler.setScheduleMap(jetSkiDetails.getScheduleMap());
-        integerScheduler.setTotalAvailable(jetSkiDetails.getTotalNumberOfJetSkies());
-        integerScheduler.updateSchedule(day, startTime, endTime, numOfJetSkiesToSchedule);
-
+        jetSkiScheduler.setScheduleMap(jetSkiDetails.getScheduleMap());
+        jetSkiScheduler.setTotalNumOfJetSkies(jetSkiDetails.getTotalNumberOfJetSkies());
+        jetSkiDetails.setScheduleMap(jetSkiScheduler.updateSchedule(day, startTime, endTime, numOfJetSkiesToSchedule));
         jetSkiDetailsRepository.save(jetSkiDetails);
     }
 
