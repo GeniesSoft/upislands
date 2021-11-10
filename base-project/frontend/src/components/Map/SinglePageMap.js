@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Marker} from '@react-google-maps/api';
 import HotelInfoWindow from './MapInfoWindow';
-import MakerImage from './hotelMapMarker.png';
+import MakerImage from './jetskiMapMarker.png';
 
 const SingleMapDisplay = ({location}) => {
     let hotelData = [];

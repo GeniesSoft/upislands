@@ -3,7 +3,7 @@ import _ from 'lodash';
 import {Marker, StandaloneSearchBox} from '@react-google-maps/api';
 import MapWrapper from './MapWrapper';
 import {Input} from 'antd';
-import makerImage from './hotelMapMarker.png';
+import makerImage from './jetskiMapMarker.png';
 
 const MapWithSearchBox = (props) => {
     const [searchBox, setSearchBox] = useState();
