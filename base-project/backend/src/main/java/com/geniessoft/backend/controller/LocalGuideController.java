@@ -79,13 +79,11 @@ public class LocalGuideController {
     private LocalGuideGetDto getLocalGuideBaseDto(LocalGuide localGuide) {
         Company company= localGuide.getCompany();
         Map<LocalGuideSession, Boolean> localGuideSessionBooleanMap = localGuide.getScheduleMap();
-        List<LocalDate> days = null;
-        List<LocalTime> startTimes = null;
-        List<Boolean> isScheduledList = null;
-        if (!localGuideSessionBooleanMap.isEmpty()){
-            days = new ArrayList<>();
-            startTimes = new ArrayList<>();
-            isScheduledList = new ArrayList<>();
+        List<LocalDate> days = new ArrayList<>();
+        List<LocalTime> startTimes = new ArrayList<>();
+        List<Boolean> isScheduledList = new ArrayList<>();
+
+
             for (Map.Entry<LocalGuideSession,Boolean> entry:localGuideSessionBooleanMap.entrySet()) {
                 LocalDate day = entry.getKey().getDay();
                 LocalTime startTime = entry.getKey().getStartTime();
@@ -93,7 +91,7 @@ public class LocalGuideController {
                 days.add(day);
                 startTimes.add(startTime);
                 isScheduledList.add(isScheduled);
-            }}
+            }
 
         LocalGuideGetDto localGuideBaseDto= localGuideMapper.localGuideToLocalGuideGetDto(localGuide, company, days, startTimes, isScheduledList);
         return localGuideBaseDto;

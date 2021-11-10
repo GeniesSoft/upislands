@@ -18,6 +18,6 @@ import java.util.Map;
 public interface LocalGuideMapper {
 
     LocalGuide localGuideBaseDtoToLocalGuide(LocalGuideBaseDto localGuideBaseDto);
-    LocalGuideGetDto localGuideToLocalGuideGetDto(LocalGuide localGuide, Company company, List<LocalDate> day, List<LocalTime> startTime, List<Boolean> isScheduled);
+    LocalGuideGetDto localGuideToLocalGuideGetDto(LocalGuide localGuide, Company company, List<LocalDate> days, List<LocalTime> startTimes, List<Boolean> isScheduledList);
     void updateLocalGuide(@MappingTarget LocalGuide localGuide, LocalGuideUpdateDto localGuideUpdateDto);
 }
