@@ -17,6 +17,7 @@ import java.util.Objects;
 @AllArgsConstructor
 public class LocalGuideSession {
 
+
     private LocalDate day;
     private LocalTime startTime;
 

@@ -1,16 +1,23 @@
 package com.geniessoft.backend.utility.mapper;
 
 import com.geniessoft.backend.dto.LocalGuideBaseDto;
+import com.geniessoft.backend.dto.LocalGuideGetDto;
 import com.geniessoft.backend.dto.LocalGuideUpdateDto;
 import com.geniessoft.backend.model.Company;
 import com.geniessoft.backend.model.LocalGuide;
+import com.geniessoft.backend.model.LocalGuideSession;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
+import java.util.Map;
 
 @Mapper(componentModel = "spring")
 public interface LocalGuideMapper {
 
     LocalGuide localGuideBaseDtoToLocalGuide(LocalGuideBaseDto localGuideBaseDto);
-    LocalGuideBaseDto localGuideToLocalGuideDto(LocalGuide localGuide, Company company);
+    LocalGuideGetDto localGuideToLocalGuideGetDto(LocalGuide localGuide, Company company, List<LocalDate> day, List<LocalTime> startTime, List<Boolean> isScheduled);
     void updateLocalGuide(@MappingTarget LocalGuide localGuide, LocalGuideUpdateDto localGuideUpdateDto);
 }

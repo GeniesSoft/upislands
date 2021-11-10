@@ -4,9 +4,11 @@ import com.geniessoft.backend.dto.LocalGuideBaseDto;
 import com.geniessoft.backend.dto.LocalGuideUpdateDto;
 import com.geniessoft.backend.model.Company;
 import com.geniessoft.backend.model.LocalGuide;
+import com.geniessoft.backend.model.Location;
 import com.geniessoft.backend.repository.LocalGuideRepository;
 import com.geniessoft.backend.service.CompanyService;
 import com.geniessoft.backend.service.LocalGuideService;
+import com.geniessoft.backend.service.LocationService;
 import com.geniessoft.backend.utility.mapper.LocalGuideMapper;
 import com.geniessoft.backend.utility.schedule.LocalGuideScheduler;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,7 @@ public class LocalGuideServiceImpl implements LocalGuideService {
     private final LocalGuideMapper localGuideMapper;
     private final LocalGuideRepository localGuideRepository;
     private final LocalGuideScheduler localGuideScheduler;
+    private final LocationService locationService;
 
     @Override
     public LocalGuide findLocalGuideById(int localGuideId) {
@@ -64,13 +67,11 @@ public class LocalGuideServiceImpl implements LocalGuideService {
 
     @Transactional
     @Override
-    public void updateSchedule(Integer localGuideId, LocalDate day, LocalTime startTime, LocalTime endTime) {
-        LocalGuide localGuide = findLocalGuideById(localGuideId);
-
-        localGuideScheduler.setScheduleMap(localGuide.getScheduleMap());
-        localGuide.setScheduleMap(localGuideScheduler.updateSchedule(day, startTime, endTime, true));
+    public void updateSchedule(LocalGuide localGuide) {
         localGuideRepository.save(localGuide);
     }
+
+
 
     /*@Override
     public LocalGuide findMostBookedLocalGuide() {
@@ -106,6 +107,22 @@ public class LocalGuideServiceImpl implements LocalGuideService {
     @Override
     public List<LocalGuide> findAllLocalGuides() {
         return localGuideRepository.findAll();
+    }
+
+    @Override
+    public List<LocalGuide> getLocalGuidesByLocationId(Integer locationId) {
+        Location location = locationService.findLocationById(locationId);
+
+        List<LocalGuide> allLocalGuides = findAllLocalGuides();
+
+        List<LocalGuide> localGuides = new ArrayList<>();
+        for (LocalGuide localguide: allLocalGuides) {
+            if (localguide.getCompany().getLocationList().contains(location)){
+                localGuides.add(localguide);
+            }
+        }
+
+        return localGuides;
     }
 
     /*private Map<LocalGuide,Integer> makeLocalGuideCountMap(){

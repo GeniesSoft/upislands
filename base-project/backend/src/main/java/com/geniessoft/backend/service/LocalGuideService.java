@@ -3,6 +3,7 @@ package com.geniessoft.backend.service;
 import com.geniessoft.backend.dto.LocalGuideBaseDto;
 import com.geniessoft.backend.dto.LocalGuideUpdateDto;
 import com.geniessoft.backend.model.LocalGuide;
+import com.geniessoft.backend.model.Location;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -15,5 +16,6 @@ public interface LocalGuideService {
     LocalGuide DeleteLocalGuide(int localGuideId);
     LocalGuide saveLocalGuide(LocalGuideBaseDto localGuideBaseDto);
     List<LocalGuide> findAllLocalGuides();
-    public void updateSchedule(Integer localGuideId, LocalDate day, LocalTime startTime, LocalTime endTime);
+    List<LocalGuide> getLocalGuidesByLocationId(Integer locationId);
+    public void updateSchedule(LocalGuide localGuide);
 }

@@ -16,12 +16,12 @@ public class LocalGuide {
 
     private String localGuideName;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(
             name="localGuideSession",
             joinColumns = @JoinColumn(name = "localGuideId")
     )
-    @Column(name = "is_available")
+    @Column(name = "is_scheduled")
     private Map<LocalGuideSession, Boolean> scheduleMap;
 
     @ManyToOne(fetch = FetchType.LAZY)

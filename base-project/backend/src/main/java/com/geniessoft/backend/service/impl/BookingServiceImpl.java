@@ -26,6 +26,7 @@ public class BookingServiceImpl implements BookingService {
     private final UserService userService;
     private final LocationService locationService;
     private final LocalGuideService localGuideService;
+    private final ScheduleService scheduleService;
 
     @Override
     public Booking findBookingById(int bookingId) {
@@ -46,8 +47,8 @@ public class BookingServiceImpl implements BookingService {
         booking.setUser(user);
         booking.setBookingLocation(location);
         booking.setBookingCompany(company);
-        jetSkiDetailsService.updateSchedule(company.getCompanyId(), booking.getDate(),booking.getStartTime() , booking.getEndTime(), booking.getJetSkiCount());
-        localGuideService.updateSchedule(localGuide.getLocalGuideId(), booking.getDate(),booking.getStartTime() , booking.getEndTime());
+        scheduleService.updateJetSkiSchedule(company.getCompanyId(), booking.getDate(),booking.getStartTime() , booking.getEndTime(), booking.getJetSkiCount());
+        scheduleService.updateLocalGuideSchedule(localGuide.getLocalGuideId(), booking.getDate(),booking.getStartTime() , booking.getEndTime());
         double totalPrice = jetSkiDetailsService.getSessionPrice(company.getCompanyId())*bookingSaveDto.getJetSkiCount();
         booking.setTotalPrice(totalPrice);
         bookingRepository.save(booking);

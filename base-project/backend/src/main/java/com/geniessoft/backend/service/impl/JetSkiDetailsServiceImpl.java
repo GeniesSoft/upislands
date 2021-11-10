@@ -56,12 +56,7 @@ public class JetSkiDetailsServiceImpl implements com.geniessoft.backend.service.
 
     @Override
     @Transactional
-    public void updateSchedule(Integer companyId, LocalDate day, LocalTime startTime, LocalTime endTime, Integer numOfJetSkiesToSchedule) {
-        JetSkiDetails jetSkiDetails = findJetSkiDetailsByCompanyId(companyId);
-
-        jetSkiScheduler.setScheduleMap(jetSkiDetails.getScheduleMap());
-        jetSkiScheduler.setTotalNumOfJetSkies(jetSkiDetails.getTotalNumberOfJetSkies());
-        jetSkiDetails.setScheduleMap(jetSkiScheduler.updateSchedule(day, startTime, endTime, numOfJetSkiesToSchedule));
+    public void updateSchedule(JetSkiDetails jetSkiDetails) {
         jetSkiDetailsRepository.save(jetSkiDetails);
     }
 

@@ -11,7 +11,7 @@ public interface JetSkiDetailsService {
     JetSkiDetails saveJetSkiDetails(Integer companyId, JetSkiDetails jetSkiDetails);
     JetSkiDetails updateJetSkiDetails(Integer companyId, JetSkiDetails jetSkiDetails);
     void deleteJetSkiDetails(Integer companyId);
-    void updateSchedule(Integer companyId, LocalDate day, LocalTime startTime, LocalTime endTime, Integer numOfJetSkiesToSchedule);
+    void updateSchedule(JetSkiDetails jetSkiDetails);
     double getSessionPrice(Integer companyId);
 
 }
