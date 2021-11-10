@@ -16,7 +16,7 @@ public interface CompanyService {
 
     Company updateCompany(CompanyUpdateDto companyUpdateGetDto);
 
-    List<Company> findCompanyByLocationId(Integer locationId);
+    List<Company> findCompaniesByLocationId(Integer locationId);
 
     List<ContentDto> getCompanyContents(int companyId, int offset, int pageSize);
 

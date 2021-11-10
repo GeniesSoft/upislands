@@ -63,12 +63,12 @@ public class LocalGuideController {
         LocalGuide localGuide = localGuideService.findLocalGuideById(localGuideId);
         return getLocalGuideBaseDto(localGuide);
     }
-    @ResponseStatus(HttpStatus.OK)
+  /*  @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/get-available")
     public LocalGuideSession getAvailableLocalGuide(){
         LocalGuideSession localGuideSession = scheduleService.getLocalGuideScheduleByLocalGuideId(0);
         return localGuideSession;
-    }
+    }*/
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/mostBooked")
     public LocalGuideBaseDto getMostBookedLocalGuide(){
@@ -137,7 +137,17 @@ public class LocalGuideController {
        }
         return localGuideIdAverageMap;
     }
-
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = "/available-local-guides")
+    public List<Integer> getAvailableLocalGuides(@RequestParam(value = "locationId") Integer locationId,@RequestParam(value = "day") String day,
+            @RequestParam(value = "startTime") String startTime,@RequestParam(value = "endTime") String endTime){
+        List<Integer> localGuideIds = new ArrayList<>();
+        List<LocalGuide> localGuides = scheduleService.getAvailableLocalGuides(locationId,LocalDate.parse(day),LocalTime.parse(startTime), LocalTime.parse(endTime));
+        for (LocalGuide localGuide: localGuides) {
+            localGuideIds.add(localGuide.getLocalGuideId());
+        }
+        return localGuideIds;
+    }
 
 
 }

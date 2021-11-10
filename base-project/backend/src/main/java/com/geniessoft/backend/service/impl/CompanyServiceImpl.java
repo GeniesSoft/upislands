@@ -56,7 +56,7 @@ public class CompanyServiceImpl implements CompanyService {
         return company;
     }
     @Override
-    public List<Company> findCompanyByLocationId(Integer locationId){
+    public List<Company> findCompaniesByLocationId(Integer locationId){
         Location location = locationService.findLocationById(locationId);
         List<Company> allCompanies = companyRepository.findAll();
         List<Company> companies = new ArrayList<>();
