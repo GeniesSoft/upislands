@@ -58,11 +58,11 @@ public class ScheduleServiceImpl implements ScheduleService {
                 LocalDate entryDay = localGuideSessionBooleanEntry.getKey().getDay();
                 LocalTime entryStartTime = localGuideSessionBooleanEntry.getKey().getStartTime();
                 Boolean isScheduled = localGuideSessionBooleanEntry.getValue();
-
+                if (entryDay.equals(day)&& entryStartTime.toSecondOfDay() >= startTime.toSecondOfDay()){
                     for (long i = 0; 0 > startTime.plusMinutes(i).compareTo(endTime); i=+30){
                         if (entryDay.equals(day)&&entryStartTime.equals(startTime)&&isScheduled){
                             localGuides.remove(localGuide);
-                            isDeleted =true;
+                            isDeleted = true;
                             break;
                     }
                 }
@@ -73,6 +73,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             if (isDeleted){
                 break;
             }
+        }
         }
 
         return localGuides;
