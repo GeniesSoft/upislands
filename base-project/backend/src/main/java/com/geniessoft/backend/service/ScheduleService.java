@@ -13,6 +13,6 @@ public interface ScheduleService {
     void updateLocalGuideSchedule(Integer localGuideId, LocalDate day, LocalTime startTime, LocalTime endTime);
     List<LocalGuide> getAvailableLocalGuides(Integer locationId, LocalDate day, LocalTime startTime, LocalTime endTime);
     Map<LocalGuideSession,Boolean> getLocalGuideScheduleByLocalGuideId(Integer localGuideId);
-    Integer getJetSkiCount(LocalGuide localGuide);
+    Integer getAvailableJetSkiCount(LocalGuide localGuide,LocalDate day, LocalTime startTime, LocalTime endTime);
     void deleteSession(Booking booking);
 }

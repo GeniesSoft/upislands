@@ -139,14 +139,19 @@ public class LocalGuideController {
     }
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/available-local-guides")
-    public List<Integer> getAvailableLocalGuides(@RequestParam(value = "locationId") Integer locationId,@RequestParam(value = "day") String day,
+    public Map<Integer,Integer> getAvailableLocalGuides(@RequestParam(value = "locationId") Integer locationId,@RequestParam(value = "day") String day,
             @RequestParam(value = "startTime") String startTime,@RequestParam(value = "endTime") String endTime){
-        List<Integer> localGuideIds = new ArrayList<>();
+        //List<Integer> localGuideIds = new ArrayList<>();
+        Map<Integer,Integer> localGuideIdJetSkiMap = new HashMap<>();
         List<LocalGuide> localGuides = scheduleService.getAvailableLocalGuides(locationId,LocalDate.parse(day),LocalTime.parse(startTime), LocalTime.parse(endTime));
         for (LocalGuide localGuide: localGuides) {
-            localGuideIds.add(localGuide.getLocalGuideId());
+           // localGuideIds.add(localGuide.getLocalGuideId());
+            Integer availableJetSkiCount = scheduleService.getAvailableJetSkiCount(localGuide,LocalDate.parse(day),LocalTime.parse(startTime), LocalTime.parse(endTime));
+            localGuideIdJetSkiMap.put(localGuide.getLocalGuideId(),availableJetSkiCount);
         }
-        return localGuideIds;
+
+
+        return localGuideIdJetSkiMap;
     }
 
 

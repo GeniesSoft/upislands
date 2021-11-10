@@ -89,8 +89,29 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 
     @Override
-    public Integer getJetSkiCount(LocalGuide localGuide) {
-        return null;
+    public Integer getAvailableJetSkiCount(LocalGuide localGuide,LocalDate day, LocalTime startTime, LocalTime endTime) {
+        Company company = localGuide.getCompany();
+        JetSkiDetails jetSkiDetails = jetSkiDetailsService.findJetSkiDetailsByCompanyId(company.getCompanyId());
+        Map<JetSkiSession,Integer> jetSkiSessionUsedJetSkiMap = jetSkiDetails.getScheduleMap();
+
+        Integer numOfMaxUsedJetSkies = 0;
+        Integer usedJetSkies = 0;
+        for (Map.Entry<JetSkiSession,Integer> entry: jetSkiSessionUsedJetSkiMap.entrySet() ){
+
+            LocalDate entryDay = entry.getKey().getDay();
+            LocalTime entryStartTime = entry.getKey().getStartTime();
+            if (entryStartTime.toSecondOfDay() >= startTime.toSecondOfDay() && entryDay.equals(day)){
+            usedJetSkies = entry.getValue();
+         if (entryStartTime.equals(endTime)&&entryDay.equals(day)){
+             break;
+         }
+         if (numOfMaxUsedJetSkies < usedJetSkies){
+             numOfMaxUsedJetSkies = usedJetSkies;
+         }
+        }}
+
+       Integer availableJetSkies = jetSkiDetails.getTotalNumberOfJetSkies() - numOfMaxUsedJetSkies;
+        return availableJetSkies;
     }
 
     @Transactional
