@@ -202,6 +202,7 @@ export const ButtonGroup = styled.div`
 export const PostImage = styled.div`
   height: 600px;
   position: relative;
+  margin: 10px;
 
   @media (max-width: 767px) {
     height: 406px;
@@ -214,6 +215,60 @@ export const PostImage = styled.div`
     top: 0;
     left: 0;
     object-fit: cover;
+  }
+  
+  img {
+    padding: 3px;    
+    position: absolute;
+    object-fit: cover;
+    border-left: black;
+
+  }
+  
+  img.half {
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+  
+  img.quarter1 {
+    width: 25%;
+    height: 50%;
+    position: absolute;
+    left: 50%;
+    object-fit: cover;
+  }
+  
+  img.quarter2 {
+    width: 25%;
+    height: 50%;
+    position: absolute;
+    left: 75%;
+    object-fit: cover;
+    border-top-right-radius: 20px;
+  }
+  
+  img.quarter3 {
+    width: 25%;
+    height: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    object-fit: cover;
+  }
+  
+  img.quarter4 {
+    width: 25%;
+    height: 50%;
+    position: absolute;
+    top: 50%;
+    left: 75%;
+    object-fit: cover;
+    border-bottom-right-radius: 20px;
   }
 
   .image_gallery_button {

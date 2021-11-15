@@ -5,12 +5,24 @@ import ImageGalleryWrapper from './ImageGallery.style';
 
 const images = [
     {
-        original: '/images/post-image-1.jpg',
-        thumbnail: '/images/post-thumb-1.jpg',
+        original: '/images/post/0.jpg',
+        thumbnail: '/images/post/0.jpg',
     },
     {
-        original: '/images/post-image-2.jpg',
-        thumbnail: '/images/post-thumb-2.jpg',
+        original: '/images/post/1.jpg',
+        thumbnail: '/images/post/1.jpg',
+    },
+    {
+        original: '/images/post/2.jpg',
+        thumbnail: '/images/post/2.jpg',
+    },
+    {
+        original: '/images/post/3.jpg',
+        thumbnail: '/images/post/3.jpg',
+    },
+    {
+        original: '/images/post/4.jpg',
+        thumbnail: '/images/post/4.jpg',
     },
 ];
 

@@ -45,8 +45,28 @@ const SinglePage = ({match}) => {
         <SinglePageWrapper>
             <PostImage>
                 <img
-                    className="absolute"
-                    src="/images/single-post-bg.jpg"
+                    className="half"
+                    src="/images/post/0.jpg"
+                    alt="Listing details page banner"
+                />
+                <img
+                    className="quarter1"
+                    src="/images/post/1.jpg"
+                    alt="Listing details page banner"
+                />
+                <img
+                    className="quarter2"
+                    src="/images/post/2.jpg"
+                    alt="Listing details page banner"
+                />
+                <img
+                    className="quarter3"
+                    src="/images/post/3.jpg"
+                    alt="Listing details page banner"
+                />
+                <img
+                    className="quarter4"
+                    src="/images/post/4.jpg"
                     alt="Listing details page banner"
                 />
                 <Button
