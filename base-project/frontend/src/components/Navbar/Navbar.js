@@ -34,7 +34,6 @@ const Navbar = ({
                                 ? null
                                 : searchComponent}
                         </div>
-
                     </LogoArea>
                 ) : null}
 

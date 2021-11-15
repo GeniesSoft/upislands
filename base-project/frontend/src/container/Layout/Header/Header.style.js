@@ -375,6 +375,8 @@ export const NavbarSearchWrapper = styled.div`
       right: 25px;
     }
   }
+  
+  margin-left: 45px;
 `;
 
 export default HeaderWrapper;

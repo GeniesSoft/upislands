@@ -195,9 +195,9 @@ export const PostsWrapper = styled.div`
     margin-right: auto;
   }
   &.col-12 {
-    width: 60%;
+    width: 50%;
     @media (min-width: 1921px) {
-      width: calc(60% - 120px);
+      width: calc(50% - 120px);
       margin-left: 120px;
       margin-right: auto;
     }
@@ -208,7 +208,7 @@ export const FixedMap = styled.div`
   position: fixed;
   background-color: ${themeGet('color.2', '#F7F7F7')};
   right: 0;
-  width: 40%;
+  width: 50%;
   height: calc(100% - 152px);
   top: 152px;
   z-index: 9;
