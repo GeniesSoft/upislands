@@ -6,6 +6,11 @@ const LocationWrapper = styled.div`
   @media (max-width: 480px) {
     padding: 30px 0;
   }
+  
+  .location-card-passive {
+    filter: grayscale(90%);
+  }
+  
 `;
 
 export const CarouselSection = styled.div`

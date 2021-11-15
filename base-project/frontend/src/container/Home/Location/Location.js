@@ -46,7 +46,7 @@ const LocationGrid = () => {
         <LocationWrapper>
             <Container fluid={true}>
                 <SectionTitle
-                    title={<Heading content="Explore Destinations"/>}
+                    title={<Heading content="Explore Locations"/>}
                     link={<TextLink link={LISTING_POSTS_PAGE} content="Show all"/>}
                 />
 
@@ -62,10 +62,18 @@ const LocationGrid = () => {
                                 {data.map((post, index) => (
                                     <GlideSlide key={index}>
                                         <ImageCard
+                                            className={
+                                                (post.numberOfPost === 0) ?
+                                                    "location-card-passive" :
+                                                    "location-card-active"
+                                            }
                                             link="listing"
-                                            imageSrc={post.locationImage.url}
+                                            imageSrc={`/${post.locationImage.url}`}
                                             title={post.city}
-                                            meta={`${post.numberOfPost} Hotels`}
+                                            meta={(post.numberOfPost === 0) ?
+                                                "coming soon..." :
+                                                `${post.numberOfPost} Trips`
+                                            }
                                         />
                                     </GlideSlide>
                                 ))}
