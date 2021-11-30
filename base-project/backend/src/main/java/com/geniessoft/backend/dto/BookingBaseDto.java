@@ -21,7 +21,6 @@ public  class BookingBaseDto {
     protected int localGuideId;
     protected int userId;
     protected int companyId;
-
     protected int jetSkiCount;
 
 

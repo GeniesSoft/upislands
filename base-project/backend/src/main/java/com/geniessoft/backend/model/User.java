@@ -1,9 +1,10 @@
 package com.geniessoft.backend.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.geniessoft.backend.oauth2Security.utilforsecurity.AuthProvider;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,11 +12,14 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "appuser")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    private long userId;
     private String firstName;
     private String lastName;
 
@@ -26,8 +30,26 @@ public class User {
     private LocalDate birthDate;
     private boolean deleted = false;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private AuthProvider provider;
+    private String providerId;
+    private String imageUrl;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Booking> bookingList;
+
+    public User(User user) {
+        this.userId = user.getUserId();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.emailAddress = user.getEmailAddress();
+        this.password = user.getPassword();
+        this.phoneNumber = user.getPhoneNumber();
+        this.birthDate = user.getBirthDate();
+        this.userProfileImage = user.getUserProfileImage();
+        this.role = user.role;
+    }
 
     public void addBooking(Booking booking){
         bookingList.add(booking);
@@ -41,6 +63,6 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Content userProfileImage;
 }

@@ -19,4 +19,5 @@ public class Content {
     protected Date uploadDate;
     protected String contentType;
     protected String contentPath;
+    protected String contentUrl;
 }

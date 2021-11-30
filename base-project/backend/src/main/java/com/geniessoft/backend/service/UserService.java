@@ -2,11 +2,11 @@ package com.geniessoft.backend.service;
 
 import com.geniessoft.backend.dto.UserRegisterDto;
 import com.geniessoft.backend.dto.UserUpdateDto;
+import com.geniessoft.backend.model.JwtAuthenticationResponse;
 import com.geniessoft.backend.model.User;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
 
 public interface UserService {
@@ -17,11 +17,15 @@ public interface UserService {
 
     User findFirstByEmailAddressEquals(String emailAddress);
 
-    //User findMostBookedUser();
+    User findByEmailAddress(String emailAddress);
 
-    //List<User> findBookedUsersByDescOrder();
+    JwtAuthenticationResponse loginUser(String username, String password);
 
-    User findUser(int userId);
+    User save(User user);
+
+    User findUser(long userId);
+
+    Optional<User> getUserWithEmail(String email);
 
     void uploadUserProfileImage(int userId, MultipartFile file);
 

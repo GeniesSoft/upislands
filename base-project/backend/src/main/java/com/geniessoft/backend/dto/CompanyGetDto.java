@@ -10,6 +10,6 @@ import java.util.List;
 public class CompanyGetDto extends CompanyBaseDto{
 
     private int companyId;
-    private int userId;
+    private long userId;
     private List<LocationGetDto> locationList;
 }

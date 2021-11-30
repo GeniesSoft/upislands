@@ -9,6 +9,8 @@ import com.geniessoft.backend.model.Location;
 import com.geniessoft.backend.model.User;
 import com.geniessoft.backend.service.AnalysisService;
 import com.geniessoft.backend.service.UserService;
+import com.geniessoft.backend.service.impl.FileStoreService;
+import com.geniessoft.backend.utility.bucket.BucketName;
 import com.geniessoft.backend.utility.customvalidator.ImageConstraint;
 import com.geniessoft.backend.utility.mapper.CompanyMapper;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +22,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -31,9 +35,12 @@ import java.util.List;
 @Validated
 public class UserController {
 
+    private static final String FILE_NAME = "fileName";
+
     private final UserService userService;
     private final CompanyMapper mapper;
     private final AnalysisService analysisService;
+    private final FileStoreService fileStoreService;
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
@@ -99,6 +106,13 @@ public class UserController {
     @GetMapping(value = "/{userId}/profileImage")
     public ProfileImageDto getProfileImage(
             @PathVariable("userId") int userId){
+
+        User user = userService.findUser(userId);
+        String url = fileStoreService.getPreSignedDownloadUrl(
+                BucketName.BUCKET_NAME.getBucketName(),
+                user.getUserProfileImage().getContentName());
+
+        log.info(url);
 
         byte[] image = userService.getUserProfileImage(userId);
         return new ProfileImageDto(image);

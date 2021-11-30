@@ -4,7 +4,7 @@ import com.geniessoft.backend.dto.UserRegisterDto;
 import com.geniessoft.backend.dto.UserUpdateDto;
 import com.geniessoft.backend.model.*;
 import com.geniessoft.backend.repository.UserRepository;
-import com.geniessoft.backend.service.BookingService;
+import com.geniessoft.backend.security.JwtTokenProvider;
 import com.geniessoft.backend.service.ContentService;
 import com.geniessoft.backend.service.RoleService;
 import com.geniessoft.backend.service.UserService;
@@ -12,6 +12,11 @@ import com.geniessoft.backend.utility.bucket.BucketName;
 import com.geniessoft.backend.utility.bucket.FolderNames;
 import com.geniessoft.backend.utility.mapper.CompanyMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,6 +35,19 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final FileStoreService fileStoreService;
     private final ContentService contentService;
+    private final JwtTokenProvider tokenProvider;
+
+    private PasswordEncoder encoder;
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    public void setEncoder(PasswordEncoder encoder) {
+        this.encoder = encoder;
+    }
+    @Autowired
+    public void setAuthenticationManager(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+    }
 
     @Override
     public User saveUser(UserRegisterDto userRegisterDto) {
@@ -39,6 +57,7 @@ public class UserServiceImpl implements UserService {
 
         Role role = roleService.findRoleByName(Roles.ROLE_USER);
         user.setRole(role);
+        user.setPassword(encoder.encode(user.getPassword()));
         userRepository.save(user);
 
         return user;
@@ -65,7 +84,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUser(int userId) {
+    public User findUser(long userId) {
 
         Optional<User> user = userRepository.findByUserId(userId);
         return customUserFind(user);
@@ -76,43 +95,6 @@ public class UserServiceImpl implements UserService {
         Optional<User> user = userRepository.findFirstByEmailAddressEquals(emailAddress);
         return customUserFind(user);
     }
-
-    /*@Override
-    public User findMostBookedUser() {
-        Map<User,Integer> userCountMap = makeUserCountMap();
-        User user = Collections.max(userCountMap.entrySet(), Map.Entry.comparingByValue()).getKey();
-        return user;
-    }
-
-    @Override
-    public List<User> findBookedUsersByDescOrder() {
-        Map<User,Integer> userCountMap = makeUserCountMap();
-        userCountMap = userCountMap.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue())
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-        List<User> users = new ArrayList<>(userCountMap.keySet());
-        return users;
-    }
-
-    private Map<User,Integer> makeUserCountMap(){
-        List<Booking> bookings = bookingService.findAllBookingsByUserOrder();
-        Map<User,Integer> locationCountMap = new HashMap<>();
-        for (int i = 0;i<bookings.size();i++) {
-
-            User user = findUser(bookings.get(i).getUser().getUserId());
-            if (i == 0){
-                locationCountMap.put(user, 1);}
-            if (i !=0){
-                if (user.equals(findUser(bookings.get(i-1).getBookingLocation().getLocationId()))){
-                    locationCountMap.merge(user, 1, Integer::sum);
-                }
-                else {
-                    locationCountMap.put(user,1);
-                }
-            }
-        }
-        return locationCountMap;
-    }*/
 
     @Override
     public void checkUserEmail(String emailAddress) {
@@ -177,5 +159,31 @@ public class UserServiceImpl implements UserService {
         return fileStoreService.download(
                 user.getUserProfileImage().getContentPath(),
                 user.getUserProfileImage().getContentName());
+    }
+
+    @Override
+    public User findByEmailAddress(String emailAddress) {
+        return userRepository.findFirstByEmailAddressEquals(emailAddress).get();
+    }
+
+    @Override
+    public JwtAuthenticationResponse loginUser(String username, String password) {
+        Authentication authentication = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(username, password));
+
+        JwtAuthenticationResponse response =
+                new JwtAuthenticationResponse(tokenProvider.generateToken(authentication));
+        response.setPrincipal(authentication.getPrincipal());
+        return response;
+    }
+
+    @Override
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public Optional<User> getUserWithEmail(String email) {
+        return userRepository.findFirstByEmailAddressEquals(email);
     }
 }

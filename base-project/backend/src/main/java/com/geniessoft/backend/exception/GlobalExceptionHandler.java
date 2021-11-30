@@ -36,5 +36,4 @@ public class GlobalExceptionHandler {
     public String handleEntityExistsException(EntityExistsException e) {
         return e.getMessage();
     }
-
 }

@@ -11,8 +11,9 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
 
-    @Query
     Optional<User> findFirstByEmailAddressEquals(@Param(value = "emailAddress") String emailAddress);
 
-    Optional<User> findByUserId(int userId);
+    Optional<User> findFirstByEmailAddressEqualsAndDeletedIsFalse(@Param(value = "emailAddress") String emailAddress);
+
+    Optional<User> findByUserId(long userId);
 }
