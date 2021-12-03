@@ -65,6 +65,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> findAllUsers() {
+        return userRepository.findAllByDeletedFalse();
+    }
+
+    @Override
     public User findUser(int userId) {
 
         Optional<User> user = userRepository.findByUserId(userId);
@@ -117,7 +122,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void checkUserEmail(String emailAddress) {
         Optional<User> user = userRepository.findFirstByEmailAddressEquals(emailAddress);
-        if(!user.isEmpty()){
+        if(user.isPresent()){
             throw new EntityExistsException("This email address is used.");
         }
     }

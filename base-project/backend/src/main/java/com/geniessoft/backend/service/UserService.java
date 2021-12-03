@@ -21,6 +21,8 @@ public interface UserService {
 
     //List<User> findBookedUsersByDescOrder();
 
+    List<User> findAllUsers();
+
     User findUser(int userId);
 
     void uploadUserProfileImage(int userId, MultipartFile file);

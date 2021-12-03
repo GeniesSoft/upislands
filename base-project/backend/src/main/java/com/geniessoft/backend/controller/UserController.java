@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -40,6 +41,12 @@ public class UserController {
     public String registerUser(@Valid @RequestBody UserRegisterDto userRegisterDto){
         userService.saveUser(userRegisterDto);
         return "User successfully registered";
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping
+    public List<UserUpdateDto> getAllUsers(){
+        return userService.findAllUsers().stream().map(mapper::userToUserUpdateDto).collect(Collectors.toList());
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -67,8 +74,7 @@ public class UserController {
     @GetMapping(value = "/mostBooked")
     public UserUpdateDto getMostBookedUser(){
         User user = analysisService.findMostBookedUser();
-        UserUpdateDto userUpdateDto = mapper.userToUserUpdateDto(user);
-        return userUpdateDto;
+        return mapper.userToUserUpdateDto(user);
     }
 
     @ResponseStatus(HttpStatus.OK)

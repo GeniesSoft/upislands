@@ -31,7 +31,5 @@ public abstract class UserBaseDto {
     private String emailAddress;
 
     @NotNull(message = "Birth date is mandatory")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @JsonFormat(pattern = "MM/dd/yyyy") // In USA In general dd-mm-yyyy
     protected LocalDate birthDate;
 }

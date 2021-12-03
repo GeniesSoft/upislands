@@ -27,14 +27,14 @@ public class GlobalExceptionHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(value = EntityNotFoundException.class)
-    public String handleEntityNotFoundException(EntityNotFoundException e) {
-        return e.getMessage();
+    public List<String> handleEntityNotFoundException(EntityNotFoundException e) {
+        return List.of(e.getMessage());
     }
 
     @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(value = EntityExistsException.class)
-    public String handleEntityExistsException(EntityExistsException e) {
-        return e.getMessage();
+    public List<String> handleEntityExistsException(EntityExistsException e) {
+        return List.of(e.getMessage());
     }
 
 }
