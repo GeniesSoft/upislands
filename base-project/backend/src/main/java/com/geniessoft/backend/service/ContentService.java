@@ -14,5 +14,7 @@ public interface ContentService {
 
     List<ContentDto> getContents(List<? extends ContentDtoConverter> list);
 
+    Content defaultUserProfileImage();
+
     void deleteContent(int contentId);
 }

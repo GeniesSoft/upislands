@@ -45,7 +45,9 @@ public class JetSkiDetailsServiceImpl implements com.geniessoft.backend.service.
     public JetSkiDetails updateJetSkiDetails(Integer companyId, JetSkiDetails jetSkiDetails) {
         JetSkiDetails jetSkiDetailsToUpdate = findJetSkiDetailsByCompanyId(companyId);
         jetSkiDetailsToUpdate.update(jetSkiDetails);
-        return jetSkiDetailsRepository.save(jetSkiDetailsToUpdate);
+        System.out.println(jetSkiDetails.getJetSkiDetailsId());
+        JetSkiDetails jetSkiDetails1 = jetSkiDetailsRepository.save(jetSkiDetailsToUpdate);
+        return jetSkiDetails1;
     }
 
     @Override

@@ -1,20 +1,23 @@
 package com.geniessoft.backend.service.impl;
 
 import com.amazonaws.AmazonServiceException;
+import com.amazonaws.HttpMethod;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.*;
 import com.amazonaws.util.IOUtils;
 import com.geniessoft.backend.utility.bucket.BucketName;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.net.URL;
+import java.util.*;
 
 @Service
+@Slf4j
 public class FileStoreService {
 
     private final AmazonS3 amazonS3;
@@ -43,6 +46,8 @@ public class FileStoreService {
     }
 
     public byte[] download(String path, String fileName) {
+        log.info("path : "+path);
+        log.info("filename : "+fileName);
         try {
             S3Object object = amazonS3.getObject(path,fileName);
             S3ObjectInputStream inputStream = object.getObjectContent();
@@ -62,5 +67,21 @@ public class FileStoreService {
         metadata.put("Content-Type", file.getContentType());
         metadata.put("Content-Length",String.valueOf(file.getSize()));
         return metadata;
+    }
+
+    public String getPreSignedDownloadUrl(String path, String fileName) {
+        log.info("Path : "+path);
+        log.info("filename : "+fileName);
+        java.util.Date expiration = new java.util.Date();
+        long expTimeMillis = expiration.getTime();
+        expTimeMillis += 1000 * 60 * 60; //1 HR expiration time
+        expiration.setTime(expTimeMillis);
+        GeneratePresignedUrlRequest generatePresignedUrlRequest =
+                new GeneratePresignedUrlRequest(path, fileName)
+                        .withMethod(HttpMethod.GET)
+                        .withExpiration(expiration);
+        URL url = amazonS3.generatePresignedUrl(generatePresignedUrlRequest);
+        log.info("Pre-signed URL found for " + fileName);
+        return url.toString();
     }
 }

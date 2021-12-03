@@ -1,11 +1,7 @@
 package com.geniessoft.backend.controller;
 
-import com.geniessoft.backend.dto.LocationGetDto;
-import com.geniessoft.backend.dto.ProfileImageDto;
 import com.geniessoft.backend.dto.UserRegisterDto;
 import com.geniessoft.backend.dto.UserUpdateDto;
-import com.geniessoft.backend.model.Address;
-import com.geniessoft.backend.model.Location;
 import com.geniessoft.backend.model.User;
 import com.geniessoft.backend.service.AnalysisService;
 import com.geniessoft.backend.service.UserService;
@@ -15,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,6 +27,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Validated
 public class UserController {
+
+    private static final String FILE_NAME = "fileName";
 
     private final UserService userService;
     private final CompanyMapper mapper;
@@ -51,6 +49,7 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{id}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public UserUpdateDto getUser(@PathVariable(value = "id") Integer id){
         User user = userService.findUser(id);
         return mapper.userToUserUpdateDto(user);
@@ -58,6 +57,7 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String updateUser(@Valid @RequestBody UserUpdateDto userUpdateDto){
         userService.updateUser(userUpdateDto);
         return "User successfully updated";
@@ -65,6 +65,7 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String deleteUser(@PathVariable(value = "id") Integer id){
         userService.deleteUser(id);
         return "User successfully deleted";
@@ -88,12 +89,14 @@ public class UserController {
         }
         return userUpdateDtoList;
     }
+
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(
             path = "/{userId}/image/upload",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String uploadUserProfileImage(
             @PathVariable("userId") int userId,
             @RequestParam("file")  @ImageConstraint MultipartFile file){
@@ -103,10 +106,14 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{userId}/profileImage")
-    public ProfileImageDto getProfileImage(
+    public String getProfileImage(
             @PathVariable("userId") int userId){
 
-        byte[] image = userService.getUserProfileImage(userId);
-        return new ProfileImageDto(image);
+        //User user = userService.findUser(userId);
+        String url = userService.getUserProfileImageUrl(userId);
+        log.info(url);
+        return url;
+        //byte[] image = userService.getUserProfileImage(userId);
+        //return new ProfileImageDto(image);
     }
 }

@@ -12,3 +12,7 @@ spring.datasource.password=mert33yyy
 #create-drop: Creates the database and drops it when SessionFactory closes.
 spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.MySQL5InnoDBDialect
 spring.jpa.hibernate.ddl-auto= update
+
+spring.security.oauth2.client.registration.google.client-id=82861559745-g5t4f8r8ic20ec56j2vccgeliklqj1eg.apps.googleusercontent.com
+spring.security.oauth2.client.registration.google.client-secret=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
+spring.security.oauth2.client.registration.google.scope=email,profile

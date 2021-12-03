@@ -15,6 +15,10 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Query
     Optional<User> findFirstByEmailAddressEquals(@Param(value = "emailAddress") String emailAddress);
 
+    Optional<User> findFirstByEmailAddressEqualsAndDeletedIsFalse(@Param(value = "emailAddress") String emailAddress);
+
+    Optional<User> findByUserId(long userId);
+    
     List<User> findAllByDeletedFalse();
 
     Optional<User> findByUserId(int userId);

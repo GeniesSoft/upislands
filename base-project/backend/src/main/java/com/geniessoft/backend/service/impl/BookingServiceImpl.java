@@ -55,7 +55,6 @@ public class BookingServiceImpl implements BookingService {
         return booking;
     }
 
-
     @Override
     @Transactional(rollbackOn = Exception.class)
     public Booking updateBooking(BookingUpdateDto bookingUpdateDto) {

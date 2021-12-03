@@ -14,6 +14,7 @@ import com.geniessoft.backend.utility.mapper.LocalGuideMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -36,6 +37,7 @@ public class LocalGuideController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String addLocalGuide(@Valid @RequestBody LocalGuideBaseDto localGuideBaseDto){
         localGuideService.saveLocalGuide(localGuideBaseDto);
         return "Local guide is saved.";
@@ -43,6 +45,7 @@ public class LocalGuideController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String updateLocalGuide(@Valid @RequestBody LocalGuideUpdateDto localGuideUpdateDto){
         localGuideService.updateLocalGuide(localGuideUpdateDto);
         return "Local guide is updated.";
@@ -50,6 +53,7 @@ public class LocalGuideController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<String> deleteLocalGuide(@PathVariable(value = "id") Integer localGuideId){
         localGuideService.DeleteLocalGuide(localGuideId);
         return ResponseEntity

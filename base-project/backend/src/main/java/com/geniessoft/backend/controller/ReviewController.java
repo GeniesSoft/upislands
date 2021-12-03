@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,6 +30,7 @@ public class ReviewController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String addReview(@Valid @RequestBody ReviewBaseDto reviewBaseDto){
         reviewService.saveReview(reviewBaseDto);
         return "Review is saved";
@@ -36,6 +38,7 @@ public class ReviewController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String updateReview(@Valid @RequestBody ReviewUpdateDto reviewUpdateDto){
         reviewService.updateReview(reviewUpdateDto);
         return "Review is updated";
@@ -43,6 +46,7 @@ public class ReviewController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String deleteReview(@PathVariable(value = "id") Integer reviewId){
         reviewService.deleteReview(reviewId);
         return "Review is deleted";
@@ -104,6 +108,7 @@ public class ReviewController {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String addReviewContent(
             @PathVariable("reviewId") int reviewId,
             @RequestParam("file") @ImageConstraint MultipartFile file){

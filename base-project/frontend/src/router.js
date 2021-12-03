@@ -3,6 +3,7 @@ import {Redirect, Route, Switch} from 'react-router-dom';
 import Loadable from 'react-loadable';
 import {AuthContext} from './context/AuthProvider';
 import Layout from './container/Layout/Layout';
+import OAuth2RedirectHandler from 'oauth2/OAuth2RedirectHandler'
 import {
     ADD_HOTEL_PAGE,
     AGENT_ACCOUNT_SETTINGS_PAGE,
@@ -177,6 +178,7 @@ const Routes = () => {
     return (
         <Layout>
             <Switch>
+                <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}></Route>
                 {routes.map(({path, component, exact = false}) => (
                     <Route key={path} path={path} exact={exact} component={component}/>
                 ))}

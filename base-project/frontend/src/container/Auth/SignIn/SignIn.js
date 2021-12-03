@@ -6,8 +6,10 @@ import {REGISTRATION_PAGE} from 'settings/constant';
 import SignInForm from './SignInForm';
 import SocialLogin from '../SocialLogin';
 import Wrapper, {BannerWrapper, FormWrapper, Text, Title, TitleInfo,} from '../Auth.style';
+import Alert from 'react-s-alert';
 
 const SignIn = () => {
+    
     return (
         <Wrapper>
             <FormWrapper>

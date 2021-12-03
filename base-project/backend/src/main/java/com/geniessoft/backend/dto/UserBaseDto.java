@@ -3,6 +3,7 @@ package com.geniessoft.backend.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.geniessoft.backend.utility.customvalidator.ContactNumberConstraint;
 import com.geniessoft.backend.utility.customvalidator.NotEmptyOrSpaceOrNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;

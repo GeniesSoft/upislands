@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,6 +35,7 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String addLocation(@Valid @RequestBody LocationSaveDto locationDto){
         locationService.saveLocation(
                 LocationMapper.INSTANCE.locationSaveDtoToLocation(locationDto)
@@ -51,6 +53,7 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String updateLocation(@Valid @RequestBody LocationUpdateDto locationUpdateDto){
         locationService.updateLocation(
                 LocationMapper.INSTANCE.locationUpdateDtoToLocation(locationUpdateDto)
@@ -60,6 +63,7 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String deleteLocation(@PathVariable(value = "id") Integer id){
        locationService.deleteLocation(id);
         return "Location is deleted";
@@ -113,18 +117,21 @@ public class LocationController {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String addLocationProfileImage(
             @PathVariable("locationId") int locationId,
             @RequestParam("file") @ContentConstraints MultipartFile file){
         locationService.addLocationProfileImage(locationId ,file);
         return "Location profile image is uploaded.";
     }
+
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(
             path = "/{locationId}/content",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String addLocationContent(
             @PathVariable("locationId") int locationId,
             @RequestParam("file") @ContentConstraints MultipartFile file,
@@ -132,8 +139,10 @@ public class LocationController {
         locationService.addLocationContent(locationId ,file, content_text);
         return "Location content is uploaded.";
     }
+
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/content")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String deleteLocationContent
             (@RequestParam(value = "locationContentId") Integer locationContentId){
         locationService.deleteLocationContent(locationContentId);
@@ -142,6 +151,7 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/content")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String updateLocationContent
             (@RequestParam(value = "locationContentId") Integer locationContentId,
              @RequestParam(value = "contentText") String contentText){

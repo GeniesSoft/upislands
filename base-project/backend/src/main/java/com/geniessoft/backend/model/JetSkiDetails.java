@@ -31,7 +31,7 @@ public class JetSkiDetails {
     @Column(name = "num_of_used_jetSkies")
     private Map<JetSkiSession, Integer> scheduleMap;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "company_id")
     private Company company;
 
