@@ -1,5 +1,7 @@
 package com.geniessoft.backend.oauth2Security.oauth2;
 
+import com.amazonaws.services.comprehend.model.ContainsPiiEntitiesRequest;
+import com.geniessoft.backend.model.Content;
 import com.geniessoft.backend.model.Roles;
 import com.geniessoft.backend.model.User;
 import com.geniessoft.backend.oauth2Security.*;
@@ -8,7 +10,9 @@ import com.geniessoft.backend.oauth2Security.oauth2.user.OAuth2UserInfo;
 import com.geniessoft.backend.oauth2Security.oauth2.user.OAuth2UserInfoFactory;
 import com.geniessoft.backend.oauth2Security.utilforsecurity.AuthProvider;
 import com.geniessoft.backend.repository.UserRepository;
+import com.geniessoft.backend.service.ContentService;
 import com.geniessoft.backend.service.RoleService;
+import com.geniessoft.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
@@ -19,6 +23,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.persistence.EntityExistsException;
 import java.util.Optional;
 
 @Service
@@ -27,6 +32,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private final UserRepository userRepository;
     private final RoleService roleService;
+    private final ContentService contentService;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
@@ -73,6 +79,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         user.setProviderId(oAuth2UserInfo.getId());
         user.setFirstName(oAuth2UserInfo.getName());
         user.setEmailAddress(oAuth2UserInfo.getEmail());
+        Content content = contentService.defaultUserProfileImage();
+        user.setUserProfileImage(content);
         user.setImageUrl(oAuth2UserInfo.getImageUrl());
         user.setRole(roleService.findRoleByName(Roles.ROLE_USER));
         return userRepository.save(user);

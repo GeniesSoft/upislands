@@ -3,8 +3,8 @@ package com.geniessoft.backend.service.impl;
 import com.geniessoft.backend.dto.UserRegisterDto;
 import com.geniessoft.backend.dto.UserUpdateDto;
 import com.geniessoft.backend.model.*;
+import com.geniessoft.backend.oauth2Security.TokenProvider;
 import com.geniessoft.backend.repository.UserRepository;
-import com.geniessoft.backend.security.JwtTokenProvider;
 import com.geniessoft.backend.service.ContentService;
 import com.geniessoft.backend.service.RoleService;
 import com.geniessoft.backend.service.UserService;
@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final FileStoreService fileStoreService;
     private final ContentService contentService;
-    private final JwtTokenProvider tokenProvider;
+    private final TokenProvider tokenProvider;
 
     private PasswordEncoder encoder;
     private AuthenticationManager authenticationManager;
@@ -172,7 +172,7 @@ public class UserServiceImpl implements UserService {
                 .authenticate(new UsernamePasswordAuthenticationToken(username, password));
 
         JwtAuthenticationResponse response =
-                new JwtAuthenticationResponse(tokenProvider.generateToken(authentication));
+                new JwtAuthenticationResponse(tokenProvider.createToken(authentication));
         response.setPrincipal(authentication.getPrincipal());
         return response;
     }
@@ -185,5 +185,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> getUserWithEmail(String email) {
         return userRepository.findFirstByEmailAddressEquals(email);
+    }
+
+    @Override
+    public String getUserProfileImageUrl(long userId) {
+        User user = findUser(userId);
+        return fileStoreService.getPreSignedDownloadUrl(
+                user.getUserProfileImage().getContentPath(),
+                user.getUserProfileImage().getContentName());
     }
 }

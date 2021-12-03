@@ -36,4 +36,6 @@ public interface UserService {
     void deleteUserProfileImage(User user);
 
     byte[] getUserProfileImage(int userId);
+
+    String getUserProfileImageUrl(long userId);
 }

@@ -24,7 +24,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/auth")
-public class AuthController2 {
+public class SocialAuthController {
 
     @Autowired
     private AuthenticationManager authenticationManager;

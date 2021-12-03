@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,6 +33,7 @@ public class CompanyController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String addCompany(
             @Validated @RequestBody CompanyRegisterDto companyRegisterDto){
         companyService.saveCompany(companyRegisterDto);
@@ -62,6 +64,7 @@ public class CompanyController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String updateCompany(
             @Valid @RequestBody CompanyUpdateDto companyUpdateGetDto){
         companyService.updateCompany(companyUpdateGetDto);
@@ -70,6 +73,7 @@ public class CompanyController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String deleteCompany(
             @PathVariable(value = "id") Integer id){
         companyService.deleteCompany(id);
@@ -81,6 +85,7 @@ public class CompanyController {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String addCompanyProfileImage(
             @PathVariable("companyId") int companyId,
             @RequestParam("file") @ImageConstraint MultipartFile file){
@@ -94,6 +99,7 @@ public class CompanyController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String addCompanyContent(
             @PathVariable("companyId") int companyId,
             @RequestParam("file") @ContentConstraints MultipartFile file,
@@ -104,6 +110,7 @@ public class CompanyController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/content")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String deleteCompanyContent
             (@RequestParam(value = "companyContentId") Integer companyContentId){
         companyService.deleteCompanyContent(companyContentId);
@@ -112,6 +119,7 @@ public class CompanyController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/content")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String updateCompanyContent
             (@RequestParam(value = "companyContentId") Integer companyContentId,
              @RequestParam(value = "contentText") String contentText){

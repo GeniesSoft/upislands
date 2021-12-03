@@ -6,6 +6,8 @@ import com.geniessoft.backend.model.Content;
 import com.geniessoft.backend.model.ContentDtoConverter;
 import com.geniessoft.backend.repository.ContentRepository;
 import com.geniessoft.backend.service.ContentService;
+import com.geniessoft.backend.utility.bucket.BucketName;
+import com.geniessoft.backend.utility.bucket.FolderNames;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -61,5 +63,23 @@ public class ContentServiceImpl implements ContentService {
             return contentDto;
 
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public Content defaultUserProfileImage() {
+        Content content = contentRepository.findFirstByContentNameEquals("default.jpg");
+        if(content != null){
+            System.out.println("Sıkıntı burda değil");
+            return content;
+        }
+        System.out.println("LAn niye buraya geliyon");
+        content = new Content();
+        content.setContentName("default.jpg");
+        content.setContentPath(BucketName.BUCKET_NAME.getBucketName()+"/"+ FolderNames.user_profile_images);
+        content.setContentType("image/jpeg");
+        content.setUploadDate(new Date());
+        contentRepository.save(content);
+
+        return content;
     }
 }

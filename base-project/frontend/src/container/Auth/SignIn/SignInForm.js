@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import {Controller, useForm} from 'react-hook-form';
 import {MdLockOpen} from 'react-icons/md';
@@ -11,13 +11,14 @@ import {FieldWrapper, Label, SwitchWrapper} from '../Auth.style';
 const SignInForm = () => {
     const {signIn, loggedIn} = useContext(AuthContext);
     const {control, errors, handleSubmit} = useForm();
+    
     const onSubmit = (data) => {
         signIn(data);
     };
     if (loggedIn) {
         return <Redirect to={{pathname: '/'}}/>;
     }
-
+ 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl

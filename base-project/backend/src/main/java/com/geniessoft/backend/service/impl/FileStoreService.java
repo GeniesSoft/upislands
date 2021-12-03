@@ -69,16 +69,15 @@ public class FileStoreService {
         return metadata;
     }
 
-    public String getPreSignedDownloadUrl(String bucketName, String fileName) {
-        log.info("bucketName : "+bucketName);
+    public String getPreSignedDownloadUrl(String path, String fileName) {
+        log.info("Path : "+path);
         log.info("filename : "+fileName);
-        bucketName = "upisland-bucket/user_profile_images"; //!!!!!!!!!!!!!!
         java.util.Date expiration = new java.util.Date();
         long expTimeMillis = expiration.getTime();
         expTimeMillis += 1000 * 60 * 60; //1 HR expiration time
         expiration.setTime(expTimeMillis);
         GeneratePresignedUrlRequest generatePresignedUrlRequest =
-                new GeneratePresignedUrlRequest(bucketName, fileName)
+                new GeneratePresignedUrlRequest(path, fileName)
                         .withMethod(HttpMethod.GET)
                         .withExpiration(expiration);
         URL url = amazonS3.generatePresignedUrl(generatePresignedUrlRequest);

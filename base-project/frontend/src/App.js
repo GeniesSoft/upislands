@@ -7,6 +7,9 @@ import AuthProvider from "./context/AuthProvider";
 import Routes from "./router";
 import React from "react";
 import TestView from "./service/test/TestView";
+import Alert from 'react-s-alert';
+import 'react-s-alert/dist/s-alert-default.css';
+import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 
 function App() {
 
@@ -17,6 +20,9 @@ function App() {
             <BrowserRouter>
                 <AuthProvider>
                     <Routes/>
+                    <Alert stack={{limit: 3}} 
+                        timeout = {4000}
+                        position='top-right' effect='slide' offset={65} />
                 </AuthProvider>
             </BrowserRouter>
         </ThemeProvider>

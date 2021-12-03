@@ -36,7 +36,7 @@ public class User {
     private String providerId;
     private String imageUrl;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Booking> bookingList;
 
     public User(User user) {
@@ -63,6 +63,6 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Content userProfileImage;
 }

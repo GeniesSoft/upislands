@@ -16,6 +16,7 @@ import MainMenu from './MainMenu';
 import MobileMenu from './MobileMenu';
 import ProfileMenu from './ProfileMenu';
 import NavbarSearch from './NavbarSearch';
+import Alert from 'react-s-alert';
 import HeaderWrapper, {
     AvatarImage,
     AvatarInfo,
@@ -24,8 +25,9 @@ import HeaderWrapper, {
     LogoArea,
     MobileNavbar,
 } from './Header.style';
+import {getCurrentUser } from 'service/auth/AuthApi';
 
-const avatarImg = `http://s3.amazonaws.com/redqteam.com/isomorphic-reloaded-image/profilepic.png`;
+//const avatarImg = `http://s3.amazonaws.com/redqteam.com/isomorphic-reloaded-image/profilepic.png`;
 // const LogoIcon = () => (
 //   <svg width="25" height="27.984" viewBox="0 0 25 27.984">
 //     <g transform="translate(0 0)">
@@ -51,6 +53,8 @@ export default withRouter(function Header({location}) {
     const headerType = location.pathname === '/' ? 'transparent' : 'default';
 
     const [homeLogo, setHomeLogo] = useState("white");
+    const [avatarName, setAvatarName] = useState('');
+    const [avatarImg, setAvatarImg] = useState('');
 
     const handleNavColorChange = () => {
         const handleScroll = () => {
@@ -65,7 +69,25 @@ export default withRouter(function Header({location}) {
             document.removeEventListener("scroll", handleScroll);
         }
     }
-    useEffect(handleNavColorChange, []);
+
+    useEffect(() => {
+        console.log("Logged in : -------> " + loggedIn);
+        handleNavColorChange();
+        getCurrentUser()
+            .then(response => {
+                console.log("Logged in : ------- " + response);
+                setAvatarName(response.firstName + response.lastName)
+                setAvatarImg(response.avatar)
+            })
+            .catch(error => {
+                console.log(error)
+                console.log("Failed to load user data.");
+            })
+            return () => {
+                setAvatarName({}); // This worked for me
+                setAvatarImg({})
+            };
+    }, []);
 
     return (
         <HeaderWrapper>
@@ -154,7 +176,7 @@ export default withRouter(function Header({location}) {
                                         <Logo src={avatarImg}/>
                                     </AvatarImage>
                                     <AvatarInfo>
-                                        <Text as="h3" content="Nova Scotia"/>
+                                        <Text as="h3" content={avatarName}/>
                                         <TextLink
                                             link={AGENT_PROFILE_PAGE}
                                             content="View Profile"

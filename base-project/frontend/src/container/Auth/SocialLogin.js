@@ -1,7 +1,8 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {Redirect} from 'react-router-dom';
 import {Button, Col, Row} from 'antd';
 import {AuthContext} from 'context/AuthProvider';
+import { GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, ACCESS_TOKEN } from '../../constants/index'
 
 const SocialLogin = () => {
     const {signUp, loggedIn} = useContext(AuthContext);
@@ -11,7 +12,14 @@ const SocialLogin = () => {
         firebase: false,
         google: false,
     });
+
     const handleSocialAuth = (key) => {
+        if(key == 'facebook'){
+            window.location.href = FACEBOOK_AUTH_URL;
+        }
+        if(key == 'google'){
+            window.location.href = GOOGLE_AUTH_URL;
+        }
         setState({
             ...state,
             [key]: true,
@@ -44,33 +52,7 @@ const SocialLogin = () => {
                     </Button>
                 </Col>
                 <Col span={12}>
-                    <Button
-                        loading={state.github}
-                        className="github-btn"
-                        type="primary"
-                        style={{width: '100%', marginBottom: 16}}
-                        size="large"
-                        onClick={() => handleSocialAuth('github')}
-                    >
-                        Github
-                    </Button>
-                </Col>
-            </Row>
-            <Row gutter={16} style={{marginBottom: '37px'}}>
-                <Col span={12}>
-                    <Button
-                        loading={state.firebase}
-                        className="firebase-btn"
-                        type="primary"
-                        style={{width: '100%', marginBottom: 16}}
-                        size="large"
-                        onClick={() => handleSocialAuth('firebase')}
-                    >
-                        Firebase
-                    </Button>
-                </Col>
-                <Col span={12}>
-                    <Button
+                <Button
                         loading={state.google}
                         className="google-btn"
                         type="primary"

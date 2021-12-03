@@ -11,6 +11,7 @@ import com.geniessoft.backend.service.JetSkiDetailsService;
 import com.geniessoft.backend.utility.mapper.JetSkiDetailsMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -32,6 +33,7 @@ public class JetSkiDetailsController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/{companyId}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String saveJetSkiDetails(
             @PathVariable(value = "companyId") Integer companyId,
             @Valid @RequestBody JetSkiDetailsSaveDto jetSkiDetailsSaveDto) {
@@ -44,6 +46,7 @@ public class JetSkiDetailsController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{companyId}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String updateJetSkiDetails(
             @PathVariable(value = "companyId") Integer companyId,
             @Valid @RequestBody JetSkiDetailsUpdateDto jetSkiDetailsUpdateDto) {
@@ -56,6 +59,7 @@ public class JetSkiDetailsController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{companyId}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String deleteJetSkiDetails(
             @PathVariable(value = "companyId") Integer companyId) {
         jetSkiDetailsService.deleteJetSkiDetails(companyId);
