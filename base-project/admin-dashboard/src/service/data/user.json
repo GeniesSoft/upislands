@@ -1,0 +1,19 @@
+{
+  "create": {
+    "firstName": "",
+    "lastName": "",
+    "emailAddress": "",
+    "password": "",
+    "phoneNumber": "",
+    "birthDate": ""
+  },
+  "update": {
+    "userId": 0,
+    "firstName": "",
+    "lastName": "",
+    "emailAddress": "",
+    "phoneNumber": "",
+    "birthDate": ""
+  }
+}
+

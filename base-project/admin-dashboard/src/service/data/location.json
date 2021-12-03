@@ -1,0 +1,17 @@
+{
+  "create": {
+    "locationName": "",
+    "description": "",
+    "tripTime": "",
+    "needExperience": false,
+    "address": {}
+  },
+  "update": {
+    "locationId": 0,
+    "locationName": "",
+    "description": "",
+    "tripTime": "",
+    "needExperience": true,
+    "address": {}
+  }
+}
