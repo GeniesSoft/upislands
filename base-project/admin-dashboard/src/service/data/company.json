@@ -1,0 +1,18 @@
+{
+  "create": {
+    "userId": 0,
+    "locationIdList": [],
+    "companyName": "",
+    "companyDescription": "",
+    "guide": false,
+    "address": {}
+  },
+  "update": {
+    "companyId": 0,
+    "locationIdList": [],
+    "companyName": "",
+    "companyDescription": "",
+    "guide": false,
+    "address": {}
+  }
+}

@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    username: sa
+    password:
+    url: jdbc:h2:tcp://localhost/~/test
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-secret: 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
+            client-id: 857195037884-mapi4a7gtrb40800j8f66jubddkpiaia.apps.googleusercontent.com
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+              scope:
+                - email
+                - profile
+    basic:
+      enable: false
+    jwt:
+      uri: /auth/**
+      header: Authorization
+      prefix: Bearer
+      expiration: 86400
+      secret: JwtSecretKey
+
+  servlet:
+    multipart:
+      max-file-size: 50MB

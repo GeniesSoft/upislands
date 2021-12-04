@@ -5,9 +5,8 @@ import com.geniessoft.backend.dto.UserUpdateDto;
 import com.geniessoft.backend.model.JwtAuthenticationResponse;
 import com.geniessoft.backend.model.User;
 import org.springframework.web.multipart.MultipartFile;
-
+import java.util.List;
 import java.util.Optional;
-
 
 public interface UserService {
 
@@ -22,6 +21,8 @@ public interface UserService {
     JwtAuthenticationResponse loginUser(String username, String password);
 
     User save(User user);
+
+    List<User> findAllUsers();
 
     User findUser(long userId);
 
