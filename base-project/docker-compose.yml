@@ -4,6 +4,7 @@ services:
 
   # backend
   app-server:
+    image: app-server:latest
     build:
       context: backend
       dockerfile: Dockerfile
