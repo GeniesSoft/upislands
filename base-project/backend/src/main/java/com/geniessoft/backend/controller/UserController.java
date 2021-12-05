@@ -2,6 +2,7 @@ package com.geniessoft.backend.controller;
 
 import com.geniessoft.backend.dto.UserRegisterDto;
 import com.geniessoft.backend.dto.UserUpdateDto;
+import com.geniessoft.backend.dto.denemeDto;
 import com.geniessoft.backend.model.User;
 import com.geniessoft.backend.service.AnalysisService;
 import com.geniessoft.backend.service.UserService;
@@ -57,7 +58,6 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String updateUser(@Valid @RequestBody UserUpdateDto userUpdateDto){
         userService.updateUser(userUpdateDto);
         return "User successfully updated";
@@ -65,7 +65,6 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/{id}")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String deleteUser(@PathVariable(value = "id") Integer id){
         userService.deleteUser(id);
         return "User successfully deleted";

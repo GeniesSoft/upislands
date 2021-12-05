@@ -30,9 +30,8 @@ public class User {
     private LocalDate birthDate;
     private boolean deleted = false;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
-    private AuthProvider provider;
+    private AuthProvider provider = AuthProvider.none;
     private String providerId;
     private String imageUrl;
 

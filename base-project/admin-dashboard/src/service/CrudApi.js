@@ -67,17 +67,24 @@ class CrudApi {
         } else {
             switch (error.response.status) {
                 case 400:
-                    console.log(error.response.data);
+                    console.log(error.response);
                     error.response.data.forEach(Notify.error);
                     break;
+                case 401:
+                    console.log(error.response);
+                    Notify.error("Unauthorized");
+                    break;
                 case 404:
-                    Notify.error(error.response.data);
+                    Notify.error(error.response);
+                    Notify.error("Not Found");
                     break;
                 case 405:
-                    Notify.error(error.response.data);
+                    console.log(error.response);
+                    Notify.error("Method Not Allowed");
                     break;
                 case 409:
-                    Notify.error(error.response.data);
+                    console.log(error.response);
+                    Notify.error("Conflict");
                     break;
                 default:
                     Notify.error(error.response);
