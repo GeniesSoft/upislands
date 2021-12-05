@@ -29,7 +29,7 @@ public abstract class UserBaseDto {
 
     @NotEmptyOrSpaceOrNull(message = "Email address cannot be empty")
     @Email(message = "Invalid email address")
-    private String emailAddress;
+    protected String emailAddress;
 
     @NotNull(message = "Birth date is mandatory")
     protected LocalDate birthDate;
