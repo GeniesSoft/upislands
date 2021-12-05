@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {Button} from 'antd';
 import Box from 'components/UI/Box/Box';
 import Text from 'components/UI/Text/Text';
-import ProductCard from '../ProductCard/ProductCard';
 import ProductCard2 from '../ProductCard2/ProductCard2';
 
 const LoadMore = ({
@@ -55,6 +54,8 @@ export default function SectionGrid2({
             <Box className="grid_wrapper" {...rowStyle}>
                 {data && data.length
                     ? data.map((item) => {
+                        console.log('item')
+                        console.log(item)
                         return (
                             <Box
                                 className="grid_column"
@@ -62,7 +63,7 @@ export default function SectionGrid2({
                                 key={item.id}
                                 {...columnStyle}
                             >
-                                <ProductCard2 link={link} {...item} />
+                                <ProductCard2 link={link} fields={item} />
                             </Box>
                         );
                     })

@@ -17,7 +17,7 @@ export default function Listing({location, history}) {
     let url = '/data/hotel.json';
     const {width} = useWindowSize();
     const [showMap, setShowMap] = useState(false);
-    const {data, loading, loadMoreData, total, limit} = useDataApi(url);
+    const {data, loading, loadMoreData, total, limit} = useDataApi('findAllLocations');
     // let columnWidth = [1 / 1, 1 / 2, 1 / 3, 1 / 4, 1 / 5];
     let columnWidth = [1 / 1];
     if (location.search) {
@@ -31,6 +31,10 @@ export default function Listing({location, history}) {
     const handleMapToggle = () => {
         setShowMap((showMap) => !showMap);
     };
+
+    const get = () => {
+
+    }
 
     return (
         <ListingWrapper>
@@ -59,7 +63,7 @@ export default function Listing({location, history}) {
                         <SectionGrid2
                             link={SINGLE_POST_PAGE}
                             columnWidth={columnWidth}
-                            data={data}
+                            data={data[0]}
                             totalItem={total.length}
                             loading={loading}
                             limit={limit}
@@ -70,7 +74,7 @@ export default function Listing({location, history}) {
                         <SectionGrid
                             link={SINGLE_POST_PAGE}
                             columnWidth={columnWidth}
-                            data={data}
+                            data={data[0]}
                             totalItem={total.length}
                             loading={loading}
                             limit={limit}

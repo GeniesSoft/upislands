@@ -29,6 +29,8 @@ import java.util.stream.Collectors;
 @Validated
 public class UserController {
 
+    public record Person (String name, String address) {}
+
     private static final String FILE_NAME = "fileName";
 
     private final UserService userService;
@@ -50,7 +52,6 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{id}")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public UserUpdateDto getUser(@PathVariable(value = "id") Integer id){
         User user = userService.findUser(id);
         return mapper.userToUserUpdateDto(user);

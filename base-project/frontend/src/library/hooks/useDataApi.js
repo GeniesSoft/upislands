@@ -1,4 +1,6 @@
 import {useEffect, useReducer, useState} from 'react';
+import {getCurrentUser} from "../../service/auth/AuthApi";
+import LocationApi from "../../service/location/LocationApi";
 
 async function SuperFetch(
     url,
@@ -17,11 +19,30 @@ async function SuperFetch(
     // authentication
     // we will had custom headers here.
 
-    return fetch(url, options)
-        .then(res => {
-            return Promise.resolve(res.json());
+    if (url == 'getCurrentUser') {
+        let resd = {}
+        await getCurrentUser().then(res=>{
+            resd = res
         })
-        .catch(error => Promise.reject(error));
+        return [resd]
+    }
+    else if(url == 'findAllLocations'){
+        let resd = {}
+        await LocationApi.readAll().then(res => {
+            resd = res.data
+            console.log(resd)
+        })
+        return [resd]
+    }
+    else {
+        return fetch(url, options)
+            .then(res => {
+                return Promise.resolve(res.json());
+            })
+            .catch(error => Promise.reject(error));
+    }
+
+
 }
 
 function dataFetchReducer(state, action) {
@@ -84,7 +105,7 @@ const useDataApi = (initialUrl, limit = 10, initialData = []) => {
             try {
                 const result = await SuperFetch(url);
                 if (!didCancel) {
-                    dispatch({type: 'FETCH_SUCCESS', payload: result});
+                    dispatch({type: 'FETCH_SUCCESS', payload: result });
                 }
             } catch (error) {
                 if (!didCancel) {

@@ -1,4 +1,4 @@
-import React, {Fragment, useContext} from 'react';
+import React, {Fragment, useContext, useEffect, useState} from 'react';
 import {Link, NavLink, Route} from 'react-router-dom';
 import isEmpty from 'lodash/isEmpty';
 import {IoIosAdd, IoLogoFacebook, IoLogoInstagram, IoLogoTwitter,} from 'react-icons/io';
@@ -13,7 +13,8 @@ import AuthProvider, {AuthContext} from 'context/AuthProvider';
 import AgentItemLists from './AgentItemLists';
 import AgentFavItemLists from './AgentFavItemLists';
 import AgentContact from './AgentContact';
-import useDataApi from 'library/hooks/useDataApi';
+import useDataApi from 'library/hooks/useDataApi'
+import {getCurrentUser} from "../../../service/auth/AuthApi";
 import {ADD_HOTEL_PAGE, AGENT_PROFILE_CONTACT, AGENT_PROFILE_FAVOURITE,} from 'settings/constant';
 import AgentDetailsPage, {
     BannerSection,
@@ -77,29 +78,36 @@ const ProfileRoute = (props) => {
 };
 
 const AgentProfileInfo = () => {
-    const {data, loading} = useDataApi('/data/agent.json');
-    if (isEmpty(data) || loading) return <Loader/>;
-    const {
-        first_name,
-        last_name,
-        content,
-        profile_pic,
-        cover_pic,
-        social_profile,
-    } = data[0];
 
+    const {data, loading} = useDataApi('getCurrentUser');
+    console.log('ssss')
+    console.log(data)
+    if (isEmpty(data) || loading) return <Loader/>;
+    const social_profile2= {
+        "facebook": "http://www.facebook.com/redqinc",
+            "twitter": "http://www.twitter.com/redqinc",
+            "linkedin": "http://www.linkedin.com/company/redqinc",
+            "instagram": "http://www.instagram.com/redqinc",
+            "pinterest": "http://www.pinterest.com/redqinc"
+    }
+    const first_name = data[0].firstName;
+    const last_name = data[0].lastName;
+    const content = 'Mert Yuksek';
+    const profile_pic = data[0].avatar;
+    const cover_pic = "http://s3.amazonaws.com/redqteam.com/tripfinder-images/coverpic2.png";
+    const social_profile = social_profile2;
     const username = `${first_name} ${last_name}`;
 
     return (
         <Fragment>
             <BannerSection>
-                <Image className="absolute" src={cover_pic.url} alt="Profile cover"/>
+                <Image className="absolute" src={cover_pic} alt="Profile cover"/>
             </BannerSection>
             <UserInfoArea>
                 <Container fluid={true}>
                     <ProfileImage>
                         {profile_pic ? (
-                            <Image src={profile_pic.url} alt="Profile"/>
+                            <Image src={profile_pic} alt="Profile"/>
                         ) : (
                             <ProfilePicLoader/>
                         )}

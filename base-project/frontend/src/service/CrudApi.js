@@ -27,6 +27,14 @@ class CrudApi {
             });
     }
 
+    async readAll() {
+        return this.axios
+            .get("")
+            .catch(error => {
+                this.handleError(error);
+            });
+    }
+
     update(updateRequest) {
         const pid = Notify.startProcess("Update request is pending...");
         this.axios

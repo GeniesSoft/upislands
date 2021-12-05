@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -179,4 +180,13 @@ public class LocationController {
         byte[] image = locationService.getLocationProfileImage(locationId);
         return new ProfileImageDto(image);
     }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping
+    public List<LocationGetDto> getLocations(){
+        return locationService.findAllLocations().stream().map((location)->
+                LocationMapper.INSTANCE.locationToLocationGetDto(location,
+                        location.getAddress())).collect(Collectors.toList());
+    }
+
 }

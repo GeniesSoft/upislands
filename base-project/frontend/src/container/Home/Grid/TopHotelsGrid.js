@@ -36,7 +36,7 @@ const TopHotelsGrid = () => {
     return (
         <Container fluid={true}>
             <SectionTitle
-                title={<Heading content="Travelers’ Choice: Top hotels"/>}
+                title={<Heading content="Travelers’ Choice: Top trips"/>}
                 link={<TextLink link={LISTING_POSTS_PAGE} content="Show all"/>}
             />
 

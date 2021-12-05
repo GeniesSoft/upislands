@@ -9,7 +9,7 @@ export function signin(loginRequest) {
     });
 }
 
-export const getCurrentUser = () => {
+export function getCurrentUser (){
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
     }
@@ -20,7 +20,7 @@ export const getCurrentUser = () => {
     });
 }
 
-const request = (options) => {
+async function request (options)  {
     const headers = new Headers({
         'Content-Type': 'application/json',
     })
@@ -32,7 +32,7 @@ const request = (options) => {
     const defaults = {headers: headers};
     options = Object.assign({}, defaults, options);
 
-    return fetch(options.url, options)
+    return await fetch(options.url, options)
     .then(response => 
         response.json().then(json => {
             if(!response.ok) {
