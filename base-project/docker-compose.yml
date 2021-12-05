@@ -27,6 +27,20 @@ services:
     depends_on:
       - app-server
     networks:
+      - frontend
+      
+  # admin
+  app-admin:
+    build:
+      context: admin-dashboard
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_API_BASE_URL: http://127.0.0.1:8080/api
+    ports:
+      - "81:81"
+    depends_on:
+      - app-server
+    networks:
       - frontend  
 
   # Database Service (PostgreSQL)
