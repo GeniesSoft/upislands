@@ -79,48 +79,49 @@ const ProfileRoute = (props) => {
 
 const AgentProfileInfo = () => {
 
-    const {data, loading} = useDataApi('getCurrentUser');
-    console.log('ssss')
-    console.log(data)
+    // const {data, loading} = useDataApi('getCurrentUser');
+    const {data, loading} = useDataApi('/data/agent.json');
+
     if (isEmpty(data) || loading) return <Loader/>;
-    const social_profile2= {
-        "facebook": "http://www.facebook.com/redqinc",
-            "twitter": "http://www.twitter.com/redqinc",
-            "linkedin": "http://www.linkedin.com/company/redqinc",
-            "instagram": "http://www.instagram.com/redqinc",
-            "pinterest": "http://www.pinterest.com/redqinc"
-    }
-    const first_name = data[0].firstName;
-    const last_name = data[0].lastName;
-    const content = 'Mert Yuksek';
-    const profile_pic = data[0].avatar;
-    const cover_pic = "http://s3.amazonaws.com/redqteam.com/tripfinder-images/coverpic2.png";
-    const social_profile = social_profile2;
-    const username = `${first_name} ${last_name}`;
+
+    // const social_profile2= {
+    //     "facebook": "http://www.facebook.com/redqinc",
+    //         "twitter": "http://www.twitter.com/redqinc",
+    //         "linkedin": "http://www.linkedin.com/company/redqinc",
+    //         "instagram": "http://www.instagram.com/redqinc",
+    //         "pinterest": "http://www.pinterest.com/redqinc"
+    // }
+    // const first_name = data[0].firstName;
+    // const last_name = data[0].lastName;
+    // const content = 'Mert Yuksek';
+    // const profile_pic = data[0].avatar;
+    // const cover_pic = "http://s3.amazonaws.com/redqteam.com/tripfinder-images/coverpic2.png";
+    // const social_profile = social_profile2;
+    // const username = `${first_name} ${last_name}`;
 
     return (
         <Fragment>
             <BannerSection>
-                <Image className="absolute" src={cover_pic} alt="Profile cover"/>
+                <Image className="absolute" src={data[0].cover_pic.url} alt="Profile cover"/>
             </BannerSection>
             <UserInfoArea>
                 <Container fluid={true}>
                     <ProfileImage>
-                        {profile_pic ? (
-                            <Image src={profile_pic} alt="Profile"/>
+                        {data[0].profile_pic ? (
+                            <Image src={data[0].profile_pic.url} alt="Profile"/>
                         ) : (
                             <ProfilePicLoader/>
                         )}
                     </ProfileImage>
                     <ProfileInformationArea>
                         <ProfileInformation>
-                            <Heading content={username}/>
-                            <Text content={content}/>
+                            <Heading content={data[0].username}/>
+                            <Text content={data[0].content}/>
                         </ProfileInformation>
                         <SocialAccount>
                             <Popover content="Twitter">
                                 <a
-                                    href={social_profile.twitter}
+                                    href={data[0].social_profile.twitter}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
@@ -129,7 +130,7 @@ const AgentProfileInfo = () => {
                             </Popover>
                             <Popover content="Facebook">
                                 <a
-                                    href={social_profile.facebook}
+                                    href={data[0].social_profile.facebook}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
@@ -138,7 +139,7 @@ const AgentProfileInfo = () => {
                             </Popover>
                             <Popover content="Instagram">
                                 <a
-                                    href={social_profile.instagram}
+                                    href={data[0].social_profile.instagram}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >

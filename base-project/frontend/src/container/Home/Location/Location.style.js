@@ -9,6 +9,7 @@ const LocationWrapper = styled.div`
   
   .location-card-passive {
     filter: grayscale(90%);
+    pointer-events: none;
   }
   
 `;
