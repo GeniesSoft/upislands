@@ -10,7 +10,7 @@ import useDataApi from 'library/hooks/useDataApi';
 import {LISTING_POSTS_PAGE, SINGLE_POST_PAGE} from 'settings/constant';
 
 const TopHotelsGrid = () => {
-    const {data, loading} = useDataApi('/data/top-hotel.json');
+    const {data, loading} = useDataApi('/data/top-trips.json');
     const {width} = useWindowSize();
 
     let posts = data;

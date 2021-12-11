@@ -19,14 +19,14 @@ async function SuperFetch(
     // authentication
     // we will had custom headers here.
 
-    if (url == 'getCurrentUser') {
+    if (url == 'getCurrentUser' && false) {
         let resd = {}
         await getCurrentUser().then(res=>{
             resd = res
         })
         return [resd]
     }
-    else if(url == 'findAllLocations'){
+    else if(url == 'findAllLocations' && false){
         let resd = {}
         await LocationApi.readAll().then(res => {
             resd = res.data

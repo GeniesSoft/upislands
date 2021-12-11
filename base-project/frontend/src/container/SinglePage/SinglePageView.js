@@ -22,7 +22,7 @@ const SinglePage = ({match}) => {
     const [isModalShowing, setIsModalShowing] = useState(false);
     const {width} = useWindowSize();
 
-    let url = '/data/hotel-single.json';
+    let url = '/data/trip-single.json';
     if (!match.params.slug) {
         url += match.params.slug;
     }

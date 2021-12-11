@@ -54,8 +54,6 @@ export default function SectionGrid({
             <Box className="grid_wrapper" {...rowStyle}>
                 {data && data.length
                     ? data.map((item) => {
-                        console.log('item')
-                        console.log(item)
                         return (
                             <Box
                                 className="grid_column"
@@ -63,7 +61,7 @@ export default function SectionGrid({
                                 key={item.id}
                                 {...columnStyle}
                             >
-                                <ProductCard link={link} fields={item.data} />
+                                <ProductCard link={link} {...item} />
                             </Box>
                         );
                     })

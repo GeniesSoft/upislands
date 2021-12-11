@@ -15,9 +15,9 @@ const SignUp = () => {
                     withLink
                     linkTo="/"
                     src="/images/logo-alt.png"
-                    title="Upislands"
+                    title="UpIsle"
                 />
-                <Title>Welcome To Upislands</Title>
+                <Title>Welcome To UpIsle</Title>
                 <TitleInfo>Please Register for your account</TitleInfo>
                 <SignUpForm/>
                 <Divider>Or Register Up With </Divider>

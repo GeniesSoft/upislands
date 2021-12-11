@@ -14,11 +14,11 @@ import {SINGLE_POST_PAGE} from 'settings/constant';
 import ListingWrapper, {PostsWrapper, ShowMapCheckbox} from './Listing.style';
 
 export default function Listing({location, history}) {
-    let url = '/data/hotel.json';
+    let url = '/data/trips.json';
     const {width} = useWindowSize();
     const [showMap, setShowMap] = useState(false);
-    const {data, loading, loadMoreData, total, limit} = useDataApi('findAllLocations');
-    // let columnWidth = [1 / 1, 1 / 2, 1 / 3, 1 / 4, 1 / 5];
+    // const {data, loading, loadMoreData, total, limit} = useDataApi('findAllLocations');
+    const {data, loading, loadMoreData, total, limit} = useDataApi(url);
     let columnWidth = [1 / 1];
     if (location.search) {
         url += location.search;
@@ -63,7 +63,8 @@ export default function Listing({location, history}) {
                         <SectionGrid2
                             link={SINGLE_POST_PAGE}
                             columnWidth={columnWidth}
-                            data={data[0]}
+                            // data={data[0]}
+                            data={data}
                             totalItem={total.length}
                             loading={loading}
                             limit={limit}
@@ -74,7 +75,8 @@ export default function Listing({location, history}) {
                         <SectionGrid
                             link={SINGLE_POST_PAGE}
                             columnWidth={columnWidth}
-                            data={data[0]}
+                            // data={data[0]}
+                            data={data}
                             totalItem={total.length}
                             loading={loading}
                             limit={limit}

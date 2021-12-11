@@ -11,7 +11,7 @@ services:
     ports:
       - "8080:8080"
     depends_on: 
-      - db  
+      - app-db  
     networks:
       - backend
       - frontend
@@ -44,19 +44,26 @@ services:
     networks:
       - frontend  
 
-  # Database Service (PostgreSQL)
-  db:
-    image: postgres
+  # Database Service (MySQL)
+  app-db:
+    image: mysql
+    volumes:
+      - db:/var/lib/mysql
     ports:
-      - "5432:5432"
+      - "3306:3306"
     environment:
-    - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=postgres
-    - POSTGRES_DB=app-db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: system
+      MYSQL_PASSWORD: system
+      MYSQL_DATABASE: app_db
     networks:
       - backend
 
 # Networks
 networks:
   backend:
-  frontend:    
+  frontend:
+
+# Volumes
+volumes:
+  db:  

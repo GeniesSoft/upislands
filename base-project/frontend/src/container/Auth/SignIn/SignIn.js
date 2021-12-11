@@ -17,7 +17,7 @@ const SignIn = () => {
                     withLink
                     linkTo="/"
                     src="/images/logo-alt.png"
-                    title="Upislands"
+                    title="UpIsle"
                 />
                 <Title>Welcome Back</Title>
                 <TitleInfo>Please log into your account</TitleInfo>

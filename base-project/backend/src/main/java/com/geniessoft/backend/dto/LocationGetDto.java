@@ -7,4 +7,6 @@ import lombok.Setter;
 @Setter
 public class LocationGetDto extends LocationBaseDto{
 
+    private int locationId;
+
 }

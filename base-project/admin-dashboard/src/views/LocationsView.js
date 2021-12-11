@@ -1,8 +1,10 @@
+import LocationContainer from "../containers/LocationContainer";
+
 const LocationsView = () => {
 
     return (
         <div>
-            Locations
+            <LocationContainer />
         </div>
     );
 }

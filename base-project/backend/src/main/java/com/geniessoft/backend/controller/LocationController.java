@@ -36,7 +36,6 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String addLocation(@Valid @RequestBody LocationSaveDto locationDto){
         locationService.saveLocation(
                 LocationMapper.INSTANCE.locationSaveDtoToLocation(locationDto)
@@ -54,7 +53,6 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String updateLocation(@Valid @RequestBody LocationUpdateDto locationUpdateDto){
         locationService.updateLocation(
                 LocationMapper.INSTANCE.locationUpdateDtoToLocation(locationUpdateDto)
@@ -64,13 +62,13 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/{id}")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String deleteLocation(@PathVariable(value = "id") Integer id){
        locationService.deleteLocation(id);
         return "Location is deleted";
     }
+
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/mostBooked")
+    @GetMapping(value = "/most-booked")
     public LocationGetDto getMostBookedLocation(){
         Location location = analysisService.findMostBookedLocation();
         Address address= location.getAddress();
@@ -79,7 +77,7 @@ public class LocationController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/bookedLocations")
+    @GetMapping(value = "/booked-locations")
     public List<LocationGetDto> getBookedLocationsByOrder(){
          List<Location> locations = analysisService.findBookedLocationsByBookingDescOrder();
          List<LocationGetDto> locationGetDtoList = new ArrayList<>();
@@ -91,7 +89,7 @@ public class LocationController {
         return locationGetDtoList;
     }
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/LocationsAverage")
+    @GetMapping(value = "/locations-average")
     public Map<Integer,Double> getLocationsByAverageOrder(){
         Map<Location,Double> locationAverageMap = analysisService.findLocationsByRatingDescOrder();
         Map<Integer,Double> locationIdAverageMap = new HashMap<>();
@@ -102,9 +100,9 @@ public class LocationController {
         return locationIdAverageMap;
     }
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/state-locations")
-    public List<LocationGetDto> getLocationsByState(@Valid @RequestParam(value = "state") String state){
-        List<Location> locations =  locationService.findAllLocationsInAState(state);
+    @GetMapping(value = "/state/{stateName}")
+    public List<LocationGetDto> getLocationsByState(@Valid @PathVariable String stateName){
+        List<Location> locations =  locationService.findAllLocationsInAState(stateName);
         List<LocationGetDto> locationGetDtoList = new ArrayList<>();
         for (Location location: locations) {
             locationGetDtoList.add(LocationMapper.INSTANCE.locationToLocationGetDto(location, location.getAddress()));

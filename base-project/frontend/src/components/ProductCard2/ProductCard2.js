@@ -34,44 +34,16 @@ const responsive = {
     },
 };
 
-const PostGrid = (props) => {
-
-    const title = props.fields.locationName;
-    console.log(`hellfsolfoslof`)
-    console.log(props)
-
-    const rating = 4;
-    const location = {
-        "id": 67404,
-        "lat": 40.706877,
-        "lng": -74.011265,
-        "formattedAddress": "52623 Donnie Roads",
-        "zipcode": "68225-1064",
-        "city": "Nestorview",
-        "state_long": "Washington",
-        "state_short": "WY",
-        "country_long": "Tanzania",
-        "country_short": "VN"
-    };
-    const price = '221';
-    const ratingCount = 300;
-    const gallery = [
-        {
-            "id": 11287,
-            "url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-2_thumb.jpg"
-        },
-        {
-            "id": 51759,
-            "url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-3_thumb.jpg"
-        },
-        {
-            "id": 1888,
-            "url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-4_thumb.jpg"
-        }
-    ];
-    const slug = '';
-    const link = '';
-
+const PostGrid = ({
+                      title,
+                      rating,
+                      location,
+                      price,
+                      ratingCount,
+                      gallery,
+                      slug,
+                      link,
+                  }) => {
     return (
         <GridCardListing
             isCarousel={true}
