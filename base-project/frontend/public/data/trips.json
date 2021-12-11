@@ -1,0 +1,422 @@
+[
+  {
+    "id": 1,
+    "agentId": 1,
+    "title": "Tittle 1",
+    "slug": "Slug 1",
+    "content": "Content 1",
+    "status": "Status 1",
+    "price": "Price 1",
+    "isNegotiable": false,
+    "propertyType": "Type 1",
+    "condition": "Condition 1",
+    "rating": 5,
+    "ratingCount": 1,
+    "contactNumber": "Contact Number 1",
+    "amenities": [],
+    "image": {},
+    "location": {
+      "id": 1,
+      "lat": 40.706877,
+      "lng": -74.011265,
+      "formattedAddress": "Formatted Address 1",
+      "zipcode": "Zipcode 1",
+      "city": "City 1",
+      "state_long": "State Long 1",
+      "state_short": "State Short 1",
+      "country_long": "Contry Long 1",
+      "country_short": "Contry Short 1"
+    },
+    "gallery": [
+      {
+        "id": 1,
+        "url": "/images/post/0.jpg"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "agentId": 2,
+    "title": "Tittle 2",
+    "slug": "Slug 2",
+    "content": "Content 2",
+    "status": "Status 2",
+    "price": "Price 2",
+    "isNegotiable": false,
+    "propertyType": "Type 2",
+    "condition": "Condition 2",
+    "rating": 5,
+    "ratingCount": 2,
+    "contactNumber": "Contact Number 2",
+    "amenities": [],
+    "image": {},
+    "location": {
+      "id": 2,
+      "lat": 40.706877,
+      "lng": -74.02265,
+      "formattedAddress": "Formatted Address 2",
+      "zipcode": "Zipcode 2",
+      "city": "City 2",
+      "state_long": "State Long 2",
+      "state_short": "State Short 2",
+      "country_long": "Contry Long 2",
+      "country_short": "Contry Short 2"
+    },
+    "gallery": [
+      {
+        "id": 2,
+        "url": "/images/post/1.jpg"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "agentId": 3,
+    "title": "Tittle 3",
+    "slug": "Slug 3",
+    "content": "Content 3",
+    "status": "Status 3",
+    "price": "Price 3",
+    "isNegotiable": false,
+    "propertyType": "Type 3",
+    "condition": "Condition 3",
+    "rating": 5,
+    "ratingCount": 3,
+    "contactNumber": "Contact Number 3",
+    "amenities": [],
+    "image": {},
+    "location": {
+      "id": 3,
+      "lat": 40.706877,
+      "lng": -74.03365,
+      "formattedAddress": "Formatted Address 3",
+      "zipcode": "Zipcode 3",
+      "city": "City 3",
+      "state_long": "State Long 3",
+      "state_short": "State Short 3",
+      "country_long": "Contry Long 3",
+      "country_short": "Contry Short 3"
+    },
+    "gallery": [
+      {
+        "id": 3,
+        "url": "/images/post/2.jpg"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "agentId": 4,
+    "title": "Tittle 4",
+    "slug": "Slug 4",
+    "content": "Content 4",
+    "status": "Status 4",
+    "price": "Price 4",
+    "isNegotiable": false,
+    "propertyType": "Type 4",
+    "condition": "Condition 4",
+    "rating": 5,
+    "ratingCount": 4,
+    "contactNumber": "Contact Number 4",
+    "amenities": [],
+    "image": {},
+    "location": {
+      "id": 4,
+      "lat": 40.706877,
+      "lng": -74.0465,
+      "formattedAddress": "Formatted Address 4",
+      "zipcode": "Zipcode 4",
+      "city": "City 4",
+      "state_long": "State Long 4",
+      "state_short": "State Short 4",
+      "country_long": "Contry Long 4",
+      "country_short": "Contry Short 4"
+    },
+    "gallery": [
+      {
+        "id": 4,
+        "url": "/images/post/3.jpg"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "agentId": 5,
+    "title": "Tittle 5",
+    "slug": "Slug 5",
+    "content": "Content 5",
+    "status": "Status 5",
+    "price": "Price 5",
+    "isNegotiable": false,
+    "propertyType": "Type 5",
+    "condition": "Condition 5",
+    "rating": 5,
+    "ratingCount": 5,
+    "contactNumber": "Contact Number 5",
+    "amenities": [],
+    "image": {},
+    "location": {
+      "id": 5,
+      "lat": 80.706877,
+      "lng": -78.055665,
+      "formattedAddress": "Formatted Address 5",
+      "zipcode": "Zipcode 5",
+      "city": "City 5",
+      "state_long": "State Long 5",
+      "state_short": "State Short 5",
+      "country_long": "Contry Long 5",
+      "country_short": "Contry Short 5"
+    },
+    "gallery": [
+      {
+        "id": 5,
+        "url": "/images/post/4.jpg"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "agentId": 6,
+    "title": "Tittle 6",
+    "slug": "Slug 6",
+    "content": "Content 6",
+    "status": "Status 6",
+    "price": "Price 6",
+    "isNegotiable": false,
+    "propertyType": "Type 6",
+    "condition": "Condition 6",
+    "rating": 5,
+    "ratingCount": 6,
+    "contactNumber": "Contact Number 6",
+    "amenities": [],
+    "image": {},
+    "location": {
+      "id": 6,
+      "lat": 80.706877,
+      "lng": -78.0665,
+      "formattedAddress": "Formatted Address 6",
+      "zipcode": "Zipcode 6",
+      "city": "City 6",
+      "state_long": "State Long 6",
+      "state_short": "State Short 6",
+      "country_long": "Contry Long 6",
+      "country_short": "Contry Short 6"
+    },
+    "gallery": [
+      {
+        "id": 6,
+        "url": "/images/post/0.jpg"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "agentId": 7,
+    "title": "Tittle 7",
+    "slug": "Slug 7",
+    "content": "Content 7",
+    "status": "Status 7",
+    "price": "Price 7",
+    "isNegotiable": false,
+    "propertyType": "Type 7",
+    "condition": "Condition 7",
+    "rating": 5,
+    "ratingCount": 7,
+    "contactNumber": "Contact Number 7",
+    "amenities": [],
+    "image": {},
+    "location": {
+      "id": 7,
+      "lat": 80.706877,
+      "lng": -78.0765,
+      "formattedAddress": "Formatted Address 7",
+      "zipcode": "Zipcode 7",
+      "city": "City 7",
+      "state_long": "State Long 7",
+      "state_short": "State Short 7",
+      "country_long": "Contry Long 7",
+      "country_short": "Contry Short 7"
+    },
+    "gallery": [
+      {
+        "id": 7,
+        "url": "/images/post/1.jpg"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "agentId": 8,
+    "title": "Tittle 8",
+    "slug": "Slug 8",
+    "content": "Content 8",
+    "status": "Status 8",
+    "price": "Price 8",
+    "isNegotiable": false,
+    "propertyType": "Type 8",
+    "condition": "Condition 8",
+    "rating": 5,
+    "ratingCount": 8,
+    "contactNumber": "Contact Number 8",
+    "amenities": [],
+    "image": {},
+    "location": {
+      "id": 8,
+      "lat": 80.706877,
+      "lng": -78.0865,
+      "formattedAddress": "Formatted Address 8",
+      "zipcode": "Zipcode 8",
+      "city": "City 8",
+      "state_long": "State Long 8",
+      "state_short": "State Short 8",
+      "country_long": "Contry Long 8",
+      "country_short": "Contry Short 8"
+    },
+    "gallery": [
+      {
+        "id": 8,
+        "url": "/images/post/2.jpg"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "agentId": 9,
+    "title": "Tittle 9",
+    "slug": "Slug 9",
+    "content": "Content 9",
+    "status": "Status 9",
+    "price": "Price 9",
+    "isNegotiable": false,
+    "propertyType": "Type 9",
+    "condition": "Condition 9",
+    "rating": 5,
+    "ratingCount": 9,
+    "contactNumber": "Contact Number 9",
+    "amenities": [],
+    "image": {},
+    "location": {
+      "id": 9,
+      "lat": 120.706877,
+      "lng": -712.091065,
+      "formattedAddress": "Formatted Address 9",
+      "zipcode": "Zipcode 9",
+      "city": "City 9",
+      "state_long": "State Long 9",
+      "state_short": "State Short 9",
+      "country_long": "Contry Long 9",
+      "country_short": "Contry Short 9"
+    },
+    "gallery": [
+      {
+        "id": 9,
+        "url": "/images/post/3.jpg"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "agentId": 10,
+    "title": "Tittle 10",
+    "slug": "Slug 10",
+    "content": "Content 10",
+    "status": "Status 10",
+    "price": "Price 10",
+    "isNegotiable": false,
+    "propertyType": "Type 10",
+    "condition": "Condition 10",
+    "rating": 5,
+    "ratingCount": 10,
+    "contactNumber": "Contact Number 10",
+    "amenities": [],
+    "image": {},
+    "location": {
+      "id": 10,
+      "lat": 120.706877,
+      "lng": -712.0101065,
+      "formattedAddress": "Formatted Address 10",
+      "zipcode": "Zipcode 10",
+      "city": "City 10",
+      "state_long": "State Long 10",
+      "state_short": "State Short 10",
+      "country_long": "Contry Long 10",
+      "country_short": "Contry Short 10"
+    },
+    "gallery": [
+      {
+        "id": 10,
+        "url": "/images/post/4.jpg"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "agentId": 11,
+    "title": "Tittle 11",
+    "slug": "Slug 11",
+    "content": "Content 11",
+    "status": "Status 11",
+    "price": "Price 11",
+    "isNegotiable": false,
+    "propertyType": "Type 11",
+    "condition": "Condition 11",
+    "rating": 5,
+    "ratingCount": 11,
+    "contactNumber": "Contact Number 11",
+    "amenities": [],
+    "image": {},
+    "location": {
+      "id": 11,
+      "lat": 120.706877,
+      "lng": -712.0111165,
+      "formattedAddress": "Formatted Address 11",
+      "zipcode": "Zipcode 11",
+      "city": "City 11",
+      "state_long": "State Long 11",
+      "state_short": "State Short 11",
+      "country_long": "Contry Long 11",
+      "country_short": "Contry Short 11"
+    },
+    "gallery": [
+      {
+        "id": 11,
+        "url": "/images/post/0.jpg"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "agentId": 12,
+    "title": "Tittle 12",
+    "slug": "Slug 12",
+    "content": "Content 12",
+    "status": "Status 12",
+    "price": "Price 12",
+    "isNegotiable": false,
+    "propertyType": "Type 12",
+    "condition": "Condition 12",
+    "rating": 5,
+    "ratingCount": 12,
+    "contactNumber": "Contact Number 12",
+    "amenities": [],
+    "image": {},
+    "location": {
+      "id": 12,
+      "lat": 120.706877,
+      "lng": -712.01265,
+      "formattedAddress": "Formatted Address 12",
+      "zipcode": "Zipcode 12",
+      "city": "City 12",
+      "state_long": "State Long 12",
+      "state_short": "State Short 12",
+      "country_long": "Contry Long 12",
+      "country_short": "Contry Short 12"
+    },
+    "gallery": [
+      {
+        "id": 12,
+        "url": "/images/post/1.jpg"
+      }
+    ]
+  }
+]
