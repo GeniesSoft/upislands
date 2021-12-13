@@ -2,17 +2,17 @@
   {
     "id": 65362,
     "agentId": 2125,
-    "title": "Awesome Cotton Chicken",
-    "slug": "reiciendis-consequatur-dolore",
-    "content": "In South Williamsburg only a few blocks inland from the East River, Marlo &Sons is a rustic respite with nice wine, good cocktails, and excellent snacking fare such as oysters, local cheese, and potato tortilla. But thereâ€™s more: seasonal salads and soups, the famous brick chicken, a dimly lit space outfitted in various types of wood(this is an Andrew Tarlow restaurant, after all). In many ways.",
-    "status": "draft",
-    "price": "253.00",
+    "title": "Trip Title",
+    "slug": "Trip Slug",
+    "content": "Trip Content",
+    "status": "Active",
+    "price": "Trip Price",
     "isNegotiable": true,
-    "propertyType": "Hotel",
+    "propertyType": "Trip",
     "condition": "Excellent",
     "rating": 5,
     "ratingCount": 35,
-    "contactNumber": "1-403-000-9038 x910",
+    "contactNumber": "Trip Contact",
     "amenities": [
       {
         "id": 11895,
@@ -48,26 +48,26 @@
       "id": 48797,
       "lat": 40.706877,
       "lng": -74.011265,
-      "formattedAddress": "Broklyn New York, United States Of America",
+      "formattedAddress": "Trip Address",
       "zipcode": "10001",
       "city": "Broklyn",
-      "state_long": "New York",
-      "state_short": "NY",
-      "country_long": "United States Of America",
-      "country_short": "USA"
+      "state_long": "Trip State Long",
+      "state_short": "Trip State Shot",
+      "country_long": "Trip Country Long",
+      "country_short": "Trip Country Short"
     },
     "gallery": [
       {
-        "id": 49921,
-        "url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-single2.jpg"
+        "id": 1,
+        "url": "img1.jpg"
       },
       {
-        "id": 43045,
-        "url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-single3.jpg"
+        "id": 2,
+        "url": "img2.jpg"
       },
       {
-        "id": 19843,
-        "url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-single4.jpg"
+        "id": 3,
+        "url": "img3.jpg"
       }
     ],
     "reviews": [

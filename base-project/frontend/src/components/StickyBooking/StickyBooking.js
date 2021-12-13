@@ -33,7 +33,7 @@ const StickyBooking = ({logo, title, price, rating, action, className}) => {
                             <>{title && <Title>{title}</Title>}</>
                         ) : (
                             <Price>
-                                <span>${price}</span> / Night
+                                <span>${price}</span> / hour
                             </Price>
                         )}
                         {rating && <HotelRating>{rating}</HotelRating>}
@@ -46,7 +46,7 @@ const StickyBooking = ({logo, title, price, rating, action, className}) => {
             <HotelAction className="hotel_action">
                 {windowInnerWidth > 767 && (
                     <Price>
-                        <span>${price}</span> / Night
+                        <span>${price}</span> / hour
                     </Price>
                 )}
                 <ActionBtn>{action}</ActionBtn>

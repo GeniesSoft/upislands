@@ -118,7 +118,7 @@ const SinglePage = ({match}) => {
                             rating={rating}
                             ratingCount={ratingCount}
                         />
-                        <Amenities amenities={amenities}/>
+                        {/*<Amenities amenities={amenities}/>*/}
                         <Location location={data[0]}/>
                     </Col>
                     <Col xl={8}>
