@@ -12,7 +12,7 @@ const Amenities = ({titleStyle, linkStyle}) => {
     return (
         <Element name="amenities" className="Amenities">
             <AmenitiesWrapper>
-                <Heading as="h2" content="Amenities" {...titleStyle} />
+                <Heading as="h2" content="Guides" {...titleStyle} />
                 <AmenitiesArea>
                     <IconCard icon={<FaWifi/>} title="Free wifi"/>
                     <IconCard icon={<FaCarAlt/>} title="Free parking"/>

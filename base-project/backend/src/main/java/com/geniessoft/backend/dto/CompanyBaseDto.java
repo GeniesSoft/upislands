@@ -14,7 +14,6 @@ public abstract class CompanyBaseDto {
     @NotEmptyOrSpaceOrNull(message = "Company description cannot be empty.")
     protected String companyDescription;
 
-    private boolean guide;
+    protected AddressDto address;
 
-    private AddressDto address;
 }

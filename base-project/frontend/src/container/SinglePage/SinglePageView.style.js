@@ -199,7 +199,7 @@ export const ButtonGroup = styled.div`
   }
 `;
 
-export const PostImage = styled.div`
+export const PostImageWrapper = styled.div`
   height: 600px;
   position: relative;
   margin: 10px;
@@ -225,7 +225,16 @@ export const PostImage = styled.div`
 
   }
   
-  img.half {
+  .full {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+    .half1 {
     width: 50%;
     height: 100%;
     position: absolute;
@@ -235,7 +244,34 @@ export const PostImage = styled.div`
     border-bottom-left-radius: 20px;
   }
   
-  img.quarter1 {
+  .half2 {
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+  
+  .merge-quarter1 {
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    border-top-right-radius: 20px;
+  }
+  
+  .merge-quarter2 {
+    width: 50%;
+    height: 50%;
+    top: 50%;
+    left: 50%;
+    border-bottom-right-radius: 20px;
+  }
+  
+  .quarter1 {
     width: 25%;
     height: 50%;
     position: absolute;
@@ -243,7 +279,7 @@ export const PostImage = styled.div`
     object-fit: cover;
   }
   
-  img.quarter2 {
+  .quarter2 {
     width: 25%;
     height: 50%;
     position: absolute;
@@ -252,7 +288,7 @@ export const PostImage = styled.div`
     border-top-right-radius: 20px;
   }
   
-  img.quarter3 {
+  .quarter3 {
     width: 25%;
     height: 50%;
     position: absolute;
@@ -261,7 +297,7 @@ export const PostImage = styled.div`
     object-fit: cover;
   }
   
-  img.quarter4 {
+  .quarter4 {
     width: 25%;
     height: 50%;
     position: absolute;

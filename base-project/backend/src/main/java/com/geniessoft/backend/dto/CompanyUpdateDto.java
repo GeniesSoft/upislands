@@ -11,10 +11,10 @@ import java.util.List;
 @Setter
 public class CompanyUpdateDto extends CompanyBaseDto{
 
-    @Positive(message = "Location Id must provide")
+    @Positive(message = "Company Id must provide")
     private int companyId;
 
-    @LocationListConstraint(message = "You must add at least one location.")
-    private List<Integer> locationIdList;
+    @Positive(message = "User Id must provide")
+    private int userId;
 
 }

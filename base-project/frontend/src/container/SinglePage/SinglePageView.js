@@ -6,26 +6,25 @@ import Container from 'components/UI/Container/Container';
 import Loader from 'components/Loader/Loader';
 import useWindowSize from 'library/hooks/useWindowSize';
 import Description from './Description/Description';
-import Amenities from './Amenities/Amenities';
+import Guides from './Guides/Guides';
 import Location from './Location/Location';
 import Review from './Review/Review';
 import Reservation from './Reservation/Reservation';
 import BottomReservation from './Reservation/BottomReservation';
 import TopBar from './TopBar/TopBar';
-import SinglePageWrapper, {PostImage} from './SinglePageView.style';
+import SinglePageWrapper, {PostImageWrapper} from './SinglePageView.style';
 import PostImageGallery from './ImageGallery/ImageGallery';
 import useDataApi from 'library/hooks/useDataApi';
 import isEmpty from 'lodash/isEmpty';
+import PostImages from "../../components/PostImages/PostImages";
 
 const SinglePage = ({match}) => {
     const {href} = useLocation();
     const [isModalShowing, setIsModalShowing] = useState(false);
     const {width} = useWindowSize();
 
-    let url = '/data/trip-single.json';
-    if (!match.params.slug) {
-        url += match.params.slug;
-    }
+    let url = '/data/trips.json';
+
     const {data, loading} = useDataApi(url);
     if (isEmpty(data) || loading) return <Loader/>;
     const {
@@ -37,38 +36,15 @@ const SinglePage = ({match}) => {
         gallery,
         location,
         content,
-        amenities,
+        guides,
         author,
-    } = data[0];
+    } = data[ (parseInt(match.params.slug) - 1) ];
 
     return (
         <SinglePageWrapper>
-            <PostImage>
-                <img
-                    className="half"
-                    src="/images/post/0.jpg"
-                    alt="Listing details page banner"
-                />
-                <img
-                    className="quarter1"
-                    src="/images/post/1.jpg"
-                    alt="Listing details page banner"
-                />
-                <img
-                    className="quarter2"
-                    src="/images/post/2.jpg"
-                    alt="Listing details page banner"
-                />
-                <img
-                    className="quarter3"
-                    src="/images/post/3.jpg"
-                    alt="Listing details page banner"
-                />
-                <img
-                    className="quarter4"
-                    src="/images/post/4.jpg"
-                    alt="Listing details page banner"
-                />
+            <PostImageWrapper>
+                <PostImages gallery={gallery} />
+
                 <Button
                     type="primary"
                     onClick={() => setIsModalShowing(true)}
@@ -88,7 +64,7 @@ const SinglePage = ({match}) => {
                     closable={false}
                 >
                     <Fragment>
-                        <PostImageGallery/>
+                        <PostImageGallery gallery={gallery} />
                         <Button
                             onClick={() => setIsModalShowing(false)}
                             className="image_gallery_close"
@@ -104,7 +80,7 @@ const SinglePage = ({match}) => {
                         </Button>
                     </Fragment>
                 </Modal>
-            </PostImage>
+            </PostImageWrapper>
 
             <TopBar title={title} shareURL={href} author={author} media={gallery}/>
 
@@ -118,8 +94,8 @@ const SinglePage = ({match}) => {
                             rating={rating}
                             ratingCount={ratingCount}
                         />
-                        {/*<Amenities amenities={amenities}/>*/}
-                        <Location location={data[0]}/>
+                        <Guides guides={guides}/>
+                        <Location location={data[ (parseInt(match.params.slug) - 1) ]}/>
                     </Col>
                     <Col xl={8}>
                         {width > 1200 ? (
@@ -129,7 +105,7 @@ const SinglePage = ({match}) => {
                                 top={202}
                                 bottomBoundary="#reviewSection"
                             >
-                                <Reservation/>
+                                <Reservation guides={guides} />
                             </Sticky>
                         ) : (
                             <BottomReservation

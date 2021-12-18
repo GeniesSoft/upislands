@@ -1,8 +1,10 @@
+import CompanyContainer from "../containers/CompanyContainer";
+
 const CompaniesView = () => {
 
     return (
         <div>
-            Companies
+            <CompanyContainer />
         </div>
     );
 }

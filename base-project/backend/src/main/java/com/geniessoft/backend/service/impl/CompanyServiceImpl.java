@@ -34,6 +34,11 @@ public class CompanyServiceImpl implements CompanyService {
     private final LocationService locationService;
 
     @Override
+    public List<Company> findAllCompanies() {
+        return companyRepository.findAll();
+    }
+
+    @Override
     public Company findCompanyById(Integer companyId) {
         Optional<Company> company = companyRepository
                 .findByCompanyIdAndDeletedIsFalse(companyId);
@@ -49,12 +54,11 @@ public class CompanyServiceImpl implements CompanyService {
         Company company = mapper.companyRegisterDtoToCompany(companyRegisterDto);
         User user = userService.findUser(companyRegisterDto.getUserId());
         company.setJobOwner(user);
-        List<Location> locationList = getLocations(companyRegisterDto.getLocationIdList());
-        company.setLocationList(locationList);
         companyRepository.save(company);
 
         return company;
     }
+
     @Override
     public List<Company> findCompaniesByLocationId(Integer locationId){
         Location location = locationService.findLocationById(locationId);
@@ -94,9 +98,8 @@ public class CompanyServiceImpl implements CompanyService {
         }
     }
 
-
     @Override
-    public void checkUserHasCompany(int userId) {
+    public void checkUserHasCompany(long userId) {
         Optional<Company> company = companyRepository
                 .findFirstByJobOwnerUserId(userId);
         if (company.isPresent()) {
@@ -115,10 +118,19 @@ public class CompanyServiceImpl implements CompanyService {
         }
         mapper.updateCompany(company, companyUpdateDto);
         mapper.updateAddress(company.getAddress(), companyUpdateDto);
-        company.setLocationList(getLocations(companyUpdateDto.getLocationIdList()));
         companyRepository.save(company);
 
         return company;
+    }
+
+    @Override
+    public void addLocation(Integer companyId, Integer locationId) {
+        Company company = findCompanyById(companyId);
+        Location location = locationService.findLocationById(locationId);
+
+        company.getLocationList().add(location);
+
+        companyRepository.save(company);
     }
 
     @Override

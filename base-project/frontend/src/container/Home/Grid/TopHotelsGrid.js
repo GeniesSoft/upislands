@@ -10,7 +10,7 @@ import useDataApi from 'library/hooks/useDataApi';
 import {LISTING_POSTS_PAGE, SINGLE_POST_PAGE} from 'settings/constant';
 
 const TopHotelsGrid = () => {
-    const {data, loading} = useDataApi('/data/top-trips.json');
+    const {data, loading} = useDataApi('/data/trips.json');
     const {width} = useWindowSize();
 
     let posts = data;
@@ -32,6 +32,8 @@ const TopHotelsGrid = () => {
         posts = data.slice(0, 10);
         limit = 10;
     }
+
+    posts = data.slice(3,6)
 
     return (
         <Container fluid={true}>

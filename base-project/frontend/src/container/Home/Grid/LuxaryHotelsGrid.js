@@ -10,7 +10,7 @@ import SectionTitle from 'components/SectionTitle/SectionTitle';
 import {LISTING_POSTS_PAGE, SINGLE_POST_PAGE,} from '../../../settings/constant';
 
 const LuxaryHotelsGrid = () => {
-    const {data, loading} = useDataApi('/data/luxary-trips.json');
+    const {data, loading} = useDataApi('/data/trips.json');
     const {width} = useWindowSize();
 
     let posts = data;
@@ -32,6 +32,8 @@ const LuxaryHotelsGrid = () => {
         posts = data.slice(0, 10);
         limit = 10;
     }
+
+    posts = data.slice(0,3);
 
     return (
         <Container fluid={true}>

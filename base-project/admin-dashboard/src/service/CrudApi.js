@@ -1,4 +1,5 @@
 import Notify from "./notification/Notify";
+import axios from "axios";
 
 class CrudApi {
 
@@ -61,6 +62,37 @@ class CrudApi {
             });
     }
 
+    specific(method, address, request) {
+        const pid = Notify.startProcess("Request is pending...");
+        switch (method){
+            case "GET":
+                axios
+                    .get(address, request)
+                    .then(response => {
+                        Notify.updateProcess(pid, "success", response.data);
+                    })
+                    .catch(error => {
+                        Notify.updateProcess(pid, "error", "Request failed!");
+                        this.handleError(error);
+                    });
+                break;
+            case "POST":
+                axios
+                    .post(address, request)
+                    .then(response => {
+                        Notify.updateProcess(pid, "success", response.data);
+                    })
+                    .catch(error => {
+                        Notify.updateProcess(pid, "error", "Request failed!");
+                        this.handleError(error);
+                    });
+                break;
+            default:
+                Notify.updateProcess(pid, "error", "Request failed!");
+                break;
+        }
+    }
+
     handleError(error) {
         if (!error.response) {
             Notify.error("Network Error");
@@ -85,6 +117,10 @@ class CrudApi {
                 case 409:
                     console.log(error.response);
                     Notify.error("Conflict");
+                    break;
+                case 500:
+                    console.log(error.response);
+                    Notify.error("Server Error");
                     break;
                 default:
                     Notify.error(error.response);

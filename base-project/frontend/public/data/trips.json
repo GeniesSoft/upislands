@@ -3,7 +3,7 @@
     "id": 1,
     "agentId": 1,
     "title": "Tittle 1",
-    "slug": "Slug 1",
+    "slug": "1",
     "content": "Content 1",
     "status": "Status 1",
     "price": "Price 1",
@@ -13,7 +13,14 @@
     "rating": 5,
     "ratingCount": 1,
     "contactNumber": "Contact Number 1",
-    "amenities": [],
+    "guides": [
+      {
+        "id": 1,
+        "name": "Guide1",
+        "location": "Guide1 Location",
+        "image": "/images/coming-soon.png"
+      }
+    ],
     "image": {},
     "location": {
       "id": 1,
@@ -32,13 +39,37 @@
         "id": 1,
         "url": "/images/post/0.jpg"
       }
+    ],
+    "reviews": [
+      {
+        "reviewID": 1,
+        "reviewTitle": "Review 1",
+        "reviewText": "Review 1 Text",
+        "reviewAuthorId": 1,
+        "reviewAuthorFirstName": "Author 1 Name",
+        "reviewAuthorLastName": "Author 1 Lastname",
+        "reviewAuthorEmail": "Author1@mail.com",
+        "reviewAuthorPic": {
+          "id": 1,
+          "url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-single7.jpg"
+        },
+        "reviewDate": "2018-11-25T01:20:05.316Z",
+        "reviewFields": [
+          {
+            "id": 1,
+            "rating": 4,
+            "ratingFieldName": "Fun"
+          }
+        ]
+      }
     ]
+
   },
   {
     "id": 2,
     "agentId": 2,
     "title": "Tittle 2",
-    "slug": "Slug 2",
+    "slug": "2",
     "content": "Content 2",
     "status": "Status 2",
     "price": "Price 2",
@@ -46,9 +77,16 @@
     "propertyType": "Type 2",
     "condition": "Condition 2",
     "rating": 5,
-    "ratingCount": 2,
+    "ratingCount": 1,
     "contactNumber": "Contact Number 2",
-    "amenities": [],
+    "guides": [
+      {
+        "id": 1,
+        "name": "Guide1",
+        "location": "Guide1 Location",
+        "image": "/images/coming-soon.png"
+      }
+    ],
     "image": {},
     "location": {
       "id": 2,
@@ -65,7 +103,34 @@
     "gallery": [
       {
         "id": 2,
+        "url": "/images/post/0.jpg"
+      },
+      {
+        "id": 2,
         "url": "/images/post/1.jpg"
+      }
+    ],
+    "reviews": [
+      {
+        "reviewID": 2,
+        "reviewTitle": "Review 2",
+        "reviewText": "Review 2 Text",
+        "reviewAuthorId": 2,
+        "reviewAuthorFirstName": "Author 2 Name",
+        "reviewAuthorLastName": "Author 2 Lastname",
+        "reviewAuthorEmail": "Author2@mail.com",
+        "reviewAuthorPic": {
+          "id": 2,
+          "url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-single7.jpg"
+        },
+        "reviewDate": "2018-11-25T01:20:05.316Z",
+        "reviewFields": [
+          {
+            "id": 2,
+            "rating": 5,
+            "ratingFieldName": "Fun"
+          }
+        ]
       }
     ]
   },
@@ -73,7 +138,7 @@
     "id": 3,
     "agentId": 3,
     "title": "Tittle 3",
-    "slug": "Slug 3",
+    "slug": "3",
     "content": "Content 3",
     "status": "Status 3",
     "price": "Price 3",
@@ -81,9 +146,28 @@
     "propertyType": "Type 3",
     "condition": "Condition 3",
     "rating": 5,
-    "ratingCount": 3,
+    "ratingCount": 1,
     "contactNumber": "Contact Number 3",
-    "amenities": [],
+    "guides": [
+      {
+        "id": 1,
+        "name": "Guide1",
+        "location": "Guide1 Location",
+        "image": "/images/coming-soon.png"
+      },
+      {
+        "id": 2,
+        "name": "Guide2",
+        "location": "Guide2 Location",
+        "image": "/images/coming-soon.png"
+      },
+      {
+        "id": 3,
+        "name": "Guide3",
+        "location": "Guide3 Location",
+        "image": "/images/coming-soon.png"
+      }
+    ],
     "image": {},
     "location": {
       "id": 3,
@@ -100,7 +184,38 @@
     "gallery": [
       {
         "id": 3,
+        "url": "/images/post/0.jpg"
+      },
+      {
+        "id": 3,
+        "url": "/images/post/1.jpg"
+      },
+      {
+        "id": 3,
         "url": "/images/post/2.jpg"
+      }
+    ],
+    "reviews": [
+      {
+        "reviewID": 3,
+        "reviewTitle": "Review 3",
+        "reviewText": "Review 3 Text",
+        "reviewAuthorId": 3,
+        "reviewAuthorFirstName": "Author 3 Name",
+        "reviewAuthorLastName": "Author 3 Lastname",
+        "reviewAuthorEmail": "Author3@mail.com",
+        "reviewAuthorPic": {
+          "id": 3,
+          "url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-single7.jpg"
+        },
+        "reviewDate": "2018-11-25T01:20:05.316Z",
+        "reviewFields": [
+          {
+            "id": 3,
+            "rating": 3,
+            "ratingFieldName": "Fun"
+          }
+        ]
       }
     ]
   },
@@ -108,7 +223,7 @@
     "id": 4,
     "agentId": 4,
     "title": "Tittle 4",
-    "slug": "Slug 4",
+    "slug": "4",
     "content": "Content 4",
     "status": "Status 4",
     "price": "Price 4",
@@ -116,9 +231,34 @@
     "propertyType": "Type 4",
     "condition": "Condition 4",
     "rating": 5,
-    "ratingCount": 4,
+    "ratingCount": 1,
     "contactNumber": "Contact Number 4",
-    "amenities": [],
+    "guides": [
+      {
+        "id": 1,
+        "name": "Guide1",
+        "location": "Guide1 Location",
+        "image": "/images/coming-soon.png"
+      },
+      {
+        "id": 2,
+        "name": "Guide2",
+        "location": "Guide2 Location",
+        "image": "/images/coming-soon.png"
+      },
+      {
+        "id": 3,
+        "name": "Guide3",
+        "location": "Guide3 Location",
+        "image": "/images/coming-soon.png"
+      },
+      {
+        "id": 4,
+        "name": "Guide4",
+        "location": "Guide4 Location",
+        "image": "/images/coming-soon.png"
+      }
+    ],
     "image": {},
     "location": {
       "id": 4,
@@ -135,7 +275,42 @@
     "gallery": [
       {
         "id": 4,
+        "url": "/images/post/0.jpg"
+      },
+      {
+        "id": 4,
+        "url": "/images/post/1.jpg"
+      },
+      {
+        "id": 4,
+        "url": "/images/post/2.jpg"
+      },
+      {
+        "id": 4,
         "url": "/images/post/3.jpg"
+      }
+    ],
+    "reviews": [
+      {
+        "reviewID": 4,
+        "reviewTitle": "Review 4",
+        "reviewText": "Review 4 Text",
+        "reviewAuthorId": 4,
+        "reviewAuthorFirstName": "Author 4 Name",
+        "reviewAuthorLastName": "Author 4 Lastname",
+        "reviewAuthorEmail": "Author4@mail.com",
+        "reviewAuthorPic": {
+          "id": 4,
+          "url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-single7.jpg"
+        },
+        "reviewDate": "2018-11-25T01:20:05.316Z",
+        "reviewFields": [
+          {
+            "id": 4,
+            "rating": 1,
+            "ratingFieldName": "Fun"
+          }
+        ]
       }
     ]
   },
@@ -143,7 +318,7 @@
     "id": 5,
     "agentId": 5,
     "title": "Tittle 5",
-    "slug": "Slug 5",
+    "slug": "5",
     "content": "Content 5",
     "status": "Status 5",
     "price": "Price 5",
@@ -151,9 +326,34 @@
     "propertyType": "Type 5",
     "condition": "Condition 5",
     "rating": 5,
-    "ratingCount": 5,
+    "ratingCount": 1,
     "contactNumber": "Contact Number 5",
-    "amenities": [],
+    "guides": [
+      {
+        "id": 1,
+        "name": "Guide1",
+        "location": "Guide1 Location",
+        "image": "/images/coming-soon.png"
+      },
+      {
+        "id": 2,
+        "name": "Guide2",
+        "location": "Guide2 Location",
+        "image": "/images/coming-soon.png"
+      },
+      {
+        "id": 3,
+        "name": "Guide3",
+        "location": "Guide3 Location",
+        "image": "/images/coming-soon.png"
+      },
+      {
+        "id": 4,
+        "name": "Guide4",
+        "location": "Guide4 Location",
+        "image": "/images/coming-soon.png"
+      }
+    ],
     "image": {},
     "location": {
       "id": 5,
@@ -170,7 +370,46 @@
     "gallery": [
       {
         "id": 5,
+        "url": "/images/post/0.jpg"
+      },
+      {
+        "id": 5,
+        "url": "/images/post/1.jpg"
+      },
+      {
+        "id": 5,
+        "url": "/images/post/2.jpg"
+      },
+      {
+        "id": 5,
+        "url": "/images/post/3.jpg"
+      },
+      {
+        "id": 5,
         "url": "/images/post/4.jpg"
+      }
+    ],
+    "reviews": [
+      {
+        "reviewID": 5,
+        "reviewTitle": "Review 5",
+        "reviewText": "Review 5 Text",
+        "reviewAuthorId": 5,
+        "reviewAuthorFirstName": "Author 5 Name",
+        "reviewAuthorLastName": "Author 5 Lastname",
+        "reviewAuthorEmail": "Author5@mail.com",
+        "reviewAuthorPic": {
+          "id": 5,
+          "url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-single7.jpg"
+        },
+        "reviewDate": "2018-11-25T01:20:05.316Z",
+        "reviewFields": [
+          {
+            "id": 5,
+            "rating": 5,
+            "ratingFieldName": "Fun"
+          }
+        ]
       }
     ]
   },
@@ -178,7 +417,7 @@
     "id": 6,
     "agentId": 6,
     "title": "Tittle 6",
-    "slug": "Slug 6",
+    "slug": "6",
     "content": "Content 6",
     "status": "Status 6",
     "price": "Price 6",
@@ -186,9 +425,46 @@
     "propertyType": "Type 6",
     "condition": "Condition 6",
     "rating": 5,
-    "ratingCount": 6,
+    "ratingCount": 1,
     "contactNumber": "Contact Number 6",
-    "amenities": [],
+    "guides": [
+      {
+        "id": 1,
+        "name": "Guide1",
+        "location": "Guide1 Location",
+        "image": "/images/coming-soon.png"
+      },
+      {
+        "id": 2,
+        "name": "Guide2",
+        "location": "Guide2 Location",
+        "image": "/images/coming-soon.png"
+      },
+      {
+        "id": 3,
+        "name": "Guide3",
+        "location": "Guide3 Location",
+        "image": "/images/coming-soon.png"
+      },
+      {
+        "id": 4,
+        "name": "Guide4",
+        "location": "Guide4 Location",
+        "image": "/images/coming-soon.png"
+      },
+      {
+        "id": 5,
+        "name": "Guide5",
+        "location": "Guide5 Location",
+        "image": "/images/coming-soon.png"
+      },
+      {
+        "id": 6,
+        "name": "Guide6",
+        "location": "Guide6 Location",
+        "image": "/images/coming-soon.png"
+      }
+    ],
     "image": {},
     "location": {
       "id": 6,
@@ -207,215 +483,28 @@
         "id": 6,
         "url": "/images/post/0.jpg"
       }
-    ]
-  },
-  {
-    "id": 7,
-    "agentId": 7,
-    "title": "Tittle 7",
-    "slug": "Slug 7",
-    "content": "Content 7",
-    "status": "Status 7",
-    "price": "Price 7",
-    "isNegotiable": false,
-    "propertyType": "Type 7",
-    "condition": "Condition 7",
-    "rating": 5,
-    "ratingCount": 7,
-    "contactNumber": "Contact Number 7",
-    "amenities": [],
-    "image": {},
-    "location": {
-      "id": 7,
-      "lat": 80.706877,
-      "lng": -78.0765,
-      "formattedAddress": "Formatted Address 7",
-      "zipcode": "Zipcode 7",
-      "city": "City 7",
-      "state_long": "State Long 7",
-      "state_short": "State Short 7",
-      "country_long": "Contry Long 7",
-      "country_short": "Contry Short 7"
-    },
-    "gallery": [
+    ],
+    "reviews": [
       {
-        "id": 7,
-        "url": "/images/post/1.jpg"
-      }
-    ]
-  },
-  {
-    "id": 8,
-    "agentId": 8,
-    "title": "Tittle 8",
-    "slug": "Slug 8",
-    "content": "Content 8",
-    "status": "Status 8",
-    "price": "Price 8",
-    "isNegotiable": false,
-    "propertyType": "Type 8",
-    "condition": "Condition 8",
-    "rating": 5,
-    "ratingCount": 8,
-    "contactNumber": "Contact Number 8",
-    "amenities": [],
-    "image": {},
-    "location": {
-      "id": 8,
-      "lat": 80.706877,
-      "lng": -78.0865,
-      "formattedAddress": "Formatted Address 8",
-      "zipcode": "Zipcode 8",
-      "city": "City 8",
-      "state_long": "State Long 8",
-      "state_short": "State Short 8",
-      "country_long": "Contry Long 8",
-      "country_short": "Contry Short 8"
-    },
-    "gallery": [
-      {
-        "id": 8,
-        "url": "/images/post/2.jpg"
-      }
-    ]
-  },
-  {
-    "id": 9,
-    "agentId": 9,
-    "title": "Tittle 9",
-    "slug": "Slug 9",
-    "content": "Content 9",
-    "status": "Status 9",
-    "price": "Price 9",
-    "isNegotiable": false,
-    "propertyType": "Type 9",
-    "condition": "Condition 9",
-    "rating": 5,
-    "ratingCount": 9,
-    "contactNumber": "Contact Number 9",
-    "amenities": [],
-    "image": {},
-    "location": {
-      "id": 9,
-      "lat": 120.706877,
-      "lng": -712.091065,
-      "formattedAddress": "Formatted Address 9",
-      "zipcode": "Zipcode 9",
-      "city": "City 9",
-      "state_long": "State Long 9",
-      "state_short": "State Short 9",
-      "country_long": "Contry Long 9",
-      "country_short": "Contry Short 9"
-    },
-    "gallery": [
-      {
-        "id": 9,
-        "url": "/images/post/3.jpg"
-      }
-    ]
-  },
-  {
-    "id": 10,
-    "agentId": 10,
-    "title": "Tittle 10",
-    "slug": "Slug 10",
-    "content": "Content 10",
-    "status": "Status 10",
-    "price": "Price 10",
-    "isNegotiable": false,
-    "propertyType": "Type 10",
-    "condition": "Condition 10",
-    "rating": 5,
-    "ratingCount": 10,
-    "contactNumber": "Contact Number 10",
-    "amenities": [],
-    "image": {},
-    "location": {
-      "id": 10,
-      "lat": 120.706877,
-      "lng": -712.0101065,
-      "formattedAddress": "Formatted Address 10",
-      "zipcode": "Zipcode 10",
-      "city": "City 10",
-      "state_long": "State Long 10",
-      "state_short": "State Short 10",
-      "country_long": "Contry Long 10",
-      "country_short": "Contry Short 10"
-    },
-    "gallery": [
-      {
-        "id": 10,
-        "url": "/images/post/4.jpg"
-      }
-    ]
-  },
-  {
-    "id": 11,
-    "agentId": 11,
-    "title": "Tittle 11",
-    "slug": "Slug 11",
-    "content": "Content 11",
-    "status": "Status 11",
-    "price": "Price 11",
-    "isNegotiable": false,
-    "propertyType": "Type 11",
-    "condition": "Condition 11",
-    "rating": 5,
-    "ratingCount": 11,
-    "contactNumber": "Contact Number 11",
-    "amenities": [],
-    "image": {},
-    "location": {
-      "id": 11,
-      "lat": 120.706877,
-      "lng": -712.0111165,
-      "formattedAddress": "Formatted Address 11",
-      "zipcode": "Zipcode 11",
-      "city": "City 11",
-      "state_long": "State Long 11",
-      "state_short": "State Short 11",
-      "country_long": "Contry Long 11",
-      "country_short": "Contry Short 11"
-    },
-    "gallery": [
-      {
-        "id": 11,
-        "url": "/images/post/0.jpg"
-      }
-    ]
-  },
-  {
-    "id": 12,
-    "agentId": 12,
-    "title": "Tittle 12",
-    "slug": "Slug 12",
-    "content": "Content 12",
-    "status": "Status 12",
-    "price": "Price 12",
-    "isNegotiable": false,
-    "propertyType": "Type 12",
-    "condition": "Condition 12",
-    "rating": 5,
-    "ratingCount": 12,
-    "contactNumber": "Contact Number 12",
-    "amenities": [],
-    "image": {},
-    "location": {
-      "id": 12,
-      "lat": 120.706877,
-      "lng": -712.01265,
-      "formattedAddress": "Formatted Address 12",
-      "zipcode": "Zipcode 12",
-      "city": "City 12",
-      "state_long": "State Long 12",
-      "state_short": "State Short 12",
-      "country_long": "Contry Long 12",
-      "country_short": "Contry Short 12"
-    },
-    "gallery": [
-      {
-        "id": 12,
-        "url": "/images/post/1.jpg"
+        "reviewID": 6,
+        "reviewTitle": "Review 6",
+        "reviewText": "Review 6 Text",
+        "reviewAuthorId": 6,
+        "reviewAuthorFirstName": "Author 6 Name",
+        "reviewAuthorLastName": "Author 6 Lastname",
+        "reviewAuthorEmail": "Author6@mail.com",
+        "reviewAuthorPic": {
+          "id": 6,
+          "url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-single7.jpg"
+        },
+        "reviewDate": "2018-11-25T01:20:05.316Z",
+        "reviewFields": [
+          {
+            "id": 6,
+            "rating": 4,
+            "ratingFieldName": "Fun"
+          }
+        ]
       }
     ]
   }

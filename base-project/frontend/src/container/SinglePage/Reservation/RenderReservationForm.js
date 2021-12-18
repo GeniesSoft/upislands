@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button} from 'antd';
+import {Button, Select} from 'antd';
 import HtmlLabel from 'components/UI/HtmlLabel/HtmlLabel';
 import DatePickerRange from 'components/UI/DatePicker/ReactDates';
 import ViewWithPopup from 'components/UI/ViewWithPopup/ViewWithPopup';
@@ -8,15 +8,17 @@ import ReservationFormWrapper, {
     FieldWrapper,
     FormActionArea,
     ItemWrapper,
-    RoomGuestWrapper,
+    JetSkiesWrapper,
 } from './Reservation.style.js';
+import {Option} from "antd/es/mentions";
+import {value} from "lodash/seq";
 
-const RenderReservationForm = () => {
+const RenderReservationForm = (props) => {
     const [formState, setFormState] = useState({
         startDate: null,
         endDate: null,
-        room: 0,
-        guest: 0,
+        guide: null,
+        jetSkies: 0,
     });
 
     const handleIncrement = (type) => {
@@ -48,10 +50,16 @@ const RenderReservationForm = () => {
             endDate: value.setEndDate,
         });
     };
+    const handleGuidOnChange = (value) => {
+        setFormState({
+            ...formState,
+            guide: value,
+        });
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
         alert(
-            `Start Date: ${formState.startDate}\nEnd Date: ${formState.endDate}\nRooms: ${formState.room}\nGuests: ${formState.guest}`
+            `Start Date: ${formState.startDate}\nEnd Date: ${formState.endDate}\nGuide: ${formState.guide}\nJetSkies: ${formState.jetSkies}`
         );
     };
 
@@ -70,32 +78,32 @@ const RenderReservationForm = () => {
                 />
             </FieldWrapper>
             <FieldWrapper>
-                <HtmlLabel htmlFor="guests" content="Guests"/>
+                <HtmlLabel htmlFor="jetSkies" content="Jet Skies"/>
                 <ViewWithPopup
                     key={200}
                     noView={true}
-                    className={formState.room || formState.guest ? 'activated' : ''}
+                    className={formState.jetSkies || formState.guest ? 'activated' : ''}
                     view={
                         <Button type="default">
-                            <span>Room {formState.room > 0 && `: ${formState.room}`}</span>
-                            <span>-</span>
-                            <span>Guest{formState.guest > 0 && `: ${formState.guest}`}</span>
+                            <span>Jet Skies {formState.jetSkies > 0 && `: ${formState.jetSkies}`}</span>
+                            {/*<span>-</span>*/}
+                            {/*<span>Guest{formState.guest > 0 && `: ${formState.guest}`}</span>*/}
                         </Button>
                     }
                     popup={
-                        <RoomGuestWrapper>
+                        <JetSkiesWrapper>
                             <ItemWrapper>
-                                <strong>Room</strong>
+                                <strong>Jet Skies</strong>
                                 <InputIncDec
-                                    id="room"
-                                    increment={() => handleIncrement('room')}
-                                    decrement={() => handleDecrement('room')}
-                                    onChange={(e) => handleIncDecOnChnage(e, 'room')}
-                                    value={formState.room}
+                                    id="jetSkies"
+                                    increment={() => handleIncrement('jetSkies')}
+                                    decrement={() => handleDecrement('jetSkies')}
+                                    onChange={(e) => handleIncDecOnChnage(e, 'jetSkies')}
+                                    value={formState.jetSkies}
                                 />
                             </ItemWrapper>
 
-                            <ItemWrapper>
+{/*                            <ItemWrapper>
                                 <strong>Guest</strong>
                                 <InputIncDec
                                     id="guest"
@@ -104,14 +112,43 @@ const RenderReservationForm = () => {
                                     onChange={(e) => handleIncDecOnChnage(e, 'guest')}
                                     value={formState.guest}
                                 />
-                            </ItemWrapper>
-                        </RoomGuestWrapper>
+                            </ItemWrapper>*/}
+                        </JetSkiesWrapper>
                     }
                 />
             </FieldWrapper>
+
+            <FieldWrapper>
+                <HtmlLabel htmlFor="guide" content="Guide"/>
+                <Select
+                    size={"large"}
+                    bordered={false}
+                    style={
+                        {
+                            padding: "8px",
+                            height: "54px",
+                            width: "100%",
+                            background: "whitesmoke"
+                        }
+                    }
+                    defaultValue="Select Guide"
+                    onChange={(value) => handleGuidOnChange(value)}
+                >
+                    {
+                        props.guides.map(guide => {
+                            return (
+                                <Option style={{width: "100%"}} value={guide.id}>
+                                    {guide.name}
+                                </Option>
+                            );
+                        })
+                    }
+                </Select>
+            </FieldWrapper>
+
             <FormActionArea>
                 <Button htmlType="submit" type="primary">
-                    Book Hotel
+                    Book Trip
                 </Button>
             </FormActionArea>
         </ReservationFormWrapper>

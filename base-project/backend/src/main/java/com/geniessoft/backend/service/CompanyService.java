@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface CompanyService {
 
+    List<Company> findAllCompanies();
+
     Company findCompanyById(Integer companyId);
 
     Company saveCompany(CompanyRegisterDto companyRegisterDto);
@@ -20,9 +22,11 @@ public interface CompanyService {
 
     List<ContentDto> getCompanyContents(int companyId, int offset, int pageSize);
 
+    void addLocation(Integer companyId, Integer locationId);
+
     byte[] getCompanyProfileImage(int companyId);
 
-    void checkUserHasCompany(int userId);
+    void checkUserHasCompany(long userId);
 
     void deleteCompany(Integer companyId);
 

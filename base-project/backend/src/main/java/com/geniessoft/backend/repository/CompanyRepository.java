@@ -13,7 +13,7 @@ public interface CompanyRepository extends JpaRepository<Company,Integer> {
 
     Optional<Company> findByCompanyIdAndDeletedIsFalse(int companyId);
     Optional<Company> findFirstByCompanyNameEquals(String name);
-    Optional<Company> findFirstByJobOwnerUserId(int userId);
+    Optional<Company> findFirstByJobOwnerUserId(long userId);
 
     @Override
     List<Company> findAll();

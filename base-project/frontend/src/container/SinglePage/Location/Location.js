@@ -21,18 +21,15 @@ const Location = ({
                 <Heading as="h2" content="Location" {...titleStyle} />
                 <Text content={formattedAddress} {...locationMetaStyle} />
                 <Text
-                    content="Take an easy walk to the main historic sites of the city. The
-          neighborhood is perfect for an authentic taste of Roman life, with
-          shops, art galleries, restaurants, bars, and clubs all nearby and
-          ready to be discovered."
+                    content="Location Content 1"
                     {...contentStyle}
                 />
                 <Text
-                    content="Distance from Leonardo da Vinci International Airport"
+                    content="Location Content 2"
                     {...contentStyle}
                     {...boldContentStyle}
                 />
-                <Text content="26 mins by car without traffic" {...contentStyle} />
+                <Text content="Location Content 3" {...contentStyle} />
 
                 <Map location={location} multiple={false}/>
             </LocationWrapper>

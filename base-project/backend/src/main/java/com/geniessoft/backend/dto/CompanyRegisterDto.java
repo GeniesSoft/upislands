@@ -14,7 +14,4 @@ public class CompanyRegisterDto extends CompanyBaseDto{
     @Positive(message = "You must enter job owner")
     private int userId;
 
-    @LocationListConstraint(message = "You must add at least one location.")
-    private List<Integer> locationIdList;
-
 }

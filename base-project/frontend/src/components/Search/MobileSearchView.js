@@ -204,7 +204,7 @@ const FilterDrawer = ({history, location}) => {
                         <AccordionItem>
                             <AccordionItemHeading>
                                 <AccordionItemButton>
-                                    <Heading as="h4" content="Amenities"/>
+                                    <Heading as="h4" content="Guides"/>
                                     <IoIosArrowDown/>
                                 </AccordionItemButton>
                             </AccordionItemHeading>

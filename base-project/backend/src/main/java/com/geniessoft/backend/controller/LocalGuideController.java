@@ -3,7 +3,6 @@ package com.geniessoft.backend.controller;
 import com.geniessoft.backend.dto.LocalGuideBaseDto;
 import com.geniessoft.backend.dto.LocalGuideGetDto;
 import com.geniessoft.backend.dto.LocalGuideUpdateDto;
-import com.geniessoft.backend.model.Booking;
 import com.geniessoft.backend.model.Company;
 import com.geniessoft.backend.model.LocalGuide;
 import com.geniessoft.backend.model.LocalGuideSession;

@@ -11,10 +11,10 @@ const topBarMenu = [
         name: 'Overview',
         target: 'overview',
     },
-    // {
-    //     name: 'Amenities',
-    //     target: 'amenities',
-    // },
+    {
+        name: 'Guides',
+        target: 'guides',
+    },
     {
         name: 'Location',
         target: 'location',

@@ -26,7 +26,18 @@ const images = [
     },
 ];
 
-const PostImageGallery = () => {
+const PostImageGallery = (props) => {
+
+    const images = []
+
+    props.gallery.forEach( item => {
+        let image = {
+            original: item.url,
+            thumbnail: item.url
+        }
+        images.push(image);
+    });
+
     return (
         <ImageGalleryWrapper>
             <ImageGallery

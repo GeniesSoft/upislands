@@ -130,7 +130,7 @@ export const FieldWrapper = styled.div`
   }
 `;
 
-export const RoomGuestWrapper = styled.div`
+export const JetSkiesWrapper = styled.div`
   width: 100%;
   strong {
     font-size: 15px;

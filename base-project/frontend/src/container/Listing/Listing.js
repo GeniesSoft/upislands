@@ -47,13 +47,14 @@ export default function Listing({location, history}) {
                             <FilterDrawer history={history} location={location}/>
                         )
                     }
-                    // right={
-                    //     <ShowMapCheckbox>
-                    //         <Checkbox defaultChecked={true} onChange={handleMapToggle}>
-                    //             Show map
-                    //         </Checkbox>
-                    //     </ShowMapCheckbox>
-                    // }
+/*                    right={
+                        <ShowMapCheckbox>
+                            <Checkbox defaultChecked={true} onChange={handleMapToggle}>
+                                Show map
+                            </Checkbox>
+                        </ShowMapCheckbox>
+                    }
+*/
                 />
             </Sticky>
 

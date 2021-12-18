@@ -2,7 +2,6 @@ package com.geniessoft.backend.controller;
 
 import com.geniessoft.backend.dto.UserRegisterDto;
 import com.geniessoft.backend.dto.UserUpdateDto;
-import com.geniessoft.backend.dto.denemeDto;
 import com.geniessoft.backend.model.User;
 import com.geniessoft.backend.service.AnalysisService;
 import com.geniessoft.backend.service.UserService;
