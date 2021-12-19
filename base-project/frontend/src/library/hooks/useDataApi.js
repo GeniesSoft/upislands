@@ -56,7 +56,7 @@ function dataFetchReducer(state, action) {
         case 'FETCH_SUCCESS':
             return {
                 ...state,
-                data: action.payload.slice(0, state.limit),
+                data: action.payload,
                 total: action.payload,
                 loading: false,
                 error: false,
@@ -72,10 +72,7 @@ function dataFetchReducer(state, action) {
                 ...state,
                 data: [
                     ...state.data,
-                    ...state.total.slice(
-                        state.data.length,
-                        state.data.length + state.limit
-                    ),
+                    ...state.total,
                 ],
                 loading: false,
                 error: false,

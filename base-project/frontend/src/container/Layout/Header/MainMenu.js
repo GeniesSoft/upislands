@@ -2,7 +2,7 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import {Menu} from 'antd';
 
-import {AGENT_PROFILE_PAGE, HOME_PAGE, LISTING_POSTS_PAGE, PRICING_PLAN_PAGE,} from 'settings/constant';
+import {AGENT_PROFILE_PAGE, HOME_PAGE, LISTING_POSTS_PAGE} from 'settings/constant';
 
 const MainMenu = ({className}) => {
     return (
@@ -19,7 +19,9 @@ const MainMenu = ({className}) => {
                 <NavLink to={`${AGENT_PROFILE_PAGE}`}>Agent</NavLink>
             </Menu.Item>
             <Menu.Item key="3">
-                <NavLink to={`${PRICING_PLAN_PAGE}`}>Pricing</NavLink>
+                <NavLink to={{pathname: "https://www.boat-ed.com/floridarental/"}} target="_blank">
+                    PWC License
+                </NavLink>
             </Menu.Item>
         </Menu>
     );

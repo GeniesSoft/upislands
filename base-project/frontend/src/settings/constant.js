@@ -4,7 +4,7 @@ export const AGENTS_PAGE = '/agents';
 
 // Listing Single Page Section
 export const LISTING_POSTS_PAGE = '/listing';
-export const SINGLE_POST_PAGE = '/post';
+export const SINGLE_POST_PAGE = '/trip';
 
 // Agent Profile Page Section
 export const AGENT_PROFILE_PAGE = '/profile';
@@ -20,6 +20,7 @@ export const AGENT_PROFILE_CONTACT = '/contact';
 export const PRICING_PLAN_PAGE = '/pricing-plan';
 export const PRIVACY_PAGE = '/privacy';
 export const ADD_HOTEL_PAGE = '/add-hotel';
+export const GUIDE_PAGE = '/guide';
 
 // Login / Registration Page
 export const LOGIN_PAGE = '/sign-in';

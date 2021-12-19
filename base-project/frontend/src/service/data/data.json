@@ -1,0 +1,930 @@
+{
+  "trips": [
+    {
+      "id": 1,
+      "agentId": 1,
+      "title": "Miami Marine Stadium",
+      "slug": "1",
+      "content": "Content 1",
+      "status": "Status 1",
+      "price": "Price 1",
+      "isNegotiable": true,
+      "propertyType": "Type 1",
+      "condition": "Condition 1",
+      "rating": 5,
+      "ratingCount": 1,
+      "contactNumber": "Contact Number 1",
+      "image": {},
+      "location": {
+        "id": 1,
+        "lat": 40.706877,
+        "lng": -74.011265,
+        "formattedAddress": "Formatted Address 1",
+        "zipcode": "Zipcode 1",
+        "city": "City 1",
+        "state_long": "State Long 1",
+        "state_short": "State Short 1",
+        "country_long": "Contry Long 1",
+        "country_short": "Contry Short 1"
+      },
+      "gallery": [
+        {
+          "id": 1,
+          "url": "/images/post/mms/mms-1.JPG"
+        },
+        {
+          "id": 2,
+          "url": "/images/post/mms/mms-2.JPG"
+        },
+        {
+          "id": 3,
+          "url": "/images/post/mms/mms-3.JPG"
+        },
+        {
+          "id": 4,
+          "url": "/images/post/mms/mms-4.JPG"
+        },
+        {
+          "id": 5,
+          "url": "/images/post/mms/mms-5.JPG"
+        },
+        {
+          "id": 6,
+          "url": "/images/post/mms/mms-6.JPG"
+        },
+        {
+          "id": 7,
+          "url": "/images/post/mms/mms-7.JPG"
+        }
+      ],
+      "reviews": [
+        {
+          "reviewID": 1,
+          "reviewTitle": "Review 1",
+          "reviewText": "Review 1 Text",
+          "reviewAuthorId": 1,
+          "reviewAuthorFirstName": "Author 1 Name",
+          "reviewAuthorLastName": "Author 1 Lastname",
+          "reviewAuthorEmail": "Author1@mail.com",
+          "reviewAuthorPic": {
+            "id": 1,
+            "url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-single7.jpg"
+          },
+          "reviewDate": "2018-11-25T01:20:05.316Z",
+          "reviewFields": [
+            {
+              "id": 1,
+              "rating": 4,
+              "ratingFieldName": "Fun"
+            }
+          ]
+        }
+      ]
+
+    },
+    {
+      "id": 2,
+      "agentId": 2,
+      "title": "Star Island",
+      "slug": "2",
+      "content": "Content 2",
+      "status": "Status 2",
+      "price": "Price 2",
+      "isNegotiable": true,
+      "propertyType": "Type 2",
+      "condition": "Condition 2",
+      "rating": 5,
+      "ratingCount": 1,
+      "contactNumber": "Contact Number 2",
+      "image": {},
+      "location": {
+        "id": 2,
+        "lat": 40.706877,
+        "lng": -74.02265,
+        "formattedAddress": "Formatted Address 2",
+        "zipcode": "Zipcode 2",
+        "city": "City 2",
+        "state_long": "State Long 2",
+        "state_short": "State Short 2",
+        "country_long": "Contry Long 2",
+        "country_short": "Contry Short 2"
+      },
+      "gallery": [
+        {
+          "id":1,
+          "url": "/images/post/si/si-1.JPG"
+        },
+        {
+          "id":2,
+          "url": "/images/post/si/si-2.JPG"
+        },
+        {
+          "id":3,
+          "url": "/images/post/si/si-3.JPG"
+        },
+        {
+          "id":4,
+          "url": "/images/post/si/si-4.JPG"
+        }
+      ],
+      "reviews": [
+        {
+          "reviewID": 2,
+          "reviewTitle": "Review 2",
+          "reviewText": "Review 2 Text",
+          "reviewAuthorId": 2,
+          "reviewAuthorFirstName": "Author 2 Name",
+          "reviewAuthorLastName": "Author 2 Lastname",
+          "reviewAuthorEmail": "Author2@mail.com",
+          "reviewAuthorPic": {
+            "id": 2,
+            "url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-single7.jpg"
+          },
+          "reviewDate": "2018-11-25T01:20:05.316Z",
+          "reviewFields": [
+            {
+              "id": 2,
+              "rating": 5,
+              "ratingFieldName": "Fun"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "agentId": 3,
+      "title": "Venation Island",
+      "slug": "3",
+      "content": "Content 3",
+      "status": "Status 3",
+      "price": "Price 3",
+      "isNegotiable": true,
+      "propertyType": "Type 3",
+      "condition": "Condition 3",
+      "rating": 5,
+      "ratingCount": 1,
+      "contactNumber": "Contact Number 3",
+      "image": {},
+      "location": {
+        "id": 3,
+        "lat": 40.706877,
+        "lng": -74.03365,
+        "formattedAddress": "Formatted Address 3",
+        "zipcode": "Zipcode 3",
+        "city": "City 3",
+        "state_long": "State Long 3",
+        "state_short": "State Short 3",
+        "country_long": "Contry Long 3",
+        "country_short": "Contry Short 3"
+      },
+      "gallery": [
+        {
+          "id": 1,
+          "url": "/images/post/vi/vi-1.jpg"
+        },
+        {
+          "id": 2,
+          "url": "/images/post/vi/vi-2.jpg"
+        },
+        {
+          "id": 3,
+          "url": "/images/post/vi/vi-3.jpg"
+        },
+        {
+          "id": 4,
+          "url": "/images/post/vi/vi-4.jpg"
+        }
+      ],
+      "reviews": [
+        {
+          "reviewID": 3,
+          "reviewTitle": "Review 3",
+          "reviewText": "Review 3 Text",
+          "reviewAuthorId": 3,
+          "reviewAuthorFirstName": "Author 3 Name",
+          "reviewAuthorLastName": "Author 3 Lastname",
+          "reviewAuthorEmail": "Author3@mail.com",
+          "reviewAuthorPic": {
+            "id": 3,
+            "url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-single7.jpg"
+          },
+          "reviewDate": "2018-11-25T01:20:05.316Z",
+          "reviewFields": [
+            {
+              "id": 3,
+              "rating": 3,
+              "ratingFieldName": "Fun"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "agentId": 4,
+      "title": "Tittle 4",
+      "slug": "4",
+      "content": "Content 4",
+      "status": "Status 4",
+      "price": "Price 4",
+      "isNegotiable": true,
+      "propertyType": "Type 4",
+      "condition": "Condition 4",
+      "rating": 5,
+      "ratingCount": 1,
+      "contactNumber": "Contact Number 4",
+      "image": {},
+      "location": {
+        "id": 4,
+        "lat": 40.706877,
+        "lng": -74.0465,
+        "formattedAddress": "Formatted Address 4",
+        "zipcode": "Zipcode 4",
+        "city": "City 4",
+        "state_long": "State Long 4",
+        "state_short": "State Short 4",
+        "country_long": "Contry Long 4",
+        "country_short": "Contry Short 4"
+      },
+      "gallery": [
+        {
+          "id": 4,
+          "url": "/images/post/0.jpg"
+        }
+      ],
+      "reviews": [
+        {
+          "reviewID": 4,
+          "reviewTitle": "Review 4",
+          "reviewText": "Review 4 Text",
+          "reviewAuthorId": 4,
+          "reviewAuthorFirstName": "Author 4 Name",
+          "reviewAuthorLastName": "Author 4 Lastname",
+          "reviewAuthorEmail": "Author4@mail.com",
+          "reviewAuthorPic": {
+            "id": 4,
+            "url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-single7.jpg"
+          },
+          "reviewDate": "2018-11-25T01:20:05.316Z",
+          "reviewFields": [
+            {
+              "id": 4,
+              "rating": 1,
+              "ratingFieldName": "Fun"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "agentId": 5,
+      "title": "Tittle 5",
+      "slug": "5",
+      "content": "Content 5",
+      "status": "Status 5",
+      "price": "Price 5",
+      "isNegotiable": true,
+      "propertyType": "Type 5",
+      "condition": "Condition 5",
+      "rating": 5,
+      "ratingCount": 1,
+      "contactNumber": "Contact Number 5",
+      "image": {},
+      "location": {
+        "id": 5,
+        "lat": 80.706877,
+        "lng": -78.055665,
+        "formattedAddress": "Formatted Address 5",
+        "zipcode": "Zipcode 5",
+        "city": "City 5",
+        "state_long": "State Long 5",
+        "state_short": "State Short 5",
+        "country_long": "Contry Long 5",
+        "country_short": "Contry Short 5"
+      },
+      "gallery": [
+        {
+          "id": 1,
+          "url": "/images/post/1.jpg"
+        },
+        {
+          "id": 2,
+          "url": "/images/post/2.jpg"
+        }
+      ],
+      "reviews": [
+        {
+          "reviewID": 5,
+          "reviewTitle": "Review 5",
+          "reviewText": "Review 5 Text",
+          "reviewAuthorId": 5,
+          "reviewAuthorFirstName": "Author 5 Name",
+          "reviewAuthorLastName": "Author 5 Lastname",
+          "reviewAuthorEmail": "Author5@mail.com",
+          "reviewAuthorPic": {
+            "id": 5,
+            "url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-single7.jpg"
+          },
+          "reviewDate": "2018-11-25T01:20:05.316Z",
+          "reviewFields": [
+            {
+              "id": 5,
+              "rating": 5,
+              "ratingFieldName": "Fun"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "agentId": 6,
+      "title": "Tittle 6",
+      "slug": "6",
+      "content": "Content 6",
+      "status": "Status 6",
+      "price": "Price 6",
+      "isNegotiable": true,
+      "propertyType": "Type 6",
+      "condition": "Condition 6",
+      "rating": 5,
+      "ratingCount": 1,
+      "contactNumber": "Contact Number 6",
+      "image": {},
+      "location": {
+        "id": 6,
+        "lat": 80.706877,
+        "lng": -78.0665,
+        "formattedAddress": "Formatted Address 6",
+        "zipcode": "Zipcode 6",
+        "city": "City 6",
+        "state_long": "State Long 6",
+        "state_short": "State Short 6",
+        "country_long": "Contry Long 6",
+        "country_short": "Contry Short 6"
+      },
+      "gallery": [
+        {
+          "id": 3,
+          "url": "/images/post/3.jpg"
+        },
+        {
+          "id": 4,
+          "url": "/images/post/4.jpg"
+        }
+      ],
+      "reviews": [
+        {
+          "reviewID": 6,
+          "reviewTitle": "Review 6",
+          "reviewText": "Review 6 Text",
+          "reviewAuthorId": 6,
+          "reviewAuthorFirstName": "Author 6 Name",
+          "reviewAuthorLastName": "Author 6 Lastname",
+          "reviewAuthorEmail": "Author6@mail.com",
+          "reviewAuthorPic": {
+            "id": 6,
+            "url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-single7.jpg"
+          },
+          "reviewDate": "2018-11-25T01:20:05.316Z",
+          "reviewFields": [
+            {
+              "id": 6,
+              "rating": 4,
+              "ratingFieldName": "Fun"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "guides": [
+    {
+      "id": 1,
+      "name": "Jeff MOUNIR",
+      "content": "Jetskis on the beach",
+      "image": "/images/guides/lg-2.jpg",
+
+      "rating": 5,
+      "ratingCount": 1,
+      "price": "Price 1",
+      "gallery": [
+        {
+          "id": 1,
+          "url": "https://img1.wsimg.com/isteam/ip/cd545e4c-f0d9-47fe-9412-0055aaf02d6b/IMG_5924.jpeg/:/rs=w:370,cg:true,m"
+        },
+        {
+          "id": 2,
+          "url": "https://img1.wsimg.com/isteam/ip/cd545e4c-f0d9-47fe-9412-0055aaf02d6b/IMG_5784.jpeg/:/rs=w:370,cg:true,m"
+        },
+        {
+          "id": 3,
+          "url": "https://img1.wsimg.com/isteam/ip/cd545e4c-f0d9-47fe-9412-0055aaf02d6b/DE55467C-C1CC-4CA5-B76D-5EA435BB3D12.jpeg/:/rs=w:370,cg:true,m"
+        },
+        {
+          "id": 4,
+          "url": "https://img1.wsimg.com/isteam/ip/cd545e4c-f0d9-47fe-9412-0055aaf02d6b/IMG_0329.jpeg/:/rs=w:370,cg:true,m"
+        },
+        {
+          "id": 5,
+          "url": "https://img1.wsimg.com/isteam/ip/cd545e4c-f0d9-47fe-9412-0055aaf02d6b/IMG_0432.jpeg/:/rs=w:370,cg:true,m"
+        }
+      ],
+      "location": {
+        "id": 1,
+        "lat": 60.706877,
+        "lng": -76.066666,
+        "formattedAddress": "Formatted Address 1",
+        "zipcode": "Zipcode 1",
+        "city": "City 1",
+        "state_long": "State Long 1",
+        "state_short": "State Short 1",
+        "country_long": "Contry Long 1",
+        "country_short": "Contry Short 1"
+      },
+      "amenities": {
+        "deposit": {
+          "value": true
+        },
+        "personalItemLocator": {
+          "value": true
+        },
+        "gas": {
+          "value": true
+        },
+        "secondRiderFee": {
+          "value": true
+        }
+      },
+      "reviews": [
+        {
+          "reviewID": 1,
+          "reviewTitle": "Review 1",
+          "reviewText": "Review 1 Text",
+          "reviewAuthorId": 6,
+          "reviewAuthorFirstName": "AuthorName1",
+          "reviewAuthorLastName": "AuthorLastname1",
+          "reviewAuthorEmail": "Author1@mail.com",
+          "reviewAuthorPic": {
+            "id": 1,
+            "url": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+          },
+          "reviewDate": "6068-66-66T06:60:06.666Z",
+          "reviewFields": [
+            {
+              "id": 1,
+              "rating": 4,
+              "ratingFieldName": "Fun"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Mouni MOUNIR",
+      "content": "Jetskis on the beach",
+      "image": "/images/guides/lg-1.jpg",
+
+      "rating": 5,
+      "ratingCount": 1,
+      "price": "Price 2",
+      "gallery": [
+        {
+          "id": 1,
+          "url": "https://img1.wsimg.com/isteam/ip/cd545e4c-f0d9-47fe-9412-0055aaf02d6b/64BC30B8-DFCA-444D-A0C6-A92FFF117986.jpeg/:/rs=w:370,cg:true,m"
+        },
+        {
+          "id": 2,
+          "url": "https://img1.wsimg.com/isteam/ip/cd545e4c-f0d9-47fe-9412-0055aaf02d6b/A51A7A73-CE26-44B6-AEAB-167F7FF91C33.jpeg/:/rs=w:370,cg:true,m"
+        },
+        {
+          "id": 3,
+          "url": "https://img1.wsimg.com/isteam/ip/cd545e4c-f0d9-47fe-9412-0055aaf02d6b/IMG_5923.jpeg/:/rs=w:370,cg:true,m"
+        },
+        {
+          "id": 4,
+          "url": "https://img1.wsimg.com/isteam/ip/cd545e4c-f0d9-47fe-9412-0055aaf02d6b/87829F70-C9EE-43A9-8BEA-0D6354626CF0.jpeg/:/rs=w:370,cg:true,m"
+        },
+        {
+          "id": 5,
+          "url": "https://img1.wsimg.com/isteam/ip/cd545e4c-f0d9-47fe-9412-0055aaf02d6b/IMG_5784.jpeg/:/rs=w:370,cg:true,m"
+        }
+      ],
+      "location": {
+        "id": 2,
+        "lat": 50.706877,
+        "lng": -75.055565,
+        "formattedAddress": "Formatted Address 2",
+        "zipcode": "Zipcode 2",
+        "city": "City 2",
+        "state_long": "State Long 2",
+        "state_short": "State Short 2",
+        "country_long": "Contry Long 2",
+        "country_short": "Contry Short 2"
+      },
+      "amenities": {
+        "deposit": {
+          "value": true
+        },
+        "personalItemLocator": {
+          "value": true
+        },
+        "gas": {
+          "value": true
+        },
+        "secondRiderFee": {
+          "value": true
+        }
+      },
+      "reviews": [
+        {
+          "reviewID": 2,
+          "reviewTitle": "Review 2",
+          "reviewText": "Review 2 Text",
+          "reviewAuthorId": 2,
+          "reviewAuthorFirstName": "AuthorName2",
+          "reviewAuthorLastName": "AuthorLastname2",
+          "reviewAuthorEmail": "Author2@mail.com",
+          "reviewAuthorPic": {
+            "id": 2,
+            "url": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+          },
+          "reviewDate": "5058-55-55T05:50:05.556Z",
+          "reviewFields": [
+            {
+              "id": 2,
+              "rating": 5,
+              "ratingFieldName": "Fun"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Barış Ege",
+      "content": "ml-STD",
+      "image": "https://media-exp1.licdn.com/dms/image/C5603AQFEQH-ukionFg/profile-displayphoto-shrink_800_800/0/1615289399080?e=1645660800&v=beta&t=QGdZ05c_AJkY8V9MlZi5PuHFjEZftSxD1PugcLavsdY",
+
+      "rating": 5,
+      "ratingCount": 1,
+      "price": "Price 3",
+      "gallery": [
+        {
+          "id": 1,
+          "url": "https://img1.wsimg.com/isteam/ip/cd545e4c-f0d9-47fe-9412-0055aaf02d6b/IMG_0431.jpeg/:/rs=w:370,cg:true,m"
+        },
+        {
+          "id": 2,
+          "url": "https://img1.wsimg.com/isteam/ip/cd545e4c-f0d9-47fe-9412-0055aaf02d6b/IMG_0429.jpeg/:/rs=w:370,cg:true,m"
+        },
+        {
+          "id": 3,
+          "url": "https://img1.wsimg.com/isteam/ip/cd545e4c-f0d9-47fe-9412-0055aaf02d6b/IMG_0433.jpeg/:/rs=w:370,cg:true,m"
+        },
+        {
+          "id": 4,
+          "url": "https://img1.wsimg.com/isteam/ip/cd545e4c-f0d9-47fe-9412-0055aaf02d6b/IMG_0428.jpeg/:/rs=w:370,cg:true,m"
+        },
+        {
+          "id": 5,
+          "url": "https://img1.wsimg.com/isteam/ip/cd545e4c-f0d9-47fe-9412-0055aaf02d6b/IMG_5205.jpeg/:/rs=w:370,cg:true,m"
+        }
+      ],
+      "location": {
+        "id": 3,
+        "lat": 60.706877,
+        "lng": -76.066666,
+        "formattedAddress": "Formatted Address 3",
+        "zipcode": "Zipcode 3",
+        "city": "City 3",
+        "state_long": "State Long 3",
+        "state_short": "State Short 3",
+        "country_long": "Contry Long 3",
+        "country_short": "Contry Short 3"
+      },
+      "amenities": {
+        "deposit": {
+          "value": true
+        },
+        "personalItemLocator": {
+          "value": true
+        },
+        "gas": {
+          "value": true
+        },
+        "secondRiderFee": {
+          "value": true
+        }
+      },
+      "reviews": [
+        {
+          "reviewID": 3,
+          "reviewTitle": "Review 3",
+          "reviewText": "Review 3 Text",
+          "reviewAuthorId": 3,
+          "reviewAuthorFirstName": "AuthorName3",
+          "reviewAuthorLastName": "AuthorLastname3",
+          "reviewAuthorEmail": "Author3@mail.com",
+          "reviewAuthorPic": {
+            "id": 3,
+            "url": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+          },
+          "reviewDate": "6068-66-66T06:60:06.666Z",
+          "reviewFields": [
+            {
+              "id": 3,
+              "rating": 4,
+              "ratingFieldName": "Fun"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Guide4",
+      "content": "Content 4",
+      "image": "/images/coming-soon.png",
+
+      "rating": 5,
+      "ratingCount": 1,
+      "price": "Price 4",
+      "gallery": [
+        {
+          "id": 1,
+          "url": "/images/coming-soon.png"
+        }
+      ],
+      "location": {
+        "id": 1,
+        "lat": 40.706877,
+        "lng": -74.011265,
+        "formattedAddress": "Formatted Address 4",
+        "zipcode": "Zipcode 4",
+        "city": "City 4",
+        "state_long": "State Long 4",
+        "state_short": "State Short 4",
+        "country_long": "Contry Long 4",
+        "country_short": "Contry Short 4"
+      },
+      "amenities": {
+        "deposit": {
+          "value": true
+        },
+        "personalItemLocator": {
+          "value": true
+        },
+        "gas": {
+          "value": true
+        },
+        "secondRiderFee": {
+          "value": true
+        }
+      },
+      "reviews": [
+        {
+          "reviewID": 4,
+          "reviewTitle": "Review 4",
+          "reviewText": "Review 1 Text",
+          "reviewAuthorId": 4,
+          "reviewAuthorFirstName": "AuthorName4",
+          "reviewAuthorLastName": "AuthorLastname4",
+          "reviewAuthorEmail": "Author4@mail.com",
+          "reviewAuthorPic": {
+            "id": 4,
+            "url": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+          },
+          "reviewDate": "2018-11-25T01:20:05.316Z",
+          "reviewFields": [
+            {
+              "id": 4,
+              "rating": 5,
+              "ratingFieldName": "Fun"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Guide5",
+      "content": "Content 5",
+      "image": "/images/coming-soon.png",
+
+      "rating": 5,
+      "ratingCount": 2,
+      "price": "Price 5",
+      "gallery": [
+        {
+          "id": 5,
+          "url": "/images/coming-soon.png"
+        }
+      ],
+      "location": {
+        "id": 2,
+        "lat": 40.706877,
+        "lng": -74.022265,
+        "formattedAddress": "Formatted Address 5",
+        "zipcode": "Zipcode 5",
+        "city": "City 5",
+        "state_long": "State Long 5",
+        "state_short": "State Short 5",
+        "country_long": "Contry Long 5",
+        "country_short": "Contry Short 5"
+      },
+      "amenities": {
+        "deposit": {
+          "value": true
+        },
+        "personalItemLocator": {
+          "value": true
+        },
+        "gas": {
+          "value": true
+        },
+        "secondRiderFee": {
+          "value": true
+        }
+      },
+      "reviews": [
+        {
+          "reviewID": 2,
+          "reviewTitle": "Review 5",
+          "reviewText": "Review 5 Text",
+          "reviewAuthorId": 2,
+          "reviewAuthorFirstName": "AuthorName5",
+          "reviewAuthorLastName": "AuthorLastname5",
+          "reviewAuthorEmail": "Author5@mail.com",
+          "reviewAuthorPic": {
+            "id": 5,
+            "url": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+          },
+          "reviewDate": "2028-22-25T02:20:05.326Z",
+          "reviewFields": [
+            {
+              "id": 5,
+              "rating": 5,
+              "ratingFieldName": "Fun"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Guide6",
+      "content": "Content 6",
+      "image": "/images/coming-soon.png",
+
+      "rating": 5,
+      "ratingCount": 3,
+      "price": "Price 6",
+      "gallery": [
+        {
+          "id": 6,
+          "url": "/images/coming-soon.png"
+        }
+      ],
+      "location": {
+        "id": 6,
+        "lat": 40.706877,
+        "lng": -74.033365,
+        "formattedAddress": "Formatted Address 6",
+        "zipcode": "Zipcode 6",
+        "city": "City 6",
+        "state_long": "State Long 6",
+        "state_short": "State Short 6",
+        "country_long": "Contry Long 6",
+        "country_short": "Contry Short 6"
+      },
+      "amenities": {
+        "deposit": {
+          "value": true
+        },
+        "personalItemLocator": {
+          "value": true
+        },
+        "gas": {
+          "value": true
+        },
+        "secondRiderFee": {
+          "value": true
+        }
+      },
+      "reviews": [
+        {
+          "reviewID": 6,
+          "reviewTitle": "Review 6",
+          "reviewText": "Review 6 Text",
+          "reviewAuthorId": 3,
+          "reviewAuthorFirstName": "AuthorName6",
+          "reviewAuthorLastName": "AuthorLastname6",
+          "reviewAuthorEmail": "Author6@mail.com",
+          "reviewAuthorPic": {
+            "id": 6,
+            "url": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+          },
+          "reviewDate": "3038-33-35T03:30:05.336Z",
+          "reviewFields": [
+            {
+              "id": 6,
+              "rating": 5,
+              "ratingFieldName": "Fun"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": 0,
+      "lat": "25",
+      "lng": "85",
+      "formattedAddress": "Miami Beach",
+      "zipcode": "33140",
+      "city": "Miami",
+      "state_long": "Florida",
+      "state_short": "FL",
+      "country_long": "United States of America",
+      "country_short": "USA",
+      "locationImage": {
+        "id": 0,
+        "url": "images/locaitons/miami.jpg"
+      },
+      "numberOfPost": 10
+    },
+    {
+      "id": 1,
+      "lat": "",
+      "lng": "",
+      "formattedAddress": "",
+      "zipcode": "",
+      "city": "Hawaii",
+      "state_long": "",
+      "state_short": "",
+      "country_long": "",
+      "country_short": "",
+      "locationImage": {
+        "id": 1,
+        "url": "images/locaitons/hawaii.jpg"
+      },
+      "numberOfPost": 0
+    },
+    {
+      "id": 2,
+      "lat": "",
+      "lng": "",
+      "formattedAddress": "",
+      "zipcode": "",
+      "city": "Ibiza",
+      "state_long": "",
+      "state_short": "",
+      "country_long": "",
+      "country_short": "",
+      "locationImage": {
+        "id": 2,
+        "url": "images/locaitons/ibiza.jpg"
+      },
+      "numberOfPost": 0
+    },
+    {
+      "id": 3,
+      "lat": "",
+      "lng": "",
+      "formattedAddress": "",
+      "zipcode": "",
+      "city": "Key West",
+      "state_long": "",
+      "state_short": "",
+      "country_long": "",
+      "country_short": "",
+      "locationImage": {
+        "id": 3,
+        "url": "images/locaitons/key-west.jpg"
+      },
+      "numberOfPost": 0
+    },
+    {
+      "id": 4,
+      "lat": "",
+      "lng": "",
+      "formattedAddress": "",
+      "zipcode": "",
+      "city": "Fort Lauderdale",
+      "state_long": "",
+      "state_short": "",
+      "country_long": "",
+      "country_short": "",
+      "locationImage": {
+        "id": 4,
+        "url": "images/locaitons/fort-lauderdale.jpg"
+      },
+      "numberOfPost": 0
+    }
+  ]
+}

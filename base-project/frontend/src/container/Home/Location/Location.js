@@ -7,9 +7,9 @@ import TextLink from 'components/UI/TextLink/TextLink';
 import SectionTitle from 'components/SectionTitle/SectionTitle';
 import ImageCard from 'components/ImageCard/ImageCard';
 import GlideCarousel, {GlideSlide,} from 'components/UI/GlideCarousel/GlideCarousel';
-import useDataApi from 'library/hooks/useDataApi';
 import {LISTING_POSTS_PAGE} from 'settings/constant';
 import LocationWrapper, {CarouselSection} from './Location.style';
+import data from '../../../service/data/data.json';
 
 const carouselOptions = {
     type: 'carousel',
@@ -40,7 +40,8 @@ const carouselOptions = {
 };
 
 const LocationGrid = () => {
-    const {data} = useDataApi('/data/location.json');
+    console.log(data.locations);
+    const locationData = data.locations;
 
     return (
         <LocationWrapper>
@@ -49,9 +50,8 @@ const LocationGrid = () => {
                     title={<Heading content="Explore Locations"/>}
                     link={<TextLink link={LISTING_POSTS_PAGE} content="Show all"/>}
                 />
-
                 <CarouselSection>
-                    {data.length !== 0 ? (
+                    {locationData.length !== 0 ? (
                         <GlideCarousel
                             carouselSelector="explore_carousel"
                             prevButton={<IoIosArrowBack/>}
@@ -59,7 +59,7 @@ const LocationGrid = () => {
                             options={carouselOptions}
                         >
                             <>
-                                {data.map((post, index) => (
+                                {locationData.map((post, index) => (
                                     <GlideSlide key={index}>
                                         <ImageCard
                                             className={

@@ -9,32 +9,17 @@ import SectionGrid2 from 'components/SectionGrid2/SectionGrid2';
 import ListingMap from './ListingMap';
 import FilterDrawer from 'components/Search/MobileSearchView';
 import useWindowSize from 'library/hooks/useWindowSize';
-import useDataApi from 'library/hooks/useDataApi';
 import {SINGLE_POST_PAGE} from 'settings/constant';
 import ListingWrapper, {PostsWrapper, ShowMapCheckbox} from './Listing.style';
+import data from '../../service/data/data.json';
 
 export default function Listing({location, history}) {
-    let url = '/data/trips.json';
+
     const {width} = useWindowSize();
-    const [showMap, setShowMap] = useState(false);
-    // const {data, loading, loadMoreData, total, limit} = useDataApi('findAllLocations');
-    const {data, loading, loadMoreData, total, limit} = useDataApi(url);
+
     let columnWidth = [1 / 1];
-    if (location.search) {
-        url += location.search;
-    }
-    if (showMap) {
-        // columnWidth = [1 / 1, 1 / 2, 1 / 2, 1 / 2, 1 / 3];
-        columnWidth = [1 / 1];
-    }
 
-    const handleMapToggle = () => {
-        setShowMap((showMap) => !showMap);
-    };
-
-    const get = () => {
-
-    }
+    const tripData = data.trips;
 
     return (
         <ListingWrapper>
@@ -47,14 +32,6 @@ export default function Listing({location, history}) {
                             <FilterDrawer history={history} location={location}/>
                         )
                     }
-/*                    right={
-                        <ShowMapCheckbox>
-                            <Checkbox defaultChecked={true} onChange={handleMapToggle}>
-                                Show map
-                            </Checkbox>
-                        </ShowMapCheckbox>
-                    }
-*/
                 />
             </Sticky>
 
@@ -64,24 +41,22 @@ export default function Listing({location, history}) {
                         <SectionGrid2
                             link={SINGLE_POST_PAGE}
                             columnWidth={columnWidth}
-                            // data={data[0]}
-                            data={data}
-                            totalItem={total.length}
-                            loading={loading}
-                            limit={limit}
-                            handleLoadMore={loadMoreData}
+                            data={tripData}
+                            totalItem={6}
+                            loading={false}
+                            limit={10}
+                            handleLoadMore={null}
                             placeholder={<PostPlaceholder/>}
                         />
                         :
                         <SectionGrid
                             link={SINGLE_POST_PAGE}
                             columnWidth={columnWidth}
-                            // data={data[0]}
-                            data={data}
-                            totalItem={total.length}
-                            loading={loading}
-                            limit={limit}
-                            handleLoadMore={loadMoreData}
+                            data={tripData}
+                            totalItem={6}
+                            loading={false}
+                            limit={10}
+                            handleLoadMore={null}
                             placeholder={<PostPlaceholder/>}
                         />
                     }

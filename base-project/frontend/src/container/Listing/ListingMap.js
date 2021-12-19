@@ -1,16 +1,16 @@
 import React from 'react';
 import isEmpty from 'lodash/isEmpty';
 import Map from 'components/Map/Map';
-import useDataApi from 'library/hooks/useDataApi';
 import {FixedMap} from './Listing.style';
+import data from '../../service/data/data.json';
 
 const ListingMap = () => {
-    const {data, loading} = useDataApi('/data/trips.json');
-    if (isEmpty(data) || loading) return <div>Loading</div>;
+    const tripData = data.trips;
+    if (isEmpty(data)) return <div>Loading</div>;
 
     return (
         <FixedMap>
-            <Map location={data} multiple={true}/>
+            <Map location={tripData} multiple={true}/>
         </FixedMap>
     );
 };

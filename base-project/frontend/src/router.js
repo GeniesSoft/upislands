@@ -8,7 +8,7 @@ import {
     ADD_HOTEL_PAGE,
     AGENT_ACCOUNT_SETTINGS_PAGE,
     AGENT_PROFILE_PAGE,
-    FORGET_PASSWORD_PAGE,
+    FORGET_PASSWORD_PAGE, GUIDE_PAGE,
     HOME_PAGE,
     LISTING_POSTS_PAGE,
     LOGIN_PAGE,
@@ -74,10 +74,21 @@ const routes = [
         component: Loadable({
             loader: () =>
                 import(
-                    /* webpackChunkName: "SinglePageView" */ './container/SinglePage/SinglePageView'
+                    /* webpackChunkName: "SinglePageView" */ './container/TripPage/TripPageView'
                     ),
             loading: Loading,
-            modules: ['SinglePageView'],
+            modules: ['TripPageView'],
+        }),
+    },
+    {
+        path: `${GUIDE_PAGE}/:slug`,
+        component: Loadable({
+            loader: () =>
+                import(
+                    /* webpackChunkName: "SinglePageView" */ './container/GuidePage/GuidePageView'
+                    ),
+            loading: Loading,
+            modules: ['GuidePageView'],
         }),
     },
     {

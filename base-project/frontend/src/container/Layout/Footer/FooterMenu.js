@@ -2,19 +2,26 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import {Menu} from 'antd';
 
-import {AGENT_PROFILE_PAGE, HOME_PAGE, LISTING_POSTS_PAGE, PRICING_PLAN_PAGE, PRIVACY_PAGE,} from 'settings/constant';
+import {AGENT_PROFILE_PAGE, HOME_PAGE, LISTING_POSTS_PAGE, PRIVACY_PAGE,} from 'settings/constant';
 
 const FooterMenu = () => {
+
+    const openPageHandler = () => {
+
+    }
+
     return (
         <Menu>
             <Menu.Item key="0">
-                <NavLink to={`${HOME_PAGE}`}>Hotels</NavLink>
+                <NavLink to={`${HOME_PAGE}`}>Trips</NavLink>
             </Menu.Item>
             <Menu.Item key="1">
                 <NavLink to={`${LISTING_POSTS_PAGE}`}>Listing</NavLink>
             </Menu.Item>
             <Menu.Item key="2">
-                <NavLink to={`${PRICING_PLAN_PAGE}`}>Pricing</NavLink>
+                <NavLink to={{pathname: "https://www.boat-ed.com/floridarental/"}} target="_blank">
+                    PWC License
+                </NavLink>
             </Menu.Item>
             <Menu.Item key="3">
                 <NavLink to={`${PRIVACY_PAGE}`}>Privacy</NavLink>
