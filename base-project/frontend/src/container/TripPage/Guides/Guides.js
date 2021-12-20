@@ -24,9 +24,11 @@ const Guides = ({guides, titleStyle, linkStyle}) => {
                                 <Card
                                     hoverable
                                     style={{ width: 240 }}
-                                    cover={<img alt="guide" src={guide.image} />}
                                 >
-                                    <Meta title={guide.name} description={guide.content} />
+                                    <div className={"card-image"}>
+                                        <img alt="guide" src={guide.image} />
+                                    </div>
+                                    <Meta title={guide.name} description={guide.location.formattedAddress} />
                                     <div className={"view-details"}>
                                         <TextLink
                                             link={`${GUIDE_PAGE}/${guide.id}`}

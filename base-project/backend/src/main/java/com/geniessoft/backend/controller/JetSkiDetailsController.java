@@ -33,7 +33,6 @@ public class JetSkiDetailsController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/{companyId}")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String saveJetSkiDetails(
             @PathVariable(value = "companyId") Integer companyId,
             @Valid @RequestBody JetSkiDetailsSaveDto jetSkiDetailsSaveDto) {
@@ -46,7 +45,6 @@ public class JetSkiDetailsController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{companyId}")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String updateJetSkiDetails(
             @PathVariable(value = "companyId") Integer companyId,
             @Valid @RequestBody JetSkiDetailsUpdateDto jetSkiDetailsUpdateDto) {
@@ -59,7 +57,6 @@ public class JetSkiDetailsController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{companyId}")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String deleteJetSkiDetails(
             @PathVariable(value = "companyId") Integer companyId) {
         jetSkiDetailsService.deleteJetSkiDetails(companyId);

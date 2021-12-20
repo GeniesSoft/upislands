@@ -88,6 +88,7 @@ public class LocationController {
         }
         return locationGetDtoList;
     }
+
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/locations-average")
     public Map<Integer,Double> getLocationsByAverageOrder(){
@@ -99,6 +100,7 @@ public class LocationController {
         }
         return locationIdAverageMap;
     }
+
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/state/{stateName}")
     public List<LocationGetDto> getLocationsByState(@Valid @PathVariable String stateName){
@@ -130,7 +132,6 @@ public class LocationController {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String addLocationContent(
             @PathVariable("locationId") int locationId,
             @RequestParam("file") @ContentConstraints MultipartFile file,
@@ -141,7 +142,6 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/content")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String deleteLocationContent
             (@RequestParam(value = "locationContentId") Integer locationContentId){
         locationService.deleteLocationContent(locationContentId);
@@ -150,7 +150,6 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/content")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String updateLocationContent
             (@RequestParam(value = "locationContentId") Integer locationContentId,
              @RequestParam(value = "contentText") String contentText){

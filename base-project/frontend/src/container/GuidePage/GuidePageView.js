@@ -14,7 +14,7 @@ import TopBar from './TopBar/TopBar';
 import SinglePageWrapper, {PostImageWrapper} from './GuidePageView.style';
 import PostImageGallery from './ImageGallery/ImageGallery';
 import isEmpty from 'lodash/isEmpty';
-import PostImages from "../../components/PostImages/PostImages";
+import PostGallery from "../../components/PostImages/PostGallery";
 import Amenities from "./Amenities/Amenities";
 import data from "../../service/data/data.json"
 
@@ -43,7 +43,7 @@ const SinglePage = ({match}) => {
     return (
         <SinglePageWrapper>
             <PostImageWrapper>
-                <PostImages gallery={gallery} />
+                <PostGallery gallery={gallery} />
 
                 <Button
                     type="primary"

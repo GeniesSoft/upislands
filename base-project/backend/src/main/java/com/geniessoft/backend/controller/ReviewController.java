@@ -30,7 +30,6 @@ public class ReviewController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String addReview(@Valid @RequestBody ReviewBaseDto reviewBaseDto){
         reviewService.saveReview(reviewBaseDto);
         return "Review is saved";
@@ -38,7 +37,6 @@ public class ReviewController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String updateReview(@Valid @RequestBody ReviewUpdateDto reviewUpdateDto){
         reviewService.updateReview(reviewUpdateDto);
         return "Review is updated";
@@ -46,7 +44,6 @@ public class ReviewController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/{id}")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String deleteReview(@PathVariable(value = "id") Integer reviewId){
         reviewService.deleteReview(reviewId);
         return "Review is deleted";
@@ -71,6 +68,7 @@ public class ReviewController {
         return reviewAverage + "";
 
     }
+
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "review/average/location")
     public String getLocationReviewAverage(@RequestParam(value= "locationId") Integer locationId){
@@ -108,13 +106,14 @@ public class ReviewController {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+
     public String addReviewContent(
             @PathVariable("reviewId") int reviewId,
             @RequestParam("file") @ImageConstraint MultipartFile file){
         reviewService.addReviewContent(reviewId ,file);
         return "Review content is uploaded.";
     }
+
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{reviewId}/content")
     public ProfileImageDto getReviewContent(

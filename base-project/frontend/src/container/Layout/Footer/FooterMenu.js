@@ -16,7 +16,7 @@ const FooterMenu = () => {
                 <NavLink to={`${HOME_PAGE}`}>Trips</NavLink>
             </Menu.Item>
             <Menu.Item key="1">
-                <NavLink to={`${LISTING_POSTS_PAGE}`}>Listing</NavLink>
+                <NavLink to={`${LISTING_POSTS_PAGE}`}>Trips</NavLink>
             </Menu.Item>
             <Menu.Item key="2">
                 <NavLink to={{pathname: "https://www.boat-ed.com/floridarental/"}} target="_blank">
@@ -26,9 +26,9 @@ const FooterMenu = () => {
             <Menu.Item key="3">
                 <NavLink to={`${PRIVACY_PAGE}`}>Privacy</NavLink>
             </Menu.Item>
-            <Menu.Item key="4">
-                <NavLink to={`${AGENT_PROFILE_PAGE}`}>Agent</NavLink>
-            </Menu.Item>
+            {/*<Menu.Item key="4">*/}
+            {/*    <NavLink to={`${AGENT_PROFILE_PAGE}`}>Agent</NavLink>*/}
+            {/*</Menu.Item>*/}
         </Menu>
     );
 };

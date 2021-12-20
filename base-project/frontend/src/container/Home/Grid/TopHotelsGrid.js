@@ -15,9 +15,9 @@ const TopHotelsGrid = () => {
     const {width} = useWindowSize();
 
     let posts = tripData;
-    let limit;
+    let limit = 10;
 
-    posts = tripData.slice(3,6);
+    posts = tripData.slice(0,3);
 
     return (
         <Container fluid={true}>

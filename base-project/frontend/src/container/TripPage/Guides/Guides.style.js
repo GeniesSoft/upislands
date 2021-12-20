@@ -13,9 +13,16 @@ const GuidesWrapper = styled.div`
     }
   }
   
+  .card-image {
+    width: 240px;
+    height: 240px;
+  }
+  
   img {
-    height: 160px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
+    border-radius: 50%;
   }
   
   .view-details {

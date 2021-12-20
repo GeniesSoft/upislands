@@ -27,6 +27,12 @@
         "country_long": "Contry Long 1",
         "country_short": "Contry Short 1"
       },
+      "videoGallery": [
+        {
+          "id": 1,
+          "url": "https://www.youtube.com/embed/LAsL5GoMJGo"
+        }
+      ],
       "gallery": [
         {
           "id": 1,
@@ -109,6 +115,12 @@
         "country_long": "Contry Long 2",
         "country_short": "Contry Short 2"
       },
+      "videoGallery": [
+        {
+          "id": 1,
+          "url": "https://www.youtube.com/embed/1_SCouh_YtU"
+        }
+      ],
       "gallery": [
         {
           "id":1,
@@ -178,6 +190,12 @@
         "country_long": "Contry Long 3",
         "country_short": "Contry Short 3"
       },
+      "videoGallery": [
+        {
+          "id": 1,
+          "url": "https://www.youtube.com/embed/dvhRKBwjTnE"
+        }
+      ],
       "gallery": [
         {
           "id": 1,
@@ -247,6 +265,12 @@
         "country_long": "Contry Long 4",
         "country_short": "Contry Short 4"
       },
+      "videoGallery": [
+        {
+          "id": 1,
+          "url": ""
+        }
+      ],
       "gallery": [
         {
           "id": 4,
@@ -304,6 +328,12 @@
         "country_long": "Contry Long 5",
         "country_short": "Contry Short 5"
       },
+      "videoGallery": [
+        {
+          "id": 1,
+          "url": ""
+        }
+      ],
       "gallery": [
         {
           "id": 1,
@@ -365,6 +395,12 @@
         "country_long": "Contry Long 6",
         "country_short": "Contry Short 6"
       },
+      "videoGallery": [
+        {
+          "id": 1,
+          "url": ""
+        }
+      ],
       "gallery": [
         {
           "id": 3,
@@ -565,9 +601,9 @@
     },
     {
       "id": 3,
-      "name": "Barış Ege",
-      "content": "ml-STD",
-      "image": "https://media-exp1.licdn.com/dms/image/C5603AQFEQH-ukionFg/profile-displayphoto-shrink_800_800/0/1615289399080?e=1645660800&v=beta&t=QGdZ05c_AJkY8V9MlZi5PuHFjEZftSxD1PugcLavsdY",
+      "name": "Jhon Doe",
+      "content": "Jetto",
+      "image": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80",
 
       "rating": 5,
       "ratingCount": 1,

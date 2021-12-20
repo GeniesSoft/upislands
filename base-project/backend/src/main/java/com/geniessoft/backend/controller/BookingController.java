@@ -50,6 +50,7 @@ public class BookingController {
         return "Booking is deleted";
 
     }
+
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{id}")
     public BookingBaseDto getBookingById(@PathVariable( value = "id") Integer bookingId){

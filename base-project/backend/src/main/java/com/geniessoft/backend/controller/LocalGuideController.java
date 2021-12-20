@@ -36,7 +36,6 @@ public class LocalGuideController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String addLocalGuide(@Valid @RequestBody LocalGuideBaseDto localGuideBaseDto){
         localGuideService.saveLocalGuide(localGuideBaseDto);
         return "Local guide is saved.";
@@ -44,7 +43,6 @@ public class LocalGuideController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String updateLocalGuide(@Valid @RequestBody LocalGuideUpdateDto localGuideUpdateDto){
         localGuideService.updateLocalGuide(localGuideUpdateDto);
         return "Local guide is updated.";
@@ -52,7 +50,6 @@ public class LocalGuideController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/{id}")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<String> deleteLocalGuide(@PathVariable(value = "id") Integer localGuideId){
         localGuideService.DeleteLocalGuide(localGuideId);
         return ResponseEntity
@@ -66,12 +63,7 @@ public class LocalGuideController {
         LocalGuide localGuide = localGuideService.findLocalGuideById(localGuideId);
         return getLocalGuideBaseDto(localGuide);
     }
-  /*  @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/get-available")
-    public LocalGuideSession getAvailableLocalGuide(){
-        LocalGuideSession localGuideSession = scheduleService.getLocalGuideScheduleByLocalGuideId(0);
-        return localGuideSession;
-    }*/
+
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/mostBooked")
     public LocalGuideBaseDto getMostBookedLocalGuide(){
@@ -129,6 +121,7 @@ public class LocalGuideController {
         }
         return localGuideBaseDtoList;
     }
+
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/GuidesAverage")
     public Map<Integer,Double> getLocalGuidesByAverageOrder(){
@@ -140,6 +133,7 @@ public class LocalGuideController {
        }
         return localGuideIdAverageMap;
     }
+
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/available-local-guides")
     public Map<Integer,Integer> getAvailableLocalGuides(@RequestParam(value = "locationId") Integer locationId,@RequestParam(value = "day") String day,

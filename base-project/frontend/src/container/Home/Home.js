@@ -18,7 +18,7 @@ const Home = () => {
                 onLeave={() => dispatch({type: 'SHOW_TOP_SEARCHBAR'})}
             />
             <LocationGrid/>
-            <LuxaryHotelsGrid/>
+            {/*<LuxaryHotelsGrid/>*/}
             <TopHotelsGrid/>
         </>
     );

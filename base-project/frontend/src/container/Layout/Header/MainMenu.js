@@ -13,11 +13,14 @@ const MainMenu = ({className}) => {
                 </NavLink>
             </Menu.Item>
             <Menu.Item key="1">
-                <NavLink to={`${LISTING_POSTS_PAGE}`}>Listing</NavLink>
+                <NavLink to={`${LISTING_POSTS_PAGE}`}>Trips</NavLink>
             </Menu.Item>
-            <Menu.Item key="2">
-                <NavLink to={`${AGENT_PROFILE_PAGE}`}>Agent</NavLink>
+            <Menu.Item key="1">
+                <NavLink to={`${AGENT_PROFILE_PAGE}`}>Become a Host</NavLink>
             </Menu.Item>
+            {/*<Menu.Item key="2">*/}
+            {/*    <NavLink to={`${AGENT_PROFILE_PAGE}`}>Agent</NavLink>*/}
+            {/*</Menu.Item>*/}
             <Menu.Item key="3">
                 <NavLink to={{pathname: "https://www.boat-ed.com/floridarental/"}} target="_blank">
                     PWC License
