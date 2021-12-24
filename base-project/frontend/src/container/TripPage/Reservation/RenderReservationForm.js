@@ -15,12 +15,13 @@ import {Option} from "antd/es/mentions";
 import {value} from "lodash/seq";
 import {USER_ID} from "../../../constants";
 import BookingApi from "../../../service/booking/BookingApi";
+import {useHistory} from "react-router-dom";
 
 let bookingRequest = {
     date: "",
     startTime: "",
     endTime: "",
-    userId: 0,
+    userId: -1,
     locationId: 0,
     localGuideId: 0,
     companyId: 0,
@@ -28,7 +29,11 @@ let bookingRequest = {
 }
 
 const RenderReservationForm = (props) => {
+
+    let history = useHistory();
+
     const [formState, setFormState] = useState({
+        userId: null,
         date: null,
         startTime: null,
         endTime: null,
@@ -79,20 +84,25 @@ const RenderReservationForm = (props) => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        bookingRequest.userId =parseInt(localStorage.getItem(USER_ID));
 
-        bookingRequest.date = formState.date;
-        bookingRequest.startTime = formState.startTime;
-        bookingRequest.endTime = formState.endTime;
-        bookingRequest.locationId = props.locationId;
-        bookingRequest.jetSkiCount = formState.jetSkies;
+        if (localStorage.getItem(USER_ID)) {
+            bookingRequest.userId =parseInt(localStorage.getItem(USER_ID));
 
-        bookingRequest.localGuideId = formState.guide;
-        bookingRequest.companyId = 1;
+            bookingRequest.date = formState.date;
+            bookingRequest.startTime = formState.startTime;
+            bookingRequest.endTime = formState.endTime;
+            bookingRequest.locationId = props.locationId;
+            bookingRequest.jetSkiCount = formState.jetSkies;
 
-        console.log(bookingRequest);
+            bookingRequest.localGuideId = formState.guide;
+            bookingRequest.companyId = 1;
 
-        BookingApi.create(bookingRequest);
+            console.log(bookingRequest);
+            BookingApi.create(bookingRequest);
+        } else {
+            history.push("/sign-in");
+        }
+
     };
 
     return (
@@ -160,17 +170,6 @@ const RenderReservationForm = (props) => {
                                     value={formState.jetSkies}
                                 />
                             </ItemWrapper>
-
-{/*                            <ItemWrapper>
-                                <strong>Guest</strong>
-                                <InputIncDec
-                                    id="guest"
-                                    increment={() => handleIncrement('guest')}
-                                    decrement={() => handleDecrement('guest')}
-                                    onChange={(e) => handleIncDecOnChnage(e, 'guest')}
-                                    value={formState.guest}
-                                />
-                            </ItemWrapper>*/}
                         </JetSkiesWrapper>
                     }
                 />

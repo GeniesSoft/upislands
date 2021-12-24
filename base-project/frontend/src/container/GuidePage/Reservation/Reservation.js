@@ -27,7 +27,7 @@ export default function Reservation(props) {
         <Card
             className="reservation_sidebar"
             header={<CardHeader/>}
-            content={<RenderReservationForm trips={props.trips} />}
+            content={<RenderReservationForm guideId={props.guideId} trips={props.trips} />}
             footer={
                 <p>
                     Special offers available. <TextLink to="/#1" content="See details"/>

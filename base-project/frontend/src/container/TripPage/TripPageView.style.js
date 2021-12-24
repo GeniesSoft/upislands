@@ -217,7 +217,7 @@ export const PostImageWrapper = styled.div`
     object-fit: cover;
   }
   
-  img {
+  img, video {
     padding: 3px;    
     position: absolute;
     object-fit: cover;
@@ -234,7 +234,7 @@ export const PostImageWrapper = styled.div`
     left: 0;
   }
   
-    .half1 {
+  .half1 {
     width: 50%;
     height: 100%;
     position: absolute;

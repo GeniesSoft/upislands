@@ -11,14 +11,25 @@ import lombok.Setter;
 @Setter
 public class AddressDto {
 
-    private String latitude;
-    private String longitude;
-    private String streetNumber;
-    private String street;
+    private int id;
+    private double lat;
+    private double lng;
+
+    private String formattedAddress;
     private String city;
-    private String county;
-    private String state;
-    private String country;
-    private String zip;
+    private String zipcode;
+
+    public static final AddressDto DEFAULT_ADDRESS;
+
+    static {
+        DEFAULT_ADDRESS = new AddressDto(
+                0,
+                60.70d,
+                -76.6d,
+                "Default Address",
+                "Default City",
+                "Default Zipcode"
+        );
+    }
 
 }

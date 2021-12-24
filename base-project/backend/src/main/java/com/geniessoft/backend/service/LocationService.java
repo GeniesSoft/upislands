@@ -1,6 +1,7 @@
 package com.geniessoft.backend.service;
 
 import com.geniessoft.backend.dto.ContentDto;
+import com.geniessoft.backend.dto.LocationGetFrontendDto;
 import com.geniessoft.backend.dto.LocationSaveDto;
 import com.geniessoft.backend.dto.LocationUpdateDto;
 import com.geniessoft.backend.model.Company;
@@ -42,4 +43,6 @@ public interface LocationService {
     void updateLocationContent(Integer locationContentId, String contentText);
 
     byte[] getLocationProfileImage(int locationId);
+
+    List<LocationGetFrontendDto> getFrontendDtoList();
 }

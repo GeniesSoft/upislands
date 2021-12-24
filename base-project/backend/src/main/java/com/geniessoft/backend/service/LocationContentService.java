@@ -1,5 +1,6 @@
 package com.geniessoft.backend.service;
 
+import com.geniessoft.backend.dto.GalleryItem;
 import com.geniessoft.backend.model.Company;
 import com.geniessoft.backend.model.CompanyContent;
 import com.geniessoft.backend.model.Location;
@@ -25,4 +26,7 @@ public interface LocationContentService {
     void updateLocationContent(Integer locationContentId, String contentText);
 
     List<LocationContent> getLocationContentPage(int locationId, int offset, int pageSize);
+
+    List<GalleryItem> getLocationGallery(int locationId, String type);
+
 }

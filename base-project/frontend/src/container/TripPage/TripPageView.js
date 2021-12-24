@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {useLocation} from 'library/hooks/useLocation';
 import Sticky from 'react-stickynode';
 import {Button, Col, Modal, Row} from 'antd';
@@ -15,8 +15,9 @@ import TopBar from './TopBar/TopBar';
 import SinglePageWrapper, {PostImageWrapper} from './TripPageView.style';
 import PostImageGallery from './ImageGallery/ImageGallery';
 import isEmpty from 'lodash/isEmpty';
-import PostGallery from "../../components/PostImages/PostGallery";
-import data from "../../service/data/data.json";
+import PostGallery from "../../components/PostGallery/PostGallery";
+import LocalGuideApi from "../../service/localguide/LocalGuideApi";
+import LocationApi from "../../service/location/LocationApi";
 
 const SinglePage = ({match}) => {
 
@@ -24,9 +25,35 @@ const SinglePage = ({match}) => {
     const [isModalShowing, setIsModalShowing] = useState(false);
     const {width} = useWindowSize();
 
-    if (isEmpty(data)) return <Loader/>;
-    const tripData = data.trips[ (parseInt(match.params.slug) - 1) ];
-    const guideData = data.guides;
+    const [guideData, setGuideData] = useState(null);
+    const [tripData, setTripData] = useState(null);
+
+    function fetchLocalGuides() {
+        LocalGuideApi.readAllFrontend()
+            .then(
+                response => {
+                    setGuideData(response.data);
+                }
+            );
+    }
+
+    function fetchLocations() {
+        LocationApi.readAllFrontend()
+            .then(
+                response => {
+                    setTripData(response.data)
+                }
+            );
+    }
+
+    useEffect(async () => {
+        await fetchLocalGuides();
+        await fetchLocations();
+    }, []);
+
+    if (guideData == null || tripData == null) return <Loader/>;
+
+    const trip = tripData.filter((trip) => trip.slug === parseInt(match.params.slug))[0];
 
     const {
         reviews,
@@ -39,7 +66,7 @@ const SinglePage = ({match}) => {
         location,
         content,
         author,
-    } = tripData;
+    } = trip;
 
     const guides = guideData;
 
@@ -98,7 +125,7 @@ const SinglePage = ({match}) => {
                             ratingCount={ratingCount}
                         />
                         <Guides guides={guides}/>
-                        <Location location={tripData}/>
+                        <Location location={trip}/>
                     </Col>
                     <Col xl={8}>
                         {width > 1200 ? (

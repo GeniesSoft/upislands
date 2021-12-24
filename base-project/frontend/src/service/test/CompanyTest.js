@@ -1,6 +1,6 @@
-import {Button} from "antd";
 import CompanyApi from "../company/CompanyApi";
 import TestConstraints from "./TestConstraints";
+import {Button} from "@mui/material";
 
 const CompanyTest = () => {
 

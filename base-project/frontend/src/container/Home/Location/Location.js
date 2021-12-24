@@ -40,7 +40,6 @@ const carouselOptions = {
 };
 
 const LocationGrid = () => {
-    console.log(data.locations);
     const locationData = data.locations;
 
     return (

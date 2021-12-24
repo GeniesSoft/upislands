@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import Sticky from 'react-stickynode';
 import Toolbar from 'components/UI/Toolbar/Toolbar';
 import {Checkbox} from 'antd';
@@ -12,6 +12,8 @@ import useWindowSize from 'library/hooks/useWindowSize';
 import {SINGLE_POST_PAGE} from 'settings/constant';
 import ListingWrapper, {PostsWrapper, ShowMapCheckbox} from './Listing.style';
 import data from '../../service/data/data.json';
+import LocationApi from "../../service/location/LocationApi";
+import Loader from "../../components/Loader/Loader";
 
 export default function Listing({location, history}) {
 
@@ -19,7 +21,22 @@ export default function Listing({location, history}) {
 
     let columnWidth = [1 / 1];
 
-    const tripData = data.trips;
+    const [tripData, setTripData] = useState(null);
+
+    function fetchLocations() {
+        LocationApi.readAllFrontend()
+            .then(
+                response => {
+                    setTripData(response.data)
+                }
+            );
+    }
+
+    useEffect(async () => {
+        await fetchLocations();
+    }, []);
+
+    if (tripData == null) return <Loader/>;
 
     return (
         <ListingWrapper>

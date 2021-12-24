@@ -2,6 +2,7 @@ package com.geniessoft.backend.controller;
 
 import com.geniessoft.backend.dto.LocalGuideBaseDto;
 import com.geniessoft.backend.dto.LocalGuideGetDto;
+import com.geniessoft.backend.dto.LocalGuideGetFrontendDto;
 import com.geniessoft.backend.dto.LocalGuideUpdateDto;
 import com.geniessoft.backend.model.Company;
 import com.geniessoft.backend.model.LocalGuide;
@@ -46,6 +47,12 @@ public class LocalGuideController {
     @GetMapping
     public List<LocalGuideGetDto> getAllLocalGuides() {
         return localGuideService.findAllLocalGuides().stream().map(localGuideMapper::localGuideToLocalGuideGetDto).collect(Collectors.toList());
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/frontend")
+    public List<LocalGuideGetFrontendDto> getAllLocalGuidesFrontend() {
+        return localGuideService.findAllLocalGuides().stream().map(localGuideMapper::localGuideToLocalGuideGetFrontendDto).collect(Collectors.toList());
     }
 
     @ResponseStatus(HttpStatus.OK)

@@ -5,7 +5,9 @@ import {FixedMap} from './Listing.style';
 import data from '../../service/data/data.json';
 
 const ListingMap = () => {
+
     const tripData = data.trips;
+
     if (isEmpty(data)) return <div>Loading</div>;
 
     return (

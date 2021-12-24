@@ -5,15 +5,15 @@ import CompanyTest from "./CompanyTest";
 const TestView = () => {
 
     return (
-      <div>
-          <hr />
-          <UserTest />
-          <hr />
-          <LocationTest />
-          <hr />
-          <CompanyTest />
-          <hr />
-      </div>
+        <div>
+            <hr/>
+            <UserTest/>
+            <hr/>
+            <LocationTest/>
+            <hr/>
+            <CompanyTest/>
+            <hr/>
+        </div>
     );
 
 }

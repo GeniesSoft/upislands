@@ -62,20 +62,9 @@ class CrudApi {
             });
     }
 
-    specific(method, address, request) {
+    async specific(method, address, request) {
         const pid = Notify.startProcess("Request is pending...");
         switch (method){
-            case "GET":
-                axios
-                    .get(address, request)
-                    .then(response => {
-                        Notify.updateProcess(pid, "success", response.data);
-                    })
-                    .catch(error => {
-                        Notify.updateProcess(pid, "error", "Request failed!");
-                        this.handleError(error);
-                    });
-                break;
             case "POST":
                 axios
                     .post(address, request)
@@ -107,16 +96,14 @@ class CrudApi {
                     Notify.error("Unauthorized");
                     break;
                 case 404:
-                    Notify.error(error.response);
-                    Notify.error("Not Found");
+                    error.response.data.forEach(Notify.error);
                     break;
                 case 405:
                     console.log(error.response);
                     Notify.error("Method Not Allowed");
                     break;
                 case 409:
-                    console.log(error.response);
-                    Notify.error("Conflict");
+                    error.response.data.forEach(Notify.error);
                     break;
                 case 500:
                     console.log(error.response);

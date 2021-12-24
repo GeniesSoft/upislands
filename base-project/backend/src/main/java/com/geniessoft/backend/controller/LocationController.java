@@ -132,10 +132,8 @@ public class LocationController {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public String addLocationContent(
-            @PathVariable("locationId") int locationId,
-            @RequestParam("file") @ContentConstraints MultipartFile file,
-            @RequestParam("contentText") String content_text){
+    public String addLocationContent(@PathVariable("locationId") int locationId, @RequestParam("file") @ContentConstraints MultipartFile file, @RequestParam("contentText") String content_text) {
+
         locationService.addLocationContent(locationId ,file, content_text);
         return "Location content is uploaded.";
     }
@@ -181,9 +179,14 @@ public class LocationController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
     public List<LocationGetDto> getLocations(){
-        return locationService.findAllLocations().stream().map((location)->
-                LocationMapper.INSTANCE.locationToLocationGetDto(location,
-                        location.getAddress())).collect(Collectors.toList());
+        return locationService.findAllLocations().stream().map(
+                (location)-> LocationMapper.INSTANCE.locationToLocationGetDto(location, location.getAddress())).collect(Collectors.toList());
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/frontend")
+    public List<LocationGetFrontendDto> getLocationsFrontend(){
+        return locationService.getFrontendDtoList();
     }
 
 }

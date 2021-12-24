@@ -2,7 +2,7 @@ import CrudApi from "../CrudApi";
 import axios from "axios";
 import {API_BASE_URL} from "../../constants";
 
-class LocationApi extends CrudApi {
+class LocalGuideApi extends CrudApi {
 
     async readAllFrontend() {
         return this.axios
@@ -14,10 +14,10 @@ class LocationApi extends CrudApi {
 
 }
 
-export default new LocationApi(
+export default new LocalGuideApi(
     axios.create(
         {
-            baseURL: API_BASE_URL + "/locations"
+            baseURL: API_BASE_URL + "/local-guide"
         }
     )
 );

@@ -2,6 +2,7 @@ package com.geniessoft.backend.utility.mapper;
 
 import com.geniessoft.backend.dto.LocalGuideBaseDto;
 import com.geniessoft.backend.dto.LocalGuideGetDto;
+import com.geniessoft.backend.dto.LocalGuideGetFrontendDto;
 import com.geniessoft.backend.dto.LocalGuideUpdateDto;
 import com.geniessoft.backend.model.Company;
 import com.geniessoft.backend.model.LocalGuide;
@@ -22,6 +23,11 @@ public interface LocalGuideMapper {
 
     @Mapping(source = "localGuide.company.companyId", target = "companyId")
     LocalGuideGetDto localGuideToLocalGuideGetDto(LocalGuide localGuide);
+
+    @Mapping(source = "localGuide.company.companyId", target = "companyId")
+    @Mapping(source = "localGuide.localGuideId", target = "id")
+    @Mapping(source = "localGuide.localGuideName", target = "name")
+    LocalGuideGetFrontendDto localGuideToLocalGuideGetFrontendDto(LocalGuide localGuide);
 
     void updateLocalGuide(@MappingTarget LocalGuide localGuide, LocalGuideUpdateDto localGuideUpdateDto);
 }

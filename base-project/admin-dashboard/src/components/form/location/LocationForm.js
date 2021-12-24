@@ -3,6 +3,7 @@ import {useFormik} from "formik";
 import * as yup from "yup";
 import LocationApi from "../../../service/location/LocationApi";
 import LocationValidations from "./LocationValidations";
+import Dropzone from "../../../service/content/Dropzone";
 
 const LocationForm = (props) => {
 
@@ -179,6 +180,15 @@ const LocationForm = (props) => {
                             fullWidth
                         />
                     </Grid>
+
+                    {props.op === "UPDATE" ?
+                        <Grid item xs={12}>
+                            <p>Add Image</p>
+                            <Dropzone locationId={locationId} />
+                        </Grid>
+                        :
+                        null
+                    }
 
                 </Grid>
 

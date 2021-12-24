@@ -1,5 +1,6 @@
 package com.geniessoft.backend.service.impl;
 
+import com.geniessoft.backend.dto.GalleryItem;
 import com.geniessoft.backend.model.CompanyContent;
 import com.geniessoft.backend.model.Content;
 import com.geniessoft.backend.model.Location;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,4 +77,28 @@ public class LocationContentServiceImpl implements LocationContentService {
 
         return locationContentPage.toList();
     }
+
+    @Override
+    public List<GalleryItem> getLocationGallery(int locationId, String type) {
+
+        List<LocationContent> locationContents =locationContentRepository.findAllByLocation_LocationId(locationId);
+
+        List<GalleryItem> gallery = new LinkedList<>();
+
+        locationContents.stream().filter(content -> content.getContentType().contains(type)  ).forEach(content -> {
+            GalleryItem galleryItem = new GalleryItem();
+            galleryItem.setId(content.getContentId());
+
+            String url = fileStoreService.getPreSignedDownloadUrl(
+                    content.getContent().getContentPath(),
+                    content.getContent().getContentName());
+
+            galleryItem.setUrl(url);
+
+            gallery.add(galleryItem);
+        });
+
+        return gallery;
+    }
+
 }

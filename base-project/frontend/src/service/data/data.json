@@ -474,11 +474,7 @@
         "lng": -76.066666,
         "formattedAddress": "Formatted Address 1",
         "zipcode": "Zipcode 1",
-        "city": "City 1",
-        "state_long": "State Long 1",
-        "state_short": "State Short 1",
-        "country_long": "Contry Long 1",
-        "country_short": "Contry Short 1"
+        "city": "City 1"
       },
       "amenities": {
         "deposit": {
@@ -890,7 +886,7 @@
       "country_short": "USA",
       "locationImage": {
         "id": 0,
-        "url": "images/locaitons/miami.jpg"
+        "url": "images/locations/miami.jpg"
       },
       "numberOfPost": 10
     },
@@ -907,7 +903,7 @@
       "country_short": "",
       "locationImage": {
         "id": 1,
-        "url": "images/locaitons/hawaii.jpg"
+        "url": "images/locations/hawaii.jpg"
       },
       "numberOfPost": 0
     },
@@ -924,7 +920,7 @@
       "country_short": "",
       "locationImage": {
         "id": 2,
-        "url": "images/locaitons/ibiza.jpg"
+        "url": "images/locations/ibiza.jpg"
       },
       "numberOfPost": 0
     },
@@ -941,7 +937,7 @@
       "country_short": "",
       "locationImage": {
         "id": 3,
-        "url": "images/locaitons/key-west.jpg"
+        "url": "images/locations/key-west.jpg"
       },
       "numberOfPost": 0
     },
@@ -958,7 +954,7 @@
       "country_short": "",
       "locationImage": {
         "id": 4,
-        "url": "images/locaitons/fort-lauderdale.jpg"
+        "url": "images/locations/fort-lauderdale.jpg"
       },
       "numberOfPost": 0
     }

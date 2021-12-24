@@ -1,8 +1,6 @@
 package com.geniessoft.backend.service.impl;
 
-import com.geniessoft.backend.dto.ContentDto;
-import com.geniessoft.backend.dto.LocationSaveDto;
-import com.geniessoft.backend.dto.LocationUpdateDto;
+import com.geniessoft.backend.dto.*;
 import com.geniessoft.backend.model.*;
 import com.geniessoft.backend.repository.LocationRepository;
 import com.geniessoft.backend.service.*;
@@ -242,5 +240,18 @@ public class LocationServiceImpl implements LocationService {
         return fileStoreService.download(
                 location.getLocationProfileImage().getContentPath(),
                 location.getLocationProfileImage().getContentName());
+    }
+
+    @Override
+    public List<LocationGetFrontendDto> getFrontendDtoList() {
+
+        var list = findAllLocations().stream().map(LocationMapper.INSTANCE::locationToLocationGetFrontendDto).toList();
+
+        list.forEach(location -> {
+            location.setGallery(locationContentService.getLocationGallery(location.getId(),"image"));
+            location.setVideoGallery(locationContentService.getLocationGallery(location.getId(),"video"));
+        });
+
+        return list;
     }
 }

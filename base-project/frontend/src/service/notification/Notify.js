@@ -7,9 +7,9 @@ class Notify {
 
     startProcess(message) {
         this.processMap.set(message, this.count);
-        toast.loading(message,{
+        toast.loading(message, {
             toastId: this.count,
-            position: "top-right",
+            position: "bottom-center",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -33,7 +33,7 @@ class Notify {
 
     info(message) {
         toast.info(message, {
-            position: "top-right",
+            position: "bottom-center",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -45,7 +45,7 @@ class Notify {
 
     success(message) {
         toast.success(message, {
-            position: "top-right",
+            position: "bottom-center",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -57,7 +57,7 @@ class Notify {
 
     warning(message) {
         toast.warning(message, {
-            position: "top-right",
+            position: "bottom-center",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -69,7 +69,7 @@ class Notify {
 
     error(message) {
         toast.error(message, {
-            position: "top-right",
+            position: "bottom-center",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -82,7 +82,7 @@ class Notify {
     errorUpdate(id, message) {
         toast.error(message, {
             toastId: id,
-            position: "top-right",
+            position: "bottom-center",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -94,7 +94,7 @@ class Notify {
 
     default(message) {
         toast(message, {
-            position: "top-right",
+            position: "bottom-center",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -105,8 +105,8 @@ class Notify {
     }
 
     loading(message) {
-        toast.loading(message,{
-            position: "top-right",
+        toast.loading(message, {
+            position: "bottom-center",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,

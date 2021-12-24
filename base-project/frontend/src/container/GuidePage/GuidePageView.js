@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {useLocation} from 'library/hooks/useLocation';
 import Sticky from 'react-stickynode';
 import {Button, Col, Modal, Row} from 'antd';
@@ -14,18 +14,46 @@ import TopBar from './TopBar/TopBar';
 import SinglePageWrapper, {PostImageWrapper} from './GuidePageView.style';
 import PostImageGallery from './ImageGallery/ImageGallery';
 import isEmpty from 'lodash/isEmpty';
-import PostGallery from "../../components/PostImages/PostGallery";
+import PostGallery from "../../components/PostGallery/PostGallery";
 import Amenities from "./Amenities/Amenities";
-import data from "../../service/data/data.json"
+import LocalGuideApi from "../../service/localguide/LocalGuideApi";
+import LocationApi from "../../service/location/LocationApi";
 
 const SinglePage = ({match}) => {
+
     const {href} = useLocation();
     const [isModalShowing, setIsModalShowing] = useState(false);
     const {width} = useWindowSize();
 
-    if (isEmpty(data)) return <Loader/>;
-    const guideData = data.guides;
-    const tripData = data.trips;
+    const [guideData, setGuideData] = useState(null);
+    const [tripData, setTripData] = useState(null);
+
+    function fetchLocalGuides() {
+        LocalGuideApi.readAllFrontend()
+            .then(
+                response => {
+                    setGuideData(response.data)
+                }
+            );
+    }
+
+    function fetchLocations() {
+        LocationApi.readAllFrontend()
+            .then(
+                response => {
+                    setTripData(response.data)
+                }
+            );
+    }
+
+    useEffect(async () => {
+        await fetchLocalGuides();
+        await fetchLocations();
+    }, []);
+
+    if (guideData == null || tripData == null) return <Loader/>;
+
+    const guide = guideData.filter(guide => guide.id === parseInt(match.params.slug))[0]
 
     const {
         reviews,
@@ -38,7 +66,7 @@ const SinglePage = ({match}) => {
         content,
         amenities,
         author,
-    } = guideData[ (parseInt(match.params.slug) - 1) ];
+    } = guide;
 
     return (
         <SinglePageWrapper>
@@ -95,7 +123,7 @@ const SinglePage = ({match}) => {
                             ratingCount={ratingCount}
                         />
                         <Amenities amenities={amenities} />
-                        <Location location={guideData[ (parseInt(match.params.slug) - 1) ]}/>
+                        <Location location={guide}/>
                     </Col>
                     <Col xl={8}>
                         {width > 1200 ? (
@@ -105,10 +133,12 @@ const SinglePage = ({match}) => {
                                 top={202}
                                 bottomBoundary="#reviewSection"
                             >
-                                <Reservation trips={tripData} />
+                                <Reservation guideId={guide.id} trips={tripData} />
                             </Sticky>
                         ) : (
                             <BottomReservation
+                                guideId={guide.id}
+                                trips={tripData}
                                 title={name}
                                 price={price}
                                 rating={rating}

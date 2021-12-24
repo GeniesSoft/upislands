@@ -1,33 +1,25 @@
+import ReactPlayer from 'react-player'
+
 const PostGallery = (props) => {
 
     const gallery = props.gallery;
     const videoGallery = props.videoGallery;
 
-    if (videoGallery) {
+    if (videoGallery && videoGallery.length > 0) {
         switch (gallery.length) {
             case 0:
             return (
-                    <iframe
-                        className={"full"}
-                        width="1280"
-                        height="720"
-                        src={videoGallery[0].url}
-                        title="Video" frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen />
+                <video className={"full"} controls >
+                    <source src={videoGallery[0].url} type="video/mp4"/>
+                </video>
                 )
 
             case 1:
                 return (
                     <div>
-                        <iframe
-                            className="half1"
-                            width="1280"
-                            height="720"
-                            src={videoGallery[0].url}
-                            title="Video" frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen />
+                        <video className={"half1"} controls >
+                            <source src={videoGallery[0].url} type="video/mp4"/>
+                        </video>
                         <img
                             className="half2"
                             src={gallery[0].url}
@@ -38,14 +30,9 @@ const PostGallery = (props) => {
             case 2:
                 return (
                     <div>
-                        <iframe
-                            className="half1"
-                            width="1280"
-                            height="720"
-                            src={videoGallery[0].url}
-                            title="Video" frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen />
+                        <video className={"half1"} controls >
+                            <source src={videoGallery[0].url} type="video/mp4"/>
+                        </video>
                         <img
                             className="merge-quarter1"
                             src={gallery[0].url}
@@ -61,14 +48,7 @@ const PostGallery = (props) => {
             case 3:
                 return (
                     <div>
-                        <iframe
-                            className="half1"
-                            width="1280"
-                            height="720"
-                            src={videoGallery[0].url}
-                            title="Video" frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen />
+                        <ReactPlayer playing={true} controls={true} className={"full"} url={videoGallery[0].url} />
                         <img
                             className="merge-quarter1"
                             src={gallery[0].url}
@@ -89,14 +69,7 @@ const PostGallery = (props) => {
             default:
                 return (
                     <div>
-                        <iframe
-                            className="half1"
-                            width="1280"
-                            height="720"
-                            src={videoGallery[0].url}
-                            title="Video" frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen />
+                        <ReactPlayer url={videoGallery[0].url} />
                         <img
                             className="quarter1"
                             src={gallery[0].url}
@@ -122,6 +95,16 @@ const PostGallery = (props) => {
         }
     } else {
         switch (gallery.length) {
+            case 0:
+                return (
+                        <div>
+                            <img
+                                className="full"
+                                src={"/images/coming-soon.png"}
+                                alt="image"
+                            />
+                        </div>
+                    );
             case 1:
                 return (
                     <div>

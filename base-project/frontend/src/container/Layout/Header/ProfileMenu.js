@@ -19,6 +19,7 @@ const ProfileMenu = ({avatar, history}) => {
 
     function handleLogout() {
         logOut();
+        localStorage.clear();
         history.push('/');
     }
 
