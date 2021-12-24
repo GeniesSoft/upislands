@@ -108,10 +108,12 @@ const SinglePage = ({match}) => {
                                 top={202}
                                 bottomBoundary="#reviewSection"
                             >
-                                <Reservation guides={guides} />
+                                <Reservation locationId={parseInt(match.params.slug)} guides={guides} />
                             </Sticky>
                         ) : (
                             <BottomReservation
+                                locationId={parseInt(match.params.slug)}
+                                guides={guides}
                                 title={title}
                                 price={price}
                                 rating={rating}

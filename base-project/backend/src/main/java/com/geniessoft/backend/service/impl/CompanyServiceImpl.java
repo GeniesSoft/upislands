@@ -5,6 +5,7 @@ import com.geniessoft.backend.dto.CompanyUpdateDto;
 import com.geniessoft.backend.dto.ContentDto;
 import com.geniessoft.backend.model.*;
 import com.geniessoft.backend.repository.CompanyRepository;
+import com.geniessoft.backend.repository.JetSkiDetailsRepository;
 import com.geniessoft.backend.service.*;
 import com.geniessoft.backend.utility.bucket.BucketName;
 import com.geniessoft.backend.utility.bucket.FolderNames;
@@ -32,6 +33,7 @@ public class CompanyServiceImpl implements CompanyService {
     private final CompanyContentService companyContentService;
     private final UserService userService;
     private final LocationService locationService;
+    private final JetSkiDetailsRepository jetSkiDetailsRepository;
 
     @Override
     public List<Company> findAllCompanies() {
@@ -53,8 +55,12 @@ public class CompanyServiceImpl implements CompanyService {
         checkUserHasCompany(companyRegisterDto.getUserId());
         Company company = mapper.companyRegisterDtoToCompany(companyRegisterDto);
         User user = userService.findUser(companyRegisterDto.getUserId());
+
         company.setJobOwner(user);
-        companyRepository.save(company);
+        Company savedCompany = companyRepository.save(company);
+
+        JetSkiDetails jetSkiDetails = new JetSkiDetails(companyRegisterDto.getTotalNumberOfJetSkies(), companyRegisterDto.getSessionPrice(), savedCompany);
+        jetSkiDetailsRepository.save(jetSkiDetails);
 
         return company;
     }

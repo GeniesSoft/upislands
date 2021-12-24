@@ -11,7 +11,7 @@ import java.time.LocalTime;
 @Getter
 @Setter
 public  class BookingBaseDto {
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     protected LocalDate date;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     protected LocalTime startTime;
@@ -22,6 +22,5 @@ public  class BookingBaseDto {
     protected int userId;
     protected int companyId;
     protected int jetSkiCount;
-
 
 }

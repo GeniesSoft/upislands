@@ -1,4 +1,5 @@
 import Notify from "./notification/Notify";
+import axios from "axios";
 
 class CrudApi {
 
@@ -61,22 +62,72 @@ class CrudApi {
             });
     }
 
-    handleError(error) {
-        switch (error.response.status) {
-            case 400:
-                console.log(error.response.data);
-                error.response.data.forEach(Notify.error);
+    specific(method, address, request) {
+        const pid = Notify.startProcess("Request is pending...");
+        switch (method){
+            case "GET":
+                axios
+                    .get(address, request)
+                    .then(response => {
+                        Notify.updateProcess(pid, "success", response.data);
+                    })
+                    .catch(error => {
+                        Notify.updateProcess(pid, "error", "Request failed!");
+                        this.handleError(error);
+                    });
                 break;
-            case 404:
-                Notify.error(error.response.data);
-                break;
-            case 409:
-                Notify.error(error.response.data);
+            case "POST":
+                axios
+                    .post(address, request)
+                    .then(response => {
+                        Notify.updateProcess(pid, "success", response.data);
+                    })
+                    .catch(error => {
+                        Notify.updateProcess(pid, "error", "Request failed!");
+                        this.handleError(error);
+                    });
                 break;
             default:
-                Notify.error(error.response);
+                Notify.updateProcess(pid, "error", "Request failed!");
                 break;
         }
+    }
+
+    handleError(error) {
+        if (!error.response) {
+            Notify.error("Network Error");
+        } else {
+            switch (error.response.status) {
+                case 400:
+                    console.log(error.response);
+                    error.response.data.forEach(Notify.error);
+                    break;
+                case 401:
+                    console.log(error.response);
+                    Notify.error("Unauthorized");
+                    break;
+                case 404:
+                    Notify.error(error.response);
+                    Notify.error("Not Found");
+                    break;
+                case 405:
+                    console.log(error.response);
+                    Notify.error("Method Not Allowed");
+                    break;
+                case 409:
+                    console.log(error.response);
+                    Notify.error("Conflict");
+                    break;
+                case 500:
+                    console.log(error.response);
+                    Notify.error("Server Error");
+                    break;
+                default:
+                    Notify.error(error.response);
+                    break;
+            }
+        }
+
     }
 
 }

@@ -14,4 +14,8 @@ public class CompanyRegisterDto extends CompanyBaseDto{
     @Positive(message = "You must enter job owner")
     private int userId;
 
+    private Integer totalNumberOfJetSkies;
+
+    private Double sessionPrice;
+
 }

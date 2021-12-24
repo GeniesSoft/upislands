@@ -55,6 +55,10 @@ public class UserServiceImpl implements UserService {
         User user = mapper.userRegDtoToUser(userRegisterDto);
         checkUserEmail(user.getEmailAddress());
 
+        Content content = contentService.defaultUserProfileImage();
+        user.setUserProfileImage(content);
+        user.setImageUrl(content.getContentUrl());
+
         Role role = roleService.findRoleByName(Roles.ROLE_USER);
         user.setRole(role);
         user.setPassword(encoder.encode(user.getPassword()));

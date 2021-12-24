@@ -26,6 +26,7 @@ import HeaderWrapper, {
     MobileNavbar,
 } from './Header.style';
 import {getCurrentUser } from 'service/auth/AuthApi';
+import {USER_ID} from "../../../constants";
 
 //const avatarImg = `http://s3.amazonaws.com/redqteam.com/isomorphic-reloaded-image/profilepic.png`;
 // const LogoIcon = () => (
@@ -78,6 +79,7 @@ export default withRouter(function Header({location}) {
                 console.log("Logged in : ------- " + response);
                 setAvatarName(response.firstName + response.lastName)
                 setAvatarImg(response.avatar)
+                localStorage.setItem(USER_ID, response.id);
             })
             .catch(error => {
                 console.log(error)

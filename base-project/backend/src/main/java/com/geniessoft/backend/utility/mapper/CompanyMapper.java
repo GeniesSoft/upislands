@@ -5,6 +5,7 @@ import com.geniessoft.backend.model.Address;
 import com.geniessoft.backend.model.Company;
 import com.geniessoft.backend.model.User;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public interface CompanyMapper {
 
     CompanyGetDto companyToCompanyGetDto(Company company, Address address, List<LocationGetDto> locationGetDtoList);
 
+    @Mapping(source = "company.jobOwner.userId", target = "userId")
     CompanyGetDto companyToCompanyGetDto(Company company);
 
     void updateAddress(@MappingTarget Address address, CompanyUpdateDto dto);

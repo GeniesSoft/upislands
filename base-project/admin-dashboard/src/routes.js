@@ -2,10 +2,13 @@ import HomeView from "./views/HomeView";
 import UsersView from "./views/UsersView";
 import CompaniesView from "./views/CompaniesView";
 import LocationsView from "./views/LocationsView";
+import LocalGuideView from "./views/LocalGuideView";
 import HomeIcon from '@mui/icons-material/Home';
 import PeopleIcon from '@mui/icons-material/People';
 import BusinessIcon from '@mui/icons-material/Business';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
+import BookIcon from '@mui/icons-material/Book';
+
 
 export const routes = [
     {
@@ -35,6 +38,13 @@ export const routes = [
         path: "/locations",
         component: <LocationsView/>,
         icon: <MyLocationIcon/>,
+    },
+    {
+        id: 4,
+        name: "Local Guide",
+        path: "/local-guide",
+        component: <LocalGuideView/>,
+        icon: <BookIcon/>,
     },
 
 ]

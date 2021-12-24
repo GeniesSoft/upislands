@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RequestMapping("/api/local-guide")
@@ -42,6 +43,12 @@ public class LocalGuideController {
     }
 
     @ResponseStatus(HttpStatus.OK)
+    @GetMapping
+    public List<LocalGuideGetDto> getAllLocalGuides() {
+        return localGuideService.findAllLocalGuides().stream().map(localGuideMapper::localGuideToLocalGuideGetDto).collect(Collectors.toList());
+    }
+
+    @ResponseStatus(HttpStatus.OK)
     @PutMapping
     public String updateLocalGuide(@Valid @RequestBody LocalGuideUpdateDto localGuideUpdateDto){
         localGuideService.updateLocalGuide(localGuideUpdateDto);
@@ -57,70 +64,70 @@ public class LocalGuideController {
                 .body("Local guide is deleted.");
     }
 
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/{id}")
-    public LocalGuideGetDto getLocalGuide(@PathVariable(value = "id") Integer localGuideId){
-        LocalGuide localGuide = localGuideService.findLocalGuideById(localGuideId);
-        return getLocalGuideBaseDto(localGuide);
-    }
+//    @ResponseStatus(HttpStatus.OK)
+//    @GetMapping(value = "/{id}")
+//    public LocalGuideGetDto getLocalGuide(@PathVariable(value = "id") Integer localGuideId){
+//        LocalGuide localGuide = localGuideService.findLocalGuideById(localGuideId);
+//        return getLocalGuideBaseDto(localGuide);
+//    }
 
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/mostBooked")
-    public LocalGuideBaseDto getMostBookedLocalGuide(){
-        LocalGuide localGuide = analysisService.findMostBookedLocalGuide();
-        return getLocalGuideBaseDto(localGuide);
-    }
+//    @ResponseStatus(HttpStatus.OK)
+//    @GetMapping(value = "/mostBooked")
+//    public LocalGuideBaseDto getMostBookedLocalGuide(){
+//        LocalGuide localGuide = analysisService.findMostBookedLocalGuide();
+//        return getLocalGuideBaseDto(localGuide);
+//    }
 
-    private LocalGuideGetDto getLocalGuideBaseDto(LocalGuide localGuide) {
-        Company company= localGuide.getCompany();
-        Map<LocalGuideSession, Boolean> localGuideSessionBooleanMap = localGuide.getScheduleMap();
-        List<LocalDate> days = new ArrayList<>();
-        List<LocalTime> startTimes = new ArrayList<>();
-        List<Boolean> isScheduledList = new ArrayList<>();
+//    private LocalGuideGetDto getLocalGuideBaseDto(LocalGuide localGuide) {
+//        Company company= localGuide.getCompany();
+//        Map<LocalGuideSession, Boolean> localGuideSessionBooleanMap = localGuide.getScheduleMap();
+//        List<LocalDate> days = new ArrayList<>();
+//        List<LocalTime> startTimes = new ArrayList<>();
+//        List<Boolean> isScheduledList = new ArrayList<>();
+//
+//
+//            for (Map.Entry<LocalGuideSession,Boolean> entry:localGuideSessionBooleanMap.entrySet()) {
+//                LocalDate day = entry.getKey().getDay();
+//                LocalTime startTime = entry.getKey().getStartTime();
+//                Boolean isScheduled = entry.getValue();
+//                days.add(day);
+//                startTimes.add(startTime);
+//                isScheduledList.add(isScheduled);
+//            }
+//
+//        LocalGuideGetDto localGuideBaseDto= localGuideMapper.localGuideToLocalGuideGetDto(localGuide, company, days, startTimes, isScheduledList);
+//        return localGuideBaseDto;
+//    }
 
-
-            for (Map.Entry<LocalGuideSession,Boolean> entry:localGuideSessionBooleanMap.entrySet()) {
-                LocalDate day = entry.getKey().getDay();
-                LocalTime startTime = entry.getKey().getStartTime();
-                Boolean isScheduled = entry.getValue();
-                days.add(day);
-                startTimes.add(startTime);
-                isScheduledList.add(isScheduled);
-            }
-
-        LocalGuideGetDto localGuideBaseDto= localGuideMapper.localGuideToLocalGuideGetDto(localGuide, company, days, startTimes, isScheduledList);
-        return localGuideBaseDto;
-    }
-
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/bookedGuides")
-    public List<LocalGuideGetDto> getBookedLocalGuideByOrder(){
-        List<LocalGuide> localGuides = analysisService.findLocalGuidesByBookingDescOrder();
-        List<LocalGuideGetDto> localGuideBaseDtoList = new ArrayList<>();
-        List<LocalDate> days = null;
-        List<LocalTime> startTimes = null;
-        List<Boolean> isScheduledList = null;
-        for (LocalGuide localGuide: localGuides) {
-            Company company = localGuide.getCompany();
-            Map<LocalGuideSession, Boolean> localGuideSessionBooleanMap = localGuide.getScheduleMap();
-            System.out.println(localGuideSessionBooleanMap.isEmpty());
-            if (!localGuideSessionBooleanMap.isEmpty()){
-                days = new ArrayList<>();
-                startTimes = new ArrayList<>();
-                isScheduledList = new ArrayList<>();
-            for (Map.Entry<LocalGuideSession,Boolean> entry:localGuideSessionBooleanMap.entrySet()) {
-               LocalDate day = entry.getKey().getDay();
-               LocalTime startTime = entry.getKey().getStartTime();
-               Boolean isScheduled = entry.getValue();
-               days.add(day);
-               startTimes.add(startTime);
-               isScheduledList.add(isScheduled);
-            }}
-            LocalGuideGetDto localGuideGetDto = localGuideMapper.localGuideToLocalGuideGetDto(localGuide,company, days, startTimes, isScheduledList);
-            localGuideBaseDtoList.add(localGuideGetDto);
-        }
-        return localGuideBaseDtoList;
-    }
+//    @ResponseStatus(HttpStatus.OK)
+//    @GetMapping(value = "/bookedGuides")
+//    public List<LocalGuideGetDto> getBookedLocalGuideByOrder(){
+//        List<LocalGuide> localGuides = analysisService.findLocalGuidesByBookingDescOrder();
+//        List<LocalGuideGetDto> localGuideBaseDtoList = new ArrayList<>();
+//        List<LocalDate> days = null;
+//        List<LocalTime> startTimes = null;
+//        List<Boolean> isScheduledList = null;
+//        for (LocalGuide localGuide: localGuides) {
+//            Company company = localGuide.getCompany();
+//            Map<LocalGuideSession, Boolean> localGuideSessionBooleanMap = localGuide.getScheduleMap();
+//            System.out.println(localGuideSessionBooleanMap.isEmpty());
+//            if (!localGuideSessionBooleanMap.isEmpty()){
+//                days = new ArrayList<>();
+//                startTimes = new ArrayList<>();
+//                isScheduledList = new ArrayList<>();
+//            for (Map.Entry<LocalGuideSession,Boolean> entry:localGuideSessionBooleanMap.entrySet()) {
+//               LocalDate day = entry.getKey().getDay();
+//               LocalTime startTime = entry.getKey().getStartTime();
+//               Boolean isScheduled = entry.getValue();
+//               days.add(day);
+//               startTimes.add(startTime);
+//               isScheduledList.add(isScheduled);
+//            }}
+//            LocalGuideGetDto localGuideGetDto = localGuideMapper.localGuideToLocalGuideGetDto(localGuide,company, days, startTimes, isScheduledList);
+//            localGuideBaseDtoList.add(localGuideGetDto);
+//        }
+//        return localGuideBaseDtoList;
+//    }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/GuidesAverage")

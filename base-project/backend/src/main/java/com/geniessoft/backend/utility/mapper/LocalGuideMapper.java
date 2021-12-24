@@ -7,6 +7,7 @@ import com.geniessoft.backend.model.Company;
 import com.geniessoft.backend.model.LocalGuide;
 import com.geniessoft.backend.model.LocalGuideSession;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 import java.time.LocalDate;
@@ -18,6 +19,9 @@ import java.util.Map;
 public interface LocalGuideMapper {
 
     LocalGuide localGuideBaseDtoToLocalGuide(LocalGuideBaseDto localGuideBaseDto);
-    LocalGuideGetDto localGuideToLocalGuideGetDto(LocalGuide localGuide, Company company, List<LocalDate> days, List<LocalTime> startTimes, List<Boolean> isScheduledList);
+
+    @Mapping(source = "localGuide.company.companyId", target = "companyId")
+    LocalGuideGetDto localGuideToLocalGuideGetDto(LocalGuide localGuide);
+
     void updateLocalGuide(@MappingTarget LocalGuide localGuide, LocalGuideUpdateDto localGuideUpdateDto);
 }

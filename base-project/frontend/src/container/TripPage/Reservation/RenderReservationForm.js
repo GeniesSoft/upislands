@@ -13,6 +13,19 @@ import ReservationFormWrapper, {
 } from './Reservation.style.js';
 import {Option} from "antd/es/mentions";
 import {value} from "lodash/seq";
+import {USER_ID} from "../../../constants";
+import BookingApi from "../../../service/booking/BookingApi";
+
+let bookingRequest = {
+    date: "",
+    startTime: "",
+    endTime: "",
+    userId: 0,
+    locationId: 0,
+    localGuideId: 0,
+    companyId: 0,
+    jetSkiCount: 0,
+}
 
 const RenderReservationForm = (props) => {
     const [formState, setFormState] = useState({
@@ -66,9 +79,20 @@ const RenderReservationForm = (props) => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert(
-            `Date: ${formState.date}\nStart Time: ${formState.startTime}\nEnd Time: ${formState.endTime}\nGuide: ${formState.guide}\nJetSkies: ${formState.jetSkies}`
-        );
+        bookingRequest.userId =parseInt(localStorage.getItem(USER_ID));
+
+        bookingRequest.date = formState.date;
+        bookingRequest.startTime = formState.startTime;
+        bookingRequest.endTime = formState.endTime;
+        bookingRequest.locationId = props.locationId;
+        bookingRequest.jetSkiCount = formState.jetSkies;
+
+        bookingRequest.localGuideId = formState.guide;
+        bookingRequest.companyId = 1;
+
+        console.log(bookingRequest);
+
+        BookingApi.create(bookingRequest);
     };
 
     return (

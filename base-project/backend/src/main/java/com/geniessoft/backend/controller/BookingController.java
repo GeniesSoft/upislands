@@ -22,7 +22,6 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(value = "/api/booking")
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 public class BookingController {
 
     private final BookingService bookingService;

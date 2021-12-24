@@ -1,8 +1,12 @@
-import {Button, Container, CssBaseline, Grid, TextField} from "@mui/material";
+import {Button, Container, CssBaseline, Divider, Grid, TextField} from "@mui/material";
 import {useFormik} from "formik";
 import * as yup from "yup";
 import CompanyApi from "../../../service/company/CompanyApi";
 import CompanyValidations from "./CompanyValidations";
+
+function Dvider() {
+    return null;
+}
 
 const CompanyForm = (props) => {
 
@@ -12,6 +16,8 @@ const CompanyForm = (props) => {
         companyName,
         companyDescription,
         address,
+        totalNumberOfJetSkies,
+        sessionPrice,
     } = props.fields ||
     {
         companyId: "",
@@ -19,6 +25,8 @@ const CompanyForm = (props) => {
         companyName: "",
         companyDescription: "",
         address: "",
+        totalNumberOfJetSkies: "",
+        sessionPrice: "",
     }
 
     const initCreate = {
@@ -26,6 +34,8 @@ const CompanyForm = (props) => {
         companyName: companyName,
         companyDescription: companyDescription,
         address: address,
+        totalNumberOfJetSkies: totalNumberOfJetSkies,
+        sessionPrice: sessionPrice
     }
 
     const initUpdate = {
@@ -34,6 +44,8 @@ const CompanyForm = (props) => {
         companyName: companyName,
         companyDescription: companyDescription,
         address: address,
+        totalNumberOfJetSkies: totalNumberOfJetSkies,
+        sessionPrice: sessionPrice
     }
 
     const getInitialValues = () => {
@@ -160,6 +172,42 @@ const CompanyForm = (props) => {
                             fullWidth
                         />
                     </Grid>
+
+                    <hr style={{width: "100%"}} />
+
+                    <Grid item xs={12}>
+                        <TextField
+                            id="totalNumberOfJetSkies"
+                            label="Total Num Of Jet Skies"
+                            type={"number"}
+                            value={formik.values.totalNumberOfJetSkies}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            helperText={formik.touched.totalNumberOfJetSkies ? formik.errors.totalNumberOfJetSkies : " "}
+                            error={formik.touched.totalNumberOfJetSkies && Boolean(formik.errors.totalNumberOfJetSkies)}
+                            margin="dense"
+                            variant="outlined"
+                            fullWidth
+                        />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <TextField
+                            id="sessionPrice"
+                            label="Session Price"
+                            type={"number"}
+                            value={formik.values.sessionPrice}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            helperText={formik.touched.sessionPrice ? formik.errors.sessionPrice : " "}
+                            error={formik.touched.sessionPrice && Boolean(formik.errors.sessionPrice)}
+                            margin="dense"
+                            variant="outlined"
+                            fullWidth
+                        />
+                    </Grid>
+
+
 
                 </Grid>
 

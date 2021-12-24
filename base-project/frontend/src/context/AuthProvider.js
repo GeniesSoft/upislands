@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import { signin, getCurrentUser } from 'service/auth/AuthApi';
-import { ACCESS_TOKEN } from 'constants/index';
+import {ACCESS_TOKEN, USER_ID} from 'constants/index';
 import Alert from 'react-s-alert';
 
 export const AuthContext = React.createContext();
