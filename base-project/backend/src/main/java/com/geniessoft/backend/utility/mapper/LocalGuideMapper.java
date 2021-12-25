@@ -10,6 +10,7 @@ import com.geniessoft.backend.model.LocalGuideSession;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.factory.Mappers;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -18,6 +19,8 @@ import java.util.Map;
 
 @Mapper(componentModel = "spring")
 public interface LocalGuideMapper {
+
+    LocalGuideMapper INSTANCE = Mappers.getMapper(LocalGuideMapper.class);
 
     LocalGuide localGuideBaseDtoToLocalGuide(LocalGuideBaseDto localGuideBaseDto);
 

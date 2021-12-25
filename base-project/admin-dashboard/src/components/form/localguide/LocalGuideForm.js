@@ -3,6 +3,7 @@ import {useFormik} from "formik";
 import * as yup from "yup";
 import LocationApi from "../../../service/location/LocationApi";
 import LocalGuideApi from "../../../service/localguide/LocalGuideApi";
+import Dropzone from "../../../service/content/Dropzone";
 
 const LocalGuideForm = (props) => {
 
@@ -121,6 +122,15 @@ const LocalGuideForm = (props) => {
                             fullWidth
                         />
                     </Grid>
+
+                    {props.op === "UPDATE" ?
+                        <Grid item xs={12}>
+                            <p>Add Content</p>
+                            <Dropzone id={localGuideId} path={"local-guide"}/>
+                        </Grid>
+                        :
+                        null
+                    }
 
                 </Grid>
 

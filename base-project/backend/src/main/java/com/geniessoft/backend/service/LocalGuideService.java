@@ -1,9 +1,9 @@
 package com.geniessoft.backend.service;
 
-import com.geniessoft.backend.dto.LocalGuideBaseDto;
-import com.geniessoft.backend.dto.LocalGuideUpdateDto;
+import com.geniessoft.backend.dto.*;
 import com.geniessoft.backend.model.LocalGuide;
 import com.geniessoft.backend.model.Location;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -18,4 +18,9 @@ public interface LocalGuideService {
     List<LocalGuide> findAllLocalGuides();
     List<LocalGuide> getLocalGuidesByLocationId(Integer locationId);
     public void updateSchedule(LocalGuide localGuide);
+    List<LocalGuideGetFrontendDto> getFrontendDtoList();
+
+    List<ContentDto> getLocalGuideContents(int locationId);
+
+    void addLocalGuideContent(int localGuideId, MultipartFile file, String content_text);
 }

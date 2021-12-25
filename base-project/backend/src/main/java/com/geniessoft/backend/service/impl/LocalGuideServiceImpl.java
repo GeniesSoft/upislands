@@ -1,21 +1,29 @@
 package com.geniessoft.backend.service.impl;
 
+import com.geniessoft.backend.dto.ContentDto;
 import com.geniessoft.backend.dto.LocalGuideBaseDto;
+import com.geniessoft.backend.dto.LocalGuideGetFrontendDto;
 import com.geniessoft.backend.dto.LocalGuideUpdateDto;
 import com.geniessoft.backend.model.Company;
 import com.geniessoft.backend.model.LocalGuide;
 import com.geniessoft.backend.model.Location;
 import com.geniessoft.backend.repository.LocalGuideRepository;
 import com.geniessoft.backend.service.CompanyService;
+import com.geniessoft.backend.service.LocalGuideContentService;
 import com.geniessoft.backend.service.LocalGuideService;
 import com.geniessoft.backend.service.LocationService;
+import com.geniessoft.backend.utility.bucket.BucketName;
+import com.geniessoft.backend.utility.bucket.FolderNames;
 import com.geniessoft.backend.utility.mapper.LocalGuideMapper;
+import com.geniessoft.backend.utility.mapper.LocationMapper;
 import com.geniessoft.backend.utility.schedule.LocalGuideScheduler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
@@ -30,6 +38,8 @@ public class LocalGuideServiceImpl implements LocalGuideService {
     private final LocalGuideRepository localGuideRepository;
     private final LocalGuideScheduler localGuideScheduler;
     private final LocationService locationService;
+    private final FileStoreService fileStoreService;
+    private final LocalGuideContentService localGuideContentService;
 
     @Override
     public LocalGuide findLocalGuideById(int localGuideId) {
@@ -144,4 +154,47 @@ public class LocalGuideServiceImpl implements LocalGuideService {
         }
         return locationCountMap;
     }*/
+
+    @Override
+    public void addLocalGuideContent(int localGuideId, MultipartFile file, String content_text) {
+
+        LocalGuide localGuide = findLocalGuideById(localGuideId);
+        Map<String,String> metadata = fileStoreService.getMetadata(file);
+
+        String path = String.format("%s/%s",
+                BucketName.BUCKET_NAME.getBucketName(),
+                FolderNames.local_guide_contents +"/"+ localGuide.getLocalGuideId());
+
+        String fileName = String.format("%s-%s",
+                System.currentTimeMillis(),
+                file.getOriginalFilename());
+
+        try {
+
+            localGuideContentService.saveLocalGuideContent
+                    (fileName,path,file.getContentType(),content_text,localGuide);
+            fileStoreService.upload(path,fileName,Optional.of(metadata),file.getInputStream());
+            System.out.println("LocalGuide content is uploaded");
+        }
+        catch (IOException e){
+            throw new IllegalStateException(e);
+        }
+    }
+
+    @Override
+    public List<ContentDto> getLocalGuideContents(int locationId) {
+        return null;
+    }
+
+    @Override
+    public List<LocalGuideGetFrontendDto> getFrontendDtoList() {
+        var list = findAllLocalGuides().stream().map(LocalGuideMapper.INSTANCE::localGuideToLocalGuideGetFrontendDto).toList();
+
+        list.forEach(localGuide -> {
+            localGuide.setGallery(localGuideContentService.getLocalGuideContentGallery(localGuide.getId(),"image"));
+            localGuide.setVideoGallery(localGuideContentService.getLocalGuideContentGallery(localGuide.getId(),"video"));
+        });
+
+        return list;
+    }
 }

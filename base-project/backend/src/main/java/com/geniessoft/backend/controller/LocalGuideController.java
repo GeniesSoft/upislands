@@ -1,21 +1,21 @@
 package com.geniessoft.backend.controller;
 
-import com.geniessoft.backend.dto.LocalGuideBaseDto;
-import com.geniessoft.backend.dto.LocalGuideGetDto;
-import com.geniessoft.backend.dto.LocalGuideGetFrontendDto;
-import com.geniessoft.backend.dto.LocalGuideUpdateDto;
+import com.geniessoft.backend.dto.*;
 import com.geniessoft.backend.model.Company;
 import com.geniessoft.backend.model.LocalGuide;
 import com.geniessoft.backend.model.LocalGuideSession;
 import com.geniessoft.backend.service.AnalysisService;
 import com.geniessoft.backend.service.LocalGuideService;
 import com.geniessoft.backend.service.ScheduleService;
+import com.geniessoft.backend.utility.customvalidator.ContentConstraints;
 import com.geniessoft.backend.utility.mapper.LocalGuideMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -47,12 +47,6 @@ public class LocalGuideController {
     @GetMapping
     public List<LocalGuideGetDto> getAllLocalGuides() {
         return localGuideService.findAllLocalGuides().stream().map(localGuideMapper::localGuideToLocalGuideGetDto).collect(Collectors.toList());
-    }
-
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/frontend")
-    public List<LocalGuideGetFrontendDto> getAllLocalGuidesFrontend() {
-        return localGuideService.findAllLocalGuides().stream().map(localGuideMapper::localGuideToLocalGuideGetFrontendDto).collect(Collectors.toList());
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -161,9 +155,24 @@ public class LocalGuideController {
             localGuideIdJetSkiMap.put(localGuide.getLocalGuideId(),availableJetSkiCount);
         }
 
-
         return localGuideIdJetSkiMap;
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping(
+            path = "/{localGuideId}/content",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public String addLocalguideContent(@PathVariable("localGuideId") int localGuideId, @RequestParam("file") @ContentConstraints MultipartFile file, @RequestParam("contentText") String content_text) {
 
+        localGuideService.addLocalGuideContent(localGuideId ,file, content_text);
+        return "Location content is uploaded.";
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/frontend")
+    public List<LocalGuideGetFrontendDto> localGuideGetFrontend(){
+        return localGuideService.getFrontendDtoList();
+    }
 }

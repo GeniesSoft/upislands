@@ -20,6 +20,7 @@ public class LocalGuideGetFrontendDto {
     private int ratingCount = 1;
     private String price = "default price";
     private List<GalleryItem> gallery = List.of();
+    private List<GalleryItem> videoGallery = List.of();
     private AddressDto location = AddressDto.DEFAULT_ADDRESS;
     private JSONObject amenities;
     {

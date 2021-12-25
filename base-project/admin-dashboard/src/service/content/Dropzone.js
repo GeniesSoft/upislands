@@ -4,7 +4,7 @@ import {useDropzone} from 'react-dropzone'
 import {API_BASE_URL} from "../../constants";
 import Notify from "../notification/Notify";
 
-export default function Dropzone( { locationId } ) {
+export default function Dropzone( { id,path } ) {
     const onDrop = useCallback(acceptedFiles => {
 
         const file = acceptedFiles[0];
@@ -13,7 +13,7 @@ export default function Dropzone( { locationId } ) {
         formData.append('file',file);
         formData.append('contentText',"Content");
 
-        axios.post(`${API_BASE_URL}/locations/${locationId}/content`,
+        axios.post(`${API_BASE_URL}/${path}/${id}/content`,
             formData,
             {
                 headers:{

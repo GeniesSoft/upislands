@@ -26,7 +26,7 @@ const Guides = ({guides, titleStyle, linkStyle}) => {
                                     style={{ width: 240 }}
                                 >
                                     <div className={"card-image"}>
-                                        <img alt="guide" src={guide.image} />
+                                        <img alt="guide" src={guide.gallery[0] ? guide.gallery[0].url : guide.image} />
                                     </div>
                                     <Meta title={guide.name} description={guide.location.formattedAddress} />
                                     <div className={"view-details"}>
