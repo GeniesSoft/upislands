@@ -183,7 +183,7 @@ const LocationForm = (props) => {
 
                     {props.op === "UPDATE" ?
                         <Grid item xs={12}>
-                            <p>Add Image</p>
+                            <p>Add Content</p>
                             <Dropzone locationId={locationId} />
                         </Grid>
                         :

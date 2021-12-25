@@ -57,11 +57,15 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     @Transactional(rollbackOn = Exception.class)
-    public Booking updateBooking(BookingUpdateDto bookingUpdateDto) {
-        deleteBooking(bookingUpdateDto.getBookingId());
-        BookingBaseDto bookingBaseDto = mapper.bookingUpdateDtoToBookingBaseDto(bookingUpdateDto);
+    public void updateBooking(BookingUpdateDto bookingUpdateDto) {
 
-        return saveBooking(bookingBaseDto);
+        Booking booking = bookingRepository.findById(bookingUpdateDto.getBookingId()).orElseThrow( () ->
+                new EntityNotFoundException("Booking Not Found"));
+
+        booking.setActive( bookingUpdateDto.isActive() );
+        booking.setPaid( bookingUpdateDto.isPaid() );
+
+        bookingRepository.save(booking);
     }
 
     @Override

@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, {useCallback} from 'react'
 import {useDropzone} from 'react-dropzone'
 import {API_BASE_URL} from "../../constants";
+import Notify from "../notification/Notify";
 
 export default function Dropzone( { locationId } ) {
     const onDrop = useCallback(acceptedFiles => {
@@ -10,7 +11,7 @@ export default function Dropzone( { locationId } ) {
 
         const formData = new FormData();
         formData.append('file',file);
-        formData.append('contentText',"I love Mert Ege");
+        formData.append('contentText',"Content");
 
         axios.post(`${API_BASE_URL}/locations/${locationId}/content`,
             formData,
@@ -19,7 +20,7 @@ export default function Dropzone( { locationId } ) {
                     "Content-Type":"multipart/form-data"
                 }
             }).then(()=>{
-            console.log("Upload is successfull");
+                Notify.success("Content successfully submit")
         }).catch(err=>{
             console.log(err);
         })

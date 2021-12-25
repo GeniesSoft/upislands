@@ -7,15 +7,20 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Box from "@mui/material/Box";
 
 const columns = [
+    {selector: row => row["bookingId"], name: "Booking Id"},
+    {selector: row => row["companyId"], name: "Company Id"},
+    {selector: row => row["localGuideId"], name: "Local Guide Id"},
     {selector: row => row["locationId"], name: "Location Id"},
-    {selector: row => row["locationName"], name: "Location Name"},
-    {selector: row => row["description"], name: "Description"},
-    {selector: row => row["tripTime"], name: "Trip Time"},
-    {selector: row => row["needExperience"].toString(), name: "Need Experience"},
-    // {selector: row => row["address"], name: "Address"},
+    {selector: row => row["userId"], name: "User Id"},
+    {selector: row => row["date"], name: "Date"},
+    {selector: row => row["startTime"], name: "Start Time"},
+    {selector: row => row["endTime"], name: "End Time"},
+    {selector: row => row["jetSkiCount"], name: "Jet Ski Count"},
+    {selector: row => row["active"].toString(), name: "Is Active"},
+    {selector: row => row["paid"].toString(), name: "Is Paid"},
 ];
 
-const LocationTable = (props) => {
+const BookingTable = (props) => {
 
     const [selectedRows, setSelectedRows] = useState([]);
     const [toggleCleared, setToggleCleared] = useState(false);
@@ -76,7 +81,7 @@ const LocationTable = (props) => {
     return (
         <div>
             <DataTable
-                title={"Locations"}
+                title={"Bookings"}
                 columns={columns}
                 data={props.fields}
                 selectableRows
@@ -94,4 +99,4 @@ const LocationTable = (props) => {
 
 }
 
-export default LocationTable;
+export default BookingTable;

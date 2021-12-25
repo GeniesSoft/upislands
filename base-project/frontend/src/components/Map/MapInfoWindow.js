@@ -17,7 +17,7 @@ const MapInfoWindow = ({data, onCloseClick}) => {
                 className='info_window_card'
                 location={data?.formattedAddress}
                 title={data?.title}
-                price={`$${data?.price}/hour - Free Cancellation`}
+                price={`$${data?.price}`}
                 rating={
                     <Rating
                         rating={data?.rating}

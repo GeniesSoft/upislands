@@ -6,6 +6,7 @@ import {Button, Input, Switch} from 'antd';
 import FormControl from 'components/UI/FormControl/FormControl';
 import {AuthContext} from 'context/AuthProvider';
 import {FieldWrapper, Label, SwitchWrapper} from '../Auth.style';
+import UserApi from "../../../service/user/UserApi";
 
 const SignUpForm = () => {
     const {signUp, loggedIn} = useContext(AuthContext);
@@ -15,7 +16,11 @@ const SignUpForm = () => {
     const password = watch('password');
     const confirmPassword = watch('confirmPassword');
     const onSubmit = (data) => {
-        signUp(data);
+
+        UserApi.create(data);
+
+        console.log(data);
+
     };
     if (loggedIn) {
         return <Redirect to={{pathname: '/'}}/>;
@@ -23,13 +28,14 @@ const SignUpForm = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
+
             <FormControl
-                label="Username"
-                htmlFor="username"
+                label="First Name"
+                htmlFor="firstName"
                 error={
-                    errors.username && (
+                    errors.firstName && (
                         <>
-                            {errors.username?.type === 'required' && (
+                            {errors.firstName?.type === 'required' && (
                                 <span>This field is required!</span>
                             )}
                         </>
@@ -38,8 +44,8 @@ const SignUpForm = () => {
             >
                 <Controller
                     as={<Input/>}
-                    id="username"
-                    name="username"
+                    id="firstName"
+                    name="firstName"
                     defaultValue=""
                     control={control}
                     rules={{
@@ -47,16 +53,42 @@ const SignUpForm = () => {
                     }}
                 />
             </FormControl>
+
             <FormControl
-                label="Email"
-                htmlFor="email"
+                label="Last Name"
+                htmlFor="lastName"
                 error={
-                    errors.email && (
+                    errors.lastName && (
                         <>
-                            {errors.email?.type === 'required' && (
+                            {errors.lastName?.type === 'required' && (
                                 <span>This field is required!</span>
                             )}
-                            {errors.email?.type === 'pattern' && (
+                        </>
+                    )
+                }
+            >
+                <Controller
+                    as={<Input/>}
+                    id="lastName"
+                    name="lastName"
+                    defaultValue=""
+                    control={control}
+                    rules={{
+                        required: true,
+                    }}
+                />
+            </FormControl>
+
+            <FormControl
+                label="Email"
+                htmlFor="emailAddress"
+                error={
+                    errors.emailAddress && (
+                        <>
+                            {errors.emailAddress?.type === 'required' && (
+                                <span>This field is required!</span>
+                            )}
+                            {errors.emailAddress?.type === 'pattern' && (
                                 <span>Please enter a valid email address!</span>
                             )}
                         </>
@@ -66,8 +98,8 @@ const SignUpForm = () => {
                 <Controller
                     as={<Input/>}
                     type="email"
-                    id="email"
-                    name="email"
+                    id="emailAddress"
+                    name="emailAddress"
                     defaultValue=""
                     control={control}
                     rules={{
@@ -76,6 +108,7 @@ const SignUpForm = () => {
                     }}
                 />
             </FormControl>
+
             <FormControl
                 label="Password"
                 htmlFor="password"
@@ -104,24 +137,76 @@ const SignUpForm = () => {
                     rules={{required: true, minLength: 6, maxLength: 20}}
                 />
             </FormControl>
+
+            {/*<FormControl*/}
+            {/*    label="Confirm password"*/}
+            {/*    htmlFor="confirmPassword"*/}
+            {/*    error={*/}
+            {/*        confirmPassword &&*/}
+            {/*        password !== confirmPassword && (*/}
+            {/*            <span>Your password is not same!</span>*/}
+            {/*        )*/}
+            {/*    }*/}
+            {/*>*/}
+            {/*    <Controller*/}
+            {/*        as={<Input.Password/>}*/}
+            {/*        defaultValue=""*/}
+            {/*        control={control}*/}
+            {/*        id="confirmPassword"*/}
+            {/*        name="confirmPassword"*/}
+            {/*    />*/}
+            {/*</FormControl>*/}
+
             <FormControl
-                label="Confirm password"
-                htmlFor="confirmPassword"
+                label="Phone"
+                htmlFor="phoneNumber"
                 error={
-                    confirmPassword &&
-                    password !== confirmPassword && (
-                        <span>Your password is not same!</span>
+                    errors.phoneNumber && (
+                        <>
+                            {errors.phoneNumber?.type === 'required' && (
+                                <span>This field is required!</span>
+                            )}
+                        </>
                     )
                 }
             >
                 <Controller
-                    as={<Input.Password/>}
+                    as={<Input type="number" />}
+                    id="phoneNumber"
+                    name="phoneNumber"
                     defaultValue=""
                     control={control}
-                    id="confirmPassword"
-                    name="confirmPassword"
+                    rules={{
+                        required: true,
+                    }}
                 />
             </FormControl>
+
+            <FormControl
+                label="Birth Date"
+                htmlFor="birthDate"
+                error={
+                    errors.birthDate && (
+                        <>
+                            {errors.birthDate?.type === 'required' && (
+                                <span>This field is required!</span>
+                            )}
+                        </>
+                    )
+                }
+            >
+                <Controller
+                    as={<Input type="date" />}
+                    id="birthDate"
+                    name="birthDate"
+                    defaultValue=""
+                    control={control}
+                    rules={{
+                        required: true,
+                    }}
+                />
+            </FormControl>
+
             <FieldWrapper>
                 <SwitchWrapper>
                     <Controller

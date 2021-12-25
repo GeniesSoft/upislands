@@ -3,6 +3,7 @@ package com.geniessoft.backend.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -26,6 +27,10 @@ public class Booking {
     private double totalPrice = 0;
     private int jetSkiCount;
     private boolean active = true;
+
+    @Column(name = "is_paid")
+    @Nullable
+    private boolean paid = false;
 
     @OneToOne
     @JoinColumn(name = "booking_location_id")

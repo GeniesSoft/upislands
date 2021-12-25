@@ -10,7 +10,7 @@ public interface BookingService {
 
     Booking findBookingById(int bookingId);
     Booking saveBooking(BookingBaseDto bookingSaveDto);
-    Booking updateBooking(BookingUpdateDto bookingUpdateDto);
+    void updateBooking(BookingUpdateDto bookingUpdateDto);
     List<Booking> findAllBookings();
     List<Booking> findAllBookingsByLocationOrder();
     List<Booking> findAllBookingsByLocalGuideOrder();

@@ -5,37 +5,34 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DialogTemplate from "../components/dialog/DialogTemplate";
 
 import AlertDialog from "../components/dialog/AlertDialog";
-import LocationApi from "../service/location/LocationApi";
-import LocationForm from "../components/form/location/LocationForm";
-import LocationTable from "../components/table/location/LocationTable";
-import LocalGuideApi from "../service/localguide/LocalGuideApi";
-import LocalGuideForm from "../components/form/localguide/LocalGuideForm";
-import LocalGuideTable from "../components/table/localguide/LocalGuideTable";
+import BookingApi from "../service/booking/BookingApi";
+import BookingTable from "../components/table/booking/BookingTable";
+import BookingForm from "../components/form/booking/BookingForm";
 
-const LocalGuideContainer = () => {
+const BookingContainer = () => {
 
-    const [localGuideList, setLocalGuideList] = useState([]);
-    const [selectedLocalGuide, setSelectedLocalGuide] = useState([]);
-    const [localGuideToEdit, setLocalGuideToEdit] = useState(null);
+    const [bookingList, setBookingList] = useState([]);
+    const [selectedBookings, setSelectedBookings] = useState([]);
+    const [bookingToEdit, setBookingToEdit] = useState(null);
     const [addDialogOpen, setAddDialogOpen] = useState(false);
     const [editDialogOpen, setEditDialogOpen] = useState(false);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
-    function fetchLocalGuides() {
-        LocalGuideApi.readAll()
+    function fetchBookings() {
+        BookingApi.readAll()
             .then(
                 response => {
-                    setLocalGuideList(response.data)
+                    setBookingList(response.data)
                 }
             );
     }
 
     useEffect(() => {
-        fetchLocalGuides();
+        fetchBookings();
     }, []);
 
     const onSelectionChangeHandler = (ids) => {
-        setSelectedLocalGuide(ids);
+        setSelectedBookings(ids);
     }
 
     const handleAddButtonClicked = () => {
@@ -44,17 +41,17 @@ const LocalGuideContainer = () => {
 
     const handleAddDialogClose = () => {
         setAddDialogOpen(false);
-        fetchLocalGuides();
+        fetchBookings();
     }
 
     const handleEditButtonClicked = () => {
-        setLocalGuideToEdit(selectedLocalGuide[0]);
+        setBookingToEdit(selectedBookings[0]);
         setEditDialogOpen(true);
     }
 
     const handleEditDialogClose = () => {
         setEditDialogOpen(false);
-        fetchLocalGuides();
+        fetchBookings();
     }
 
     const handleDeleteButtonClicked = () => {
@@ -64,8 +61,8 @@ const LocalGuideContainer = () => {
     const handleDeleteDialogClose = (result) => {
         setDeleteDialogOpen(false);
         if (result) {
-            selectedLocalGuide.forEach(localGuide => LocalGuideApi.delete(localGuide.localGuideId));
-            setLocalGuideList(localGuideList.filter(localGuide => !selectedLocalGuide.includes(localGuide)));
+            selectedBookings.forEach(booking => BookingApi.delete(booking.bookingId));
+            setBookingList(bookingList.filter(booking => !selectedBookings.includes(booking)));
         }
     }
 
@@ -101,8 +98,8 @@ const LocalGuideContainer = () => {
 
                 <Grid item>
                     <Paper elevation={1}>
-                        <LocalGuideTable
-                            fields={localGuideList ? localGuideList : []}
+                        <BookingTable
+                            fields={bookingList ? bookingList : []}
                             onSelectionChangeHandler={onSelectionChangeHandler}
                             onEdit={handleEditButtonClicked}
                             onDelete={handleDeleteButtonClicked}
@@ -115,22 +112,22 @@ const LocalGuideContainer = () => {
             <DialogTemplate
                 open={addDialogOpen}
                 onClose={handleAddDialogClose}
-                title={"Add Local Guide"}
+                title={"Add Booking"}
             >
-                <LocalGuideForm op={"CREATE"} />
+                <BookingForm op={"CREATE"} />
             </DialogTemplate>
 
             <DialogTemplate
                 open={editDialogOpen}
                 onClose={handleEditDialogClose}
-                title={"Edit Local Guide"}
+                title={"Edit Booking"}
             >
-                <LocalGuideForm op={"UPDATE"} fields={localGuideToEdit} />
+                <BookingForm op={"UPDATE"} fields={bookingToEdit} />
             </DialogTemplate>
 
             <AlertDialog
-                title={"Local Guide Deletion"}
-                message={"Are you sure you want to delete selected local guides?"}
+                title={"Booking Deletion"}
+                message={"Are you sure you want to delete selected bookings?"}
 
                 isOpen={deleteDialogOpen}
                 onClose={handleDeleteDialogClose}
@@ -142,4 +139,4 @@ const LocalGuideContainer = () => {
 
 }
 
-export default LocalGuideContainer;
+export default BookingContainer;

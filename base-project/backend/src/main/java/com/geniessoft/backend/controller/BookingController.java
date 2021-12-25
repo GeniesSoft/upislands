@@ -2,6 +2,7 @@ package com.geniessoft.backend.controller;
 
 
 import com.geniessoft.backend.dto.BookingBaseDto;
+import com.geniessoft.backend.dto.BookingGetDto;
 import com.geniessoft.backend.dto.BookingUpdateDto;
 import com.geniessoft.backend.model.Booking;
 import com.geniessoft.backend.model.Company;
@@ -17,6 +18,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -32,6 +34,12 @@ public class BookingController {
     public String addBooking(@Valid @RequestBody BookingBaseDto bookingBaseDto){
         bookingService.saveBooking(bookingBaseDto);
         return "Booking is saved";
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping
+    public List<BookingGetDto> getBookings() {
+        return bookingService.findAllBookings().stream().map(mapper::bookingToBookingGetDto).toList();
     }
 
     @ResponseStatus(HttpStatus.OK)

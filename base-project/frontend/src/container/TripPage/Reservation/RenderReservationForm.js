@@ -16,6 +16,8 @@ import {value} from "lodash/seq";
 import {USER_ID} from "../../../constants";
 import BookingApi from "../../../service/booking/BookingApi";
 import {useHistory} from "react-router-dom";
+import Notify from "../../../service/notification/Notify";
+import Modal from "antd/es/modal/Modal";
 
 let bookingRequest = {
     date: "",
@@ -31,6 +33,9 @@ let bookingRequest = {
 const RenderReservationForm = (props) => {
 
     let history = useHistory();
+
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [paymentHref, setPaymentHref] = useState("");
 
     const [formState, setFormState] = useState({
         userId: null,
@@ -75,6 +80,8 @@ const RenderReservationForm = (props) => {
             startTime: value[0],
             endTime: value[1]
         });
+
+        props.checkPrice(value[0], value[1]);
     };
     const handleGuidOnChange = (value) => {
         setFormState({
@@ -97,8 +104,23 @@ const RenderReservationForm = (props) => {
             bookingRequest.localGuideId = formState.guide;
             bookingRequest.companyId = 1;
 
-            console.log(bookingRequest);
-            BookingApi.create(bookingRequest);
+            const price = props.calculatePrice(formState.startTime, formState.endTime)
+
+            if (price === 99) {
+                BookingApi.create(bookingRequest);
+                setPaymentHref("https://buy.stripe.com/9AQfZecb03mGcZa7ss")
+                setIsModalVisible(true);
+
+            }
+            else if (price === 149) {
+                BookingApi.create(bookingRequest);
+                setPaymentHref("https://buy.stripe.com/3cs6oEfnc8H08IUdQR")
+                setIsModalVisible(true);
+            }
+            else {
+                BookingApi.create(bookingRequest);
+            }
+
         } else {
             history.push("/sign-in");
         }
@@ -107,6 +129,11 @@ const RenderReservationForm = (props) => {
 
     return (
         <ReservationFormWrapper className="form-container" onSubmit={handleSubmit}>
+
+            <Modal title="Payment" visible={isModalVisible} onOk={ () => setIsModalVisible(false) }>
+                Please click <a target={"_blank"} href={paymentHref.toString()}> here</a> for payment.
+            </Modal>
+
             <FieldWrapper>
                 <HtmlLabel htmlFor="date" content="Date"/>
                 <DatePicker

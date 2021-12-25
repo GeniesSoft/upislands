@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useState} from 'react';
 import PropTypes from 'prop-types';
 import Card from 'components/UI/Card/Card';
 import Heading from 'components/UI/Heading/Heading';
@@ -6,28 +6,65 @@ import Text from 'components/UI/Text/Text';
 import TextLink from 'components/UI/TextLink/TextLink';
 import RenderReservationForm from './RenderReservationForm';
 
-const CardHeader = ({priceStyle, pricePeriodStyle, linkStyle}) => {
-    return (
-        <Fragment>
-            <Heading
-                content={
-                    <Fragment>
-                        Price <Text as="span" content="/ 30 min." {...pricePeriodStyle} />
-                    </Fragment>
-                }
-                {...priceStyle}
-            />
-            <TextLink link="/#1" content="Contact Us" {...linkStyle} />
-        </Fragment>
-    );
-};
-
 export default function Reservation(props) {
+
+    const [price, setPrice] = useState(null);
+
+    const calculatePrice = (start, end) => {
+        const sH = start.toString().slice(0,2);
+        const eH = end.toString().slice(0,2);
+
+        const sM = start.toString().slice(3,5);
+        const eM = end.toString().slice(3,5);
+
+        let rH = parseInt(eH) - parseInt(sH);
+        let rM = parseInt(eM) - parseInt(sM);
+        let price = 0;
+
+        if (rH === 1 && rM === 0) {
+            price = 149;
+        }
+        else if (rH === 1 && rM === -30) {
+            price = 99;
+        }
+        else if (rH === 0 && rM === 30) {
+            price = 99;
+        }
+        else {
+            price = 0;
+        }
+
+        return price;
+    }
+
+    const handlePriceCheck = (start, end) => {
+        setPrice(calculatePrice(start, end));
+    }
+
+    const getPrice = () => {
+        if (price && price !== 0) {
+            return (<Text fontWeight={"100"} as="span" content={`Total Price: $${price}`}/>);
+        }
+        else {
+            return (<Text fontWeight={"100"} as="span" content="Select time interval for price" />);
+        }
+    }
+
     return (
         <Card
             className="reservation_sidebar"
-            header={<CardHeader/>}
-            content={<RenderReservationForm locationId={props.locationId} guides={props.guides} />}
+            header={
+                <Fragment>
+                    <Heading
+                        content={
+                            <div>
+                                {getPrice()}
+                            </div>
+                        }
+                    />
+                </Fragment>
+            }
+            content={<RenderReservationForm calculatePrice={calculatePrice} checkPrice={handlePriceCheck} locationId={props.locationId} guides={props.guides} />}
             footer={
                 <p>
                     Special offers available. <TextLink to="/#1" content="See details"/>
@@ -36,26 +73,3 @@ export default function Reservation(props) {
         />
     );
 }
-
-CardHeader.propTypes = {
-    priceStyle: PropTypes.object,
-    pricePeriodStyle: PropTypes.object,
-    linkStyle: PropTypes.object,
-};
-
-CardHeader.defaultProps = {
-    priceStyle: {
-        color: '#2C2C2C',
-        fontSize: '25px',
-        fontWeight: '700',
-    },
-    pricePeriodStyle: {
-        fontSize: '15px',
-        fontWeight: '400',
-    },
-    linkStyle: {
-        fontSize: '15px',
-        fontWeight: '700',
-        color: '#008489',
-    },
-};
