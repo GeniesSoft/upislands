@@ -20,6 +20,9 @@ public class AddressDto {
     private String zipcode;
 
     public static final AddressDto DEFAULT_ADDRESS;
+    public static final AddressDto Venetion_Island;
+    public static final AddressDto Star_Island;
+    public static final AddressDto Miami_Marine_Stadium;
 
     static {
         DEFAULT_ADDRESS = new AddressDto(
@@ -29,6 +32,30 @@ public class AddressDto {
                 "Default Address",
                 "Default City",
                 "Default Zipcode"
+        );
+        Venetion_Island = new AddressDto(
+                1,
+                25.790225890688255d,
+                -80.156786273679d,
+                "Miami Beach, Florida 33139, USA",
+                "Florida",
+                "Zipcode"
+        );
+        Star_Island = new AddressDto(
+                2,
+                25.77711395334303d,
+                -80.1505102426341d,
+                "Miami Beach, Florida 33139, USA",
+                "Florida",
+                "Zipcode"
+        );
+        Miami_Marine_Stadium = new AddressDto(
+                3,
+                25.742661777829827d,
+                -80.17085258465686d,
+                "3501 Rickenbacker Causeway, Miami, FL 33149, USA",
+                "Florida",
+                "Zipcode"
         );
     }
 

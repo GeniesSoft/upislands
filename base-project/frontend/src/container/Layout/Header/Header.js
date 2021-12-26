@@ -107,7 +107,7 @@ export default withRouter(function Header({location}) {
                                         <Logo
                                             withLink
                                             linkTo="/"
-                                            src={homeLogo === "white" ? "/images/nav-logo-2.svg" : "/images/nav-logo.svg"}
+                                            src={homeLogo === "white" ? "/images/nav-logo-2.png" : "/images/nav-logo.png"}
                                             title="UpIsle"
                                         /> :
                                         <Logo
@@ -138,7 +138,7 @@ export default withRouter(function Header({location}) {
                                         <Logo
                                             withLink
                                             linkTo="/"
-                                            src={homeLogo === "white" ? "/images/nav-logo-2.svg" : "/images/nav-logo.svg"}
+                                            src={homeLogo === "white" ? "/images/nav-logo-2.png" : "/images/nav-logo.png"}
                                             title="UpIsle"
                                         /> :
                                         <Logo

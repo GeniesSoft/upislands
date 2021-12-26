@@ -45,12 +45,14 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<UserUpdateDto> getAllUsers(){
         return userService.findAllUsers().stream().map(mapper::userToUserUpdateDto).collect(Collectors.toList());
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{id}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public UserUpdateDto getUser(@PathVariable(value = "id") Integer id){
         User user = userService.findUser(id);
         return mapper.userToUserUpdateDto(user);
@@ -58,6 +60,7 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String updateUser(@Valid @RequestBody UserUpdateDto userUpdateDto){
         userService.updateUser(userUpdateDto);
         return "User successfully updated";
@@ -65,6 +68,7 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String deleteUser(@PathVariable(value = "id") Integer id){
         userService.deleteUser(id);
         return "User successfully deleted";
@@ -72,6 +76,7 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/mostBooked")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public UserUpdateDto getMostBookedUser(){
         User user = analysisService.findMostBookedUser();
         return mapper.userToUserUpdateDto(user);
@@ -79,6 +84,7 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/bookedUsers")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<UserUpdateDto> getBookedUsersByOrder(){
         List<User> users = analysisService.findBookedUsersByDescOrder();
         List<UserUpdateDto> userUpdateDtoList = new ArrayList<>();
@@ -105,6 +111,7 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{userId}/profileImage")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String getProfileImage(
             @PathVariable("userId") int userId){
 

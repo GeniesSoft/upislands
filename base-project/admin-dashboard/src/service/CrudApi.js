@@ -1,10 +1,21 @@
 import Notify from "./notification/Notify";
 import axios from "axios";
+import AuthApi from "./auth/AuthApi";
 
 class CrudApi {
 
     constructor(axios) {
         this.axios = axios;
+
+        this.axios.interceptors.request.use((config) => {
+            if (AuthApi.isUserLoggedIn()) {
+                config.headers.Authorization = AuthApi.getUserToken();
+            }
+            return config;
+        }, (error) => {
+            console.log(error);
+            return Promise.reject(error);
+        })
     }
 
     create(createRequest) {

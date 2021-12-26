@@ -4,6 +4,8 @@ import {routes} from "./routes";
 import {BrowserRouter, NavLink, Route, Routes} from "react-router-dom";
 import {List, ListItem, ListItemIcon, ListItemText} from "@mui/material";
 import * as React from "react";
+import PrivateRoute from "./components/common/PrivateRoute";
+import LoginView from "./views/LoginView";
 
 function App() {
 
@@ -36,12 +38,17 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     {routes.map(route =>
-                        <Route key={route.id} path={route.path} element={
-                            <NavBar nav={navigation}>
-                                {route.component}
-                            </NavBar>
-                        }/>
+                        <Route exact path='/' element={<PrivateRoute role={"ADMIN"} />}>
+                            <Route key={route.id} path={route.path} element={
+                                <NavBar nav={navigation}>
+                                    {route.component}
+                                </NavBar>
+                            }/>
+                        </Route>
                     )}
+                    {
+                        <Route path={"/login"} element={<LoginView />} />
+                    }
                 </Routes>
             </BrowserRouter>
         </div>

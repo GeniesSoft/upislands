@@ -58,7 +58,7 @@ const SearchInput = (props) => {
                         type='text'
                         defaultValue=''
                         value={locationInput.searchedLocation || ''}
-                        placeholder='Search “Thailand, Asia”'
+                        placeholder='Search “Miami, Florida”'
                         size='large'
                         onChange={handleOnChange}
                         onPressEnter={handleOnPressEnter}

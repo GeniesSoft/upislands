@@ -247,6 +247,18 @@ public class LocationServiceImpl implements LocationService {
 
         var list = findAllLocations().stream().map(LocationMapper.INSTANCE::locationToLocationGetFrontendDto).toList();
 
+        list.forEach(loc -> {
+            if (loc.getTitle().equals("Venetion Island")) {
+                loc.setLocation(AddressDto.Venetion_Island);
+            }
+            if (loc.getTitle().equals("Star Island")) {
+                loc.setLocation(AddressDto.Star_Island);
+            }
+            if (loc.getTitle().equals("Miami Marine Stadium")) {
+                loc.setLocation(AddressDto.Miami_Marine_Stadium);
+            }
+        });
+
         list.forEach(location -> {
             location.setGallery(locationContentService.getLocationGallery(location.getId(),"image"));
             location.setVideoGallery(locationContentService.getLocationGallery(location.getId(),"video"));

@@ -14,7 +14,8 @@ const Location = ({
                       linkStyle,
                       location,
                   }) => {
-    const formattedAddress = location.formattedAddress;
+    const formattedAddress = location.location.formattedAddress;
+    console.log(location);
     return (
         <Element name="location" className="location">
             <LocationWrapper>
@@ -31,7 +32,7 @@ const Location = ({
                 />
                 <Text content="Location Content 3" {...contentStyle} />
 
-                <Map location={location} multiple={false}/>
+                <Map location={location.location} multiple={false}/>
             </LocationWrapper>
         </Element>
     );

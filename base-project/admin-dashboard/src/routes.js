@@ -4,6 +4,8 @@ import CompaniesView from "./views/CompaniesView";
 import LocationsView from "./views/LocationsView";
 import LocalGuideView from "./views/LocalGuideView";
 import BookingsView from "./views/BookingsView";
+import LogoutView from './views/LogoutView.js';
+import LogoutIcon from '@mui/icons-material/Logout';
 import HomeIcon from '@mui/icons-material/Home';
 import PeopleIcon from '@mui/icons-material/People';
 import BusinessIcon from '@mui/icons-material/Business';
@@ -55,5 +57,11 @@ export const routes = [
         component: <BookingsView />,
         icon: <BookmarkIcon />,
     },
-
+    {
+        id: 6,
+        name: "Logout",
+        path: "/logout",
+        component: <LogoutView />,
+        icon: <LogoutIcon />,
+    },
 ]

@@ -36,6 +36,7 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String addLocation(@Valid @RequestBody LocationSaveDto locationDto){
         locationService.saveLocation(
                 LocationMapper.INSTANCE.locationSaveDtoToLocation(locationDto)
@@ -45,6 +46,7 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{id}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public LocationGetDto getLocationById(@PathVariable(value = "id") Integer id){
         Location location = locationService.findLocationById(id);
         Address address = location.getAddress();
@@ -53,6 +55,7 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String updateLocation(@Valid @RequestBody LocationUpdateDto locationUpdateDto){
         locationService.updateLocation(
                 LocationMapper.INSTANCE.locationUpdateDtoToLocation(locationUpdateDto)
@@ -62,6 +65,7 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String deleteLocation(@PathVariable(value = "id") Integer id){
        locationService.deleteLocation(id);
         return "Location is deleted";
@@ -69,6 +73,7 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/most-booked")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public LocationGetDto getMostBookedLocation(){
         Location location = analysisService.findMostBookedLocation();
         Address address= location.getAddress();
@@ -78,6 +83,7 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/booked-locations")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<LocationGetDto> getBookedLocationsByOrder(){
          List<Location> locations = analysisService.findBookedLocationsByBookingDescOrder();
          List<LocationGetDto> locationGetDtoList = new ArrayList<>();
@@ -91,6 +97,7 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/locations-average")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Map<Integer,Double> getLocationsByAverageOrder(){
         Map<Location,Double> locationAverageMap = analysisService.findLocationsByRatingDescOrder();
         Map<Integer,Double> locationIdAverageMap = new HashMap<>();
@@ -103,6 +110,7 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/state/{stateName}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<LocationGetDto> getLocationsByState(@Valid @PathVariable String stateName){
         List<Location> locations =  locationService.findAllLocationsInAState(stateName);
         List<LocationGetDto> locationGetDtoList = new ArrayList<>();
@@ -132,6 +140,7 @@ public class LocationController {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String addLocationContent(@PathVariable("locationId") int locationId, @RequestParam("file") @ContentConstraints MultipartFile file, @RequestParam("contentText") String content_text) {
 
         locationService.addLocationContent(locationId ,file, content_text);
@@ -140,6 +149,7 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/content")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String deleteLocationContent
             (@RequestParam(value = "locationContentId") Integer locationContentId){
         locationService.deleteLocationContent(locationContentId);
@@ -148,6 +158,7 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/content")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String updateLocationContent
             (@RequestParam(value = "locationContentId") Integer locationContentId,
              @RequestParam(value = "contentText") String contentText){
@@ -157,6 +168,7 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/contents/{locationId}/{offset}/{pageSize}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public List<ContentDto> getLocationContentList(
             @PathVariable("locationId") int locationId,
             @PathVariable("offset") int offset,
@@ -169,6 +181,7 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{locationId}/profileImage")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ProfileImageDto getProfileImage(
             @PathVariable("locationId") int locationId){
 
@@ -178,6 +191,7 @@ public class LocationController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public List<LocationGetDto> getLocations(){
         return locationService.findAllLocations().stream().map(
                 (location)-> LocationMapper.INSTANCE.locationToLocationGetDto(location, location.getAddress())).collect(Collectors.toList());

@@ -2,7 +2,7 @@ package com.geniessoft.backend.utility.bucket;
 
 public enum BucketName {
 
-    BUCKET_NAME("upisland-bucket");
+    BUCKET_NAME("upisland");
 
     private final String bucketName;
 
@@ -13,4 +13,5 @@ public enum BucketName {
     public String getBucketName() {
         return bucketName;
     }
+
 }

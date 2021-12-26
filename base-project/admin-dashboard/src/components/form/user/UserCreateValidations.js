@@ -20,7 +20,7 @@ const validationsForm = {
         .min(8, "Password must contain at least 8 characters")
         .max(30, "Maximum password size is 30 characters")
         .matches(
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@.,$!%*?&]{8,30}$/,
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.@$!%*?&])[A-Za-z\d@.,$!%*?&]{8,30}$/,
             "Must Contain at least one uppercase letter, one lowercase letter, one number and one special character"
         ),
 

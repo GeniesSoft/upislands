@@ -38,6 +38,7 @@ public class LocalGuideController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String addLocalGuide(@Valid @RequestBody LocalGuideBaseDto localGuideBaseDto){
         localGuideService.saveLocalGuide(localGuideBaseDto);
         return "Local guide is saved.";
@@ -45,12 +46,14 @@ public class LocalGuideController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public List<LocalGuideGetDto> getAllLocalGuides() {
         return localGuideService.findAllLocalGuides().stream().map(localGuideMapper::localGuideToLocalGuideGetDto).collect(Collectors.toList());
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String updateLocalGuide(@Valid @RequestBody LocalGuideUpdateDto localGuideUpdateDto){
         localGuideService.updateLocalGuide(localGuideUpdateDto);
         return "Local guide is updated.";
@@ -58,6 +61,7 @@ public class LocalGuideController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<String> deleteLocalGuide(@PathVariable(value = "id") Integer localGuideId){
         localGuideService.DeleteLocalGuide(localGuideId);
         return ResponseEntity
@@ -132,6 +136,7 @@ public class LocalGuideController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/GuidesAverage")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public Map<Integer,Double> getLocalGuidesByAverageOrder(){
         Map<LocalGuide,Double> localGuideAverageMap = analysisService.findLocalGuidesByRatingDescOrder();
         Map<Integer,Double> localGuideIdAverageMap = new HashMap<>();
@@ -144,6 +149,7 @@ public class LocalGuideController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/available-local-guides")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public Map<Integer,Integer> getAvailableLocalGuides(@RequestParam(value = "locationId") Integer locationId,@RequestParam(value = "day") String day,
             @RequestParam(value = "startTime") String startTime,@RequestParam(value = "endTime") String endTime){
         //List<Integer> localGuideIds = new ArrayList<>();
@@ -164,6 +170,7 @@ public class LocalGuideController {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public String addLocalguideContent(@PathVariable("localGuideId") int localGuideId, @RequestParam("file") @ContentConstraints MultipartFile file, @RequestParam("contentText") String content_text) {
 
         localGuideService.addLocalGuideContent(localGuideId ,file, content_text);

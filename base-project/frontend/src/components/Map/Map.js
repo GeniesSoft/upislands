@@ -16,10 +16,10 @@ const Map = (props) => {
             {multiple ? (
                 <MapWrapper
                     id="map-multiple-location"
-                    zoom={7}
+                    zoom={15}
                     center={{
-                        lat: 41.8858,
-                        lng: -75.7223,
+                        lat: 25.790225890688255,
+                        lng: -80.156786273679,
                     }}
                 >
                     <MarkerClusterer
@@ -43,13 +43,13 @@ const Map = (props) => {
                         height: '400px',
                         width: '100%',
                     }}
-                    zoom={8}
+                    zoom={15}
                     center={{
-                        lat: 40.706877,
-                        lng: -74.011265,
+                        lat: 25.790225890688255,
+                        lng: -80.156786273679,
                     }}
                 >
-                    <HotelMapMarkerSingle location={location}/>
+                    <HotelMapMarkerSingle location={location.location}/>
                 </MapWrapper>
             )}
         </>
